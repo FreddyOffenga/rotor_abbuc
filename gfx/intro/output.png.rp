@@ -1,0 +1,6118 @@
+; ---------------------------------- 
+; RastaConverter by Ilmenit v.Beta4
+; InputName: rotor6.jpg
+; CmdLine: rotor6.jpg /h=240 /pal=Palettes\altirra.act /dither_val=1 /dither_rand=0 /filter=lanczos /init=random /s=1 /distance=yuv
+; Evaluations: 1290798
+; Score: 5.95733
+; ---------------------------------- 
+; Proper offset 
+	nop
+	nop
+	nop
+	nop
+	cmp byt2;
+line0
+	lda #$F1 ; 241 (spr=193)
+	ldy #$29 ; 41 (spr=-7)
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	ldy #$27 ; 39 (spr=-9)
+	stx COLOR1
+	sty COLPM3
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	stx COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line1
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	nop 
+	nop 
+	nop 
+	lda #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldy #$E2 ; 226 (spr=178)
+	stx COLOR1
+	sty COLOR2
+	stx COLPM1
+	nop 
+	sta COLOR0
+	ldy #$26 ; 38 (spr=-10)
+	sta COLPM0
+	ldy #$2B ; 43 (spr=-5)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line2
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	ldx #$03 ; 3 (spr=-45)
+	ldy #$1F ; 31 (spr=-17)
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	stx COLPM1
+	nop 
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldy #$26 ; 38 (spr=-10)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line3
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLBAK
+	ldy #$10 ; 16 (spr=-32)
+	stx COLPM0
+	ldy #$00 ; 0 (spr=-48)
+	stx COLPM3
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$A4 ; 164 (spr=116)
+	nop 
+	lda #$AA ; 170 (spr=122)
+	nop 
+	lda #$0F ; 15 (spr=-33)
+	ldy #$24 ; 36 (spr=-12)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line4
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	lda #$26 ; 38 (spr=-10)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR1
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	nop 
+	nop 
+	ldx #$E0 ; 224 (spr=176)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$26 ; 38 (spr=-10)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM0
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line5
+	ldy #$14 ; 20 (spr=-28)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty COLPM0
+	ldx #$FE ; 254 (spr=206)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	nop 
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$26 ; 38 (spr=-10)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line6
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	nop 
+	lda #$26 ; 38 (spr=-10)
+	sta COLPM0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty COLPM3
+	sta COLOR1
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	nop 
+	ldx #$E0 ; 224 (spr=176)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line7
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	stx COLBAK
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$27 ; 39 (spr=-9)
+	nop 
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$F1 ; 241 (spr=193)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line8
+	sta COLPM2
+	nop 
+	nop 
+	ldx #$DF ; 223 (spr=175)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLPM3
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	ldy #$F1 ; 241 (spr=193)
+	sta COLPM3
+	sty COLOR0
+	lda #$29 ; 41 (spr=-7)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line9
+	lda #$29 ; 41 (spr=-7)
+	sty COLBAK
+	sta COLOR2
+	lda #$E3 ; 227 (spr=179)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR0
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	ldy #$00 ; 0 (spr=-48)
+	sta COLOR0
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM3
+	ldy #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldy #$12 ; 18 (spr=-30)
+	sta COLOR0
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line10
+	lda #$2A ; 42 (spr=-6)
+	nop 
+	ldy #$A2 ; 162 (spr=114)
+	nop 
+	lda #$E2 ; 226 (spr=178)
+	sty COLBAK
+	sta COLOR0
+	nop 
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	sta COLPM3
+	sta COLOR0
+	nop 
+	stx COLPM0
+	ldy #$F4 ; 244 (spr=196)
+	nop 
+	lda #$26 ; 38 (spr=-10)
+	ldy #$26 ; 38 (spr=-10)
+	sty COLBAK
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line11
+	sta COLPM0
+	sty COLBAK
+	lda #$28 ; 40 (spr=-8)
+	sta COLOR2
+	lda #$E2 ; 226 (spr=178)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sta COLOR0
+	sta COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	sty COLOR2
+	lda #$28 ; 40 (spr=-8)
+	sta COLPM3
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$26 ; 38 (spr=-10)
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$F0 ; 240 (spr=192)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line12
+	sta COLPM0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$F1 ; 241 (spr=193)
+	ldy #$EF ; 239 (spr=191)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line13
+	lda #$04 ; 4 (spr=-44)
+	sta COLOR0
+	sta COLOR0
+	ldy #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$E2 ; 226 (spr=178)
+	stx COLOR1
+	nop 
+	sty COLOR0
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line14
+	ldy #$80 ; 128 (spr=80)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$93 ; 147 (spr=99)
+	sty COLPM2
+	ldx #$02 ; 2 (spr=-46)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	lda #$27 ; 39 (spr=-9)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$97 ; 151 (spr=103)
+	sty COLBAK
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$29 ; 41 (spr=-7)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line15
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	ldy #$60 ; 96 (spr=48)
+	ldy #$90 ; 144 (spr=96)
+	nop 
+	nop 
+	sty COLBAK
+	sty COLBAK
+	sta COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$96 ; 150 (spr=102)
+	sta COLOR1
+	ldy #$29 ; 41 (spr=-7)
+	ldy #$90 ; 144 (spr=96)
+	lda #$94 ; 148 (spr=100)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$28 ; 40 (spr=-8)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line16
+	ldy #$F1 ; 241 (spr=193)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$04 ; 4 (spr=-44)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	ldy #$91 ; 145 (spr=97)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$8F ; 143 (spr=95)
+	stx COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	lda #$36 ; 54 (spr=6)
+	lda #$96 ; 150 (spr=102)
+	sta COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line17
+	stx COLOR1
+	ldy #$26 ; 38 (spr=-10)
+	sty COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$08 ; 8 (spr=-40)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sta COLPM2
+	nop 
+	sta COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	ldy #$21 ; 33 (spr=-15)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line18
+	ldy #$03 ; 3 (spr=-45)
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$20 ; 32 (spr=-16)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	lda #$26 ; 38 (spr=-10)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line19
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$21 ; 33 (spr=-15)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	stx COLOR1
+	sty COLBAK
+	sta COLPM0
+	lda #$29 ; 41 (spr=-7)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldy #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line20
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$28 ; 40 (spr=-8)
+	ldx #$28 ; 40 (spr=-8)
+	sta COLPM0
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line21
+	nop 
+	lda #$05 ; 5 (spr=-43)
+	ldy #$0A ; 10 (spr=-38)
+	nop 
+	nop 
+	ldy #$B4 ; 180 (spr=132)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR0
+	sta COLOR2
+	lda #$26 ; 38 (spr=-10)
+	sta COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$29 ; 41 (spr=-7)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line22
+	sty COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	stx COLPM0
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	ldx #$B0 ; 176 (spr=128)
+	sta COLOR2
+	ldx #$E0 ; 224 (spr=176)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$2A ; 42 (spr=-6)
+	lda #$04 ; 4 (spr=-44)
+	sta COLOR2
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$EF ; 239 (spr=191)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line23
+	ldx #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	ldy #$16 ; 22 (spr=-26)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$E0 ; 224 (spr=176)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR2
+	ldx #$EF ; 239 (spr=191)
+	stx HPOSP1
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$14 ; 20 (spr=-28)
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$04 ; 4 (spr=-44)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line24
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM1
+	sta HPOSP1
+	lda #$02 ; 2 (spr=-46)
+	ldy #$A2 ; 162 (spr=114)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$F5 ; 245 (spr=197)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line25
+	nop 
+	sty COLPM1
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	sta COLOR2
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$C6 ; 198 (spr=150)
+	nop 
+	nop 
+	nop 
+	ldy #$F1 ; 241 (spr=193)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$11 ; 17 (spr=-31)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line26
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM1
+	lda #$02 ; 2 (spr=-46)
+	sta HPOSP1
+	ldy #$F5 ; 245 (spr=197)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line27
+	nop 
+	ldy #$0F ; 15 (spr=-33)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$04 ; 4 (spr=-44)
+	sta HPOSP1
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR2
+	sta COLPM1
+	stx HPOSP1
+	ldy #$1D ; 29 (spr=-19)
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$92 ; 146 (spr=98)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$D0 ; 208 (spr=160)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line28
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$06 ; 6 (spr=-42)
+	sta COLPM1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sta COLPM2
+	nop 
+	ldy #$14 ; 20 (spr=-28)
+	sty COLPM1
+	lda #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	ldy #$0F ; 15 (spr=-33)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line29
+	ldy #$47 ; 71 (spr=23)
+	sty HPOSP1
+	ldy #$2A ; 42 (spr=-6)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$0F ; 15 (spr=-33)
+	ldx #$0F ; 15 (spr=-33)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F1 ; 241 (spr=193)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$01 ; 1 (spr=-47)
+	lda #$E0 ; 224 (spr=176)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line30
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR2
+	sty HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$F1 ; 241 (spr=193)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$E0 ; 224 (spr=176)
+	ldy #$D0 ; 208 (spr=160)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line31
+	lda #$00 ; 0 (spr=-48)
+	ldy #$47 ; 71 (spr=23)
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP1
+	lda #$E0 ; 224 (spr=176)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line32
+	lda #$00 ; 0 (spr=-48)
+	ldy #$47 ; 71 (spr=23)
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR2
+	sty HPOSP1
+	sty HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$FF ; 255 (spr=207)
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line33
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$90 ; 144 (spr=96)
+	lda #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$26 ; 38 (spr=-10)
+	stx COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	stx COLOR1
+	ldy #$02 ; 2 (spr=-46)
+	sty COLPM2
+	nop 
+	ldx #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line34
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$28 ; 40 (spr=-8)
+	ldy #$54 ; 84 (spr=36)
+	lda #$26 ; 38 (spr=-10)
+	nop 
+	nop 
+	ldx #$05 ; 5 (spr=-43)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$27 ; 39 (spr=-9)
+	stx COLPM1
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	sty COLOR2
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	lda #$0F ; 15 (spr=-33)
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line35
+	sty COLPM1
+	ldy #$37 ; 55 (spr=7)
+	sty HPOSP1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$28 ; 40 (spr=-8)
+	ldx #$2A ; 42 (spr=-6)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$29 ; 41 (spr=-7)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	ldx #$28 ; 40 (spr=-8)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line36
+	ldx #$11 ; 17 (spr=-31)
+	nop 
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$05 ; 5 (spr=-43)
+	sty HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$7F ; 127 (spr=79)
+	sta COLOR1
+	ldy #$8F ; 143 (spr=95)
+	ldx #$F1 ; 241 (spr=193)
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	ldx #$28 ; 40 (spr=-8)
+	nop 
+	nop 
+	ldx #$26 ; 38 (spr=-10)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line37
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	sta COLOR1
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line38
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop 
+	sty COLPM1
+	ldx #$10 ; 16 (spr=-32)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line39
+	ldx #$04 ; 4 (spr=-44)
+	sta COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR1
+	sta COLPM1
+	ldx #$94 ; 148 (spr=100)
+	stx COLOR2
+	sty COLOR2
+	sta COLOR0
+	lda #$26 ; 38 (spr=-10)
+	ldx #$97 ; 151 (spr=103)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line40
+	sta COLOR1
+	ldy #$EF ; 239 (spr=191)
+	ldy #$7E ; 126 (spr=78)
+	ldy #$01 ; 1 (spr=-47)
+	sta HPOSP1
+	lda #$A5 ; 165 (spr=117)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	stx COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$21 ; 33 (spr=-15)
+	nop 
+	sty COLBAK
+	ldy #$95 ; 149 (spr=101)
+	sta COLOR1
+	nop 
+	ldy #$95 ; 149 (spr=101)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line41
+	sty COLBAK
+	lda #$26 ; 38 (spr=-10)
+	sta COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	sta COLPM1
+	stx COLOR1
+	nop 
+	ldx #$27 ; 39 (spr=-9)
+	stx COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	ldx #$94 ; 148 (spr=100)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$49 ; 73 (spr=25)
+	lda #$FE ; 254 (spr=206)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line42
+	lda #$FE ; 254 (spr=206)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line43
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	sta COLBAK
+	lda #$FF ; 255 (spr=207)
+	ldx #$F2 ; 242 (spr=194)
+	ldx #$28 ; 40 (spr=-8)
+	ldx #$E2 ; 226 (spr=178)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP1
+	nop 
+	nop 
+	nop 
+	ldx #$62 ; 98 (spr=50)
+	ldx #$27 ; 39 (spr=-9)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F1 ; 241 (spr=193)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$95 ; 149 (spr=101)
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line44
+	sty COLBAK
+	nop 
+	sty COLPM0
+	sty COLPM0
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	sty COLOR1
+	ldy #$02 ; 2 (spr=-46)
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$94 ; 148 (spr=100)
+	stx COLOR0
+	ldy #$14 ; 20 (spr=-28)
+	lda #$F1 ; 241 (spr=193)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line45
+	nop 
+	ldy #$97 ; 151 (spr=103)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$26 ; 38 (spr=-10)
+	lda #$00 ; 0 (spr=-48)
+	lda #$11 ; 17 (spr=-31)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	lda #$3A ; 58 (spr=10)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop 
+	ldy #$97 ; 151 (spr=103)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line46
+	nop 
+	ldy #$97 ; 151 (spr=103)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$26 ; 38 (spr=-10)
+	lda #$00 ; 0 (spr=-48)
+	lda #$11 ; 17 (spr=-31)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	lda #$3A ; 58 (spr=10)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$97 ; 151 (spr=103)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line47
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	nop 
+	stx HPOSP1
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$F2 ; 242 (spr=194)
+	nop 
+	ldy #$04 ; 4 (spr=-44)
+	sty COLOR2
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line48
+	nop 
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$11 ; 17 (spr=-31)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM3
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sty COLPM0
+	sty HPOSP1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$2F ; 47 (spr=-1)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line49
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$92 ; 146 (spr=98)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldy #$03 ; 3 (spr=-45)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$EF ; 239 (spr=191)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$05 ; 5 (spr=-43)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$06 ; 6 (spr=-42)
+	stx COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line50
+	nop 
+	nop 
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	nop 
+	lda #$5E ; 94 (spr=46)
+	sty COLBAK
+	lda #$00 ; 0 (spr=-48)
+	lda #$05 ; 5 (spr=-43)
+	sta COLOR0
+	nop 
+	nop 
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	ldy #$95 ; 149 (spr=101)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line51
+	nop 
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	sta COLPM0
+	ldy #$94 ; 148 (spr=100)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$E5 ; 229 (spr=181)
+	sty COLPM0
+	lda #$01 ; 1 (spr=-47)
+	lda #$93 ; 147 (spr=99)
+	ldy #$01 ; 1 (spr=-47)
+	ldy #$E2 ; 226 (spr=178)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$11 ; 17 (spr=-31)
+	stx COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	sta COLBAK
+	ldy #$01 ; 1 (spr=-47)
+	lda #$95 ; 149 (spr=101)
+	lda #$A2 ; 162 (spr=114)
+	lda #$5E ; 94 (spr=46)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line52
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$91 ; 145 (spr=97)
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	ldx #$FF ; 255 (spr=207)
+	ldx #$21 ; 33 (spr=-15)
+	lda #$01 ; 1 (spr=-47)
+	lda #$F0 ; 240 (spr=192)
+	sty COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$A2 ; 162 (spr=114)
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$26 ; 38 (spr=-10)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line53
+	lda #$F1 ; 241 (spr=193)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$EF ; 239 (spr=191)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$26 ; 38 (spr=-10)
+	lda #$FF ; 255 (spr=207)
+	ldx #$95 ; 149 (spr=101)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP2
+	nop 
+	nop 
+	nop 
+	ldy #$DE ; 222 (spr=174)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	stx COLBAK
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$28 ; 40 (spr=-8)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line54
+	lda #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$28 ; 40 (spr=-8)
+	sty HPOSP2
+	sta HPOSP2
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	lda #$06 ; 6 (spr=-42)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$92 ; 146 (spr=98)
+	ldx #$12 ; 18 (spr=-30)
+	stx HPOSP2
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line55
+	stx COLPM0
+	lda #$A6 ; 166 (spr=118)
+	lda #$26 ; 38 (spr=-10)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	ldy #$0E ; 14 (spr=-34)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	sta HPOSP2
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM0
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$28 ; 40 (spr=-8)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line56
+	stx COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	lda #$E1 ; 225 (spr=177)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	stx COLPM1
+	ldy #$00 ; 0 (spr=-48)
+	sta COLPM0
+	lda #$05 ; 5 (spr=-43)
+	ldx #$01 ; 1 (spr=-47)
+	sta COLOR2
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$5C ; 92 (spr=44)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line57
+	nop 
+	ldx #$26 ; 38 (spr=-10)
+	stx HPOSP2
+	nop 
+	ldy #$2A ; 42 (spr=-6)
+	stx COLPM1
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR0
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$02 ; 2 (spr=-46)
+	lda #$F0 ; 240 (spr=192)
+	sty COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line58
+	ldy #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP1
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$27 ; 39 (spr=-9)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$39 ; 57 (spr=9)
+	ldx #$F0 ; 240 (spr=192)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line59
+	ldy #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP1
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	sta HPOSP1
+	nop 
+	nop 
+	nop 
+	nop 
+	lda #$39 ; 57 (spr=9)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$27 ; 39 (spr=-9)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line60
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$E0 ; 224 (spr=176)
+	ldx #$3C ; 60 (spr=12)
+	nop 
+	lda #$E2 ; 226 (spr=178)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	sta HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	lda #$29 ; 41 (spr=-7)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line61
+	sta COLOR0
+	lda #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	stx COLOR0
+	sta HPOSP0
+	ldy #$24 ; 36 (spr=-12)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP2
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$27 ; 39 (spr=-9)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line62
+	ldx #$01 ; 1 (spr=-47)
+	sty COLPM2
+	nop 
+	ldx #$F1 ; 241 (spr=193)
+	nop 
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$94 ; 148 (spr=100)
+	sta HPOSP0
+	lda #$CA ; 202 (spr=154)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$29 ; 41 (spr=-7)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$D0 ; 208 (spr=160)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line63
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$28 ; 40 (spr=-8)
+	nop 
+	stx HPOSP2
+	nop 
+	nop 
+	nop 
+	stx HPOSP2
+	sta COLOR0
+	lda #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	stx COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$93 ; 147 (spr=99)
+	lda #$FE ; 254 (spr=206)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line64
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR0
+	lda #$29 ; 41 (spr=-7)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$EF ; 239 (spr=191)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$31 ; 49 (spr=1)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$E4 ; 228 (spr=180)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line65
+	stx HPOSP2
+	nop 
+	nop 
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	lda #$18 ; 24 (spr=-24)
+	stx COLPM0
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	ldx #$E4 ; 228 (spr=180)
+	ldx #$E4 ; 228 (spr=180)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line66
+	nop 
+	nop 
+	nop 
+	ldy #$1E ; 30 (spr=-18)
+	nop 
+	nop 
+	stx COLPM0
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$FE ; 254 (spr=206)
+	sty COLOR0
+	sty COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$E4 ; 228 (spr=180)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$FE ; 254 (spr=206)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line67
+	ldx #$14 ; 20 (spr=-28)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	stx HPOSP2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR2
+	ldx #$2A ; 42 (spr=-6)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$94 ; 148 (spr=100)
+	lda #$F0 ; 240 (spr=192)
+	lda #$2A ; 42 (spr=-6)
+	sty COLPM0
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line68
+	stx COLOR1
+	lda #$00 ; 0 (spr=-48)
+	stx COLOR1
+	nop 
+	sty HPOSP2
+	nop 
+	ldx #$06 ; 6 (spr=-42)
+	sty COLOR1
+	ldx #$11 ; 17 (spr=-31)
+	nop 
+	ldy #$2F ; 47 (spr=-1)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$11 ; 17 (spr=-31)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line69
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	ldx #$06 ; 6 (spr=-42)
+	stx COLOR1
+	nop 
+	nop 
+	nop 
+	nop 
+	ldy #$A5 ; 165 (spr=117)
+	nop 
+	sta COLPM0
+	sty COLOR1
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$2A ; 42 (spr=-6)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	stx COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line70
+	lda #$00 ; 0 (spr=-48)
+	ldy #$15 ; 21 (spr=-27)
+	nop 
+	sty COLPM0
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	lda #$FC ; 252 (spr=204)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM2
+	stx HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$A6 ; 166 (spr=118)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line71
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$18 ; 24 (spr=-24)
+	ldx #$90 ; 144 (spr=96)
+	ldy #$A4 ; 164 (spr=116)
+	sty COLOR1
+	ldx #$56 ; 86 (spr=38)
+	lda #$E0 ; 224 (spr=176)
+	stx HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$7E ; 126 (spr=78)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$05 ; 5 (spr=-43)
+	ldx #$20 ; 32 (spr=-16)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line72
+	ldx #$05 ; 5 (spr=-43)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$20 ; 32 (spr=-16)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$7E ; 126 (spr=78)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$10 ; 16 (spr=-32)
+	lda #$10 ; 16 (spr=-32)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line73
+	ldx #$04 ; 4 (spr=-44)
+	stx COLOR1
+	lda #$02 ; 2 (spr=-46)
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$03 ; 3 (spr=-45)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	sty COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	lda #$E0 ; 224 (spr=176)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$6A ; 106 (spr=58)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line74
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	ldy #$07 ; 7 (spr=-41)
+	sty COLOR2
+	ldx #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$04 ; 4 (spr=-44)
+	lda #$F0 ; 240 (spr=192)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line75
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR1
+	stx COLOR1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	lda #$A4 ; 164 (spr=116)
+	nop 
+	sta COLPM0
+	lda #$4B ; 75 (spr=27)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$66 ; 102 (spr=54)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line76
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	sta HPOSP0
+	lda #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$76 ; 118 (spr=70)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	ldy #$28 ; 40 (spr=-8)
+	ldx #$66 ; 102 (spr=54)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sta COLOR0
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line77
+	ldx #$90 ; 144 (spr=96)
+	ldx #$F1 ; 241 (spr=193)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$AA ; 170 (spr=122)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$D0 ; 208 (spr=160)
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line78
+	ldx #$10 ; 16 (spr=-32)
+	sta HPOSP2
+	ldx #$90 ; 144 (spr=96)
+	ldx #$F1 ; 241 (spr=193)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$AA ; 170 (spr=122)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$D0 ; 208 (spr=160)
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line79
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	stx HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$13 ; 19 (spr=-29)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line80
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FE ; 254 (spr=206)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$90 ; 144 (spr=96)
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$07 ; 7 (spr=-41)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F1 ; 241 (spr=193)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line81
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$E2 ; 226 (spr=178)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$06 ; 6 (spr=-42)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$DE ; 222 (spr=174)
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	sty COLOR2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line82
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$03 ; 3 (spr=-45)
+	sty HPOSP0
+	sta COLBAK
+	lda #$01 ; 1 (spr=-47)
+	stx COLOR1
+	ldx #$94 ; 148 (spr=100)
+	nop 
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	stx COLOR2
+	sta COLOR0
+	stx HPOSP0
+	nop 
+	sta COLOR2
+	ldx #$3C ; 60 (spr=12)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line83
+	sty COLOR2
+	sta COLBAK
+	ldx #$3C ; 60 (spr=12)
+	stx HPOSP2
+	nop 
+	lda #$95 ; 149 (spr=101)
+	sta COLOR2
+	lda #$00 ; 0 (spr=-48)
+	lda #$92 ; 146 (spr=98)
+	nop 
+	sty HPOSP0
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	stx COLPM2
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line84
+	sty COLOR2
+	nop 
+	ldx #$3C ; 60 (spr=12)
+	stx HPOSP2
+	sta HPOSP2
+	lda #$95 ; 149 (spr=101)
+	sta COLOR2
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	sta COLBAK
+	nop 
+	lda #$92 ; 146 (spr=98)
+	nop 
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line85
+	sty COLOR0
+	nop 
+	sty COLOR2
+	sta COLPM2
+	stx COLOR0
+	sta COLOR2
+	sta COLBAK
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$95 ; 149 (spr=101)
+	sty COLOR2
+	ldy #$08 ; 8 (spr=-40)
+	nop 
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$F1 ; 241 (spr=193)
+	ldx #$F1 ; 241 (spr=193)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line86
+	ldy #$05 ; 5 (spr=-43)
+	ldx #$FF ; 255 (spr=207)
+	sta COLBAK
+	nop 
+	nop 
+	lda #$38 ; 56 (spr=8)
+	sta HPOSP2
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sty COLPM2
+	lda #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F1 ; 241 (spr=193)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line87
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$D0 ; 208 (spr=160)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	lda #$BE ; 190 (spr=142)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM0
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$04 ; 4 (spr=-44)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line88
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM0
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$04 ; 4 (spr=-44)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line89
+	sty COLPM0
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	ldy #$04 ; 4 (spr=-44)
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$38 ; 56 (spr=8)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$11 ; 17 (spr=-31)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line90
+	sta HPOSP1
+	nop 
+	lda #$92 ; 146 (spr=98)
+	ldx #$F0 ; 240 (spr=192)
+	lda #$93 ; 147 (spr=99)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	stx COLOR2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$06 ; 6 (spr=-42)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line91
+	sta HPOSP0
+	sty COLOR2
+	nop 
+	ldy #$94 ; 148 (spr=100)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	sta COLPM2
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	ldy #$01 ; 1 (spr=-47)
+	lda #$A2 ; 162 (spr=114)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line92
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$EF ; 239 (spr=191)
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F1 ; 241 (spr=193)
+	ldy #$9F ; 159 (spr=111)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$F0 ; 240 (spr=192)
+	stx HPOSP0
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line93
+	nop 
+	nop 
+	lda #$FF ; 255 (spr=207)
+	nop 
+	nop 
+	nop 
+	ldy #$93 ; 147 (spr=99)
+	nop 
+	ldx #$13 ; 19 (spr=-29)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	sty COLOR1
+	sta COLOR0
+	ldy #$EE ; 238 (spr=190)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$ED ; 237 (spr=189)
+	ldx #$2C ; 44 (spr=-4)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line94
+	ldy #$54 ; 84 (spr=36)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$93 ; 147 (spr=99)
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$03 ; 3 (spr=-45)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$93 ; 147 (spr=99)
+	nop 
+	lda #$0D ; 13 (spr=-35)
+	lda #$03 ; 3 (spr=-45)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sty COLOR1
+	sty COLOR1
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line95
+	ldy #$54 ; 84 (spr=36)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$93 ; 147 (spr=99)
+	sty COLBAK
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$F3 ; 243 (spr=195)
+	ldx #$FF ; 255 (spr=207)
+	lda #$FD ; 253 (spr=205)
+	ldx #$1E ; 30 (spr=-18)
+	sty COLOR1
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	ldy #$FE ; 254 (spr=206)
+	nop 
+	nop 
+	lda #$FD ; 253 (spr=205)
+	ldy #$93 ; 147 (spr=99)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	sty COLOR1
+	stx HPOSP0
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line96
+	nop 
+	sty COLOR1
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$28 ; 40 (spr=-8)
+	nop 
+	ldy #$28 ; 40 (spr=-8)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line97
+	lda #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$A5 ; 165 (spr=117)
+	lda #$B0 ; 176 (spr=128)
+	stx COLOR2
+	stx COLOR1
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$09 ; 9 (spr=-39)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line98
+	ldy #$0E ; 14 (spr=-34)
+	lda #$00 ; 0 (spr=-48)
+	sta COLOR2
+	lda #$98 ; 152 (spr=104)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	sty HPOSP2
+	lda #$10 ; 16 (spr=-32)
+	stx COLBAK
+	lda #$15 ; 21 (spr=-27)
+	ldy #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	lda #$1F ; 31 (spr=-17)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	lda #$02 ; 2 (spr=-46)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line99
+	sta COLPM2
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$92 ; 146 (spr=98)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	sty COLPM2
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	lda #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	lda #$14 ; 20 (spr=-28)
+	ldx #$05 ; 5 (spr=-43)
+	nop 
+	stx COLOR1
+	nop 
+	ldx #$11 ; 17 (spr=-31)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line100
+	sta COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$A3 ; 163 (spr=115)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$0B ; 11 (spr=-37)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$28 ; 40 (spr=-8)
+	sty HPOSP2
+	nop 
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line101
+	nop 
+	lda #$03 ; 3 (spr=-45)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$02 ; 2 (spr=-46)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$28 ; 40 (spr=-8)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$92 ; 146 (spr=98)
+	nop 
+	nop 
+	sta COLPM0
+	lda #$92 ; 146 (spr=98)
+	sty COLOR0
+	nop 
+	nop 
+	ldx #$E0 ; 224 (spr=176)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line102
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$03 ; 3 (spr=-45)
+	ldy #$00 ; 0 (spr=-48)
+	sta COLOR0
+	sta COLBAK
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	ldy #$92 ; 146 (spr=98)
+	ldy #$92 ; 146 (spr=98)
+	sty HPOSP2
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP0
+	sty COLPM0
+	nop 
+	nop 
+	nop 
+	ldx #$2B ; 43 (spr=-5)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line103
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$08 ; 8 (spr=-40)
+	ldy #$92 ; 146 (spr=98)
+	sty COLPM0
+	stx HPOSP2
+	ldx #$2B ; 43 (spr=-5)
+	sty COLOR0
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line104
+	sta COLPM0
+	sty HPOSP2
+	stx HPOSP2
+	ldx #$01 ; 1 (spr=-47)
+	nop 
+	sta COLOR0
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$0B ; 11 (spr=-37)
+	sta COLPM1
+	nop 
+	sty COLOR0
+	sty COLOR0
+	stx COLOR1
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line105
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$09 ; 9 (spr=-39)
+	lda #$FF ; 255 (spr=207)
+	lda #$F0 ; 240 (spr=192)
+	lda #$02 ; 2 (spr=-46)
+	sty COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	lda #$0D ; 13 (spr=-35)
+	lda #$02 ; 2 (spr=-46)
+	sty COLOR0
+	ldy #$0C ; 12 (spr=-36)
+	ldy #$04 ; 4 (spr=-44)
+	lda #$0F ; 15 (spr=-33)
+	nop 
+	sty COLPM0
+	sty COLOR1
+	nop 
+	sty COLOR1
+	sta COLOR0
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line106
+	lda #$11 ; 17 (spr=-31)
+	ldy #$26 ; 38 (spr=-10)
+	nop 
+	sty COLPM0
+	sty COLPM2
+	ldx #$0E ; 14 (spr=-34)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$FE ; 254 (spr=206)
+	ldx #$BC ; 188 (spr=140)
+	nop 
+	sty COLPM0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$20 ; 32 (spr=-16)
+	ldy #$E8 ; 232 (spr=184)
+	ldy #$06 ; 6 (spr=-42)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	lda #$0F ; 15 (spr=-33)
+	lda #$06 ; 6 (spr=-42)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line107
+	sty COLPM0
+	lda #$F2 ; 242 (spr=194)
+	ldx #$0E ; 14 (spr=-34)
+	lda #$3E ; 62 (spr=14)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	ldx #$0D ; 13 (spr=-35)
+	ldx #$FF ; 255 (spr=207)
+	ldy #$0B ; 11 (spr=-37)
+	nop 
+	lda #$0E ; 14 (spr=-34)
+	ldx #$0E ; 14 (spr=-34)
+	sty COLBAK
+	nop 
+	lda #$04 ; 4 (spr=-44)
+	lda #$06 ; 6 (spr=-42)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line108
+	ldy #$00 ; 0 (spr=-48)
+	lda #$0E ; 14 (spr=-34)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	sty COLOR2
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$29 ; 41 (spr=-7)
+	lda #$02 ; 2 (spr=-46)
+	lda #$0E ; 14 (spr=-34)
+	nop 
+	ldx #$0F ; 15 (spr=-33)
+	nop 
+	sta COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line109
+	ldy #$00 ; 0 (spr=-48)
+	lda #$0E ; 14 (spr=-34)
+	sta COLOR0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	sty COLOR2
+	ldy #$0E ; 14 (spr=-34)
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$2A ; 42 (spr=-6)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	ldx #$0E ; 14 (spr=-34)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line110
+	lda #$FF ; 255 (spr=207)
+	lda #$0E ; 14 (spr=-34)
+	nop 
+	lda #$08 ; 8 (spr=-40)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$0E ; 14 (spr=-34)
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	sty COLOR2
+	ldy #$0E ; 14 (spr=-34)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$0F ; 15 (spr=-33)
+	ldy #$2A ; 42 (spr=-6)
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	ldx #$0E ; 14 (spr=-34)
+	sta COLOR0
+	nop 
+	sta COLOR0
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line111
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	sta COLOR0
+	sta HPOSP2
+	ldy #$05 ; 5 (spr=-43)
+	stx COLOR1
+	sty COLOR2
+	lda #$0E ; 14 (spr=-34)
+	ldy #$0E ; 14 (spr=-34)
+	nop 
+	ldx #$0E ; 14 (spr=-34)
+	ldx #$C0 ; 192 (spr=144)
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$D1 ; 209 (spr=161)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$0E ; 14 (spr=-34)
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	sta COLOR0
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line112
+	nop 
+	sty COLOR1
+	ldx #$F0 ; 240 (spr=192)
+	sta COLOR0
+	ldy #$1D ; 29 (spr=-19)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP0
+	nop 
+	sty COLPM0
+	lda #$E3 ; 227 (spr=179)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$F2 ; 242 (spr=194)
+	ldx #$E3 ; 227 (spr=179)
+	ldy #$07 ; 7 (spr=-41)
+	ldx #$05 ; 5 (spr=-43)
+	ldx #$26 ; 38 (spr=-10)
+	ldx #$02 ; 2 (spr=-46)
+	sty HPOSP2
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line113
+	sta COLPM0
+	nop 
+	ldy #$2A ; 42 (spr=-6)
+	sty HPOSP2
+	lda #$00 ; 0 (spr=-48)
+	lda #$09 ; 9 (spr=-39)
+	ldy #$06 ; 6 (spr=-42)
+	sty COLPM2
+	lda #$10 ; 16 (spr=-32)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$08 ; 8 (spr=-40)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$07 ; 7 (spr=-41)
+	lda #$28 ; 40 (spr=-8)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line114
+	ldy #$0A ; 10 (spr=-38)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	lda #$28 ; 40 (spr=-8)
+	nop 
+	ldy #$EF ; 239 (spr=191)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$F0 ; 240 (spr=192)
+	ldx #$FF ; 255 (spr=207)
+	lda #$10 ; 16 (spr=-32)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line115
+	ldy #$0A ; 10 (spr=-38)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$04 ; 4 (spr=-44)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	lda #$28 ; 40 (spr=-8)
+	nop 
+	ldy #$EF ; 239 (spr=191)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$F0 ; 240 (spr=192)
+	ldx #$FF ; 255 (spr=207)
+	lda #$10 ; 16 (spr=-32)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line116
+	ldx #$F5 ; 245 (spr=197)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$01 ; 1 (spr=-47)
+	nop 
+	ldy #$42 ; 66 (spr=18)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$90 ; 144 (spr=96)
+	sta HPOSP2
+	nop 
+	nop 
+	sty HPOSP2
+	sta COLPM2
+	nop 
+	ldx #$EF ; 239 (spr=191)
+	lda #$0E ; 14 (spr=-34)
+	lda #$1C ; 28 (spr=-20)
+	ldx #$0E ; 14 (spr=-34)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F1 ; 241 (spr=193)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$12 ; 18 (spr=-30)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line117
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$0F ; 15 (spr=-33)
+	ldy #$07 ; 7 (spr=-41)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$05 ; 5 (spr=-43)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	lda #$08 ; 8 (spr=-40)
+	nop 
+	stx COLOR1
+	sty COLOR0
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line118
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	sta COLPM2
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	stx COLOR1
+	stx COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$1E ; 30 (spr=-18)
+	nop 
+	sta COLBAK
+	lda #$1E ; 30 (spr=-18)
+	ldx #$05 ; 5 (spr=-43)
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	nop 
+	nop 
+	ldx #$05 ; 5 (spr=-43)
+	ldy #$02 ; 2 (spr=-46)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line119
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR1
+	sty COLOR2
+	sty HPOSP0
+	stx HPOSP0
+	nop 
+	ldy #$38 ; 56 (spr=8)
+	sta COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$0F ; 15 (spr=-33)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$02 ; 2 (spr=-46)
+	sta HPOSP0
+	sta COLOR0
+	sty COLOR2
+	nop 
+	ldx #$26 ; 38 (spr=-10)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line120
+	ldx #$0E ; 14 (spr=-34)
+	ldy #$05 ; 5 (spr=-43)
+	sty COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR1
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$26 ; 38 (spr=-10)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	nop 
+	stx HPOSP0
+	lda #$00 ; 0 (spr=-48)
+	lda #$08 ; 8 (spr=-40)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$0E ; 14 (spr=-34)
+	ldx #$0E ; 14 (spr=-34)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line121
+	nop 
+	stx COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sta COLPM0
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$2A ; 42 (spr=-6)
+	ldy #$0E ; 14 (spr=-34)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$0E ; 14 (spr=-34)
+	ldy #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty COLBAK
+	sta COLBAK
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line122
+	nop 
+	stx COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sta COLPM0
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$2A ; 42 (spr=-6)
+	ldy #$0E ; 14 (spr=-34)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$0A ; 10 (spr=-38)
+	ldy #$0E ; 14 (spr=-34)
+	ldy #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty COLBAK
+	sta COLBAK
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line123
+	sty COLPM2
+	ldy #$0E ; 14 (spr=-34)
+	nop 
+	sta COLBAK
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sta COLPM3
+	lda #$00 ; 0 (spr=-48)
+	lda #$28 ; 40 (spr=-8)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM1
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$08 ; 8 (spr=-40)
+	ldx #$0E ; 14 (spr=-34)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$06 ; 6 (spr=-42)
+	ldy #$90 ; 144 (spr=96)
+	lda #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line124
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$EF ; 239 (spr=191)
+	lda #$FE ; 254 (spr=206)
+	nop 
+	ldx #$F7 ; 247 (spr=199)
+	ldy #$04 ; 4 (spr=-44)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$0E ; 14 (spr=-34)
+	lda #$0A ; 10 (spr=-38)
+	lda #$06 ; 6 (spr=-42)
+	lda #$09 ; 9 (spr=-39)
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$93 ; 147 (spr=99)
+	lda #$0E ; 14 (spr=-34)
+	ldy #$90 ; 144 (spr=96)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$A2 ; 162 (spr=114)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line125
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$93 ; 147 (spr=99)
+	lda #$FE ; 254 (spr=206)
+	nop 
+	ldx #$F7 ; 247 (spr=199)
+	ldx #$06 ; 6 (spr=-42)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$13 ; 19 (spr=-29)
+	stx COLPM2
+	nop 
+	lda #$0A ; 10 (spr=-38)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$06 ; 6 (spr=-42)
+	lda #$F9 ; 249 (spr=201)
+	lda #$F2 ; 242 (spr=194)
+	ldy #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$E0 ; 224 (spr=176)
+	lda #$0F ; 15 (spr=-33)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line126
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$2B ; 43 (spr=-5)
+	ldx #$0E ; 14 (spr=-34)
+	ldy #$92 ; 146 (spr=98)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$29 ; 41 (spr=-7)
+	lda #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	sta COLPM3
+	lda #$0E ; 14 (spr=-34)
+	ldx #$0E ; 14 (spr=-34)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$93 ; 147 (spr=99)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR1
+	nop 
+	nop 
+	nop 
+	ldy #$0E ; 14 (spr=-34)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line127
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$FE ; 254 (spr=206)
+	nop 
+	ldy #$0E ; 14 (spr=-34)
+	sty COLOR1
+	lda #$00 ; 0 (spr=-48)
+	ldx #$A9 ; 169 (spr=121)
+	stx COLPM2
+	stx HPOSP2
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	nop 
+	ldx #$38 ; 56 (spr=8)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line128
+	lda #$EE ; 238 (spr=190)
+	lda #$D0 ; 208 (spr=160)
+	lda #$E0 ; 224 (spr=176)
+	ldy #$0E ; 14 (spr=-34)
+	ldx #$06 ; 6 (spr=-42)
+	stx COLPM0
+	nop 
+	stx COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$FE ; 254 (spr=206)
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP2
+	nop 
+	lda #$03 ; 3 (spr=-45)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$0E ; 14 (spr=-34)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line129
+	nop 
+	nop 
+	lda #$0E ; 14 (spr=-34)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	stx HPOSP0
+	lda #$0D ; 13 (spr=-35)
+	sty COLPM0
+	ldy #$D8 ; 216 (spr=168)
+	nop 
+	ldy #$04 ; 4 (spr=-44)
+	ldx #$0E ; 14 (spr=-34)
+	sty HPOSP0
+	lda #$20 ; 32 (spr=-16)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$2A ; 42 (spr=-6)
+	ldy #$0E ; 14 (spr=-34)
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line130
+	nop 
+	sty COLPM0
+	ldx #$04 ; 4 (spr=-44)
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sta HPOSP0
+	stx COLOR2
+	sty HPOSP0
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$0D ; 13 (spr=-35)
+	ldx #$0E ; 14 (spr=-34)
+	lda #$92 ; 146 (spr=98)
+	stx COLOR1
+	ldy #$0E ; 14 (spr=-34)
+	sty HPOSP0
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line131
+	nop 
+	sty COLPM0
+	ldx #$04 ; 4 (spr=-44)
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM0
+	lda #$06 ; 6 (spr=-42)
+	nop 
+	sta HPOSP0
+	stx COLOR2
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$0E ; 14 (spr=-34)
+	ldx #$06 ; 6 (spr=-42)
+	stx COLOR1
+	ldy #$0E ; 14 (spr=-34)
+	sty HPOSP0
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line132
+	ldy #$D0 ; 208 (spr=160)
+	ldy #$01 ; 1 (spr=-47)
+	sta HPOSP2
+	ldx #$A8 ; 168 (spr=120)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLBAK
+	nop 
+	nop 
+	lda #$2A ; 42 (spr=-6)
+	lda #$00 ; 0 (spr=-48)
+	stx COLPM3
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$04 ; 4 (spr=-44)
+	sty COLPM0
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$02 ; 2 (spr=-46)
+	ldy #$01 ; 1 (spr=-47)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line133
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$06 ; 6 (spr=-42)
+	lda #$09 ; 9 (spr=-39)
+	sta COLPM3
+	ldy #$20 ; 32 (spr=-16)
+	ldx #$93 ; 147 (spr=99)
+	stx HPOSP0
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$03 ; 3 (spr=-45)
+	sty COLPM0
+	nop 
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$92 ; 146 (spr=98)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$16 ; 22 (spr=-26)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line134
+	lda #$92 ; 146 (spr=98)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	stx HPOSP2
+	nop 
+	stx HPOSP2
+	nop 
+	stx HPOSP2
+	ldy #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	stx COLPM0
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line135
+	sta HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldx #$C8 ; 200 (spr=152)
+	ldx #$60 ; 96 (spr=48)
+	sty COLOR0
+	lda #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	nop 
+	lda #$EF ; 239 (spr=191)
+	stx COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$FE ; 254 (spr=206)
+	ldy #$94 ; 148 (spr=100)
+	lda #$00 ; 0 (spr=-48)
+	sty COLOR2
+	stx COLOR1
+	stx COLPM0
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line136
+	sta COLBAK
+	sty COLPM1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	sty COLOR2
+	ldx #$10 ; 16 (spr=-32)
+	ldx #$C7 ; 199 (spr=151)
+	ldy #$A8 ; 168 (spr=120)
+	ldx #$F0 ; 240 (spr=192)
+	lda #$EE ; 238 (spr=190)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	sty COLPM1
+	lda #$00 ; 0 (spr=-48)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$5C ; 92 (spr=44)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line137
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLBAK
+	ldx #$0F ; 15 (spr=-33)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	stx COLOR0
+	ldy #$3A ; 58 (spr=10)
+	ldy #$D0 ; 208 (spr=160)
+	sta COLOR1
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$A2 ; 162 (spr=114)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line138
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$A6 ; 166 (spr=118)
+	nop 
+	sta COLBAK
+	stx COLOR0
+	stx HPOSP1
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$08 ; 8 (spr=-40)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$28 ; 40 (spr=-8)
+	nop 
+	sta COLOR0
+	ldy #$0F ; 15 (spr=-33)
+	ldy #$0F ; 15 (spr=-33)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line139
+	ldy #$93 ; 147 (spr=99)
+	lda #$01 ; 1 (spr=-47)
+	sty COLPM0
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$08 ; 8 (spr=-40)
+	sty COLBAK
+	lda #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	stx COLPM3
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F4 ; 244 (spr=196)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	lda #$FF ; 255 (spr=207)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line140
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$98 ; 152 (spr=104)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	ldy #$05 ; 5 (spr=-43)
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$D6 ; 214 (spr=166)
+	sta HPOSP2
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line141
+	sty COLOR2
+	ldy #$95 ; 149 (spr=101)
+	lda #$90 ; 144 (spr=96)
+	ldx #$F0 ; 240 (spr=192)
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	ldy #$37 ; 55 (spr=7)
+	nop 
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line142
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$A6 ; 166 (spr=118)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$D0 ; 208 (spr=160)
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$F1 ; 241 (spr=193)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP2
+	lda #$FF ; 255 (spr=207)
+	lda #$A3 ; 163 (spr=115)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$EF ; 239 (spr=191)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$11 ; 17 (spr=-31)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line143
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR1
+	ldx #$13 ; 19 (spr=-29)
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	lda #$97 ; 151 (spr=103)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$11 ; 17 (spr=-31)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	ldx #$F0 ; 240 (spr=192)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line144
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$92 ; 146 (spr=98)
+	ldx #$58 ; 88 (spr=40)
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sty COLBAK
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$2E ; 46 (spr=-2)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	lda #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	lda #$22 ; 34 (spr=-14)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line145
+	lda #$53 ; 83 (spr=35)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$34 ; 52 (spr=4)
+	ldx #$31 ; 49 (spr=1)
+	sta COLOR1
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	ldx #$F1 ; 241 (spr=193)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$12 ; 18 (spr=-30)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$12 ; 18 (spr=-30)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line146
+	lda #$53 ; 83 (spr=35)
+	sta HPOSP0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$31 ; 49 (spr=1)
+	sta COLOR1
+	ldx #$A6 ; 166 (spr=118)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$34 ; 52 (spr=4)
+	lda #$00 ; 0 (spr=-48)
+	lda #$12 ; 18 (spr=-30)
+	nop 
+	nop 
+	lda #$34 ; 52 (spr=4)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line147
+	lda #$53 ; 83 (spr=35)
+	sta HPOSP0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$31 ; 49 (spr=1)
+	sta COLOR1
+	ldx #$A6 ; 166 (spr=118)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$34 ; 52 (spr=4)
+	lda #$00 ; 0 (spr=-48)
+	lda #$12 ; 18 (spr=-30)
+	nop 
+	nop 
+	lda #$34 ; 52 (spr=4)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line148
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	ldx #$04 ; 4 (spr=-44)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	stx COLPM0
+	sty HPOSP2
+	lda #$08 ; 8 (spr=-40)
+	sty HPOSP3
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$04 ; 4 (spr=-44)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line149
+	lda #$03 ; 3 (spr=-45)
+	sta COLOR0
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$01 ; 1 (spr=-47)
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FE ; 254 (spr=206)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	stx COLOR0
+	lda #$00 ; 0 (spr=-48)
+	ldy #$11 ; 17 (spr=-31)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line150
+	lda #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	lda #$03 ; 3 (spr=-45)
+	sta COLOR0
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$04 ; 4 (spr=-44)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$A8 ; 168 (spr=120)
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLOR2
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line151
+	sty COLOR1
+	lda #$99 ; 153 (spr=105)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	sta COLOR0
+	nop 
+	stx COLOR1
+	sty HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$DE ; 222 (spr=174)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$D0 ; 208 (spr=160)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	lda #$10 ; 16 (spr=-32)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line152
+	lda #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	lda #$0F ; 15 (spr=-33)
+	ldx #$02 ; 2 (spr=-46)
+	sty HPOSP0
+	lda #$00 ; 0 (spr=-48)
+	stx COLOR1
+	sty HPOSP0
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$81 ; 129 (spr=81)
+	nop 
+	stx COLOR2
+	lda #$A6 ; 166 (spr=118)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line153
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$29 ; 41 (spr=-7)
+	lda #$EF ; 239 (spr=191)
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$08 ; 8 (spr=-40)
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$97 ; 151 (spr=103)
+	nop 
+	sta HPOSP1
+	ldx #$FF ; 255 (spr=207)
+	lda #$A5 ; 165 (spr=117)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line154
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$07 ; 7 (spr=-41)
+	stx COLOR0
+	nop 
+	ldy #$20 ; 32 (spr=-16)
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$97 ; 151 (spr=103)
+	ldy #$00 ; 0 (spr=-48)
+	sta COLPM1
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	lda #$F0 ; 240 (spr=192)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line155
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$11 ; 17 (spr=-31)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	lda #$93 ; 147 (spr=99)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line156
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F0 ; 240 (spr=192)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	lda #$93 ; 147 (spr=99)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR0
+	ldx #$F2 ; 242 (spr=194)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line157
+	ldx #$F1 ; 241 (spr=193)
+	ldx #$F1 ; 241 (spr=193)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$88 ; 136 (spr=88)
+	ldx #$01 ; 1 (spr=-47)
+	stx COLOR2
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$21 ; 33 (spr=-15)
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$99 ; 153 (spr=105)
+	nop 
+	sta COLOR0
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line158
+	nop 
+	ldy #$10 ; 16 (spr=-32)
+	stx HPOSP2
+	lda #$94 ; 148 (spr=100)
+	sta HPOSP0
+	ldy #$78 ; 120 (spr=72)
+	nop 
+	stx HPOSP1
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$98 ; 152 (spr=104)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	sta COLBAK
+	ldy #$02 ; 2 (spr=-46)
+	ldy #$04 ; 4 (spr=-44)
+	lda #$93 ; 147 (spr=99)
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line159
+	nop 
+	ldx #$FE ; 254 (spr=206)
+	nop 
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$FE ; 254 (spr=206)
+	ldy #$02 ; 2 (spr=-46)
+	nop 
+	ldy #$08 ; 8 (spr=-40)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	nop 
+	sty HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line160
+	stx HPOSP2
+	lda #$96 ; 150 (spr=102)
+	ldx #$11 ; 17 (spr=-31)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP1
+	sta HPOSP1
+	sta COLPM1
+	ldx #$0F ; 15 (spr=-33)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$31 ; 49 (spr=1)
+	nop 
+	sty HPOSP2
+	sta COLOR0
+	ldy #$EC ; 236 (spr=188)
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$D0 ; 208 (spr=160)
+	lda #$98 ; 152 (spr=104)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line161
+	lda #$04 ; 4 (spr=-44)
+	ldx #$11 ; 17 (spr=-31)
+	sta COLOR0
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	lda #$FF ; 255 (spr=207)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	sty COLBAK
+	lda #$A0 ; 160 (spr=112)
+	ldx #$F1 ; 241 (spr=193)
+	sty COLPM2
+	ldy #$92 ; 146 (spr=98)
+	sty COLPM0
+	ldy #$00 ; 0 (spr=-48)
+	lda #$06 ; 6 (spr=-42)
+	nop 
+	nop 
+	ldy #$98 ; 152 (spr=104)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line162
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line163
+	stx HPOSP0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	lda #$0F ; 15 (spr=-33)
+	lda #$03 ; 3 (spr=-45)
+	stx COLPM2
+	sta HPOSP0
+	ldy #$02 ; 2 (spr=-46)
+	sty COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$97 ; 151 (spr=103)
+	stx COLOR1
+	sty COLOR2
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line164
+	sta COLPM0
+	sta COLPM1
+	ldx #$D0 ; 208 (spr=160)
+	lda #$99 ; 153 (spr=105)
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	ldy #$D0 ; 208 (spr=160)
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	stx HPOSP2
+	lda #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line165
+	lda #$99 ; 153 (spr=105)
+	ldy #$00 ; 0 (spr=-48)
+	sty HPOSP0
+	nop 
+	sta COLPM1
+	ldx #$02 ; 2 (spr=-46)
+	sta HPOSP0
+	stx HPOSP2
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$93 ; 147 (spr=99)
+	sty HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line166
+	ldx #$02 ; 2 (spr=-46)
+	lda #$99 ; 153 (spr=105)
+	stx HPOSP0
+	sty COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	ldx #$06 ; 6 (spr=-42)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$CF ; 207 (spr=159)
+	stx HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM2
+	ldx #$04 ; 4 (spr=-44)
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line167
+	ldx #$02 ; 2 (spr=-46)
+	lda #$99 ; 153 (spr=105)
+	stx HPOSP0
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	sta HPOSP0
+	ldx #$06 ; 6 (spr=-42)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	stx COLOR1
+	sty COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM2
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$46 ; 70 (spr=22)
+	ldx #$CF ; 207 (spr=159)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line168
+	lda #$00 ; 0 (spr=-48)
+	ldy #$46 ; 70 (spr=22)
+	stx COLPM1
+	sta HPOSP1
+	ldx #$01 ; 1 (spr=-47)
+	sty HPOSP0
+	sty HPOSP3
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP0
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	sty COLPM2
+	ldx #$FE ; 254 (spr=206)
+	nop 
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line169
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$96 ; 150 (spr=102)
+	sty HPOSP2
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	lda #$A9 ; 169 (spr=121)
+	stx HPOSP1
+	nop 
+	sta COLPM1
+	nop 
+	ldx #$FE ; 254 (spr=206)
+	lda #$02 ; 2 (spr=-46)
+	lda #$01 ; 1 (spr=-47)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sta COLPM1
+	sta HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line170
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	lda #$A6 ; 166 (spr=118)
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	lda #$A9 ; 169 (spr=121)
+	stx HPOSP1
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	sta COLPM1
+	lda #$99 ; 153 (spr=105)
+	sta COLPM1
+	sta COLPM1
+	ldx #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line171
+	ldy #$00 ; 0 (spr=-48)
+	lda #$2A ; 42 (spr=-6)
+	lda #$00 ; 0 (spr=-48)
+	lda #$95 ; 149 (spr=101)
+	sty COLOR1
+	sty COLPM2
+	sta HPOSP1
+	ldy #$D0 ; 208 (spr=160)
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	lda #$97 ; 151 (spr=103)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$07 ; 7 (spr=-41)
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$2A ; 42 (spr=-6)
+	nop 
+	nop 
+	nop 
+	stx HPOSP2
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line172
+	sta COLOR1
+	stx COLOR2
+	ldy #$E0 ; 224 (spr=176)
+	sty COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$EF ; 239 (spr=191)
+	nop 
+	ldy #$1E ; 30 (spr=-18)
+	ldx #$03 ; 3 (spr=-45)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$93 ; 147 (spr=99)
+	stx COLBAK
+	stx COLBAK
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line173
+	sta COLBAK
+	stx COLOR1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F0 ; 240 (spr=192)
+	lda #$04 ; 4 (spr=-44)
+	ldx #$8F ; 143 (spr=95)
+	ldx #$11 ; 17 (spr=-31)
+	ldy #$04 ; 4 (spr=-44)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$E1 ; 225 (spr=177)
+	stx COLPM2
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$97 ; 151 (spr=103)
+	sta COLPM1
+	ldx #$FF ; 255 (spr=207)
+	ldy #$08 ; 8 (spr=-40)
+	nop 
+	ldx #$A2 ; 162 (spr=114)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line174
+	lda #$F0 ; 240 (spr=192)
+	stx COLPM2
+	sty HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM0
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM0
+	ldy #$A8 ; 168 (spr=120)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	stx COLPM0
+	sty HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$EF ; 239 (spr=191)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line175
+	ldy #$95 ; 149 (spr=101)
+	sty COLPM0
+	lda #$20 ; 32 (spr=-16)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	ldy #$00 ; 0 (spr=-48)
+	lda #$93 ; 147 (spr=99)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sty COLPM2
+	stx COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line176
+	ldx #$0F ; 15 (spr=-33)
+	sta COLPM1
+	sta HPOSP0
+	lda #$97 ; 151 (spr=103)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	sta COLOR0
+	lda #$06 ; 6 (spr=-42)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line177
+	sta COLOR0
+	nop 
+	sty COLOR2
+	lda #$05 ; 5 (spr=-43)
+	sta COLPM2
+	lda #$97 ; 151 (spr=103)
+	sta COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR0
+	lda #$98 ; 152 (spr=104)
+	sta COLPM2
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	lda #$07 ; 7 (spr=-41)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line178
+	sta COLOR0
+	nop 
+	sty COLOR2
+	lda #$05 ; 5 (spr=-43)
+	sta COLPM2
+	lda #$97 ; 151 (spr=103)
+	sta COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR0
+	lda #$98 ; 152 (spr=104)
+	sta COLPM2
+	lda #$96 ; 150 (spr=102)
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	ldx #$10 ; 16 (spr=-32)
+	lda #$07 ; 7 (spr=-41)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line179
+	nop 
+	sta COLOR0
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$97 ; 151 (spr=103)
+	nop 
+	sta COLOR0
+	ldy #$04 ; 4 (spr=-44)
+	lda #$06 ; 6 (spr=-42)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	nop 
+	sta COLOR0
+	nop 
+	sta COLBAK
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$15 ; 21 (spr=-27)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line180
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	lda #$03 ; 3 (spr=-45)
+	sty HPOSP2
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$04 ; 4 (spr=-44)
+	nop 
+	sta COLBAK
+	ldy #$2F ; 47 (spr=-1)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$98 ; 152 (spr=104)
+	sta COLOR0
+	sta COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	lda #$06 ; 6 (spr=-42)
+	sta COLOR0
+	nop 
+	ldx #$94 ; 148 (spr=100)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line181
+	nop 
+	lda #$96 ; 150 (spr=102)
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM2
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	lda #$05 ; 5 (spr=-43)
+	sta COLBAK
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	sta COLOR0
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line182
+	ldx #$D0 ; 208 (spr=160)
+	sta COLPM2
+	ldy #$A2 ; 162 (spr=114)
+	lda #$E0 ; 224 (spr=176)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	stx HPOSP2
+	lda #$F0 ; 240 (spr=192)
+	lda #$A6 ; 166 (spr=118)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$98 ; 152 (spr=104)
+	ldy #$0F ; 15 (spr=-33)
+	sta COLOR0
+	lda #$06 ; 6 (spr=-42)
+	sta COLOR0
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$01 ; 1 (spr=-47)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line183
+	ldy #$01 ; 1 (spr=-47)
+	stx HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP2
+	lda #$00 ; 0 (spr=-48)
+	lda #$96 ; 150 (spr=102)
+	ldy #$DF ; 223 (spr=175)
+	sta COLOR0
+	ldy #$FE ; 254 (spr=206)
+	sta HPOSP2
+	sty COLPM2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM2
+	lda #$06 ; 6 (spr=-42)
+	nop 
+	ldy #$05 ; 5 (spr=-43)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line184
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$05 ; 5 (spr=-43)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$05 ; 5 (spr=-43)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$97 ; 151 (spr=103)
+	sty COLBAK
+	sty COLOR2
+	ldy #$02 ; 2 (spr=-46)
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line185
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sty COLOR2
+	ldx #$F1 ; 241 (spr=193)
+	ldy #$03 ; 3 (spr=-45)
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP2
+	sta HPOSP1
+	ldy #$F0 ; 240 (spr=192)
+	sta COLOR2
+	lda #$96 ; 150 (spr=102)
+	sta COLOR0
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	stx HPOSP2
+	lda #$96 ; 150 (spr=102)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line186
+	nop 
+	ldy #$04 ; 4 (spr=-44)
+	ldx #$11 ; 17 (spr=-31)
+	lda #$00 ; 0 (spr=-48)
+	sta COLOR0
+	lda #$96 ; 150 (spr=102)
+	nop 
+	sta COLBAK
+	lda #$B8 ; 184 (spr=136)
+	nop 
+	sta HPOSP0
+	ldx #$F0 ; 240 (spr=192)
+	stx HPOSP2
+	nop 
+	lda #$21 ; 33 (spr=-15)
+	ldx #$A0 ; 160 (spr=112)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line187
+	lda #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta HPOSP2
+	sta HPOSP1
+	nop 
+	nop 
+	sta COLBAK
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	lda #$EF ; 239 (spr=191)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldy #$92 ; 146 (spr=98)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$02 ; 2 (spr=-46)
+	lda #$FF ; 255 (spr=207)
+	lda #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line188
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$AC ; 172 (spr=124)
+	stx HPOSP1
+	sta HPOSP1
+	nop 
+	nop 
+	ldy #$02 ; 2 (spr=-46)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	ldy #$F1 ; 241 (spr=193)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line189
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$AC ; 172 (spr=124)
+	stx HPOSP1
+	sta HPOSP1
+	nop 
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$95 ; 149 (spr=101)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$F1 ; 241 (spr=193)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line190
+	lda #$95 ; 149 (spr=101)
+	sta HPOSP2
+	sta HPOSP1
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$16 ; 22 (spr=-26)
+	lda #$BC ; 188 (spr=140)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$98 ; 152 (spr=104)
+	ldy #$10 ; 16 (spr=-32)
+	sta HPOSP1
+	ldy #$FF ; 255 (spr=207)
+	ldy #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$0A ; 10 (spr=-38)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line191
+	lda #$08 ; 8 (spr=-40)
+	ldy #$05 ; 5 (spr=-43)
+	ldy #$00 ; 0 (spr=-48)
+	sta COLOR0
+	sty COLOR0
+	nop 
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$98 ; 152 (spr=104)
+	ldy #$02 ; 2 (spr=-46)
+	ldy #$10 ; 16 (spr=-32)
+	lda #$92 ; 146 (spr=98)
+	sta HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	lda #$A8 ; 168 (spr=120)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$98 ; 152 (spr=104)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line192
+	lda #$96 ; 150 (spr=102)
+	sta HPOSP2
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	lda #$A8 ; 168 (spr=120)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$BB ; 187 (spr=139)
+	ldy #$98 ; 152 (spr=104)
+	ldy #$02 ; 2 (spr=-46)
+	ldx #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldy #$94 ; 148 (spr=100)
+	ldx #$F6 ; 246 (spr=198)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$06 ; 6 (spr=-42)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line193
+	lda #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	lda #$13 ; 19 (spr=-29)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	lda #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	sta HPOSP2
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$21 ; 33 (spr=-15)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	stx COLOR1
+	ldy #$04 ; 4 (spr=-44)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line194
+	ldx #$95 ; 149 (spr=101)
+	nop 
+	ldx #$08 ; 8 (spr=-40)
+	ldx #$01 ; 1 (spr=-47)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$94 ; 148 (spr=100)
+	nop 
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	stx COLOR1
+	lda #$00 ; 0 (spr=-48)
+	lda #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	ldx #$F4 ; 244 (spr=196)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line195
+	ldy #$92 ; 146 (spr=98)
+	lda #$FF ; 255 (spr=207)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	ldx #$A4 ; 164 (spr=116)
+	stx COLPM1
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	nop 
+	lda #$FF ; 255 (spr=207)
+	lda #$E8 ; 232 (spr=184)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$96 ; 150 (spr=102)
+	nop 
+	nop 
+	lda #$A6 ; 166 (spr=118)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line196
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	sty COLPM1
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	nop 
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sty HPOSP2
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$96 ; 150 (spr=102)
+	lda #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line197
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	lda #$FF ; 255 (spr=207)
+	ldy #$0A ; 10 (spr=-38)
+	ldy #$97 ; 151 (spr=103)
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP1
+	ldy #$90 ; 144 (spr=96)
+	nop 
+	ldx #$07 ; 7 (spr=-41)
+	lda #$7C ; 124 (spr=76)
+	sty COLOR1
+	nop 
+	nop 
+	lda #$05 ; 5 (spr=-43)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM1
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line198
+	sta COLOR0
+	nop 
+	stx COLOR1
+	nop 
+	sta HPOSP1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	ldx #$06 ; 6 (spr=-42)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	sty COLOR2
+	ldy #$97 ; 151 (spr=103)
+	ldx #$F1 ; 241 (spr=193)
+	stx COLPM0
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line199
+	stx HPOSP1
+	nop 
+	stx COLPM0
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP1
+	lda #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sta COLOR0
+	nop 
+	ldx #$08 ; 8 (spr=-40)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$03 ; 3 (spr=-45)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line200
+	nop 
+	sty COLPM0
+	ldy #$06 ; 6 (spr=-42)
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	sty COLPM1
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	lda #$92 ; 146 (spr=98)
+	nop 
+	nop 
+	nop 
+	nop 
+	nop 
+	ldx #$02 ; 2 (spr=-46)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$96 ; 150 (spr=102)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line201
+	stx HPOSP0
+	nop 
+	sty COLPM1
+	nop 
+	nop 
+	ldy #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sta COLOR0
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	nop 
+	ldx #$11 ; 17 (spr=-31)
+	lda #$98 ; 152 (spr=104)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line202
+	sty HPOSP2
+	lda #$00 ; 0 (spr=-48)
+	lda #$98 ; 152 (spr=104)
+	sta COLPM1
+	ldx #$11 ; 17 (spr=-31)
+	lda #$03 ; 3 (spr=-45)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$EF ; 239 (spr=191)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$02 ; 2 (spr=-46)
+	ldx #$07 ; 7 (spr=-41)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line203
+	sta COLOR0
+	sta COLPM2
+	ldx #$95 ; 149 (spr=101)
+	stx HPOSP0
+	stx COLOR1
+	ldx #$07 ; 7 (spr=-41)
+	stx COLPM3
+	sta COLBAK
+	lda #$09 ; 9 (spr=-39)
+	ldy #$A5 ; 165 (spr=117)
+	nop 
+	sty COLOR0
+	ldx #$95 ; 149 (spr=101)
+	nop 
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$12 ; 18 (spr=-30)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line204
+	nop 
+	stx HPOSP2
+	sta COLOR0
+	ldy #$08 ; 8 (spr=-40)
+	lda #$90 ; 144 (spr=96)
+	ldy #$FF ; 255 (spr=207)
+	stx HPOSP1
+	lda #$18 ; 24 (spr=-24)
+	lda #$06 ; 6 (spr=-42)
+	nop 
+	ldx #$93 ; 147 (spr=99)
+	ldy #$12 ; 18 (spr=-30)
+	ldy #$D0 ; 208 (spr=160)
+	stx COLPM2
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$0A ; 10 (spr=-38)
+	stx COLOR1
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line205
+	nop 
+	sta COLPM3
+	lda #$08 ; 8 (spr=-40)
+	stx HPOSP2
+	sty COLPM2
+	stx HPOSP0
+	stx HPOSP0
+	stx COLPM2
+	lda #$05 ; 5 (spr=-43)
+	sta COLBAK
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line206
+	nop 
+	ldy #$E0 ; 224 (spr=176)
+	lda #$0F ; 15 (spr=-33)
+	sty COLPM0
+	lda #$90 ; 144 (spr=96)
+	ldx #$FE ; 254 (spr=206)
+	stx HPOSP0
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	stx COLOR0
+	stx COLOR0
+	sty COLOR2
+	ldx #$84 ; 132 (spr=84)
+	sta COLOR1
+	ldy #$00 ; 0 (spr=-48)
+	sty HPOSP1
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line207
+	sta COLPM0
+	stx COLOR1
+	lda #$00 ; 0 (spr=-48)
+	lda #$A5 ; 165 (spr=117)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$92 ; 146 (spr=98)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	lda #$01 ; 1 (spr=-47)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	lda #$FF ; 255 (spr=207)
+	lda #$FF ; 255 (spr=207)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$F1 ; 241 (spr=193)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line208
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F1 ; 241 (spr=193)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line209
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	lda #$02 ; 2 (spr=-46)
+	ldy #$94 ; 148 (spr=100)
+	sty COLPM1
+	nop 
+	ldx #$76 ; 118 (spr=70)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	stx HPOSP3
+	ldy #$D0 ; 208 (spr=160)
+	sta COLPM3
+	sta HPOSP1
+	nop 
+	nop 
+	nop 
+	lda #$A3 ; 163 (spr=115)
+	lda #$01 ; 1 (spr=-47)
+	ldy #$01 ; 1 (spr=-47)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line210
+	ldy #$91 ; 145 (spr=97)
+	ldx #$09 ; 9 (spr=-39)
+	lda #$96 ; 150 (spr=102)
+	lda #$A2 ; 162 (spr=114)
+	stx COLOR1
+	sty HPOSP1
+	sty COLPM2
+	lda #$10 ; 16 (spr=-32)
+	stx HPOSP2
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	nop 
+	lda #$A3 ; 163 (spr=115)
+	ldy #$96 ; 150 (spr=102)
+	lda #$01 ; 1 (spr=-47)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$E8 ; 232 (spr=184)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line211
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$FF ; 255 (spr=207)
+	lda #$B3 ; 179 (spr=131)
+	ldy #$92 ; 146 (spr=98)
+	sta HPOSP2
+	sty COLPM1
+	nop 
+	ldx #$A8 ; 168 (spr=120)
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$03 ; 3 (spr=-45)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$02 ; 2 (spr=-46)
+	lda #$98 ; 152 (spr=104)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	lda #$11 ; 17 (spr=-31)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line212
+	ldy #$F0 ; 240 (spr=192)
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line213
+	lda #$98 ; 152 (spr=104)
+	nop 
+	sta COLPM1
+	sta HPOSP1
+	lda #$A9 ; 169 (spr=121)
+	stx COLOR2
+	ldx #$96 ; 150 (spr=102)
+	ldy #$93 ; 147 (spr=99)
+	sty COLOR2
+	stx COLOR1
+	sty HPOSP3
+	nop 
+	ldx #$D0 ; 208 (spr=160)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	stx COLOR0
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line214
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	stx COLOR0
+	stx HPOSP2
+	ldy #$82 ; 130 (spr=82)
+	nop 
+	sta COLBAK
+	ldx #$02 ; 2 (spr=-46)
+	stx COLOR1
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$F0 ; 240 (spr=192)
+	lda #$9A ; 154 (spr=106)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line215
+	nop 
+	ldx #$96 ; 150 (spr=102)
+	sta HPOSP3
+	sty HPOSP1
+	sty HPOSP3
+	sty COLPM2
+	sta HPOSP0
+	stx COLOR1
+	nop 
+	ldx #$EA ; 234 (spr=186)
+	nop 
+	ldx #$01 ; 1 (spr=-47)
+	nop 
+	nop 
+	nop 
+	nop 
+	lda #$99 ; 153 (spr=105)
+	ldy #$00 ; 0 (spr=-48)
+	sty COLOR2
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line216
+	lda #$05 ; 5 (spr=-43)
+	ldy #$95 ; 149 (spr=101)
+	sta COLOR2
+	nop 
+	nop 
+	sty COLPM2
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	ldx #$EA ; 234 (spr=186)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	stx HPOSP2
+	nop 
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line217
+	ldx #$F0 ; 240 (spr=192)
+	sta COLOR2
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	stx COLOR0
+	sta COLOR2
+	sty COLOR2
+	ldy #$92 ; 146 (spr=98)
+	ldx #$A8 ; 168 (spr=120)
+	stx HPOSP2
+	nop 
+	ldx #$A8 ; 168 (spr=120)
+	nop 
+	ldx #$C4 ; 196 (spr=148)
+	nop 
+	ldy #$92 ; 146 (spr=98)
+	nop 
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line218
+	nop 
+	sta COLOR2
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$98 ; 152 (spr=104)
+	nop 
+	ldx #$C4 ; 196 (spr=148)
+	ldx #$00 ; 0 (spr=-48)
+	stx COLOR0
+	sta HPOSP2
+	sty COLOR2
+	nop 
+	nop 
+	nop 
+	sta COLOR2
+	ldy #$92 ; 146 (spr=98)
+	nop 
+	nop 
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line219
+	sty HPOSP1
+	sta COLOR2
+	sta COLOR2
+	ldx #$FF ; 255 (spr=207)
+	lda #$01 ; 1 (spr=-47)
+	sty HPOSP2
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty COLOR2
+	lda #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldy #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	lda #$A6 ; 166 (spr=118)
+	ldx #$FE ; 254 (spr=206)
+	lda #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line220
+	lda #$12 ; 18 (spr=-30)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$EF ; 239 (spr=191)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$10 ; 16 (spr=-32)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$00 ; 0 (spr=-48)
+	sta COLPM1
+	lda #$02 ; 2 (spr=-46)
+	nop 
+	sty HPOSP1
+	ldx #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line221
+	ldx #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	sta COLPM0
+	nop 
+	nop 
+	lda #$CC ; 204 (spr=156)
+	lda #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	ldx #$F0 ; 240 (spr=192)
+	lda #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$A8 ; 168 (spr=120)
+	nop 
+	nop 
+	lda #$A4 ; 164 (spr=116)
+	ldx #$10 ; 16 (spr=-32)
+	lda #$00 ; 0 (spr=-48)
+	lda #$0F ; 15 (spr=-33)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$98 ; 152 (spr=104)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line222
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	ldy #$FF ; 255 (spr=207)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$02 ; 2 (spr=-46)
+	lda #$97 ; 151 (spr=103)
+	ldy #$E0 ; 224 (spr=176)
+	lda #$00 ; 0 (spr=-48)
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	ldx #$80 ; 128 (spr=80)
+	ldy #$96 ; 150 (spr=102)
+	lda #$98 ; 152 (spr=104)
+	nop 
+	ldx #$90 ; 144 (spr=96)
+	sta COLOR0
+	sta HPOSP1
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line223
+	ldx #$04 ; 4 (spr=-44)
+	lda #$FE ; 254 (spr=206)
+	stx HPOSP3
+	stx COLOR1
+	ldy #$F0 ; 240 (spr=192)
+	lda #$97 ; 151 (spr=103)
+	sta COLPM3
+	ldx #$04 ; 4 (spr=-44)
+	ldy #$96 ; 150 (spr=102)
+	sta COLPM0
+	ldx #$D0 ; 208 (spr=160)
+	sty HPOSP0
+	stx COLPM0
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$90 ; 144 (spr=96)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line224
+	ldx #$96 ; 150 (spr=102)
+	nop 
+	sty COLOR2
+	ldy #$F2 ; 242 (spr=194)
+	ldx #$B8 ; 184 (spr=136)
+	sta COLPM3
+	ldx #$95 ; 149 (spr=101)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP0
+	lda #$F1 ; 241 (spr=193)
+	ldy #$96 ; 150 (spr=102)
+	stx HPOSP0
+	lda #$04 ; 4 (spr=-44)
+	nop 
+	stx HPOSP1
+	sty COLPM0
+	stx HPOSP3
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line225
+	stx COLPM2
+	lda #$3A ; 58 (spr=10)
+	ldy #$11 ; 17 (spr=-31)
+	ldx #$EF ; 239 (spr=191)
+	ldy #$91 ; 145 (spr=97)
+	ldx #$94 ; 148 (spr=100)
+	stx COLPM3
+	stx HPOSP0
+	nop 
+	ldx #$04 ; 4 (spr=-44)
+	sta COLPM3
+	sty COLOR2
+	ldx #$02 ; 2 (spr=-46)
+	nop 
+	nop 
+	stx COLPM1
+	ldy #$76 ; 118 (spr=70)
+	ldy #$94 ; 148 (spr=100)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line226
+	nop 
+	ldy #$94 ; 148 (spr=100)
+	ldy #$96 ; 150 (spr=102)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	stx HPOSP2
+	lda #$98 ; 152 (spr=104)
+	nop 
+	ldx #$97 ; 151 (spr=103)
+	ldy #$01 ; 1 (spr=-47)
+	stx HPOSP2
+	nop 
+	stx HPOSP3
+	sty COLOR0
+	lda #$92 ; 146 (spr=98)
+	ldy #$00 ; 0 (spr=-48)
+	stx HPOSP0
+	stx HPOSP2
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line227
+	nop 
+	stx HPOSP2
+	nop 
+	sta COLOR0
+	lda #$F0 ; 240 (spr=192)
+	lda #$96 ; 150 (spr=102)
+	nop 
+	stx COLOR1
+	lda #$93 ; 147 (spr=99)
+	lda #$98 ; 152 (spr=104)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	sty COLOR2
+	nop 
+	ldx #$F1 ; 241 (spr=193)
+	lda #$00 ; 0 (spr=-48)
+	nop 
+	sta COLBAK
+	lda #$00 ; 0 (spr=-48)
+	ldx #$95 ; 149 (spr=101)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line228
+	lda #$99 ; 153 (spr=105)
+	nop 
+	ldy #$97 ; 151 (spr=103)
+	sta HPOSP0
+	sta COLBAK
+	sta HPOSP1
+	ldx #$11 ; 17 (spr=-31)
+	lda #$FF ; 255 (spr=207)
+	ldy #$02 ; 2 (spr=-46)
+	lda #$00 ; 0 (spr=-48)
+	sty COLPM1
+	nop 
+	nop 
+	ldy #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$10 ; 16 (spr=-32)
+	ldy #$02 ; 2 (spr=-46)
+	ldx #$95 ; 149 (spr=101)
+	lda #$00 ; 0 (spr=-48)
+	lda #$F0 ; 240 (spr=192)
+	lda #$5E ; 94 (spr=46)
+	lda #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line229
+	lda #$98 ; 152 (spr=104)
+	lda #$A6 ; 166 (spr=118)
+	sty COLPM3
+	nop 
+	sta COLPM1
+	stx HPOSP0
+	sta HPOSP2
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldy #$04 ; 4 (spr=-44)
+	ldy #$96 ; 150 (spr=102)
+	stx COLPM0
+	ldy #$90 ; 144 (spr=96)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$87 ; 135 (spr=87)
+	stx HPOSP1
+	sty HPOSP0
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line230
+	nop 
+	lda #$F0 ; 240 (spr=192)
+	stx COLPM2
+	sty HPOSP0
+	nop 
+	stx COLPM2
+	lda #$91 ; 145 (spr=97)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$97 ; 151 (spr=103)
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP0
+	sty COLOR1
+	stx COLOR2
+	ldy #$00 ; 0 (spr=-48)
+	stx HPOSP1
+	ldx #$04 ; 4 (spr=-44)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line231
+	ldx #$98 ; 152 (spr=104)
+	ldy #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$8A ; 138 (spr=90)
+	lda #$83 ; 131 (spr=83)
+	ldx #$00 ; 0 (spr=-48)
+	sty HPOSP0
+	lda #$92 ; 146 (spr=98)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	ldy #$96 ; 150 (spr=102)
+	lda #$96 ; 150 (spr=102)
+	ldx #$B2 ; 178 (spr=130)
+	lda #$D0 ; 208 (spr=160)
+	sta COLPM1
+	stx HPOSP1
+	lda #$00 ; 0 (spr=-48)
+	ldy #$95 ; 149 (spr=101)
+	nop 
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line232
+	nop 
+	ldy #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$A7 ; 167 (spr=119)
+	lda #$00 ; 0 (spr=-48)
+	stx HPOSP1
+	ldy #$FF ; 255 (spr=207)
+	lda #$02 ; 2 (spr=-46)
+	ldy #$A5 ; 165 (spr=117)
+	nop 
+	lda #$92 ; 146 (spr=98)
+	ldx #$72 ; 114 (spr=66)
+	lda #$92 ; 146 (spr=98)
+	nop 
+	ldy #$98 ; 152 (spr=104)
+	stx HPOSP3
+	nop 
+	nop 
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta HPOSP1
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line233
+	ldy #$FF ; 255 (spr=207)
+	ldy #$A6 ; 166 (spr=118)
+	ldy #$00 ; 0 (spr=-48)
+	sta HPOSP1
+	nop 
+	ldy #$86 ; 134 (spr=86)
+	ldx #$93 ; 147 (spr=99)
+	sty HPOSP0
+	ldy #$90 ; 144 (spr=96)
+	ldx #$98 ; 152 (spr=104)
+	nop 
+	ldx #$FF ; 255 (spr=207)
+	lda #$94 ; 148 (spr=100)
+	lda #$94 ; 148 (spr=100)
+	ldx #$EF ; 239 (spr=191)
+	ldx #$98 ; 152 (spr=104)
+	sta HPOSP2
+	ldx #$02 ; 2 (spr=-46)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$98 ; 152 (spr=104)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line234
+	ldx #$00 ; 0 (spr=-48)
+	sta COLPM0
+	sty COLPM2
+	ldx #$98 ; 152 (spr=104)
+	ldy #$95 ; 149 (spr=101)
+	lda #$01 ; 1 (spr=-47)
+	ldy #$91 ; 145 (spr=97)
+	stx COLPM2
+	ldx #$B6 ; 182 (spr=134)
+	lda #$90 ; 144 (spr=96)
+	sta COLPM2
+	sty HPOSP3
+	ldx #$92 ; 146 (spr=98)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	sty HPOSP0
+	ldx #$98 ; 152 (spr=104)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$10 ; 16 (spr=-32)
+	ldx #$90 ; 144 (spr=96)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line235
+	ldx #$90 ; 144 (spr=96)
+	ldy #$96 ; 150 (spr=102)
+	nop 
+	lda #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	nop 
+	ldy #$01 ; 1 (spr=-47)
+	ldx #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$96 ; 150 (spr=102)
+	ldx #$98 ; 152 (spr=104)
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$0F ; 15 (spr=-33)
+	ldx #$EF ; 239 (spr=191)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$10 ; 16 (spr=-32)
+	ldy #$96 ; 150 (spr=102)
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line236
+	ldx #$90 ; 144 (spr=96)
+	ldy #$96 ; 150 (spr=102)
+	stx HPOSP0
+	nop 
+	ldx #$98 ; 152 (spr=104)
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$A6 ; 166 (spr=118)
+	ldx #$00 ; 0 (spr=-48)
+	lda #$98 ; 152 (spr=104)
+	ldx #$96 ; 150 (spr=102)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$0F ; 15 (spr=-33)
+	nop 
+	ldx #$EF ; 239 (spr=191)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$FF ; 255 (spr=207)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$96 ; 150 (spr=102)
+	ldy #$10 ; 16 (spr=-32)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line237
+	ldx #$01 ; 1 (spr=-47)
+	sta COLPM2
+	ldy #$00 ; 0 (spr=-48)
+	sty HPOSP3
+	ldy #$96 ; 150 (spr=102)
+	ldy #$01 ; 1 (spr=-47)
+	ldy #$00 ; 0 (spr=-48)
+	lda #$70 ; 112 (spr=64)
+	ldy #$00 ; 0 (spr=-48)
+	ldx #$94 ; 148 (spr=100)
+	ldy #$00 ; 0 (spr=-48)
+	ldy #$96 ; 150 (spr=102)
+	sty HPOSP0
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	ldy #$A6 ; 166 (spr=118)
+	nop 
+	stx HPOSP3
+	nop 
+	ldy #$F0 ; 240 (spr=192)
+	ldx #$96 ; 150 (spr=102)
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line238
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$92 ; 146 (spr=98)
+	nop 
+	ldy #$74 ; 116 (spr=68)
+	sty HPOSP0
+	sty HPOSP1
+	ldy #$90 ; 144 (spr=96)
+	sty COLPM1
+	ldy #$F1 ; 241 (spr=193)
+	sta HPOSP2
+	ldx #$90 ; 144 (spr=96)
+	nop 
+	ldy #$03 ; 3 (spr=-45)
+	lda #$F0 ; 240 (spr=192)
+	nop 
+	nop 
+	ldx #$00 ; 0 (spr=-48)
+	nop 
+	ldx #$94 ; 148 (spr=100)
+	ldx #$94 ; 148 (spr=100)
+	ldx #$00 ; 0 (spr=-48)
+	ldx #$00 ; 0 (spr=-48)
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+line239
+	lda #$00 ; 0 (spr=-48)
+	sty COLBAK
+	stx HPOSP3
+	nop 
+	nop 
+	sta COLOR1
+	stx HPOSP3
+	lda #$FF ; 255 (spr=207)
+	nop 
+	sta HPOSP1
+	ldx #$95 ; 149 (spr=101)
+	ldx #$00 ; 0 (spr=-48)
+	ldy #$00 ; 0 (spr=-48)
+	nop 
+	sta COLPM1
+	ldy #$90 ; 144 (spr=96)
+	ldx #$F0 ; 240 (spr=192)
+	ldx #$90 ; 144 (spr=96)
+	nop ; filler
+	nop ; filler
+	nop ; filler
+	cmp byt2; on zero page so 3 cycles
+; ---------------------------------- 
