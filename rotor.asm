@@ -112,6 +112,7 @@ mp_collision    = $a0
 in_collision    = $a1
 player_nr_hit   = $a2       ; which player hit the ball? 1=player1, 2=player2
 edge_delay      = $a3
+bat_collision_delay = $a4
 
 ; ball vars
 ball_current_x      = $a6
@@ -206,11 +207,10 @@ main
             jsr reset_score
             jsr show_score_p1
             jsr show_score_p2
-            
+
+; debugging, can be removed later            
             ;jsr plot_inner
                        
-;            jsr plot_outer
-
             jsr init_sprites
             jsr init_colors
 
@@ -219,7 +219,9 @@ main
             sta ball_speed
 
 ; todo remove the test routines later
-            jmp test_ball_movements             
+;            jmp test_ball_movements             
+
+            jsr plot_outer
 
             lda #1
             sta mode_menu           ; start with menu
@@ -737,6 +739,12 @@ no_edge
 
 ; Check ball collision with bat
 
+            lda bat_collision_delay
+            beq check_allowed
+            dec bat_collision_delay
+            jmp move_one
+
+check_allowed
             lda mp_collision
             beq reset_in_collision
 
@@ -760,6 +768,9 @@ no_first_hit
             jsr move_current_xy
             beq still_moving
 do_reset
+            lda ball_angle_end
+            sta ball_angle_start
+
             jsr ball_current_to_start_position
             jsr prepare_ball_end_position            
             
@@ -768,13 +779,6 @@ still_moving
             sta ball_current_x
             lda current_y+1
             sta ball_current_y
-
-            jsr move_current_xy
-            beq still_moving2
-
-            jsr ball_current_to_start_position
-            jsr prepare_ball_end_position            
-still_moving2
 
             jsr show_ball
 
@@ -928,6 +932,9 @@ prepare_ball_end_position
             jsr move_current_xy
 ; ignore end indicator, since we only just started
 
+
+            lda #10         ; ball can touch bat at start position, so use this delay
+            sta bat_collision_delay
             rts
 
 ; x = angle 0..255
