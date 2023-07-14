@@ -1,9 +1,10 @@
 ; ROTOR
 ; F#READY, 2023-07-14
 
-; version 9
-; balls speeds can be: 2,3,4,5,6,7,8,9
-; speed 10 skips the bat and is therefore too fast with the current ball/bat size
+; version 10
+; added 4 speed levels
+; show levels in menu, select to change
+; todo: fix bug in score (diagonal edge bounce?)
 
 ; Casual game for two players
 ; (computer player not yet implemented)
@@ -216,8 +217,9 @@ main
             jsr init_colors
 
 ; init. game vars
-            lda #4
-            sta ball_speed
+            ldx #INIT_LEVEL_INDEX
+            stx current_level_index
+            jsr set_level_ball_speed
 
 ; todo remove the test routines later
 ;            jmp test_ball_movements             
@@ -408,61 +410,55 @@ dli_menu
             txa
             pha
             
-            ldx #0
-color_it
-            lda menu_colbk,x
+            lda #0
             sta WSYNC
             sta COLBK
+            lda #$0e
+            sta WSYNC
+            sta COLBK
+            lda #$0a
+            sta WSYNC
+            sta COLBK
+            lda #0
+            sta WSYNC
+            sta COLBK
+
+            ldx #0
+color_it            
             lda menu_colpf0,x
+            sta WSYNC
             sta COLPF0
             inx
-            cpx #68
+            cpx #56
             bne color_it
+
+            lda #0
+            sta WSYNC
+            sta COLBK
+            lda #$0a
+            sta WSYNC
+            sta COLBK
+            lda #$0e
+            sta WSYNC
+            sta COLBK
+            lda #0
+            sta WSYNC
+            sta COLBK
             
             pla
             tax
             pla
             rti
 
-menu_colbk
-            dta 0,$0e,$0a,0
-            
-            dta 0,0,$32,$32,$34,$34,$34,$34
-            dta $34,$34,$34,$34,$32,$32,0,0
-            dta 0,0,$72,$72,$74,$74,$74,$74
-            dta $74,$74,$74,$74,$72,$72,0,0
-
-            dta 0,0,0,0,0,0,0,0
-            dta 0,0,0,0,0,0,0,0
-            dta 0,0,0,0
-
-            dta 0,0,0,0,0,$0a,$0e,0
-
-;            dta 0,0,$32,$32,$34,$34,$34,$34
-;            dta $34,$34,$34,$34,$32,$32,0,0
-;            dta 0,0,$72,$72,$74,$74,$74,$74
-;            dta $74,$74,$74,$74,$72,$72,0,0
-
 menu_colpf0
+            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
+            dta $7c,$7c,$7a,$7a,$78,$78,0,0
             dta 0,0,0,0
-;            dta 0,0,$38,$38,$3a,$3a,$3c,$3c
-;            dta $3c,$3c,$3a,$3a,$38,$38,0,0
-;            dta 0,0,$78,$78,$7a,$7a,$7c,$7c
-;            dta $7c,$7c,$7a,$7a,$78,$78,0,0
-            dta 0,0,$08,$08,$0a,$0a,$0c,$0c
-            dta $0c,$0c,$0a,$0a,$08,$08,0,0
-            dta 0,0,$08,$08,$0a,$0a,$0c,$0c
-            dta $0c,$0c,$0a,$0a,$08,$08,0,0
-
+            dta 0,14,14,12,10,8,6,0
+            dta 0,14,14,12,10,8,6,0
+            dta 0,14,14,12,10,8,6,0
+            dta 0,0,0,0
             dta 0,0,0,0,0,0,0,0
-            dta 0,0,0,0,0,0,0,0
-            dta 0,0,0,0
-            dta 0,0,0,0
-
-;            dta 0,0,$08,$08,$0a,$0a,$0c,$0c
-;            dta $0c,$0c,$0a,$0a,$08,$08,0,0
-;            dta 0,0,$08,$08,$0a,$0a,$0c,$0c
-;            dta $0c,$0c,$0a,$0a,$08,$08,0,0
 
 make_screen_y_tab
             lda #<screen_mem
@@ -598,6 +594,28 @@ check_mode_menu
             lda mode_menu
             beq main_game_vbi
 
+; within menu vbi
+            
+            lda CONSOL
+            cmp #5          ; select
+            bne no_level_select
+            
+            lda previous_consol
+            cmp #5
+            beq wait_depressed
+            
+            jsr increase_level
+            ldx current_level_index
+            jsr set_level_ball_speed            
+
+            lda #5
+            sta previous_consol
+            jmp wait_depressed
+
+no_level_select
+            sta previous_consol
+
+wait_depressed        
             lda #<menu_dl
             sta SDLSTL
             lda #>menu_dl
@@ -1817,6 +1835,37 @@ init_colors
             lda #8
             sta COLOR1
             rts
+
+previous_consol
+            dta 0
+
+current_level_index
+            dta 0
+NR_OF_LEVELS = 4
+INIT_LEVEL_INDEX = 0
+level_speeds
+            dta 2,4,6,8
+            
+; X = level (0..NR_OF_LEVELS)
+set_level_ball_speed
+            lda level_speeds,x
+            sta ball_speed
+            txa
+            clc
+            adc #1
+            ora #16
+            sta level_char
+            rts
+            
+increase_level
+            inc current_level_index
+            lda current_level_index
+            cmp #NR_OF_LEVELS
+            bne ok_level
+            lda #INIT_LEVEL_INDEX
+            sta current_level_index
+ok_level           
+            rts
             
             .align $100
 inner_x_tab
@@ -1924,7 +1973,7 @@ menu_dl
             dta $30
             dta $47
             dta a(menu_screen)
-            dta 7,$70,6,6,$30
+            dta $30,6,6,6,$30,2,$30
 
             dta $4f
             dta a(screen_mem+(144*SCREEN_WIDTH))
@@ -1947,13 +1996,16 @@ menu_dl
 
             .align $100
 menu_screen
+            dta d'   R O T O R    '    
+
             dta d'CONTROL:'
 driver_screen
             dta d'        '
             dta d' 2 PLAYER GAME  '
-            dta d' start to play  '
-            dta d'option for menu '
-
+            dta d'    LEVEL '
+level_char            
+            dta d'1     '
+            dta d' START to play | OPTION for menu'*
 stick_text
             dta d'STICK   '
 paddle_text
