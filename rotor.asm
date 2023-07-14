@@ -1,7 +1,9 @@
 ; ROTOR
-; F#READY, 2023-07-08
+; F#READY, 2023-07-14
 
-; version 8 - TEST calculations version
+; version 9
+; balls speeds can be: 2,3,4,5,6,7,8,9
+; speed 10 skips the bat and is therefore too fast with the current ball/bat size
 
 ; Casual game for two players
 ; (computer player not yet implemented)
@@ -29,7 +31,6 @@
 ; - removed include dda_line_lib, inlined and custom for this game
 
 ; TODO
-; - variable ball speed, experiment useful values for levels
 ; - set screen width to 40 instead of 32
 ; - add backdrop image
 ; - add music by IvoP
@@ -215,7 +216,7 @@ main
             jsr init_colors
 
 ; init. game vars
-            lda #2
+            lda #4
             sta ball_speed
 
 ; todo remove the test routines later
