@@ -6,3 +6,4 @@ bc *
 .onexerun .echo "Launching executable..."
 bp "`C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2022\2022 Lovebyte Turbo\linecube_v10.asm:264`"
 bp "`C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 Lovebyte\fready.asm:7`"
+bp "`C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_abbuc\rotor.asm:790`"
