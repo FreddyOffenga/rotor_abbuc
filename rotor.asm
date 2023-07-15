@@ -1,10 +1,8 @@
 ; ROTOR
-; F#READY, 2023-07-14
+; F#READY, 2023-07-15
 
-; version 10
-; added 4 speed levels
-; show levels in menu, select to change
-; todo: fix bug in score (diagonal edge bounce?)
+; version 11
+; Fixed bug score update when edge detected, cleaned up edge detection logic
 
 ; Casual game for two players
 ; (computer player not yet implemented)
@@ -693,9 +691,6 @@ no_restart
             lda M1PL
             ora mp_collision
             sta mp_collision
-
-            jsr handle_edge_detection
-            bne exit_vbi                ; 1 = end game
  
             lda #$26
             sta $d018
@@ -743,8 +738,10 @@ do_reset
             sta ball_angle_start
 
             jsr ball_current_to_start_position
-            jsr prepare_ball_end_position            
-            
+            jsr prepare_ball_end_position
+
+            jsr update_score
+            bne exit_vbi        ; end game
 still_moving
             lda current_x+1
             sta ball_current_x
@@ -781,25 +778,10 @@ sound_bat
             sta AUDC1
             rts
 
-; Detect ball reaches edge
-; - update score
-; - score > max score, then exit A = 1, otherwise 0
+; Update score
+; Score > max score, then exit A = 1, otherwise A = 0
 
-handle_edge_detection
-            lda edge_delay
-            beq check_edge
-            dec edge_delay
-            bne no_edge
-
-check_edge
-            lda M0PF
-            ora M1PF
-            tax
-            lda outer_collision_colors,x
-            sta 709
-            txa
-            beq no_edge
-
+update_score
             lda player_turn
             cmp #1
             bne was_player2_turn
