@@ -559,6 +559,8 @@ vbi
             sta SDMCTL
             lda #0
             sta 77      ; attract off
+            lda #>rotor_font
+            sta 756
 
 ; menu switching thingy
 
@@ -1987,7 +1989,7 @@ menu_dl
 
             .align $100
 menu_screen
-            dta d'   R O T O R    '    
+            dta d'   R O T O R    '
 
             dta d'CONTROL:'
 driver_screen
@@ -2017,6 +2019,10 @@ driver_text_hi
             dta >paddle_text
             dta >driving_text
             dta >computer_text
+
+            .align $400
+rotor_font
+            ins 'font\rotor.fnt'
 
             .align $1000
 
