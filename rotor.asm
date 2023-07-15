@@ -694,56 +694,8 @@ no_restart
             ora mp_collision
             sta mp_collision
 
-            lda edge_delay
-            beq check_edge
-            dec edge_delay
-            bne no_edge
-
-check_edge
-            lda M0PF
-            ora M1PF
-            tax
-            lda outer_collision_colors,x
-            sta 709
-            txa
-            beq no_edge
- 
-            lda player_turn
-            cmp #1
-            bne was_player2_turn
-; was player 1 turn, so player 2 gets a point
-            jsr inc_score_p2
-            jsr show_score_p2
-            
-            lda score_p2
-            cmp #MAX_SCORE
-            bne no_max2
-            jmp go_menu_mode
-            
-no_max2           
-            jmp reset_edge_delay
-
-was_player2_turn            
-            jsr inc_score_p1
-            jsr show_score_p1
-            
-            lda score_p1
-            cmp #MAX_SCORE
-            bne no_max1
-            jmp go_menu_mode     
-
-no_max1
-
-reset_edge_delay
-            lda #10
-            sta edge_delay
-
-            lda #4
-;            sta 712
-no_edge
-
-; anything in A to clear collisions
-            sta HITCLR
+            jsr handle_edge_detection
+            bne exit_vbi                ; 1 = end game
  
             lda #$26
             sta $d018
@@ -827,6 +779,63 @@ sound_bat
             sta AUDF1
             lda #$a6
             sta AUDC1
+            rts
+
+; Detect ball reaches edge
+; - update score
+; - score > max score, then exit A = 1, otherwise 0
+
+handle_edge_detection
+            lda edge_delay
+            beq check_edge
+            dec edge_delay
+            bne no_edge
+
+check_edge
+            lda M0PF
+            ora M1PF
+            tax
+            lda outer_collision_colors,x
+            sta 709
+            txa
+            beq no_edge
+
+            lda player_turn
+            cmp #1
+            bne was_player2_turn
+; was player 1 turn, so player 2 gets a point
+            jsr inc_score_p2
+            jsr show_score_p2
+
+            lda score_p2
+            cmp #MAX_SCORE
+            bne reset_edge_delay
+
+            lda #1
+            sta mode_menu
+            rts
+
+was_player2_turn
+            jsr inc_score_p1
+            jsr show_score_p1
+
+            lda score_p1
+            cmp #MAX_SCORE
+            bne reset_edge_delay
+
+            lda #1
+            sta mode_menu
+            rts
+
+reset_edge_delay
+            lda #10
+            sta edge_delay
+
+no_edge
+
+            lda #0      ; no end game
+; anything in A to clear collisions
+            sta HITCLR
             rts
 
 ; player 1
