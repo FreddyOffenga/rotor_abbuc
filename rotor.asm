@@ -50,10 +50,6 @@ p1_area     = pm_area+$280
 p2_area     = pm_area+$300
 p3_area     = pm_area+$380
 
-screen_mem1 = $9000     ; 4K
-screen_mem2 = $a000     ; 4K
-screen_mem3 = $b000     ; 1K
-
 ; $1400 .. $1500 is overwritten, bug?
 
 ; outer tables 256 for 360 degrees
@@ -512,7 +508,7 @@ store_y_line
             sta tmp_screen+1
             rts
 
-; simply wipe all 3 screen blocks
+; @todo invert backdrop image, now we have to do it here :P
 clear_screen
             lda #<screen_mem1
             sta tmp_screen
@@ -543,8 +539,9 @@ clear_screen
 
 wipe_x_pages
             ldy #0
-            lda #0
 wipe_page
+            lda (tmp_screen),y
+            eor #$ff
             sta (tmp_screen),y
             iny
             bne wipe_page 
@@ -2098,5 +2095,17 @@ pm_shapes
 
 pm_shape_lo
 pm_shape_hi = *+128
+
+screen_mem1 = $9000     ; 4K
+            org screen_mem1
+            ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
+            
+screen_mem2 = $a000     ; 4K
+            org screen_mem2
+            ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
+                        
+screen_mem3 = $b000     ; 1K
+            org screen_mem3
+            ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
 
             run main
