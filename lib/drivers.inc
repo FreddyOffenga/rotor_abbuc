@@ -1,9 +1,8 @@
 ; drivers for game
 ; F#READY
 
-; $c0 - $cf used for drivers
-driver_tmp      = $c0   ; and $c1
-driver_mode     = $c2
+driver_tmp      .ds 2
+driver_mode     .ds 1
 
 paddle_vals = 229
 paddle_add  = 287       ; 65536 / 229
@@ -139,7 +138,6 @@ driver_stick
             bne no_left
 
             dec p1_angle,x
-            ;dec p1_angle,x
             lda STRIG0,x
             bne no_fast
             dec p1_angle,x
@@ -151,7 +149,6 @@ no_left     cmp #7
             bne move_done
 
             inc p1_angle,x
-            ;inc p1_angle,x
             lda STRIG0,x
             bne no_fast_right
             inc p1_angle,x

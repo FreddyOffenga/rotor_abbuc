@@ -102,7 +102,7 @@ game_restart        = $b6
 tmp_angle_diff      = $b7
 magnitude           = $b8       ; word
 
-; $c0 - $cf used for drivers
+; $c0 - $df free for music
 
 _divisor    = $e0   ; word
 _dividend   = $e2   ; word
