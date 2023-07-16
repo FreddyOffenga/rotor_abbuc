@@ -1,8 +1,8 @@
-; ROTOR
-; F#READY, 2023-07-15
+; R O T O R
 
-; version 11
-; Fixed bug score update when edge detected, cleaned up edge detection logic
+; F#READY, 2023-07-16
+; Version 1.0.0
+; For ABBUC Software Competition 2023
 
 ; Casual game for two players
 ; (computer player not yet implemented)
@@ -12,31 +12,14 @@
 ; - the ball gets color of player to indicate who should catch it
 ; - when the ball hits the circle, the other player gets a point
 
-; DONE
-; - test routine for magnitude and step calculations
-; - moved calculations to right routines, renames and improvements
-; - TEST step speed, edge detection
-; - fixed nasty bug, overlapping labels in zp :(
-; - fixed magnitude table (basic prog)
-; - fixed dx,dy by not adding 1 pixel
-; - fixed bug where M1PF was not used to detect edge (only M0PF)
-; - fixed bug in menu display, corrected menu DLI length
-; - fixed driver auto detect for paddles, stick, driving
-; - always reset game/score from menu start
-; - allow players to move even in menu (without ball)
-; - end game at X points (11 points)
-; - double speed for now (should be a better way to select ball velocity)
-; - add sound when player1/2 hits ball
-; - removed include dda_line_lib, inlined and custom for this game
-
 ; TODO
-; - add backdrop image
 ; - add music by IvoP
 ; - add sound when ball hits edge
+
+; Optional for a later version:
+; - add computer player(s)
 ; - add support for driving controllers
 ; - break part of outer circle when ball hits
-; - allow ball to go outside circle
-; - add computer player(s)
 
             icl 'lib/labels.inc'
 
@@ -77,16 +60,8 @@ ball_left_margin    = 64+5
 upper_margin    = 1
 left_margin     = 32
 
-table_x_ptr     = $80
-table_y_ptr     = $82
-
 shape_ptr       = $84
-
 tmp_screen      = $86
-
-course_x        = $88
-
-tmp_font        = $8a
 
 mode_menu       = $8c
 
@@ -129,8 +104,6 @@ magnitude           = $b8       ; word
 
 ; $c0 - $cf used for drivers
 
-DDA_ZERO_PAGE = $e0
-
 _divisor    = $e0   ; word
 _dividend   = $e2   ; word
 _remainder  = $e4   ; word
@@ -169,38 +142,24 @@ line_end_y  = $fd  ; byte
             
 main         
             lda #0
-            ;sta SDMCTL
+            sta SDMCTL
             sta game_restart
+            lda 1
+            sta 580 ; coldstart
 
             jsr driver_init
 
             jsr make_shape_index
  
             jsr make_outer_256
-
-            lda #<display_list
-            sta SDLSTL
-            lda #>display_list
-            sta SDLSTH
-
-            lda #%00101110  ; enable P/M DMA
-            sta SDMCTL
-
-;            lda #<menu_dl
-;            sta SDLSTL
-;            lda #>menu_dl
-;            sta SDLSTH
             
             jsr make_screen_y_tab
 
-            jsr clear_screen
+            jsr invert_backdrop
 
             jsr reset_score
             jsr show_score_p1
             jsr show_score_p2
-
-; debugging, can be removed later            
-            ;jsr plot_inner
                        
             jsr init_sprites
             jsr init_colors
@@ -209,11 +168,6 @@ main
             ldx #INIT_LEVEL_INDEX
             stx current_level_index
             jsr set_level_ball_speed
-
-; todo remove the test routines later
-;            jmp test_ball_movements             
-
-            jsr plot_outer
 
             lda #1
             sta mode_menu           ; start with menu
@@ -235,129 +189,6 @@ main
 
 ; we're just sitting here while VBI does all the work :)
 loop        jmp loop
-
-; test ball movement(s) from start angle to end angle
-
-; todo draw lines
-; x,y from
-; outer_x_256
-; outer_y_256
-
-; later
-; get magnitude             
-; magnitudes_lo
-; magnitudes_hi
-
-test_ball_movements
-;            jsr plot_angle_dots
-
-            lda #$80
-            sta ball_angle_start
-            ldy #$81
-
-plot_line_loop
-            sty ball_angle_end
-            tya
-            pha
-
-            lda ball_angle_start
-            tay
-            jsr plot_angle
-
-            ldx ball_angle_start
-            jsr outer_angle_to_start_position
-
-            lda ball_angle_end
-            tay
-            jsr plot_angle
-            
-            ldx ball_angle_end
-            jsr angle_to_end_position
-                                    
-            jsr init_current_xy
-
-; do steps and plot
-
-            lda #1
-            sta draw_color  
-
-            ldx #0
-plot_some            
-            txa
-            pha
-            
-            jsr move_current_xy
-            bne detect_end_line
-
-            lda current_x+1
-            clc
-            adc #outer_x_margin
-            sta x_position
-            lda #0
-            sta x_position+1
-            
-            lda current_y+1
-            sta y_position
-            jsr plot_dot 
-            
-            pla
-            tax
-            
-            inx
-            bne plot_some
-
-detect_end_line
-            pla
-            tax
-
-; next line
-            pla
-            clc
-            adc #$01
-            tay
-            cmp #$80
-
-            bne plot_line_loop
-
-test_loop
-            jmp test_loop
-
-; plot dots for all 0..255 angles
-
-plot_angle_dots
-            lda #1
-            sta draw_color
-
-            ldy #0
-
-plot_256_dots            
-            tya
-            pha
-
-            jsr plot_angle
-
-            pla
-            tay
-            iny
-            bne plot_256_dots
-                     
-            rts
-
-plot_angle
-            lda outer_x_256,y
-            clc
-            adc #outer_x_margin
-            sta x_position            
-            lda #0
-            adc #0
-            sta x_position+1
-
-            lda outer_y_256,y            
-            sta y_position
-
-            jsr plot_dot            
-            
-            rts
 
 ;------------------------
 ; 8bit * 8bit = 16bit multiply
@@ -508,15 +339,16 @@ store_y_line
             sta tmp_screen+1
             rts
 
-; @todo invert backdrop image, now we have to do it here :P
-clear_screen
+; @todo invert backdrop image
+; now we have to do it here :P
+invert_backdrop
             lda #<screen_mem1
             sta tmp_screen
             lda #>screen_mem1
             sta tmp_screen+1
             
             ldx #16     ; 16 pages = 4K
-            jsr wipe_x_pages
+            jsr do_x_pages
            
             lda #<screen_mem2
             sta tmp_screen
@@ -524,7 +356,7 @@ clear_screen
             sta tmp_screen+1
             
             ldx #16     ; 16 pages = 4K
-            jsr wipe_x_pages
+            jsr do_x_pages
 
             lda #<screen_mem3
             sta tmp_screen
@@ -532,56 +364,24 @@ clear_screen
             sta tmp_screen+1
             
             ldx #4     ; 4 pages = 1K
-            jsr wipe_x_pages
+            jsr do_x_pages
             rts
 
-; wipe x pages, starting from tmp_screen
+; invert x pages, starting from tmp_screen
 
-wipe_x_pages
+do_x_pages
             ldy #0
-wipe_page
+do_page
             lda (tmp_screen),y
             eor #$ff
             sta (tmp_screen),y
             iny
-            bne wipe_page 
+            bne do_page 
 
             inc tmp_screen+1
             dex
-            bne wipe_page
+            bne do_page
             rts
-
-plot_dot
-            ldx y_position
-            lda screen_y_lo,x
-            sta tmp_screen
-            lda screen_y_hi,x
-            sta tmp_screen+1
-            
-            lda x_position
-            lsr
-            lsr
-            lsr
-            sta course_x
-
-            lda x_position+1
-            beq x_below_256
-; x >= 256, add 256/8
-            lda course_x
-            clc
-            adc #32
-            sta course_x
-                        
-x_below_256
-            lda x_position
-            and #%00000111
-            tax
-
-            ldy course_x            
-            lda (tmp_screen),y
-            ora pixel_mask,x
-            sta (tmp_screen),y
-            rts   
 
 turn_color_ball
             ldx player_turn
@@ -590,16 +390,6 @@ turn_color_ball
             rts
             
 color_turn  dta 0,$26,$76                           
-
-pixel_mask
-            dta $80,$40,$20,$10
-            dta $08,$04,$02,$01
-
-outer_collision_colors
-            dta $06,$00,$00,$00
-            dta $0e,$00,$00,$00
-            dta $00,$00,$00,$00
-            dta $00,$00,$00,$00
 
 ; A, X, Y are already saved by the OS
 vbi                 
@@ -698,6 +488,8 @@ show_driv
 main_game_vbi
             lda game_restart
             beq no_restart
+
+; restart game
             
             lda #0
             sta game_restart
@@ -707,11 +499,6 @@ main_game_vbi
             jsr reset_score
             jsr show_score_p1
             jsr show_score_p2
-
-; restart game code
-            ; initial state of players            
-;            jsr handle_player1
-;            jsr handle_player2
 
             ldx p1_angle
             stx ball_angle_start
@@ -742,11 +529,7 @@ no_restart
             ora mp_collision
             sta mp_collision
  
-            lda #$26
-            sta $d018
-
             jsr handle_player1
-
             jsr handle_player2
 
 ; handle ball
@@ -1215,86 +998,6 @@ wipe_it2
             bne wipe_it2 
             rts
 
-plot_inner
-            lda #1
-            sta draw_color
-
-            ldx #0
-plot_in
-            txa
-            pha
-
-            lda inner_x_tab,x                      
-            clc
-            adc #outer_x_margin
-            sta x_position
-            lda #0
-            adc #0
-            sta x_position+1
-            
-            lda inner_y_tab,x
-            sta y_position
-            
-            jsr plot_dot
-;            jsr plot_pixel
-
-            pla
-            tax
-            inx
-            bne plot_in 
-            
-            rts
-            
-plot_outer
-            lda #1
-            sta draw_color
-
-            lda #<outer_x_tab
-            sta table_x_ptr
-            lda #>outer_x_tab
-            sta table_x_ptr+1
-
-            lda #<outer_y_tab
-            sta table_y_ptr
-            lda #>outer_y_tab
-            sta table_y_ptr+1
-
-plot_out
-            ldy #0
-
-            lda (table_x_ptr),y
-            clc
-            adc #outer_x_margin
-            sta x_position
-            lda #0
-            adc #0
-            sta x_position+1
-            
-            lda (table_y_ptr),y
-            sta y_position
- 
-            jsr plot_dot            
-;            jsr plot_pixel
-
-            inc table_x_ptr
-            bne no_xt
-            inc table_x_ptr+1
-no_xt
-            
-            inc table_y_ptr
-            bne no_yt
-            inc table_y_ptr+1
-no_yt            
-
-            lda table_x_ptr
-            cmp #<(outer_x_tab+1024)
-            bne plot_out
-            lda table_x_ptr+1
-            cmp #>(outer_x_tab+1024)
-            bne plot_out
-            
-            rts
-
 make_shape_index
             lda #<pm_shapes
             sta shape_ptr
@@ -1514,8 +1217,6 @@ calc_dx_div_magnitude
             lda #0
             sta _dividend
             lda tmp_dx
-            ;clc
-            ;adc #1      ; 0..0 = 1 pixel
             sta _dividend+1
 
             lda magnitude+1
@@ -1537,8 +1238,6 @@ calc_dy_div_magnitude
             lda #0
             sta _dividend
             lda tmp_dy
-            ;clc
-            ;adc #1      ; 0..0 = 1 pixel
             sta _dividend+1
             
             lda magnitude+1
@@ -1599,19 +1298,18 @@ _div_skip   dex
 
 ; 2. init. current_x, current_y
 ; - set current x,y to start of line (tmp_x1, tmp_y2)
-; @todo
 ; - calculates step sizes for x,y
 ; - calculated directions for x,y
 ;            jsr init_current_xy
 
-; 4. use current_x, current_y to plot or set a position
+; 3. use current_x, current_y to plot or set a position
 ;            lda current_x+1
 ;            sta x_position
 ;            lda current_y+1
 ;            sta y_position
 ;            jsr plot_pixel
 
-; 5. move current_x, current_y to next position on line
+; 4. move current_x, current_y to next position on line
 ; A=0 still moving
 ;           move_current_xy
 
@@ -1663,19 +1361,10 @@ set_dir_y
             sta tmp_angle2
             
             jsr calc_angle_diff
-            
-            ;lda tmp_angle_diff
-            ;lda tmp_angle_direction
 
 ; lookup magnitude of vector (tmp_x1, tmp_y1), (tmp_x2, tmp_y2)
             ldx tmp_angle_diff
             jsr angle_to_magnitude
-            
-            ;lda magnitude       ; lo
-            ;lda magnitude+1
-            
-            ;lda tmp_dx
-            ;lda tmp_dy
             
             jsr calc_dx_div_magnitude
             jsr calc_dy_div_magnitude
@@ -1869,8 +1558,6 @@ init_colors
             sta PCOLR2
             sta PCOLR3
             
-            ;lda #$34
-            ;sta COLOR0
             lda #0
             sta COLOR2
             lda #8
@@ -1951,7 +1638,6 @@ dl_screen_ptr1
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
 
             dta $0f,$0f,$0f,$0f,$0f,$0f
-
 
 ; 102 x 40 = 4080 bytes
             dta $4f
@@ -2047,7 +1733,6 @@ menu_dl
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
            
             dta $41
-            
             dta a(menu_dl)
 
             .align $100
