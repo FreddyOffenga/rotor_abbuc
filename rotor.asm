@@ -1605,6 +1605,10 @@ inner_y_tab = *+$100
 outer_x_tab
 outer_y_tab = *+1024
             ins 'data\out224.dat'
+
+            .align $400
+rotor_font
+            ins 'font\rotor.fnt'
            
             .align $400
 ; table of magnitudes (length) between angle 0 and 0..255
@@ -1685,7 +1689,7 @@ score_chars_p2
 score_p1    dta 0
 score_p2    dta 0
 
-            .align $400
+            ;.align $400
             
 menu_dl
             dta $42
@@ -1768,29 +1772,28 @@ driver_text_hi
             dta >driving_text
             dta >computer_text
 
-            .align $400
-rotor_font
-            ins 'font\rotor.fnt'
-
             .align $1000
 
 ; 128 x 32 bytes shapes            
 pm_shapes
             ins 'data\pm_128_x_32.dat'
 
-pm_shape_lo
-pm_shape_hi = *+128
+pm_shape_lo .ds 128
+pm_shape_hi .ds 128
 
-screen_mem1 = $9000     ; 4K
-            org screen_mem1
+            .align $1000
+screen_mem1 = * ; $9000     ; 4K
+;            org screen_mem1
             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
-            
-screen_mem2 = $a000     ; 4K
-            org screen_mem2
+
+            .align $1000
+screen_mem2 = * ; $a000     ; 4K
+;            org screen_mem2
             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
-                        
-screen_mem3 = $b000     ; 1K
-            org screen_mem3
+
+            .align $1000
+screen_mem3 = * ; $b000     ; 1K
+;            org screen_mem3
             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
 
             run main
