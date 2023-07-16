@@ -30,7 +30,6 @@
 ; - removed include dda_line_lib, inlined and custom for this game
 
 ; TODO
-; - set screen width to 40 instead of 32
 ; - add backdrop image
 ; - add music by IvoP
 ; - add sound when ball hits edge
@@ -51,8 +50,9 @@ p1_area     = pm_area+$280
 p2_area     = pm_area+$300
 p3_area     = pm_area+$380
 
-screen_mem  = $a000
-screen_end  = $c000
+screen_mem1 = $9000     ; 4K
+screen_mem2 = $a000     ; 4K
+screen_mem3 = $b000     ; 1K
 
 ; $1400 .. $1500 is overwritten, bug?
 
@@ -66,9 +66,9 @@ screen_y_hi     = $1900
 WIDTH           = 320
 HEIGHT          = 192
 
-SCREEN_WIDTH    = 32
+SCREEN_WIDTH    = 40
 
-outer_x_margin  = 47-32
+outer_x_margin  = 48 ;47-32
 inner_x_margin  = 64
 
 circle_center_x = WIDTH/2
@@ -181,18 +181,13 @@ main
             jsr make_shape_index
  
             jsr make_outer_256
- 
-            lda #<screen_mem
-            sta SAVMSC
-            lda #>screen_mem
-            sta SAVMSC+1
 
             lda #<display_list
             sta SDLSTL
             lda #>display_list
             sta SDLSTH
 
-            lda #%00101101  ; enable P/M DMA
+            lda #%00101110  ; enable P/M DMA
             sta SDMCTL
 
 ;            lda #<menu_dl
@@ -458,14 +453,51 @@ menu_colpf0
             dta 0,0,0,0
             dta 0,0,0,0,0,0,0,0
 
+; make pointers from y-position to screen memory
+; screen memory is 3 blocks
+; screen_mem1 : 102 lines, 4080 bytes
+; screen_mem2 : 102 lines, 4080 bytes
+; screen_mem3 :  20 lines,  800 bytes
+
 make_screen_y_tab
-            lda #<screen_mem
+            lda #<screen_mem1
             sta tmp_screen
-            lda #>screen_mem
+            lda #>screen_mem1
             sta tmp_screen+1
-            
+
             ldx #0
-fill_y_tab              
+fill_y_tab1
+            jsr store_y_line
+            inx
+            cpx #102
+            bne fill_y_tab1
+
+; x = 102
+            lda #<screen_mem2
+            sta tmp_screen
+            lda #>screen_mem2
+            sta tmp_screen+1
+
+fill_y_tab2
+            jsr store_y_line
+            inx
+            cpx #204
+            bne fill_y_tab2
+
+            lda #<screen_mem3
+            sta tmp_screen
+            lda #>screen_mem3
+            sta tmp_screen+1
+
+; x = 204
+fill_y_tab3
+            jsr store_y_line
+            inx
+            cpx #224
+            bne fill_y_tab3
+            rts
+
+store_y_line
             lda tmp_screen
             sta screen_y_lo,x
             lda tmp_screen+1
@@ -478,19 +510,39 @@ fill_y_tab
             lda tmp_screen+1
             adc #0
             sta tmp_screen+1
-            
-            inx
-            bne fill_y_tab
             rts
 
+; simply wipe all 3 screen blocks
 clear_screen
-            lda #<screen_mem
+            lda #<screen_mem1
             sta tmp_screen
-            lda #>screen_mem
+            lda #>screen_mem1
             sta tmp_screen+1
             
+            ldx #16     ; 16 pages = 4K
+            jsr wipe_x_pages
+           
+            lda #<screen_mem2
+            sta tmp_screen
+            lda #>screen_mem2
+            sta tmp_screen+1
+            
+            ldx #16     ; 16 pages = 4K
+            jsr wipe_x_pages
+
+            lda #<screen_mem3
+            sta tmp_screen
+            lda #>screen_mem3
+            sta tmp_screen+1
+            
+            ldx #4     ; 4 pages = 1K
+            jsr wipe_x_pages
+            rts
+
+; wipe x pages, starting from tmp_screen
+
+wipe_x_pages
             ldy #0
-wipe_all
             lda #0
 wipe_page
             sta (tmp_screen),y
@@ -498,9 +550,8 @@ wipe_page
             bne wipe_page 
 
             inc tmp_screen+1
-            lda tmp_screen+1
-            cmp #>screen_end
-            bne wipe_all
+            dex
+            bne wipe_page
             rts
 
 plot_dot
@@ -555,7 +606,7 @@ outer_collision_colors
 
 ; A, X, Y are already saved by the OS
 vbi                 
-            lda #%00101101  ; enable P/M DMA
+            lda #%00101110  ; enable P/M DMA
             sta SDMCTL
             lda #0
             sta 77      ; attract off
@@ -1882,10 +1933,11 @@ magnitudes_hi = *+256
 display_list
             dta $42
             dta a(score_line)
-            
+
+; 102 x 40 = 4080 bytes            
             dta $4f
 dl_screen_ptr1
-            dta a(screen_mem)
+            dta a(screen_mem1)
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1901,14 +1953,13 @@ dl_screen_ptr1
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
 
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f
 
+
+; 102 x 40 = 4080 bytes
             dta $4f
 dl_screen_ptr2
-            dta a(screen_mem+(128*SCREEN_WIDTH))
+            dta a(screen_mem2)
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1923,6 +1974,15 @@ dl_screen_ptr2
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+
+            dta $0f,$0f,$0f,$0f,$0f,$0f
+
+; 20 x 40 = 800
+            dta $4f
+            dta a(screen_mem3)       
+            dta $0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             
             dta $41
             dta a(display_list)
@@ -1932,10 +1992,10 @@ score_line
 score_chars_p1
             dta d'-- '
 
-            dta d'        '
-            dta d'        '
+            dta d'          '
+            dta d'          '
 
-            dta d' BLUE '
+            dta d'     BLUE '
 score_chars_p2
             dta d'--'
 
@@ -1949,7 +2009,7 @@ menu_dl
             dta a(score_line)
             
             dta $4f
-            dta a(screen_mem)
+            dta a(screen_mem1)
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1963,13 +2023,15 @@ menu_dl
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$8f
 
+; 64 scanlines
             dta $30
             dta $47
             dta a(menu_screen)
             dta $30,6,6,6,$30,2,$30
 
+; 60 lines
             dta $4f
-            dta a(screen_mem+(144*SCREEN_WIDTH))
+            dta a(screen_mem2+(42*SCREEN_WIDTH))
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1977,9 +2039,13 @@ menu_dl
 
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
+            dta $0f,$0f,$0f,$0f
+
+; 20 lines            
+            dta $4f
+            dta a(screen_mem3)
+            dta $0f,$0f,$0f            
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
            
@@ -1989,16 +2055,16 @@ menu_dl
 
             .align $100
 menu_screen
-            dta d'   R O T O R    '
+            dta d'     R O T O R      '
 
-            dta d'CONTROL:'
+            dta d'  CONTROL:'
 driver_screen
-            dta d'        '
-            dta d' 2 PLAYER GAME  '
-            dta d'    LEVEL '
+            dta d'            '
+            dta d' 2 PLAYER GAME    '
+            dta d'      LEVEL '
 level_char            
-            dta d'1     '
-            dta d' START to play | OPTION for menu'*
+            dta d'1       '
+            dta d'     START to play | OPTION for menu    '*
 stick_text
             dta d'STICK   '
 paddle_text
