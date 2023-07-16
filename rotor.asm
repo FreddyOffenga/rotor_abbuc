@@ -1678,9 +1678,9 @@ score_chars_p1
             dta d'          '
             dta d'          '
 
-            dta d'     BLUE '
+            dta d'    BLUE '
 score_chars_p2
-            dta d'--'
+            dta d'-- '
 
 score_p1    dta 0
 score_p2    dta 0
