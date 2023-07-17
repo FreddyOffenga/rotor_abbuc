@@ -1,7 +1,7 @@
 ; R O T O R
 
-; F#READY, 2023-07-16
-; Version 1.0.0
+; F#READY, 2023-07-17
+; Version 1.1.0
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -13,8 +13,9 @@
 ; - when the ball hits the circle, the other player gets a point
 
 ; TODO
-; - add music by IvoP
 ; - add sound when ball hits edge
+; - try fix bat positions for paddles (both start at zero?)
+; - try fix bat priority, now RED is always in front
 
 ; Optional for a later version:
 ; - add computer player(s)
@@ -64,6 +65,8 @@ shape_ptr       = $84
 tmp_screen      = $86
 
 mode_menu       = $8c
+
+volume_hit_bat  = $8d
 
 ; player vars must be in sequence for zp,x indexing
 
@@ -138,8 +141,7 @@ line_end_y  = $fd  ; byte
 
             org $2000
 
-            icl 'lib/drivers.inc'
-            
+            icl 'lib/drivers.inc'       
 main         
             lda #0
             sta SDMCTL
@@ -178,6 +180,8 @@ main
             sta VDSLST
             lda #>dli_menu
             sta VDSLST+1
+            
+            jsr music_init
             
             lda #$c0
             sta NMIEN
@@ -407,6 +411,8 @@ vbi
             bne no_option_pressed
 
 go_menu_mode            
+            jsr music_normal_volume
+            
             jsr wipe_ball
             
             lda #1
@@ -420,6 +426,8 @@ no_option_pressed
 ; reset game
 
 reset_game
+            jsr music_low_volume
+
             jsr wipe_ball
             
             lda #1
@@ -553,14 +561,14 @@ check_allowed
             inc in_collision            
             jsr bounce_bat_ball 
             
-            jsr sound_bat          
+            jsr start_sound_bat          
             
             jmp move_one
             
 reset_in_collision
             lda #0
             sta in_collision   
-            jsr sound_off         
+            ;jsr sound_off         
 
 move_one
 no_first_hit
@@ -574,7 +582,7 @@ do_reset
             jsr prepare_ball_end_position
 
             jsr update_score
-            bne exit_vbi        ; end game
+            bne game_ends
 still_moving
             lda current_x+1
             sta ball_current_x
@@ -590,25 +598,42 @@ still_moving
             sta HITCLR
 
 exit_vbi
+            jsr play_song
+            jsr play_sound_bat
             jmp $e462
+
+game_ends
+            jsr music_normal_volume
+            jmp $e462            
 
 sound_off
             lda #0
-            sta AUDC1
-            sta AUDC2
-            sta AUDC3
+            sta AUDF3
             sta AUDC3
             rts
 
-sound_bat
+start_sound_bat
+            lda #15
+            sta volume_hit_bat
+            rts
+            
+play_sound_bat
+            lda volume_hit_bat
+            beq silenced_bat
+
             lda player_turn
             asl
             asl
-            adc #$40
+            adc #$30
             sbc angle_diff_bat
-            sta AUDF1
-            lda #$a6
-            sta AUDC1
+            sta SHADOW+4
+            sta AUDF3
+            lda volume_hit_bat
+            ora #$a0
+            sta SHADOW+5
+            sta AUDC3
+            dec volume_hit_bat
+silenced_bat
             rts
 
 ; Update score
@@ -1795,5 +1820,7 @@ screen_mem2 = * ; $a000     ; 4K
 screen_mem3 = * ; $b000     ; 1K
 ;            org screen_mem3
             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
+
+            icl 'music\rotor_music\rotor_music.asm'
 
             run main
