@@ -217,18 +217,13 @@ not_equal
     sta song_ptr+1
     lda #1
     sta newsong
-    jsr play_song
-
+    rts
 .endp
 
 .proc play_song
 playloop
     jsr play_frame      ; generates tick two and beyond
     jsr adjust_volume
-    ;jsr wait_frame
-    jsr copy_shadow
-
-    ;jsr console_keys
 
     jsr check_end_song
     bcc no_end_song
@@ -296,27 +291,6 @@ end_copy
     rts
 .endp
 
-.proc console_keys
-    lda $d01f
-    cmp #3
-    beq option
-    cmp #5
-    beq select
-    cmp #6
-    beq start
-    rts
-
-option
-    mwa #normal_volume adjust_volume.volume
-    rts
-select
-    mwa #half_volume adjust_volume.volume
-    rts
-start
-    mwa #quarter_volume adjust_volume.volume
-    rts
-.endp
-
 .proc music_normal_volume
     mwa #normal_volume adjust_volume.volume
     rts
@@ -377,7 +351,7 @@ shift_loop
 .endp
 
 SHADOW              ; shadow pokey
-    .ds 9
+:9 .db 0
 
                     ; fake stereo effect:
                     ; 0*9 = small
@@ -398,6 +372,3 @@ half_volume
     dta 0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,7
 quarter_volume
     dta 0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4
-
-    ;run main
-

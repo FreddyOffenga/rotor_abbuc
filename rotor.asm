@@ -1,7 +1,7 @@
 ; R O T O R
 
-; F#READY, 2023-07-17
-; Version 1.1.0
+; F#READY, 2023-07-19
+; Version 1.1.1
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -13,9 +13,15 @@
 ; - when the ball hits the circle, the other player gets a point
 
 ; TODO
-; - add sound when ball hits edge
+; - switch player turn when edge hit
+; - change color scheme (purple, green?)
+; - fix title RED/BLUE to ONE/TWO
+; - music on/off toggle (SHIFT?)
+; - add color (pm?) in header for player ONE/TWO
+; - fix paddle player 2 start position
 ; - try fix bat positions for paddles (both start at zero?)
 ; - try fix bat priority, now RED is always in front
+; - add title image
 
 ; Optional for a later version:
 ; - add computer player(s)
@@ -67,6 +73,7 @@ tmp_screen      = $86
 mode_menu       = $8c
 
 volume_hit_bat  = $8d
+volume_hit_edge = $8e
 
 ; player vars must be in sequence for zp,x indexing
 
@@ -146,7 +153,12 @@ main
             lda #0
             sta SDMCTL
             sta game_restart
-            lda 1
+
+            lda #128
+            sta volume_hit_bat
+            sta volume_hit_edge
+
+            lda #1
             sta 580 ; coldstart
 
             jsr driver_init
@@ -182,6 +194,8 @@ main
             sta VDSLST+1
             
             jsr music_init
+;            lda #0
+;            sta $d208
             
             lda #$c0
             sta NMIEN
@@ -397,6 +411,11 @@ color_turn  dta 0,$26,$76
 
 ; A, X, Y are already saved by the OS
 vbi                 
+            jsr copy_shadow
+            jsr play_song
+            jsr play_sound_bat
+            jsr play_sound_edge            
+
             lda #%00101110  ; enable P/M DMA
             sta SDMCTL
             lda #0
@@ -502,8 +521,6 @@ main_game_vbi
             lda #0
             sta game_restart
             
-            jsr sound_off
-            
             jsr reset_score
             jsr show_score_p1
             jsr show_score_p2
@@ -567,14 +584,17 @@ check_allowed
             
 reset_in_collision
             lda #0
-            sta in_collision   
-            ;jsr sound_off         
+            sta in_collision        
 
 move_one
 no_first_hit
             jsr move_current_xy
             beq still_moving
-do_reset
+
+; edge detected
+
+            jsr start_sound_edge
+
             lda ball_angle_end
             sta ball_angle_start
 
@@ -598,42 +618,55 @@ still_moving
             sta HITCLR
 
 exit_vbi
-            jsr play_song
-            jsr play_sound_bat
             jmp $e462
 
 game_ends
             jsr music_normal_volume
             jmp $e462            
 
-sound_off
-            lda #0
-            sta AUDF3
-            sta AUDC3
-            rts
-
 start_sound_bat
-            lda #15
+            lda #10
             sta volume_hit_bat
             rts
             
 play_sound_bat
             lda volume_hit_bat
-            beq silenced_bat
+            bmi silenced_bat
 
             lda player_turn
             asl
             asl
             adc #$30
             sbc angle_diff_bat
-            sta SHADOW+4
-            sta AUDF3
+            sta SHADOW+4    ; $d204
             lda volume_hit_bat
             ora #$a0
-            sta SHADOW+5
-            sta AUDC3
+            sta SHADOW+5    ; $d205
             dec volume_hit_bat
 silenced_bat
+            rts
+
+start_sound_edge
+            lda #4
+            sta volume_hit_edge
+            rts
+
+play_sound_edge
+            lda volume_hit_edge
+            bmi silenced_edge
+            bne no_silenced_edge
+            sta SHADOW+5    ; $d205
+            dec volume_hit_edge
+            rts            
+
+no_silenced_edge
+            lda #$08
+            sta SHADOW+4    ; $d204
+            lda volume_hit_edge
+            ora #$26
+            sta SHADOW+5    ; $d205
+            dec volume_hit_edge
+silenced_edge
             rts
 
 ; Update score
@@ -1575,11 +1608,11 @@ set_p
             rts            
 
 init_colors
-            lda #$2a
+            lda #$2a    ;$5a
             sta PCOLR0
             sta PCOLR1
-            
-            lda #$7a
+
+            lda #$7a    ;$ba
             sta PCOLR2
             sta PCOLR3
             
