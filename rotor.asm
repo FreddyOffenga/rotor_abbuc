@@ -30,6 +30,17 @@
 
             icl 'lib/labels.inc'
 
+; color scheme
+;BASE_COLOR_P1   = $10   ; orange
+;BASE_COLOR_P2   = $a0   ; green
+;BASE_COLOR_P1   = $80   ; blue
+;BASE_COLOR_P2   = $e0   ; yellow
+;BASE_COLOR_P1   = $50   ; purple
+;BASE_COLOR_P2   = $b0   ; green
+BASE_COLOR_P1   = $20   ; red
+BASE_COLOR_P2   = $70   ; blue
+
+
 ; must be in decimal format, so $11 is 11
 MAX_SCORE   = $11
 
@@ -289,8 +300,24 @@ color_it
             rti
 
 menu_colpf0
-            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
-            dta $7c,$7c,$7a,$7a,$78,$78,0,0
+            dta 0,0
+            dta BASE_COLOR_P1+8
+            dta BASE_COLOR_P1+8
+            dta BASE_COLOR_P1+10
+            dta BASE_COLOR_P1+10
+            dta BASE_COLOR_P1+12
+            dta BASE_COLOR_P1+12
+
+            dta BASE_COLOR_P2+12
+            dta BASE_COLOR_P2+12
+            dta BASE_COLOR_P2+10
+            dta BASE_COLOR_P2+10
+            dta BASE_COLOR_P2+8
+            dta BASE_COLOR_P2+8
+            dta 0,0
+
+;            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
+;            dta $7c,$7c,$7a,$7a,$78,$78,0,0
             dta 0,0,0,0
             dta 0,14,14,12,10,8,6,0
             dta 0,14,14,12,10,8,6,0
@@ -407,7 +434,7 @@ turn_color_ball
             sta COLOR3
             rts
             
-color_turn  dta 0,$26,$76                           
+color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6                           
 
 ; A, X, Y are already saved by the OS
 vbi                 
@@ -1608,11 +1635,11 @@ set_p
             rts            
 
 init_colors
-            lda #$2a    ;$5a
+            lda #BASE_COLOR_P1+10
             sta PCOLR0
             sta PCOLR1
 
-            lda #$7a    ;$ba
+            lda #BASE_COLOR_P2+10
             sta PCOLR2
             sta PCOLR3
             
