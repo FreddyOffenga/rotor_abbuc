@@ -351,7 +351,7 @@ shift_loop
 .endp
 
 SHADOW              ; shadow pokey
-:9 .db 0
+:9 .byte 0
 
                     ; fake stereo effect:
                     ; 0*9 = small
