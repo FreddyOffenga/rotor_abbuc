@@ -35,10 +35,10 @@
 ;BASE_COLOR_P2   = $a0   ; green
 ;BASE_COLOR_P1   = $80   ; blue
 ;BASE_COLOR_P2   = $e0   ; yellow
-;BASE_COLOR_P1   = $50   ; purple
-;BASE_COLOR_P2   = $b0   ; green
-BASE_COLOR_P1   = $20   ; red
-BASE_COLOR_P2   = $70   ; blue
+BASE_COLOR_P1   = $50   ; purple
+BASE_COLOR_P2   = $b0   ; green
+;BASE_COLOR_P1   = $20   ; red
+;BASE_COLOR_P2   = $70   ; blue
 
 
 ; must be in decimal format, so $11 is 11
