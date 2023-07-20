@@ -1,21 +1,18 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.2
+; Version 1.1.3
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
 ; (computer player not yet implemented)
 
 ; Main idea:
-; - two players red and blue move in a circle
+; - two players ONE and TWO move in a circle
 ; - the ball gets color of player to indicate who should catch it
 ; - when the ball hits the circle, the other player gets a point
 
 ; TODO
-; - switch player turn when edge hit
-; - change color scheme (purple, green?)
-; - fix title RED/BLUE to ONE/TWO
 ; - music on/off toggle (SHIFT?)
 ; - add color (pm?) in header for player ONE/TWO
 ; - fix paddle player 2 start position
@@ -564,7 +561,7 @@ main_game_vbi
             sta HITCLR
 
             lda #2
-            sta player_turn         ; blue's turn
+            sta player_turn
 
             jsr turn_color_ball
             jmp exit_vbi            
@@ -630,6 +627,13 @@ no_first_hit
 
             jsr update_score
             bne game_ends
+
+; switch turns
+            lda player_turn
+            eor #3              ; 1 => 2, 2 => 1
+            sta player_turn
+            jsr turn_color_ball
+
 still_moving
             lda current_x+1
             sta ball_current_x
