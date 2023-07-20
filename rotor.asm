@@ -1760,14 +1760,14 @@ dl_screen_ptr2
             dta a(display_list)
 
 score_line  
-            dta d' RED '
+            dta d' ONE '
 score_chars_p1
             dta d'-- '
 
             dta d'          '
             dta d'          '
 
-            dta d'    BLUE '
+            dta d'     TWO '
 score_chars_p2
             dta d'-- '
 
