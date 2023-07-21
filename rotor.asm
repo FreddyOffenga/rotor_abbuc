@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.5
+; Version 1.1.6
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -14,27 +14,17 @@
 
 ; TODO
 ; - add color (pm?) in header for player ONE/TWO
-; - try fix bat positions for paddles (both start at zero?)
 ; - try fix bat priority, now RED is always in front
-; - add title image
 
 ; Optional for a later version:
 ; - add computer player(s)
 ; - add support for driving controllers
-; - break part of outer circle when ball hits
 
             icl 'lib/labels.inc'
 
 ; color scheme
-;BASE_COLOR_P1   = $10   ; orange
-;BASE_COLOR_P2   = $a0   ; green
-;BASE_COLOR_P1   = $80   ; blue
-;BASE_COLOR_P2   = $e0   ; yellow
 BASE_COLOR_P1   = $50   ; purple
 BASE_COLOR_P2   = $b0   ; green
-;BASE_COLOR_P1   = $20   ; red
-;BASE_COLOR_P2   = $70   ; blue
-
 
 ; must be in decimal format, so $11 is 11
 MAX_SCORE   = $11
@@ -154,10 +144,31 @@ dir_y       = $fb  ; byte
 line_end_x  = $fc  ; byte
 line_end_y  = $fd  ; byte
 
-            org $2000
+            icl 'intro.asm'
+
+            org $2400            
 
             icl 'lib/drivers.inc'       
-main         
+main
+            lda #255
+            sta 764
+
+; for fast loaders, wait 10 seconds or continue with spacebar
+wait_a_sec
+            lda 764
+            cmp #255
+            bne any_key_pressed
+
+            lda 19
+            cmp #2
+            bcc wait_a_sec
+
+any_key_pressed
+            lda #255
+            sta 764
+
+; start the game!
+ 
             lda #0
             sta SDMCTL
             sta game_restart
@@ -201,8 +212,9 @@ main
             sta VDSLST
             lda #>dli_menu
             sta VDSLST+1
-            
+
             jsr music_init
+
 ;            lda #0
 ;            sta $d208
             
@@ -1717,10 +1729,6 @@ inner_y_tab = *+$100
 outer_x_tab
 outer_y_tab = *+1024
             ins 'data\out224.dat'
-
-            .align $400
-rotor_font
-            ins 'font\rotor.fnt'
            
             .align $400
 ; table of magnitudes (length) between angle 0 and 0..255
@@ -1884,30 +1892,33 @@ driver_text_hi
             dta >driving_text
             dta >computer_text
 
-            .align $1000
-
-; 128 x 32 bytes shapes            
-pm_shapes
-            ins 'data\pm_128_x_32.dat'
-
+            .align $100
 pm_shape_lo .ds 128
 pm_shape_hi .ds 128
 
+            .align $100
+            icl 'music\rotor_music\rotor_music.asm'
+
+; 4 KB
+; 128 x 32 bytes shapes
             .align $1000
-screen_mem1 = * ; $9000     ; 4K
+pm_shapes
+            ins 'data\pm_128_x_32.dat'
+
+; 9 KB for backdrop image
+            .align $1000
+screen_mem1 = * ; 4K
 ;            org screen_mem1
             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
 
             .align $1000
-screen_mem2 = * ; $a000     ; 4K
+screen_mem2 = * ; 4K
 ;            org screen_mem2
             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
 
             .align $1000
-screen_mem3 = * ; $b000     ; 1K
+screen_mem3 = * ; 1K
 ;            org screen_mem3
             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
-
-            icl 'music\rotor_music\rotor_music.asm'
 
             run main
