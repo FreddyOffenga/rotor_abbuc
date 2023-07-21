@@ -14,7 +14,7 @@ INTRODUCTION
 
 Deep underground you will find a large system of pipes that ensure that every home is connected to all utilities. However, this system is also used as the playing field of the International Rotor Championships. To participate you must take control of a rotor bat and try to defeat your opponent.
 
-To became the Rotor champion you have to score 11 points. When your opponent misses the ball you will score one point. If you hit the ball squarely with the center of the rotor bat, the ball moves straight across the field; an "edge hit" will cause the ball to angle. The color of the ball shows which player has to hit the ball with his bat. The speed of the ball will become faster during the game.
+To became the Rotor champion you have to score 11 points. When your opponent misses the ball you will score one point. If you hit the ball squarely with the center of the rotor bat, the ball moves straight across the field; an "edge hit" will cause the ball to angle. The color of the ball shows which player has to hit the ball with his bat.
 
 Remember that Rotor is about having fun and, of course showing off your quick reactions, skill and superior tactics to your friends. 
 
@@ -28,7 +28,7 @@ START: start the game
 OPTION: abort the current game
 SELECT: starting speed of the game (1: slowest, 4: fastest)
 ?????: select 1 or 2 player game
-M: turn background music on/off
+SPACEBAR: turn background music on/off
 
 Enjoy the game and become the International Rotor Champion!
 
