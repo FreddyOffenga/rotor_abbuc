@@ -1,0 +1,42 @@
+#WUDSN IDE Converter Parameters
+#Fri Jul 21 17:22:49 CEST 2023
+filesConverterParameters.displayShrinkToFit=false
+filesConverterParameters.imageAspect.factorX=1
+imageConverterParameters.imageFilePath=intro_v4_gr8_inverted.png
+converterDirection=IMAGE_TO_FILES
+filesConverterParameters.paletteRGBs=0
+filesConverterParameters.spacingColor.green=0
+filesConverterParameters.imageAspect.factorY=1
+filesConverterParameters.displayZoomToFit=true
+filesConverterParameters.spacingWidth=0
+imageConverterParameters.targetFiles.2.path=
+imageConverterParameters.displayShrinkToFit=false
+filesConverterParameters.imageFilePath=
+imageConverterParameters.targetFiles.5.path=
+imageConverterParameters.targetFiles.8.path=
+imageConverterParameters.imageAspect.factorX=1
+filesConverterParameters.displayAspect.factorY=1
+imageConverterParameters.imageAspect.factorY=1
+filesConverterParameters.columns=40
+filesConverterParameters.displayAspect.factorX=1
+filesConverterParameters.spacingColor.blue=0
+filesConverterParameters.converterId=
+imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar bpsl \= (data.getImageDataWidth() + 7) / 8;\r\n\tvar bytes \= [];\r\n\tvar offset \= 0;\r\n\tfor (var y \= 0; y < data.getImageDataHeight(); y++) {\r\n\t    for (var x \= 0; x < data.getImageDataWidth(); x \= x + 8) {\r\n\t\t\tvar b \= 0;\r\n\t\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t\t    var color;\r\n\t\t\t    color \= data.getPixel(x + p, y);\r\n\t\t\t    if (color \!\= 0) {\r\n\t\t\t\t\tb \= b | 1 << 7 - p;\r\n\t\t\t    }\r\n\t\t\t}\r\n\t\t\tbytes[offset++] \= b;\r\n\t    }\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}
+filesConverterParameters.spacingColor.red=0
+imageConverterParameters.displayZoomToFit=true
+imageConverterParameters.targetFiles.9.path=
+imageConverterParameters.targetFiles.3.path=
+imageConverterParameters.targetFiles.6.path=
+filesConverterParameters.rows=24
+imageConverterParameters.targetFiles.0.path=intro_v4_gr8_inverted.gr8
+imageConverterParameters.displayAspect.factorX=1
+imageConverterParameters.targetFiles.1.path=
+imageConverterParameters.displayAspect.factorY=1
+imageConverterParameters.targetFiles.7.path=
+imageConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics8Converter
+filesConverterParameters.palette=HIRES_1
+filesConverterParameters.paletteType=ATARI_DEFAULT
+imageConverterParameters.useDefaultScript=true
+filesConverterParameters.sourceFiles=0
+imageConverterParameters.targetFiles=10
+imageConverterParameters.targetFiles.4.path=
