@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.3
+; Version 1.1.4
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -13,7 +13,6 @@
 ; - when the ball hits the circle, the other player gets a point
 
 ; TODO
-; - music on/off toggle (SHIFT?)
 ; - add color (pm?) in header for player ONE/TWO
 ; - fix paddle player 2 start position
 ; - try fix bat positions for paddles (both start at zero?)
@@ -74,6 +73,8 @@ ball_left_margin    = 64+5
 ; pm upper margin
 upper_margin    = 1
 left_margin     = 32
+
+music_toggle    = $80
 
 shape_ptr       = $84
 tmp_screen      = $86
@@ -165,6 +166,7 @@ main
             lda #128
             sta volume_hit_bat
             sta volume_hit_edge
+            sta music_toggle        ; 128 = on, 0 = off
 
             lda #1
             sta 580 ; coldstart
@@ -436,9 +438,31 @@ color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6
 ; A, X, Y are already saved by the OS
 vbi                 
             jsr copy_shadow
+
+            lda music_toggle
+            beq skip_music
             jsr play_song
+skip_music
             jsr play_sound_bat
             jsr play_sound_edge            
+
+; toggle music on/off with spacebar
+            lda 764
+            cmp #$21
+            bne no_spacebar
+            lda music_toggle
+            eor #128
+            sta music_toggle
+            bne music_turned_on
+            jsr music_off
+
+music_turned_on
+            lda #255
+            sta 764
+            bne skip_music
+
+no_spacebar
+
 
             lda #%00101110  ; enable P/M DMA
             sta SDMCTL
