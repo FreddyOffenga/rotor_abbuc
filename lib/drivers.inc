@@ -168,8 +168,8 @@ is_fire_button
             
             lda STRIG0,x
             rts
-check_paddle_fire
 
+check_paddle_fire
             lda STICK0
             cmp #7
             beq paddle_fire
@@ -192,4 +192,4 @@ driver_paddle
             rts
 
 paddle_offsets
-            dta 0,128
+            dta 0,0

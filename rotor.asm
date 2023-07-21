@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.4
+; Version 1.1.5
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -14,7 +14,6 @@
 
 ; TODO
 ; - add color (pm?) in header for player ONE/TWO
-; - fix paddle player 2 start position
 ; - try fix bat positions for paddles (both start at zero?)
 ; - try fix bat priority, now RED is always in front
 ; - add title image
