@@ -350,6 +350,15 @@ shift_loop
     rts
 .endp
 
+.proc music_off
+    lda #0
+    sta shadow+1
+    sta shadow+3
+    sta shadow+5
+    sta shadow+7
+    rts
+.endp
+
 SHADOW              ; shadow pokey
 :9 .byte 0
 
