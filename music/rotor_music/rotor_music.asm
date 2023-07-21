@@ -25,23 +25,21 @@ SSKCTL = $0232
 ;RANDOM = $d20a
 SKCTL  = $d20f
 
-    org $c0
+zp_music    = $c0
+chn_copy    = zp_music    ; .ds     9
+chn_pos     = zp_music+9  ; .ds     9
+bptr        = zp_music+18 ; .ds     2
+cur_pos     = zp_music+20 ; .ds     1
+chn_bits    = zp_music+21 ; .ds     1
+bit_data    = zp_music+22 ; .byte   1
 
-zp
-chn_copy    .ds     9
-chn_pos     .ds     9
-bptr        .ds     2
-cur_pos     .ds     1
-chn_bits    .ds     1
-bit_data    .byte   1
+newsong     = zp_music+23 ; .ds     1       ; IVO
 
-newsong     .ds     1       ; IVO
-
-stereo_pokey    .ds     1
+stereo_pokey    = zp_music+24 ;.ds     1
 
 POKEY = $D200
 
-    org $9800
+    ;org $9800
 buffers
     .ds 256 * 9
 
