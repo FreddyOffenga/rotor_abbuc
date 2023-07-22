@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.6
+; Version 1.1.7
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -14,7 +14,6 @@
 
 ; TODO
 ; - add color (pm?) in header for player ONE/TWO
-; - try fix bat priority, now RED is always in front
 
 ; Optional for a later version:
 ; - add computer player(s)
@@ -795,7 +794,7 @@ handle_player1
             adc #left_margin
             sta HPOSP0
             adc #8
-            sta HPOSP1
+            sta HPOSP2
             rts
 
 ; player 2
@@ -814,7 +813,7 @@ handle_player2
             lda player2_x
             clc
             adc #left_margin
-            sta HPOSP2
+            sta HPOSP1
             adc #8
             sta HPOSP3
             rts
@@ -941,19 +940,19 @@ bounce_bat_ball
             jsr ball_current_to_start_position
 
 ; which player hit the ball?
-            lda #1
-            sta player_nr_hit
+; collision bits:
+; xxxxx1x1 : 1 is player1 collision
+; xxxx1010 : 2 is player2 collision
+
             lda mp_collision
-            and #%00000011      ; pm0/1 hit = player 1 hit
-            bne p1_hit
-            lda #2
-            sta player_nr_hit   ; no p1 hit, must be p2
-p1_hit            
+            lsr
+            lsr
+            ora mp_collision
+            and #%00000011      ; 01 = player1, 10 = player2, 11 = both
 
 ; who's turn is it and who bounced the ball?
 
-            lda player_turn
-            and player_nr_hit
+            and player_turn
             beq no_switch_turn
 
             lda player_turn
@@ -962,9 +961,11 @@ p1_hit
 
 no_switch_turn
             jsr turn_color_ball
-            
-            ldx player_nr_hit
-            dex                     ; index 0,1 (player = 1,2)
+
+            lda player_turn
+            eor #3
+            tax
+            dex                 ; index 0,1 (player = 1,2)
             lda p1_angle,x
 
 ; Calculate diff between bat angle position and new ball start position
@@ -1064,7 +1065,7 @@ show_shape1
             sta p0_area,x 
             iny
             lda (shape_ptr),y
-            sta p1_area,x
+            sta p2_area,x
             inx
             iny
             cpy #32
@@ -1080,7 +1081,7 @@ show_p2
             ldy #0
 show_shape2
             lda (shape_ptr),y
-            sta p2_area,x 
+            sta p1_area,x
             iny
             lda (shape_ptr),y
             sta p3_area,x
@@ -1100,7 +1101,7 @@ wipe_p1
             lda #0
 wipe_it1            
             sta p0_area,x 
-            sta p1_area,x
+            sta p2_area,x
             inx
             dey
             bne wipe_it1 
@@ -1115,7 +1116,7 @@ wipe_p2
             ldy #16
             lda #0
 wipe_it2            
-            sta p2_area,x 
+            sta p1_area,x
             sta p3_area,x
             inx
             dey
@@ -1658,28 +1659,28 @@ set_p
             inx
             bpl set_p               
 
-            lda #%0010001  ; missile = 5th player, prio player 0..3
+            lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
             sta GPRIOR
-    
+
             lda #>pm_area
             sta PMBASE
-    
+
             lda #3          ; P/M both on
             sta GRACTL
-    
+
             lda #$90
             sta HPOSP2
             lda #$A0
             sta HPOSP3  
-            rts            
+            rts
 
 init_colors
             lda #BASE_COLOR_P1+10
             sta PCOLR0
-            sta PCOLR1
+            sta PCOLR2
 
             lda #BASE_COLOR_P2+10
-            sta PCOLR2
+            sta PCOLR1
             sta PCOLR3
             
             lda #0
