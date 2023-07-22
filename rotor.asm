@@ -205,17 +205,9 @@ any_key_pressed
             lda #1
             sta mode_menu           ; start with menu
 
-; start vbi
-            
-            lda #<dli_menu
-            sta VDSLST
-            lda #>dli_menu
-            sta VDSLST+1
-
             jsr music_init
 
-;            lda #0
-;            sta $d208
+; start vbi
             
             lda #$c0
             sta NMIEN
@@ -446,15 +438,13 @@ turn_color_ball
 color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6                           
 
 ; A, X, Y are already saved by the OS
-vbi                 
+vbi
             jsr copy_shadow
 
             lda music_toggle
             beq skip_music
             jsr play_song
 skip_music
-            jsr play_sound_bat
-            jsr play_sound_edge            
 
 ; toggle music on/off with spacebar
             lda 764
@@ -469,10 +459,15 @@ skip_music
 music_turned_on
             lda #255
             sta 764
-            bne skip_music
 
 no_spacebar
+            jsr play_sound_bat
+            jsr play_sound_edge
 
+            lda #<dli_menu
+            sta VDSLST
+            lda #>dli_menu
+            sta VDSLST+1
 
             lda #%00101110  ; enable P/M DMA
             sta SDMCTL
