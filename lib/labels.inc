@@ -46,6 +46,12 @@ HPOSM1      = $d005
 HPOSM2      = $d006
 HPOSM3      = $d007
 
+SIZEP0      = $d008
+SIZEP1      = $d009
+SIZEP2      = $d00a
+SIZEP3      = $d00b
+SIZEM       = $d00c
+
 ; collision
 M0PF        = $d000
 M1PF        = $d001
