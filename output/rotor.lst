@@ -3,7 +3,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
      1 				; R O T O R
      2
      3 				; F#READY, 2023-07-20
-     4 				; Version 1.1.8
+     4 				; Version 1.1.10
      5 				; For ABBUC Software Competition 2023
      6
      7 				; Casual game for two players
@@ -610,7 +610,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    209 272D A9 01		            lda #1
    210 272F 85 8C		            sta mode_menu           ; start with menu
    211
-   212 2731 20 70 5E		            jsr music_init
+   212 2731 20 6E 5E		            jsr music_init
    213
    214 				; start vbi
    215 				            
@@ -744,7 +744,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    343 27F2 40			            rti
    344
    345 27F3			menu_colpf2
-   346 27F3 50			            dta BASE_COLOR_P1            
+   346 27F3 50			            dta BASE_COLOR_P1
    347 27F4 50			            dta BASE_COLOR_P1
    348 27F5 50			            dta BASE_COLOR_P1
    349 27F6 50			            dta BASE_COLOR_P1
@@ -887,11 +887,11 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    486
    487 				; A, X, Y are already saved by the OS
    488 28BB			vbi
-   489 28BB 20 DE 5E		            jsr copy_shadow
+   489 28BB 20 DC 5E		            jsr copy_shadow
    490
    491 28BE A5 80		            lda music_toggle
    492 28C0 F0 03		            beq skip_music
-   493 28C2 20 99 5E		            jsr play_song
+   493 28C2 20 97 5E		            jsr play_song
    494 28C5			skip_music
    495
    496 				; toggle music on/off with spacebar
@@ -902,7 +902,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    501 28CE 49 80		            eor #128
    502 28D0 85 80		            sta music_toggle
    503 28D2 D0 03		            bne music_turned_on
-   504 28D4 20 62 5F		            jsr music_off
+   504 28D4 20 60 5F		            jsr music_off
    505
    506 28D7			music_turned_on
    507 28D7 A9 FF		            lda #255
@@ -936,7 +936,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    535 2909 D0 0C		            bne no_option_pressed
    536
    537 290B			go_menu_mode            
-   538 290B 20 FC 5E		            jsr music_normal_volume
+   538 290B 20 FA 5E		            jsr music_normal_volume
    539 				            
    540 290E 20 A3 2B		            jsr wipe_ball
    541 				            
@@ -951,7 +951,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    550 				; reset game
    551
    552 291B			reset_game
-   553 291B 20 07 5F		            jsr music_low_volume
+   553 291B 20 05 5F		            jsr music_low_volume
    554
    555 291E 20 A3 2B		            jsr wipe_ball
    556 				            
@@ -1149,7 +1149,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    748 2A35 4C 62 E4		            jmp $e462
    749
    750 2A38			game_ends
-   751 2A38 20 FC 5E		            jsr music_normal_volume
+   751 2A38 20 FA 5E		            jsr music_normal_volume
    752 2A3B 4C 62 E4		            jmp $e462            
    753
    754 2A3E			start_sound_bat
@@ -1166,10 +1166,10 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    765 2A4A 0A			            asl
    766 2A4B 69 30		            adc #$30
    767 2A4D E5 B3		            sbc angle_diff_bat
-   768 2A4F 8D 75 5F		            sta SHADOW+4    ; $d204
+   768 2A4F 8D 73 5F		            sta SHADOW+4    ; $d204
    769 2A52 A5 8D		            lda volume_hit_bat
    770 2A54 09 A0		            ora #$a0
-   771 2A56 8D 76 5F		            sta SHADOW+5    ; $d205
+   771 2A56 8D 74 5F		            sta SHADOW+5    ; $d205
    772 2A59 C6 8D		            dec volume_hit_bat
    773 2A5B			silenced_bat
    774 2A5B 60			            rts
@@ -1183,16 +1183,16 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    782 2A61 A5 8E		            lda volume_hit_edge
    783 2A63 30 16		            bmi silenced_edge
    784 2A65 D0 06		            bne no_silenced_edge
-   785 2A67 8D 76 5F		            sta SHADOW+5    ; $d205
+   785 2A67 8D 74 5F		            sta SHADOW+5    ; $d205
    786 2A6A C6 8E		            dec volume_hit_edge
    787 2A6C 60			            rts            
    788
    789 2A6D			no_silenced_edge
    790 2A6D A9 08		            lda #$08
-   791 2A6F 8D 75 5F		            sta SHADOW+4    ; $d204
+   791 2A6F 8D 73 5F		            sta SHADOW+4    ; $d204
    792 2A72 A5 8E		            lda volume_hit_edge
    793 2A74 09 26		            ora #$26
-   794 2A76 8D 76 5F		            sta SHADOW+5    ; $d205
+   794 2A76 8D 74 5F		            sta SHADOW+5    ; $d205
    795 2A79 C6 8E		            dec volume_hit_edge
    796 2A7B			silenced_edge
    797 2A7B 60			            rts
@@ -2419,321 +2419,321 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     44 = 4400			    .ds 256 * 9
     45
     46 4D00			intro_data
-    47 4D00-5F79> 01 01 A1 34 +         ins     'intro.lz16'
+    47 4D00-5F77> 01 01 A1 34 +         ins     'intro.lz16'
     48 4FD8			intro_end
     49
     50 4FD8			loop_data
     51 4FD8 01 01 A1 34 00 10 +         ins     'loop.lz16'
-    52 5DD9			loop_end
+    52 5DD7			loop_end
     53
-    54 5DD9			.proc get_byte
-    55 5DD9 AD 34 12		    lda $1234
-    56 5DDC EE DA 5D		    inc song_ptr
-    57 5DDF D0 03		    bne skip
-    58 5DE1 EE DB 5D		    inc song_ptr+1
-    59 5DE4			skip
-    60 5DE4 60			    rts
+    54 5DD7			.proc get_byte
+    55 5DD7 AD 34 12		    lda $1234
+    56 5DDA EE D8 5D		    inc song_ptr
+    57 5DDD D0 03		    bne skip
+    58 5DDF EE D9 5D		    inc song_ptr+1
+    59 5DE2			skip
+    60 5DE2 60			    rts
     61 				.endp
-    62 = 5DDA			song_ptr = get_byte + 1
+    62 = 5DD8			song_ptr = get_byte + 1
     63
-    64 5DE5			start
+    64 5DE3			start
     65
     66 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     67 				; Song Initialization - this runs in the first tick:
     68 				;
-    69 5DE5			.proc play_first_frame
+    69 5DE3			.proc play_first_frame
     70
-    71 5DE5 20 D9 5D		    jsr get_byte                    ; IVO START move init here
-    72 5DE8 8D 24 5E		    sta play_frame.init_chn_bits
-    73 5DEB A9 01		    lda #1                          ; IVO set to 1 at init(!)
-    74 5DED 85 D6		    sta bit_data
-    75 5DEF A9 44		    lda #>buffers                   ; IVO reset cbuf+1 pointer
-    76 5DF1 8D 04 5E		    sta cbuf+2                      ; IVO END
+    71 5DE3 20 D7 5D		    jsr get_byte                    ; IVO START move init here
+    72 5DE6 8D 22 5E		    sta play_frame.init_chn_bits
+    73 5DE9 A9 01		    lda #1                          ; IVO set to 1 at init(!)
+    74 5DEB 85 D6		    sta bit_data
+    75 5DED A9 44		    lda #>buffers                   ; IVO reset cbuf+1 pointer
+    76 5DEF 8D 02 5E		    sta cbuf+2                      ; IVO END
     77
     78 				    ; Init all channels:
-    79 5DF4 A2 08		    ldx #8
-    80 5DF6 A0 00		    ldy #0
-    81 5DF8 84 D7		    sty newsong                     ; IVO signal first frame is played
-    82 5DFA			clear
+    79 5DF2 A2 08		    ldx #8
+    80 5DF4 A0 00		    ldy #0
+    81 5DF6 84 D7		    sty newsong                     ; IVO signal first frame is played
+    82 5DF8			clear
     83 				    ; Read just init value and store into buffer and POKEY
-    84 5DFA 20 D9 5D		    jsr get_byte
-    85 5DFD 9D 71 5F		    sta SHADOW, x
-    86 5E00 94 C0		    sty chn_copy, x
-    87 5E02			cbuf
-    88 5E02 8D FF 44		    sta buffers + 255
-    89 5E05 EE 04 5E		    inc cbuf + 2
-    90 5E08 CA			    dex
-    91 5E09 10 EF		    bpl clear
+    84 5DF8 20 D7 5D		    jsr get_byte
+    85 5DFB 9D 6F 5F		    sta SHADOW, x
+    86 5DFE 94 C0		    sty chn_copy, x
+    87 5E00			cbuf
+    88 5E00 8D FF 44		    sta buffers + 255
+    89 5E03 EE 02 5E		    inc cbuf + 2
+    90 5E06 CA			    dex
+    91 5E07 10 EF		    bpl clear
     92
     93 				    ; Initialize buffer pointer:
-    94 5E0B 84 D2		    sty bptr
-    95 5E0D 84 D4		    sty cur_pos
-    96 5E0F 60			    rts                     ; IVO turn into subroutine
+    94 5E09 84 D2		    sty bptr
+    95 5E0B 84 D4		    sty cur_pos
+    96 5E0D 60			    rts                     ; IVO turn into subroutine
     97 				.endp
     98
     99 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    100 				; Wait for next frame
    101 				;
-   102 5E10			.proc wait_frame
+   102 5E0E			.proc wait_frame
    103
-   104 5E10 A5 14		    lda 20
-   105 5E12			delay
-   106 5E12 C5 14		    cmp 20
-   107 5E14 F0 FC		    beq delay
-   108 5E16 60			    rts                     ; IVO turn into subroutine
+   104 5E0E A5 14		    lda 20
+   105 5E10			delay
+   106 5E10 C5 14		    cmp 20
+   107 5E12 F0 FC		    beq delay
+   108 5E14 60			    rts                     ; IVO turn into subroutine
    109 				.endp
    110
    111 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    112 				; Play one frame of the song
    113 				;
-   114 5E17			.proc play_frame
-   115 5E17 A5 D7		    lda newsong
-   116 5E19 F0 02		    beq continue
-   117 5E1B D0 C8		    bne play_first_frame
+   114 5E15			.proc play_frame
+   115 5E15 A5 D7		    lda newsong
+   116 5E17 F0 02		    beq continue
+   117 5E19 D0 C8		    bne play_first_frame
    118
-   119 5E1D			continue
-   120 5E1D A4 D4		    ldy cur_pos                 ; IVO
+   119 5E1B			continue
+   120 5E1B A4 D4		    ldy cur_pos                 ; IVO
    121
-   122 5E1F A9 44		    lda #>buffers
-   123 5E21 85 D3		    sta bptr+1
+   122 5E1D A9 44		    lda #>buffers
+   123 5E1F 85 D3		    sta bptr+1
    124
-   125 = 5E24			init_chn_bits=*+1
-   126 5E23 A9 00		    lda #0              ; IVO: 8 bits, but 9 streams. bug?
-   127 5E25 85 D5		    sta chn_bits
-   128 5E27 A2 08		    ldx #8
+   125 = 5E22			init_chn_bits=*+1
+   126 5E21 A9 00		    lda #0              ; IVO: 8 bits, but 9 streams. bug?
+   127 5E23 85 D5		    sta chn_bits
+   128 5E25 A2 08		    ldx #8
    129
    130 				    ; Loop through all "channels", one for each POKEY register
-   131 5E29			chn_loop:
-   132 5E29 46 D5		    lsr chn_bits
-   133 5E2B B0 29		    bcs skip_chn       ; C=1 : skip this channel
+   131 5E27			chn_loop:
+   132 5E27 46 D5		    lsr chn_bits
+   133 5E29 B0 29		    bcs skip_chn       ; C=1 : skip this channel
    134
-   135 5E2D B5 C0		    lda chn_copy, x    ; Get status of this stream
-   136 5E2F D0 16		    bne do_copy_byte   ; If > 0 we are copying bytes
+   135 5E2B B5 C0		    lda chn_copy, x    ; Get status of this stream
+   136 5E2D D0 16		    bne do_copy_byte   ; If > 0 we are copying bytes
    137
    138 				    ; We are decoding a new match/literal
-   139 5E31 46 D6		    lsr bit_data       ; Get next bit
-   140 5E33 D0 06		    bne got_bit
-   141 5E35 20 D9 5D		    jsr get_byte       ; Not enough bits, refill!
-   142 5E38 6A			    ror                ; Extract a new bit and add a 1 at the high bit (from C set above)
-   143 5E39 85 D6		    sta bit_data       ;
-   144 5E3B			got_bit:
-   145 5E3B 20 D9 5D		    jsr get_byte       ; Always read a byte, it could mean "match size/offset" or "literal byte"
-   146 5E3E B0 0F		    bcs store          ; Bit = 1 is "literal", bit = 0 is "match"
+   139 5E2F 46 D6		    lsr bit_data       ; Get next bit
+   140 5E31 D0 06		    bne got_bit
+   141 5E33 20 D7 5D		    jsr get_byte       ; Not enough bits, refill!
+   142 5E36 6A			    ror                ; Extract a new bit and add a 1 at the high bit (from C set above)
+   143 5E37 85 D6		    sta bit_data       ;
+   144 5E39			got_bit:
+   145 5E39 20 D7 5D		    jsr get_byte       ; Always read a byte, it could mean "match size/offset" or "literal byte"
+   146 5E3C B0 0F		    bcs store          ; Bit = 1 is "literal", bit = 0 is "match"
    147
-   148 5E40 95 C9		    sta chn_pos, x     ; Store in "copy pos"
+   148 5E3E 95 C9		    sta chn_pos, x     ; Store in "copy pos"
    149
-   150 5E42 20 D9 5D		    jsr get_byte
-   151 5E45 95 C0		    sta chn_copy, x    ; Store in "copy length"
+   150 5E40 20 D7 5D		    jsr get_byte
+   151 5E43 95 C0		    sta chn_copy, x    ; Store in "copy length"
    152
    153 				                        ; And start copying first byte
-   154 5E47			do_copy_byte:
-   155 5E47 D6 C0		    dec chn_copy, x     ; Decrease match length, increase match position
-   156 5E49 F6 C9		    inc chn_pos, x
-   157 5E4B B4 C9		    ldy chn_pos, x
+   154 5E45			do_copy_byte:
+   155 5E45 D6 C0		    dec chn_copy, x     ; Decrease match length, increase match position
+   156 5E47 F6 C9		    inc chn_pos, x
+   157 5E49 B4 C9		    ldy chn_pos, x
    158
    159 				    ; Now, read old data, jump to data store
-   160 5E4D B1 D2		    lda (bptr), y
+   160 5E4B B1 D2		    lda (bptr), y
    161
-   162 5E4F			store:
-   163 5E4F A4 D4		    ldy cur_pos
-   164 5E51 9D 71 5F		    sta SHADOW, x        ; Store to output and buffer
-   165 5E54 91 D2		    sta (bptr), y
+   162 5E4D			store:
+   163 5E4D A4 D4		    ldy cur_pos
+   164 5E4F 9D 6F 5F		    sta SHADOW, x        ; Store to output and buffer
+   165 5E52 91 D2		    sta (bptr), y
    166
-   167 5E56			skip_chn:
+   167 5E54			skip_chn:
    168 				    ; Increment channel buffer pointer
-   169 5E56 E6 D3		    inc bptr+1
+   169 5E54 E6 D3		    inc bptr+1
    170
-   171 5E58 CA			    dex
-   172 5E59 10 CE		    bpl chn_loop        ; Next channel
+   171 5E56 CA			    dex
+   172 5E57 10 CE		    bpl chn_loop        ; Next channel
    173
-   174 5E5B E6 D4		    inc cur_pos
-   175 5E5D 60			    rts                 ; IVO once per frame
+   174 5E59 E6 D4		    inc cur_pos
+   175 5E5B 60			    rts                 ; IVO once per frame
    176 				.endp
    177
    178 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    179 				; Check for ending of song and jump to the next frame
    180 				;
-   181 5E5E			.proc check_end_song
-   182 5E5E AD DB 5D		    lda song_ptr + 1
-   183 = 5E62			song_end_high=*+1
-   184 5E61 C9 00		    cmp #>0
-   185 5E63 D0 09		    bne not_equal           ; IVO turn into subroutine
-   186 5E65 AD DA 5D		    lda song_ptr
-   187 = 5E69			song_end_low=*+1
-   188 5E68 C9 00		    cmp #<0
-   189 5E6A D0 02		    bne not_equal           ; IVO turn intro subroutine
+   181 5E5C			.proc check_end_song
+   182 5E5C AD D9 5D		    lda song_ptr + 1
+   183 = 5E60			song_end_high=*+1
+   184 5E5F C9 00		    cmp #>0
+   185 5E61 D0 09		    bne not_equal           ; IVO turn into subroutine
+   186 5E63 AD D8 5D		    lda song_ptr
+   187 = 5E67			song_end_low=*+1
+   188 5E66 C9 00		    cmp #<0
+   189 5E68 D0 02		    bne not_equal           ; IVO turn intro subroutine
    190
-   191 5E6C 38			    sec                     ; IVO....
-   192 5E6D 60			    rts
-   193 5E6E			not_equal
-   194 5E6E 18			    clc
-   195 5E6F 60			    rts
+   191 5E6A 38			    sec                     ; IVO....
+   192 5E6B 60			    rts
+   193 5E6C			not_equal
+   194 5E6C 18			    clc
+   195 5E6D 60			    rts
    196 				.endp
    197
    198 				; IVO everything below
    199
-   200 5E70			.proc music_init
-   201 5E70 20 12 5F		    jsr detect_2nd_pokey
-   202 5E73 20 4B 5F		    jsr clear_echo
+   200 5E6E			.proc music_init
+   201 5E6E 20 10 5F		    jsr detect_2nd_pokey
+   202 5E71 20 49 5F		    jsr clear_echo
    203
-   204 5E76 A9 8C 8D D1 5E A9 +     mwa #normal_volume adjust_volume.volume
+   204 5E74 A9 8A 8D CF 5E A9 +     mwa #normal_volume adjust_volume.volume
    205 				;    mwa #half_volume adjust_volume.volume
    206 				;    mwa #quarter_volume adjust_volume.volume
    207
-   208 5E80 A9 D8		    lda #<intro_end
-   209 5E82 8D 69 5E		    sta check_end_song.song_end_low
-   210 5E85 A9 4F		    lda #>intro_end
-   211 5E87 8D 62 5E		    sta check_end_song.song_end_high
-   212 5E8A A9 00		    lda #<(intro_data)
-   213 5E8C 8D DA 5D		    sta song_ptr
-   214 5E8F A9 4D		    lda #>(intro_data)
-   215 5E91 8D DB 5D		    sta song_ptr+1
-   216 5E94 A9 01		    lda #1
-   217 5E96 85 D7		    sta newsong
-   218 5E98 60			    rts
+   208 5E7E A9 D8		    lda #<intro_end
+   209 5E80 8D 67 5E		    sta check_end_song.song_end_low
+   210 5E83 A9 4F		    lda #>intro_end
+   211 5E85 8D 60 5E		    sta check_end_song.song_end_high
+   212 5E88 A9 00		    lda #<(intro_data)
+   213 5E8A 8D D8 5D		    sta song_ptr
+   214 5E8D A9 4D		    lda #>(intro_data)
+   215 5E8F 8D D9 5D		    sta song_ptr+1
+   216 5E92 A9 01		    lda #1
+   217 5E94 85 D7		    sta newsong
+   218 5E96 60			    rts
    219 				.endp
    220
-   221 5E99			.proc play_song
-   222 5E99			playloop
-   223 5E99 20 17 5E		    jsr play_frame      ; generates tick two and beyond
-   224 5E9C 20 C1 5E		    jsr adjust_volume
+   221 5E97			.proc play_song
+   222 5E97			playloop
+   223 5E97 20 15 5E		    jsr play_frame      ; generates tick two and beyond
+   224 5E9A 20 BF 5E		    jsr adjust_volume
    225
-   226 5E9F 20 5E 5E		    jsr check_end_song
-   227 5EA2 90 03		    bcc no_end_song
-   228 5EA4 20 A8 5E		    jsr restart_music
-   229 5EA7			no_end_song
-   230 5EA7 60			    rts
+   226 5E9D 20 5C 5E		    jsr check_end_song
+   227 5EA0 90 03		    bcc no_end_song
+   228 5EA2 20 A6 5E		    jsr restart_music
+   229 5EA5			no_end_song
+   230 5EA5 60			    rts
    231 				.endp
    232
-   233 5EA8			.proc restart_music
-   234 5EA8 A9 D9		    lda #<loop_end
-   235 5EAA 8D 69 5E		    sta check_end_song.song_end_low
-   236 5EAD A9 5D		    lda #>loop_end
-   237 5EAF 8D 62 5E		    sta check_end_song.song_end_high
-   238 5EB2 A9 D8		    lda #<(loop_data)
-   239 5EB4 8D DA 5D		    sta song_ptr
-   240 5EB7 A9 4F		    lda #>(loop_data)
-   241 5EB9 8D DB 5D		    sta song_ptr+1
-   242 5EBC A9 01		    lda #1
-   243 5EBE 85 D7		    sta newsong
-   244 5EC0 60			    rts
+   233 5EA6			.proc restart_music
+   234 5EA6 A9 D7		    lda #<loop_end
+   235 5EA8 8D 67 5E		    sta check_end_song.song_end_low
+   236 5EAB A9 5D		    lda #>loop_end
+   237 5EAD 8D 60 5E		    sta check_end_song.song_end_high
+   238 5EB0 A9 D8		    lda #<(loop_data)
+   239 5EB2 8D D8 5D		    sta song_ptr
+   240 5EB5 A9 4F		    lda #>(loop_data)
+   241 5EB7 8D D9 5D		    sta song_ptr+1
+   242 5EBA A9 01		    lda #1
+   243 5EBC 85 D7		    sta newsong
+   244 5EBE 60			    rts
    245 				.endp
    246
-   247 5EC1			.proc adjust_volume
-   248 5EC1 A0 06		    ldy #6
-   249 5EC3			adjust
-   250 5EC3 B9 72 5F		    lda SHADOW+1,y
-   251 5EC6 AA			    tax
-   252 5EC7 29 F0		    and #$f0
-   253 5EC9 99 72 5F		    sta SHADOW+1,y
-   254 5ECC 8A			    txa
-   255 5ECD 29 0F		    and #$0f
-   256 5ECF AA			    tax
-   257 = 5ED1			volume=*+1
-   258 5ED0 BD 34 12		    lda $1234,x
-   259 5ED3 19 72 5F		    ora SHADOW+1,y
-   260 5ED6 99 72 5F		    sta SHADOW+1,y
-   261 5ED9 88			    dey
-   262 5EDA 88			    dey
-   263 5EDB 10 E6		    bpl adjust
+   247 5EBF			.proc adjust_volume
+   248 5EBF A0 06		    ldy #6
+   249 5EC1			adjust
+   250 5EC1 B9 70 5F		    lda SHADOW+1,y
+   251 5EC4 AA			    tax
+   252 5EC5 29 F0		    and #$f0
+   253 5EC7 99 70 5F		    sta SHADOW+1,y
+   254 5ECA 8A			    txa
+   255 5ECB 29 0F		    and #$0f
+   256 5ECD AA			    tax
+   257 = 5ECF			volume=*+1
+   258 5ECE BD 34 12		    lda $1234,x
+   259 5ED1 19 70 5F		    ora SHADOW+1,y
+   260 5ED4 99 70 5F		    sta SHADOW+1,y
+   261 5ED7 88			    dey
+   262 5ED8 88			    dey
+   263 5ED9 10 E6		    bpl adjust
    264 				    
-   265 5EDD 60			    rts
+   265 5EDB 60			    rts
    266 				.endp
    267
-   268 5EDE			.proc copy_shadow
-   269 5EDE A2 08		    ldx #8
-   270 5EE0			copy
-   271 5EE0 BD 71 5F		    lda SHADOW,x
-   272 5EE3 9D 00 D2		    sta POKEY,x
-   273 5EE6 CA			    dex
-   274 5EE7 10 F7		    bpl copy
+   268 5EDC			.proc copy_shadow
+   269 5EDC A2 08		    ldx #8
+   270 5EDE			copy
+   271 5EDE BD 6F 5F		    lda SHADOW,x
+   272 5EE1 9D 00 D2		    sta POKEY,x
+   273 5EE4 CA			    dex
+   274 5EE5 10 F7		    bpl copy
    275
-   276 5EE9 A5 D8		    lda stereo_pokey
-   277 5EEB F0 0E		    beq end_copy
+   276 5EE7 A5 D8		    lda stereo_pokey
+   277 5EE9 F0 0E		    beq end_copy
    278
-   279 5EED A2 08		    ldx #8
-   280 5EEF			copy2
-   281 5EEF BD 83 5F		    lda ECHO,x
-   282 5EF2 9D 10 D2		    sta POKEY+$10,x
-   283 5EF5 CA			    dex
-   284 5EF6 10 F7		    bpl copy2
+   279 5EEB A2 08		    ldx #8
+   280 5EED			copy2
+   281 5EED BD 81 5F		    lda ECHO,x
+   282 5EF0 9D 10 D2		    sta POKEY+$10,x
+   283 5EF3 CA			    dex
+   284 5EF4 10 F7		    bpl copy2
    285
-   286 5EF8 20 56 5F		    jsr shift_echo
+   286 5EF6 20 54 5F		    jsr shift_echo
    287
-   288 5EFB			end_copy
-   289 5EFB 60			    rts
+   288 5EF9			end_copy
+   289 5EF9 60			    rts
    290 				.endp
    291
-   292 5EFC			.proc music_normal_volume
-   293 5EFC A9 8C 8D D1 5E A9 +     mwa #normal_volume adjust_volume.volume
-   294 5F06 60			    rts
+   292 5EFA			.proc music_normal_volume
+   293 5EFA A9 8A 8D CF 5E A9 +     mwa #normal_volume adjust_volume.volume
+   294 5F04 60			    rts
    295 				.endp
    296
-   297 5F07			.proc music_low_volume
-   298 5F07 A9 AC 8D D1 5E A9 +     mwa #quarter_volume adjust_volume.volume
-   299 5F11 60			    rts
+   297 5F05			.proc music_low_volume
+   298 5F05 A9 AA 8D CF 5E A9 +     mwa #quarter_volume adjust_volume.volume
+   299 5F0F 60			    rts
    300 				.endp
    301
-   302 5F12			.proc detect_2nd_pokey
-   303 5F12 20 10 5E		    jsr wait_frame
+   302 5F10			.proc detect_2nd_pokey
+   303 5F10 20 0E 5E		    jsr wait_frame
    304
-   305 5F15 A9 00 8D 32 02	    mva #0 SSKCTL
-   306 5F1A A9 00 8D 0F D2	    mva #0 SKCTL
-   307 5F1F A9 00 8D 1F D2	    mva #0 SKCTL+$10        ; make sure a potential 2nd pokey is cleared
+   305 5F13 A9 00 8D 32 02	    mva #0 SSKCTL
+   306 5F18 A9 00 8D 0F D2	    mva #0 SKCTL
+   307 5F1D A9 00 8D 1F D2	    mva #0 SKCTL+$10        ; make sure a potential 2nd pokey is cleared
    308
-   309 5F24 20 10 5E		    jsr wait_frame
+   309 5F22 20 0E 5E		    jsr wait_frame
    310
    311 				    ; Restart SKCTL. This starts all the poly counters
    312
-   313 5F27 A9 03 8D 32 02	    mva #3 SSKCTL
-   314 5F2C A9 03 8D 0F D2	    mva #3 SKCTL
+   313 5F25 A9 03 8D 32 02	    mva #3 SSKCTL
+   314 5F2A A9 03 8D 0F D2	    mva #3 SKCTL
    315
-   316 5F31 20 10 5E		    jsr wait_frame
+   316 5F2F 20 0E 5E		    jsr wait_frame
    317
    318 				    ; Except when there's a seconds pokey!! Its counters are not restarted.
    319 				    ; Its RANDOM should not change.
    320
-   321 5F34 AD 1A D2		    lda RANDOM+$10
-   322 5F37 CD 1A D2		    cmp RANDOM+$10
-   323 5F3A F0 05		    beq detected_stereo         ; so equal means there's a 2nd pokey
+   321 5F32 AD 1A D2		    lda RANDOM+$10
+   322 5F35 CD 1A D2		    cmp RANDOM+$10
+   323 5F38 F0 05		    beq detected_stereo         ; so equal means there's a 2nd pokey
    324
-   325 5F3C			detected_mono
-   326 5F3C A9 00 85 D8		    mva #0 stereo_pokey
-   327 5F40 60			    rts
+   325 5F3A			detected_mono
+   326 5F3A A9 00 85 D8		    mva #0 stereo_pokey
+   327 5F3E 60			    rts
    328
-   329 5F41			detected_stereo
-   330 5F41 A9 01 85 D8		    mva #1 stereo_pokey
-   331 5F45 A9 03 8D 1F D2	    mva #3 SKCTL+$10            ; start second pokey here
-   332 5F4A 60			    rts
+   329 5F3F			detected_stereo
+   330 5F3F A9 01 85 D8		    mva #1 stereo_pokey
+   331 5F43 A9 03 8D 1F D2	    mva #3 SKCTL+$10            ; start second pokey here
+   332 5F48 60			    rts
    333 				.endp
    334
-   335 5F4B			.proc clear_echo
-   336 5F4B A0 11		    ldy #(endecho-echobuffer)-1
-   337 5F4D			clear_echo_loop
-   338 5F4D A9 00 99 7A 5F	    mva #0 echobuffer,y
-   339 5F52 88 10 F8		    dey:bpl clear_echo_loop
-   340 5F55 60			    rts
+   335 5F49			.proc clear_echo
+   336 5F49 A0 11		    ldy #(endecho-echobuffer)-1
+   337 5F4B			clear_echo_loop
+   338 5F4B A9 00 99 78 5F	    mva #0 echobuffer,y
+   339 5F50 88 10 F8		    dey:bpl clear_echo_loop
+   340 5F53 60			    rts
    341 				.endp
    342
-   343 5F56			.proc shift_echo
-   344 5F56 A0 11		    ldy #(ECHO-echobuffer)-1+9
-   345 5F58			shift_loop
-   346 5F58 B9 71 5F 99 7A 5F	    mva SHADOW,y SHADOW+9,y
-   347 5F5E 88 10 F7		    dey:bpl shift_loop
-   348 5F61 60			    rts
+   343 5F54			.proc shift_echo
+   344 5F54 A0 11		    ldy #(ECHO-echobuffer)-1+9
+   345 5F56			shift_loop
+   346 5F56 B9 6F 5F 99 78 5F	    mva SHADOW,y SHADOW+9,y
+   347 5F5C 88 10 F7		    dey:bpl shift_loop
+   348 5F5F 60			    rts
    349 				.endp
    350
-   351 5F62			.proc music_off
-   352 5F62 A9 00		    lda #0
-   353 5F64 8D 72 5F		    sta shadow+1
-   354 5F67 8D 74 5F		    sta shadow+3
-   355 5F6A 8D 76 5F		    sta shadow+5
-   356 5F6D 8D 78 5F		    sta shadow+7
-   357 5F70 60			    rts
+   351 5F60			.proc music_off
+   352 5F60 A9 00		    lda #0
+   353 5F62 8D 70 5F		    sta shadow+1
+   354 5F65 8D 72 5F		    sta shadow+3
+   355 5F68 8D 74 5F		    sta shadow+5
+   356 5F6B 8D 76 5F		    sta shadow+7
+   357 5F6E 60			    rts
    358 				.endp
    359
-   360 5F71			SHADOW              ; shadow pokey
-   361 5F71 00 00 00 00 00 00 + :9 .byte 0
+   360 5F6F			SHADOW              ; shadow pokey
+   361 5F6F 00 00 00 00 00 00 + :9 .byte 0
    362
    363 				                    ; fake stereo effect:
    364 				                    ; 0*9 = small
@@ -2741,23 +2741,23 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    366 				                    ; 2*9 = big
    367 				                    ; >3 too big imho
    368
-   369 5F7A			echobuffer
-   370 = 5F7A			    .ds 1*9        ; total of echobuffer+ECHO MUST NOT exceed 128 bytes
+   369 5F78			echobuffer
+   370 = 5F78			    .ds 1*9        ; total of echobuffer+ECHO MUST NOT exceed 128 bytes
    371
-   372 5F83			ECHO
-   373 = 5F83			    .ds 9
-   374 5F8C			endecho
+   372 5F81			ECHO
+   373 = 5F81			    .ds 9
+   374 5F8A			endecho
    375
-   376 5F8C			normal_volume
-   377 5F8C-5FBD> 00 01 02 03 +     dta 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-   378 5F9C			half_volume
-   379 5F9C 00 01 01 02 02 03 +     dta 0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,7
-   380 5FAC			quarter_volume
-   381 5FAC 00 01 01 01 01 02 +     dta 0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4
+   376 5F8A			normal_volume
+   377 5F8A-5FBB> 00 01 02 03 +     dta 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+   378 5F9A			half_volume
+   379 5F9A 00 01 01 02 02 03 +     dta 0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,7
+   380 5FAA			quarter_volume
+   381 5FAA 00 01 01 01 01 02 +     dta 0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4
   1974
   1975 				; 4 KB
   1976 				; 128 x 32 bytes shapes
-  1977 5FBE			            .align $1000
+  1977 5FBC			            .align $1000
   1978 6000			pm_shapes
   1979 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
   1980
