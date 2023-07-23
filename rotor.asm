@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.8
+; Version 1.1.9
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -307,13 +307,22 @@ dli_menu
             sta COLBK
 
             ldx #0
-color_it            
+color_it1
+            lda menu_colpf2,x
+            sta WSYNC
+            sta COLPF2
+            inx
+            cpx #18
+            bne color_it1
+
+            ldx #0
+color_it2
             lda menu_colpf0,x
             sta WSYNC
             sta COLPF0
             inx
-            cpx #56
-            bne color_it
+            cpx #38
+            bne color_it2
 
             lda #0
             sta WSYNC
@@ -333,26 +342,31 @@ color_it
             pla
             rti
 
+menu_colpf2
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+            dta BASE_COLOR_P1
+
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+            dta BASE_COLOR_P2
+
+            dta 0,0
+
 menu_colpf0
-            dta 0,0
-            dta BASE_COLOR_P1+8
-            dta BASE_COLOR_P1+8
-            dta BASE_COLOR_P1+10
-            dta BASE_COLOR_P1+10
-            dta BASE_COLOR_P1+12
-            dta BASE_COLOR_P1+12
-
-            dta BASE_COLOR_P2+12
-            dta BASE_COLOR_P2+12
-            dta BASE_COLOR_P2+10
-            dta BASE_COLOR_P2+10
-            dta BASE_COLOR_P2+8
-            dta BASE_COLOR_P2+8
-            dta 0,0
-
 ;            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
 ;            dta $7c,$7c,$7a,$7a,$78,$78,0,0
-            dta 0,0,0,0
+            dta 0,0
             dta 0,14,14,12,10,8,6,0
             dta 0,14,14,12,10,8,6,0
             dta 0,14,14,12,10,8,6,0
@@ -1885,8 +1899,9 @@ menu_dl
 
 ; 64 scanlines
             dta $30
-            dta $47
+            dta $42
             dta a(menu_screen)
+            dta 2
             dta $30,6,6,6,$30,2,$30
 
 ; 60 lines
@@ -1914,7 +1929,12 @@ menu_dl
 
             .align $100
 menu_screen
-            dta d'     R O T O R      '
+            dta d'              '
+            dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
+            dta d'              '
+            dta d'              '
+            dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
+            dta d'              '
 
             dta d'  CONTROL:'
 driver_screen
