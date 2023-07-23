@@ -73,6 +73,11 @@ P1PL        = $d00d
 P2PL        = $d00e
 P3PL        = $d00f
 
+COLPM0      = $d012
+COLPM1      = $d013
+COLPM2      = $d014
+COLPM3      = $d015
+
 COLPF0      = $d016
 COLPF1      = $d017
 COLPF2      = $d018

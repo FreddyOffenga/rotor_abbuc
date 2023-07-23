@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.7
+; Version 1.1.8
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -12,9 +12,6 @@
 ; - the ball gets color of player to indicate who should catch it
 ; - when the ball hits the circle, the other player gets a point
 
-; TODO
-; - add color (pm?) in header for player ONE/TWO
-
 ; Optional for a later version:
 ; - add computer player(s)
 ; - add support for driving controllers
@@ -24,6 +21,10 @@
 ; color scheme
 BASE_COLOR_P1   = $50   ; purple
 BASE_COLOR_P2   = $b0   ; green
+
+HEADER_FG_COLOR = 14
+HEADER_P1_COLOR = BASE_COLOR_P1
+HEADER_P2_COLOR = BASE_COLOR_P2
 
 ; must be in decimal format, so $11 is 11
 MAX_SCORE   = $11
@@ -63,6 +64,9 @@ upper_margin    = 1
 left_margin     = 32
 
 music_toggle    = $80
+
+shadow_HPOSP0   = $81
+shadow_HPOSP1   = $82
 
 shape_ptr       = $84
 tmp_screen      = $86
@@ -254,6 +258,35 @@ _enter_loop                     ; accumulating multiply entry point (enter with 
             bcs _do_add
             bne _mul_loop
             rts
+
+; reset PM0/1 to playfield settings
+dli_header
+            pha
+
+            lda #8
+            sta COLPF1
+
+            lda shadow_HPOSP0
+            sta HPOSP0
+            lda shadow_HPOSP1
+            sta HPOSP1
+
+            lda #0
+            sta SIZEP0
+            sta SIZEP1
+
+            lda #BASE_COLOR_P1+10
+            sta COLPM0
+            lda #BASE_COLOR_P2+10
+            sta COLPM1
+
+            lda #<dli_menu
+            sta VDSLST
+            lda #>dli_menu
+            sta VDSLST+1
+
+            pla
+            rti
 
 dli_menu
             pha
@@ -464,9 +497,9 @@ no_spacebar
             jsr play_sound_bat
             jsr play_sound_edge
 
-            lda #<dli_menu
+            lda #<dli_header
             sta VDSLST
-            lda #>dli_menu
+            lda #>dli_header
             sta VDSLST+1
 
             lda #%00101110  ; enable P/M DMA
@@ -475,6 +508,11 @@ no_spacebar
             sta 77      ; attract off
             lda #>rotor_font
             sta 756
+
+            lda #$30
+            sta HPOSP0
+            lda #$b0
+            sta HPOSP1
 
 ; menu switching thingy
 
@@ -678,6 +716,21 @@ still_moving
             sta HITCLR
 
 exit_vbi
+
+; always set header stuff
+            lda #3
+            sta SIZEP0
+            sta SIZEP1
+
+; background in PM0/1 for header
+            lda #255
+            ldx #7
+fill_pm_header
+            sta p0_area,x
+            sta p1_area,x
+            dex
+            bpl fill_pm_header
+
             jmp $e462
 
 game_ends
@@ -688,7 +741,7 @@ start_sound_bat
             lda #10
             sta volume_hit_bat
             rts
-            
+
 play_sound_bat
             lda volume_hit_bat
             bmi silenced_bat
@@ -787,7 +840,7 @@ handle_player1
             lda player1_x
             clc
             adc #left_margin
-            sta HPOSP0
+            sta shadow_HPOSP0
             adc #8
             sta HPOSP2
             rts
@@ -808,7 +861,7 @@ handle_player2
             lda player2_x
             clc
             adc #left_margin
-            sta HPOSP1
+            sta shadow_HPOSP1
             adc #8
             sta HPOSP3
             rts
@@ -1652,7 +1705,7 @@ set_p
             sta p2_area,x
             sta p3_area,x
             inx
-            bpl set_p               
+            bpl set_p
 
             lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
             sta GPRIOR
@@ -1671,17 +1724,21 @@ set_p
 
 init_colors
             lda #BASE_COLOR_P1+10
-            sta PCOLR0
             sta PCOLR2
-
             lda #BASE_COLOR_P2+10
-            sta PCOLR1
             sta PCOLR3
             
             lda #0
             sta COLOR2
-            lda #8
+
+            lda #HEADER_FG_COLOR
             sta COLOR1
+
+            lda #HEADER_P1_COLOR
+            sta PCOLR0
+            lda #HEADER_P2_COLOR
+            sta PCOLR1
+
             rts
 
 previous_consol
@@ -1735,7 +1792,7 @@ magnitudes_hi = *+256
 
             .align $400
 display_list
-            dta $42
+            dta $42+128         ; dli_header
             dta a(score_line)
 
 ; 102 x 40 = 4080 bytes            
@@ -1808,7 +1865,7 @@ score_p2    dta 0
             ;.align $400
             
 menu_dl
-            dta $42
+            dta $42+128         ; dli_header
             dta a(score_line)
             
             dta $4f
@@ -1824,7 +1881,7 @@ menu_dl
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
 
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$8f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$8f     ; dli_menu
 
 ; 64 scanlines
             dta $30
