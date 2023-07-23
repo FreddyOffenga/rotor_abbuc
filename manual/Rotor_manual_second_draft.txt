@@ -4,7 +4,7 @@ made for the Abbuc Software Contest 2023
 CREDITS
 Code by:		F#READY
 Stereo music by:	Ivop
-Graphics by:		F#READY, Ivop and Fred_M
+Graphics by:		Ivop and Fred_M
 
 REQUIREMENTS
 Atari 8-bit computer with at least 64k of RAM | PAL only
@@ -24,5 +24,6 @@ START: start the game
 OPTION: abort the current game
 SELECT: starting speed of the game (1: slowest, 4: fastest)
 SPACEBAR: turn background music on/off
-Enjoy the game and become the International Rotor Champion!
+
+Enjoy this game and become the International Rotor Champion!
 
