@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.10
+; Version 1.1.11
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -211,11 +211,16 @@ any_key_pressed
 
             jsr music_init
 
+            lda #<display_list
+            sta SDLSTL
+            lda #>display_list
+            sta SDLSTH
+
 ; start vbi
-            
+
             lda #$c0
             sta NMIEN
-            
+
             lda #7          ; sets VVBLKI
             ldy #<vbi
             ldx #>vbi
@@ -292,10 +297,7 @@ dli_menu
             pha
             txa
             pha
-            
-            lda #0
-            sta WSYNC
-            sta COLBK
+
             lda #$0e
             sta WSYNC
             sta COLBK
@@ -585,11 +587,13 @@ check_mode_menu
 no_level_select
             sta previous_consol
 
-wait_depressed        
-            lda #<menu_dl
-            sta SDLSTL
-            lda #>menu_dl
-            sta SDLSTH
+wait_depressed
+            lda #1      ; dl jump
+            sta menu_dl_hook
+            lda #<menu_dl_part
+            sta menu_dl_hook+1
+            lda #>menu_dl_part
+            sta menu_dl_hook+2
 
 ; detect/show controller type (used for both players)
             jsr detect_show_driver
@@ -648,10 +652,11 @@ main_game_vbi
             jmp exit_vbi            
 
 no_restart
-            lda #<display_list
-            sta SDLSTL
-            lda #>display_list
-            sta SDLSTH
+; remove menu hook
+            lda #$0f        ; dl gfx 8
+            sta menu_dl_hook
+            sta menu_dl_hook+1
+            sta menu_dl_hook+2
 
             lda M0PL
             sta mp_collision
@@ -1811,7 +1816,6 @@ display_list
 
 ; 102 x 40 = 4080 bytes            
             dta $4f
-dl_screen_ptr1
             dta a(screen_mem1)
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1825,15 +1829,28 @@ dl_screen_ptr1
 
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+menu_dl_hook
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
 
             dta $0f,$0f,$0f,$0f,$0f,$0f
 
-; 102 x 40 = 4080 bytes
+; 42 + 60 = 102, 4080 bytes
             dta $4f
-dl_screen_ptr2
             dta a(screen_mem2)
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+
+            dta $0f,$0f
+
+; 60 lines
+menu_dl_end
+            dta $4f
+            dta a(screen_mem2+(42*SCREEN_WIDTH))
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
@@ -1842,14 +1859,7 @@ dl_screen_ptr2
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
-            dta $0f,$0f,$0f,$0f,$0f,$0f
+            dta $0f,$0f,$0f,$0f
 
 ; 20 x 40 = 800
             dta $4f
@@ -1860,6 +1870,16 @@ dl_screen_ptr2
             
             dta $41
             dta a(display_list)
+
+menu_dl_part
+            dta 128 ; dli_menu
+            dta $20
+            dta $42
+            dta a(menu_screen)
+            dta 2
+            dta $30,6,6,6,$30,2,$10
+            dta $01 ; jump
+            dta a(menu_dl_end)
 
 score_line  
             dta d' ONE '
@@ -1875,57 +1895,6 @@ score_chars_p2
 
 score_p1    dta 0
 score_p2    dta 0
-
-            ;.align $400
-            
-menu_dl
-            dta $42+128         ; dli_header
-            dta a(score_line)
-            
-            dta $4f
-            dta a(screen_mem1)
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$8f     ; dli_menu
-
-; 64 scanlines
-            dta $30
-            dta $42
-            dta a(menu_screen)
-            dta 2
-            dta $30,6,6,6,$30,2,$30
-
-; 60 lines
-            dta $4f
-            dta a(screen_mem2+(42*SCREEN_WIDTH))
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f
-
-; 20 lines            
-            dta $4f
-            dta a(screen_mem3)
-            dta $0f,$0f,$0f            
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-            dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
-           
-            dta $41
-            dta a(menu_dl)
 
             .align $100
 menu_screen
