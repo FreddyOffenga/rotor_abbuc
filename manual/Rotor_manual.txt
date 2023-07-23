@@ -1,20 +1,20 @@
-Rotor
+ROTOR
 made for the Abbuc Software Contest 2023
 
 CREDITS
 Code by:		F#READY
-Stereo music by:	Ivop
-Graphics by:		Ivop, Fred_M
+Stereo music by:	IvoP
+Graphics by:		IvoP, Fred_M
 
 REQUIREMENTS
-Atari 8-bit computer with at least 64k of RAM | PAL only
+Atari XL/XE computer with at least 64k of RAM | PAL only
 
 INTRODUCTION
 The year is 2102, workmen in the underground mines occasionally use their drone tools (rotors) to entertain themselves. Using the rotors, they compete against each other by bouncing a colored ball in the pipelines to decide who will be National Rotor Champion. To participate you and a co-worker must take control of a rotor bat and try to defeat each other.
 
-You will become the Rotor champion when you have scored 11 points. To score a point you have to use your skills to make sure your opponent misses the ball. If you hit the ball squarely with the center of the rotor bat, the ball moves straight across the field; an "edge hit" will cause the ball to angle. The color of the ball shows which player has to hit the ball with his bat.
+You will become the rotor champion when you have scored 11 points. To score a point you have to use your skills to make sure your opponent misses the ball. If you hit the ball squarely with the center of the rotor bat, the ball moves straight across the field; an "edge hit" will cause the ball to angle. The color of the ball shows which player has to hit the ball with his bat.
 
-Remember that Rotor is about having fun and, of course showing off your quick reactions, skill and superior tactics to your friends. 
+Remember that Rotor is about having fun and, of course, showing off your quick reactions, skill and superior tactics to your friends. 
 
 GAME CONTROLS
 Rotor is a two player game and can be played with joysticks or paddles. The game will detect automatically which controllers are connected. Please note that paddles must be connected to port 1 of the Atari computer and different types of controllers cannot be mixed.
