@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.11
+; Version 1.1.12
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -29,21 +29,22 @@ HEADER_P2_COLOR = BASE_COLOR_P2
 ; must be in decimal format, so $11 is 11
 MAX_SCORE   = $11
 
-pm_area     = $1000
+pm_area     = $0c00
 msl_area    = pm_area+$180
 p0_area     = pm_area+$200
 p1_area     = pm_area+$280
 p2_area     = pm_area+$300
 p3_area     = pm_area+$380
 
-; $1400 .. $1500 is overwritten, bug?
-
 ; outer tables 256 for 360 degrees
-outer_x_256     = $1600
-outer_y_256     = $1700
+outer_x_256     = $1000
+outer_y_256     = $1100
 
-screen_y_lo     = $1800
-screen_y_hi     = $1900
+screen_y_lo     = $1200
+screen_y_hi     = $1300
+
+pm_shape_lo     = $1400 ; 128 bytes
+pm_shape_hi     = $1480 ; 128 bytes
 
 WIDTH           = 320
 HEIGHT          = 192
@@ -149,7 +150,9 @@ line_end_y  = $fd  ; byte
 
             icl 'intro.asm'
 
-            org $2400            
+; real data is loaded at $2000 ($1700+$900)
+            org $1700
+            icl 'music\rotor_music\rotor_music.asm'
 
             icl 'lib/drivers.inc'       
 main
@@ -1933,13 +1936,6 @@ driver_text_hi
             dta >paddle_text
             dta >driving_text
             dta >computer_text
-
-            .align $100
-pm_shape_lo .ds 128
-pm_shape_hi .ds 128
-
-            .align $100
-            icl 'music\rotor_music\rotor_music.asm'
 
 ; 4 KB
 ; 128 x 32 bytes shapes

@@ -13,11 +13,10 @@ wait_black
 
             ini first_screen_off
 
-            org $2000
+            org $9800
 rotor_font
             ins 'font\rotor.fnt'
 
-            org $610
 intro_main
             lda #<dl_intro
             sta $230
