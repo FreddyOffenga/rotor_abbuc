@@ -161,24 +161,27 @@ move_done
 ; check fire button (paddle uses left/right stick as fire button)
 ; A=0 not pressed, 1=pressed
 
-is_fire_button
+is_both_buttons
             lda driver_mode
             cmp #1
             beq check_paddle_fire
-            
-            lda STRIG0,x
+
+            lda STRIG0
+            bne not_both_stick
+            lda STRIG1
+            bne not_both_stick
+
+both_fire
+            lda #1
             rts
 
 check_paddle_fire
             lda STICK0
-            cmp #7
-            beq paddle_fire
-            cmp #11
-            beq paddle_fire
+            cmp #3
+            beq both_fire
+
+not_both_stick
             lda #0
-            rts
-paddle_fire
-            lda #1
             rts
 
 ; paddle driver

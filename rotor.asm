@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-20
-; Version 1.1.13
+; Version 1.1.14
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -68,6 +68,8 @@ music_toggle    = $80
 
 shadow_HPOSP0   = $81
 shadow_HPOSP1   = $82
+
+fire_buttons    = $83
 
 shape_ptr       = $84
 tmp_screen      = $86
@@ -549,9 +551,12 @@ go_menu_mode
             bne check_mode_menu
 
 no_option_pressed
-            cmp #6
-            bne check_mode_menu
-            
+            cmp #6            
+            beq reset_game
+
+            jsr is_both_buttons
+            beq check_mode_menu
+
 ; reset game
 
 reset_game
@@ -1915,7 +1920,7 @@ driver_screen
             dta d'      LEVEL '
 level_char            
             dta d'1       '
-            dta d'     START to play | OPTION for menu    '*
+            dta d'     START or FIRE buttons to play!     '*
 stick_text
             dta d'STICK   '
 paddle_text
