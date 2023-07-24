@@ -3,7 +3,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
      1 				; R O T O R
      2
      3 				; F#READY, 2023-07-20
-     4 				; Version 1.1.12
+     4 				; Version 1.1.14
      5 				; For ABBUC Software Competition 2023
      6
      7 				; Casual game for two players
@@ -177,86 +177,88 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     69 = 0081			shadow_HPOSP0   = $81
     70 = 0082			shadow_HPOSP1   = $82
     71
-    72 = 0084			shape_ptr       = $84
-    73 = 0086			tmp_screen      = $86
-    74
-    75 = 008C			mode_menu       = $8c
+    72 = 0083			fire_buttons    = $83
+    73
+    74 = 0084			shape_ptr       = $84
+    75 = 0086			tmp_screen      = $86
     76
-    77 = 008D			volume_hit_bat  = $8d
-    78 = 008E			volume_hit_edge = $8e
-    79
-    80 				; player vars must be in sequence for zp,x indexing
+    77 = 008C			mode_menu       = $8c
+    78
+    79 = 008D			volume_hit_bat  = $8d
+    80 = 008E			volume_hit_edge = $8e
     81
-    82 = 0090			p1_shape        = $90
-    83 = 0091			p2_shape        = $91
-    84
-    85 = 0094			player1_x       = $94
-    86 = 0095			player2_x       = $95
-    87
-    88 = 0098			player1_y       = $98
-    89 = 0099			player2_y       = $99
-    90
-    91 = 009C			p1_angle        = $9c
-    92 = 009D			p2_angle        = $9d
-    93
-    94 = 00A0			mp_collision    = $a0
-    95 = 00A1			in_collision    = $a1
-    96 = 00A2			player_nr_hit   = $a2       ; which player hit the ball? 1=player1, 2=player2
-    97 = 00A3			edge_delay      = $a3
-    98 = 00A4			bat_collision_delay = $a4
-    99
-   100 				; ball vars
-   101 = 00A6			ball_current_x      = $a6
-   102 = 00A7			ball_current_y      = $a7
-   103 = 00AA			ball_angle_start    = $aa
-   104 = 00AB			ball_angle_end      = $ab
-   105 = 00AC			ball_speed          = $ac
-   106
-   107 = 00B0			tmp_angle1          = $b0
-   108 = 00B1			tmp_angle2          = $b1
-   109 = 00B2			add_to_angle        = $b2
-   110 = 00B3			angle_diff_bat      = $b3
-   111 = 00B4			tmp_angle_direction = $b4
-   112 = 00B5			player_turn         = $b5       ; who's turn to hit ball? 1=player1, 2=player2
-   113 = 00B6			game_restart        = $b6
-   114 = 00B7			tmp_angle_diff      = $b7
-   115 = 00B8			magnitude           = $b8       ; word
-   116
-   117 				; $c0 - $df free for music
+    82 				; player vars must be in sequence for zp,x indexing
+    83
+    84 = 0090			p1_shape        = $90
+    85 = 0091			p2_shape        = $91
+    86
+    87 = 0094			player1_x       = $94
+    88 = 0095			player2_x       = $95
+    89
+    90 = 0098			player1_y       = $98
+    91 = 0099			player2_y       = $99
+    92
+    93 = 009C			p1_angle        = $9c
+    94 = 009D			p2_angle        = $9d
+    95
+    96 = 00A0			mp_collision    = $a0
+    97 = 00A1			in_collision    = $a1
+    98 = 00A2			player_nr_hit   = $a2       ; which player hit the ball? 1=player1, 2=player2
+    99 = 00A3			edge_delay      = $a3
+   100 = 00A4			bat_collision_delay = $a4
+   101
+   102 				; ball vars
+   103 = 00A6			ball_current_x      = $a6
+   104 = 00A7			ball_current_y      = $a7
+   105 = 00AA			ball_angle_start    = $aa
+   106 = 00AB			ball_angle_end      = $ab
+   107 = 00AC			ball_speed          = $ac
+   108
+   109 = 00B0			tmp_angle1          = $b0
+   110 = 00B1			tmp_angle2          = $b1
+   111 = 00B2			add_to_angle        = $b2
+   112 = 00B3			angle_diff_bat      = $b3
+   113 = 00B4			tmp_angle_direction = $b4
+   114 = 00B5			player_turn         = $b5       ; who's turn to hit ball? 1=player1, 2=player2
+   115 = 00B6			game_restart        = $b6
+   116 = 00B7			tmp_angle_diff      = $b7
+   117 = 00B8			magnitude           = $b8       ; word
    118
-   119 = 00E0			_divisor    = $e0   ; word
-   120 = 00E2			_dividend   = $e2   ; word
-   121 = 00E4			_remainder  = $e4   ; word
-   122 = 00E2			_result     = _dividend         ; save memory by reusing divident to store the result
-   123
-   124 = 00E6			tmp_x1      = $e6   ; byte
-   125 = 00E7			tmp_y1      = $e7   ; byte
-   126 = 00E8			tmp_x2      = $e8   ; byte
-   127 = 00E9			tmp_y2      = $e9   ; byte
-   128
-   129 = 00EA			current_x   = $ea  ; word  8.8 fixed point
-   130 = 00EC			current_y   = $ec  ; word  8.8 fixed point
-   131
-   132 = 00EE			step_x      = $ee  ; word  8.8 fixed point
-   133 = 00F0			step_y      = $f0  ; word  8.8 fixed point
-   134
-   135 = 00F2			tmp_dx      = $f2  ; byte
-   136 = 00F3			tmp_dy      = $f3  ; byte
-   137
-   138 = 00F6			_multiplicand   = $f6   ; word
-   139 = 00F8			_multiplier     = $f8   ; byte
-   140
-   141 				; direction:
-   142 				; 0 : x1<x2 or y1<y2 = add
-   143 				; 1 ; x1>=y2 or y1>=y2 = subtract
-   144
-   145 = 00FA			dir_x       = $fa  ; byte
-   146 = 00FB			dir_y       = $fb  ; byte
-   147
-   148 = 00FC			line_end_x  = $fc  ; byte
-   149 = 00FD			line_end_y  = $fd  ; byte
-   150
-   151 				            icl 'intro.asm'
+   119 				; $c0 - $df free for music
+   120
+   121 = 00E0			_divisor    = $e0   ; word
+   122 = 00E2			_dividend   = $e2   ; word
+   123 = 00E4			_remainder  = $e4   ; word
+   124 = 00E2			_result     = _dividend         ; save memory by reusing divident to store the result
+   125
+   126 = 00E6			tmp_x1      = $e6   ; byte
+   127 = 00E7			tmp_y1      = $e7   ; byte
+   128 = 00E8			tmp_x2      = $e8   ; byte
+   129 = 00E9			tmp_y2      = $e9   ; byte
+   130
+   131 = 00EA			current_x   = $ea  ; word  8.8 fixed point
+   132 = 00EC			current_y   = $ec  ; word  8.8 fixed point
+   133
+   134 = 00EE			step_x      = $ee  ; word  8.8 fixed point
+   135 = 00F0			step_y      = $f0  ; word  8.8 fixed point
+   136
+   137 = 00F2			tmp_dx      = $f2  ; byte
+   138 = 00F3			tmp_dy      = $f3  ; byte
+   139
+   140 = 00F6			_multiplicand   = $f6   ; word
+   141 = 00F8			_multiplier     = $f8   ; byte
+   142
+   143 				; direction:
+   144 				; 0 : x1<x2 or y1<y2 = add
+   145 				; 1 ; x1>=y2 or y1>=y2 = subtract
+   146
+   147 = 00FA			dir_x       = $fa  ; byte
+   148 = 00FB			dir_y       = $fb  ; byte
+   149
+   150 = 00FC			line_end_x  = $fc  ; byte
+   151 = 00FD			line_end_y  = $fd  ; byte
+   152
+   153 				            icl 'intro.asm'
 Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_abbuc\intro.asm
      1 				; rotor intro 
      2
@@ -353,10 +355,10 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     93 A010-BE0F> 00 00 00 00 +             ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
     94
     95 02E2-02E3> 00 9C		            ini intro_main
-   152
-   153 				; real data is loaded at $2000 ($1700+$900)
-   154 BE10			            org $1700
-   155 1700			            icl 'music\rotor_music\rotor_music.asm'
+   154
+   155 				; real data is loaded at $2000 ($1700+$900)
+   156 BE10			            org $1700
+   157 1700			            icl 'music\rotor_music\rotor_music.asm'
 Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_abbuc\music\rotor_music\rotor_music.asm
      1 				;
      2 				; LZSS Compressed SAP player for 16 match bits
@@ -739,8 +741,8 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    379 329A 00 01 01 02 02 03 +     dta 0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,7
    380 32AA			quarter_volume
    381 32AA 00 01 01 01 01 02 +     dta 0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4
-   156
-   157 32BC			            icl 'lib/drivers.inc'       
+   158
+   159 32BC			            icl 'lib/drivers.inc'       
 Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_abbuc\lib\drivers.inc
      1 				; drivers for game
      2 				; F#READY
@@ -760,7 +762,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     16 = 3400			            .ds 1
     17
     18 3401			driver_init
-    19 3401-3D3C> A9 00		            lda #0  ; stick
+    19 3401-3D43> A9 00		            lda #0  ; stick
     20 3403 8D BE 32		            sta driver_mode
     21
     22 3406 AD 70 02		            lda PADDL0
@@ -862,7 +864,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    118
    119 3480			driver_lo
    120 3480 88			            dta <driver_stick
-   121 3481 CD			            dta <driver_paddle
+   121 3481 CF			            dta <driver_paddle
    122 3482 88			            dta <driver_stick
    123 3483 88			            dta <driver_stick
    124
@@ -905,1840 +907,1847 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    161 				; check fire button (paddle uses left/right stick as fire button)
    162 				; A=0 not pressed, 1=pressed
    163
-   164 34B1			is_fire_button
+   164 34B1			is_both_buttons
    165 34B1 AD BE 32		            lda driver_mode
    166 34B4 C9 01		            cmp #1
-   167 34B6 F0 04		            beq check_paddle_fire
-   168 				            
-   169 34B8 BD 84 02		            lda STRIG0,x
-   170 34BB 60			            rts
-   171
-   172 34BC			check_paddle_fire
-   173 34BC AD 78 02		            lda STICK0
-   174 34BF C9 07		            cmp #7
-   175 34C1 F0 07		            beq paddle_fire
-   176 34C3 C9 0B		            cmp #11
-   177 34C5 F0 03		            beq paddle_fire
-   178 34C7 A9 00		            lda #0
-   179 34C9 60			            rts
-   180 34CA			paddle_fire
-   181 34CA A9 01		            lda #1
-   182 34CC 60			            rts
-   183
-   184 				; paddle driver
-   185 				            
-   186 34CD			driver_paddle            
-   187 34CD BD 70 02		            lda PADDL0,x
-   188 34D0 A8			            tay
-   189 34D1 B9 00 33		            lda paddle_to_256,y
-   190 34D4 5D DA 34		            eor paddle_offsets,x
-   191 34D7 95 9C		            sta p1_angle,x
-   192 34D9 60			            rts
-   193
-   194 34DA			paddle_offsets
-   195 34DA 00 00		            dta 0,0
-   158 34DC			main
-   159 34DC A9 FF		            lda #255
-   160 34DE 8D FC 02		            sta 764
-   161
-   162 				; for fast loaders, wait 10 seconds or continue with spacebar
-   163 34E1			wait_a_sec
-   164 34E1 AD FC 02		            lda 764
-   165 34E4 C9 FF		            cmp #255
-   166 34E6 D0 06		            bne any_key_pressed
-   167
-   168 34E8 A5 13		            lda 19
-   169 34EA C9 02		            cmp #2
-   170 34EC 90 F3		            bcc wait_a_sec
-   171
-   172 34EE			any_key_pressed
-   173 34EE A9 FF		            lda #255
-   174 34F0 8D FC 02		            sta 764
-   175
-   176 				; start the game!
-   177 				 
-   178 34F3 A9 00		            lda #0
-   179 34F5 8D 2F 02		            sta SDMCTL
-   180 34F8 85 B6		            sta game_restart
-   181
-   182 34FA A9 80		            lda #128
-   183 34FC 85 8D		            sta volume_hit_bat
-   184 34FE 85 8E		            sta volume_hit_edge
-   185 3500 85 80		            sta music_toggle        ; 128 = on, 0 = off
+   167 34B6 F0 0D		            beq check_paddle_fire
+   168
+   169 34B8 AD 84 02		            lda STRIG0
+   170 34BB D0 0F		            bne not_both_stick
+   171 34BD AD 85 02		            lda STRIG1
+   172 34C0 D0 0A		            bne not_both_stick
+   173
+   174 34C2			both_fire            
+   175 34C2 A9 01		            lda #1
+   176 34C4 60			            rts
+   177
+   178 34C5			check_paddle_fire
+   179 34C5 AD 78 02		            lda STICK0
+   180 34C8 C9 03		            cmp #3
+   181 34CA F0 F6		            beq both_fire
+   182
+   183 34CC			not_both_stick
+   184 34CC A9 00		            lda #0
+   185 34CE 60			            rts
    186
-   187 3502 A9 01		            lda #1
-   188 3504 8D 44 02		            sta 580 ; coldstart
-   189
-   190 3507 20 01 34		            jsr driver_init
+   187 				; paddle driver
+   188 				            
+   189 34CF			driver_paddle            
+   190 34CF BD 70 02		            lda PADDL0,x
+   191 34D2 A8			            tay
+   192 34D3 B9 00 33		            lda paddle_to_256,y
+   193 34D6 5D DC 34		            eor paddle_offsets,x
+   194 34D9 95 9C		            sta p1_angle,x
+   195 34DB 60			            rts
+   196
+   197 34DC			paddle_offsets
+   198 34DC 00 00		            dta 0,0
+   160 34DE			main
+   161 34DE A9 FF		            lda #255
+   162 34E0 8D FC 02		            sta 764
+   163
+   164 				; for fast loaders, wait 10 seconds or continue with spacebar
+   165 34E3			wait_a_sec
+   166 34E3 AD FC 02		            lda 764
+   167 34E6 C9 FF		            cmp #255
+   168 34E8 D0 06		            bne any_key_pressed
+   169
+   170 34EA A5 13		            lda 19
+   171 34EC C9 02		            cmp #2
+   172 34EE 90 F3		            bcc wait_a_sec
+   173
+   174 34F0			any_key_pressed
+   175 34F0 A9 FF		            lda #255
+   176 34F2 8D FC 02		            sta 764
+   177
+   178 				; start the game!
+   179 				 
+   180 34F5 A9 00		            lda #0
+   181 34F7 8D 2F 02		            sta SDMCTL
+   182 34FA 85 B6		            sta game_restart
+   183
+   184 34FC A9 80		            lda #128
+   185 34FE 85 8D		            sta volume_hit_bat
+   186 3500 85 8E		            sta volume_hit_edge
+   187 3502 85 80		            sta music_toggle        ; 128 = on, 0 = off
+   188
+   189 3504 A9 01		            lda #1
+   190 3506 8D 44 02		            sta 580 ; coldstart
    191
-   192 350A 20 42 3A		            jsr make_shape_index
-   193 				 
-   194 350D 20 72 3A		            jsr make_outer_256
-   195 				            
-   196 3510 20 2D 36		            jsr make_screen_y_tab
-   197
-   198 3513 20 78 36		            jsr invert_backdrop
+   192 3509 20 01 34		            jsr driver_init
+   193
+   194 350C 20 49 3A		            jsr make_shape_index
+   195 				 
+   196 350F 20 79 3A		            jsr make_outer_256
+   197 				            
+   198 3512 20 2F 36		            jsr make_screen_y_tab
    199
-   200 3516 20 E2 3A		            jsr reset_score
-   201 3519 20 B0 3A		            jsr show_score_p1
-   202 351C 20 C9 3A		            jsr show_score_p2
-   203 				                       
-   204 351F 20 CD 3C		            jsr init_sprites
-   205 3522 20 F9 3C		            jsr init_colors
-   206
-   207 				; init. game vars
-   208 3525 A2 00		            ldx #INIT_LEVEL_INDEX
-   209 3527 8E 19 3D		            stx current_level_index
-   210 352A 20 1E 3D		            jsr set_level_ball_speed
-   211
-   212 352D A9 01		            lda #1
-   213 352F 85 8C		            sta mode_menu           ; start with menu
-   214
-   215 3531 20 6E 31		            jsr music_init
+   200 3515 20 7A 36		            jsr invert_backdrop
+   201
+   202 3518 20 E9 3A		            jsr reset_score
+   203 351B 20 B7 3A		            jsr show_score_p1
+   204 351E 20 D0 3A		            jsr show_score_p2
+   205 				                       
+   206 3521 20 D4 3C		            jsr init_sprites
+   207 3524 20 00 3D		            jsr init_colors
+   208
+   209 				; init. game vars
+   210 3527 A2 00		            ldx #INIT_LEVEL_INDEX
+   211 3529 8E 20 3D		            stx current_level_index
+   212 352C 20 25 3D		            jsr set_level_ball_speed
+   213
+   214 352F A9 01		            lda #1
+   215 3531 85 8C		            sta mode_menu           ; start with menu
    216
-   217 3534 A9 00		            lda #<display_list
-   218 3536 8D 30 02		            sta SDLSTL
-   219 3539 A9 4C		            lda #>display_list
-   220 353B 8D 31 02		            sta SDLSTH
-   221
-   222 				; start vbi
+   217 3533 20 6E 31		            jsr music_init
+   218
+   219 3536 A9 00		            lda #<display_list
+   220 3538 8D 30 02		            sta SDLSTL
+   221 353B A9 4C		            lda #>display_list
+   222 353D 8D 31 02		            sta SDLSTH
    223
-   224 353E A9 C0		            lda #$c0
-   225 3540 8D 0E D4		            sta NMIEN
-   226
-   227 3543 A9 07		            lda #7          ; sets VVBLKI
-   228 3545 A0 BD		            ldy #<vbi
-   229 3547 A2 36		            ldx #>vbi
-   230 3549 20 5C E4		            jsr $e45c       ; SETVBV
-   231
-   232 				; we're just sitting here while VBI does all the work :)
-   233 354C 4C 4C 35		loop        jmp loop
-   234
-   235 				;------------------------
-   236 				; 8bit * 8bit = 16bit multiply
-   237 				; By White Flame
-   238 				; Multiplies _multiplicand by _multiplier and stores result in .A (low byte, also in .X) and .Y (high byte)
-   239 				; uses extra zp var _multiplicand+1
-   240
-   241 				; .X and .Y get clobbered.  Change the tax/txa and tay/tya to stack or zp storage if this is an issue.
-   242 				;  idea to store 16-bit accumulator in .X and .Y instead of zp from bogax
-   243
-   244 				; In this version, both inputs must be unsigned
-   245 				; Remove the noted line to turn this into a 16bit(either) * 8bit(unsigned) = 16bit multiply.
-   246
-   247 354F			_multi8
-   248 354F A9 00		            lda #$00
-   249 3551 A8			            tay
-   250 				            ;sty _multiplicand+1          ; remove this line for 16*8=16bit multiply
-   251 3552 F0 0D		            beq _enter_loop
-   252 3554			_do_add
-   253 3554 18			            clc
-   254 3555 65 F6		            adc _multiplicand
-   255 3557 AA			            tax
-   256
-   257 3558 98			            tya
-   258 3559 65 F7		            adc _multiplicand+1
-   259 355B A8			            tay
-   260 355C 8A			            txa
-   261 355D			_mul_loop
-   262 355D 06 F6		            asl _multiplicand
-   263 355F 26 F7		            rol _multiplicand+1
-   264 3561			_enter_loop                     ; accumulating multiply entry point (enter with .A=lo, .Y=hi)
-   265 3561 46 F8		            lsr _multiplier
-   266 3563 B0 EF		            bcs _do_add
-   267 3565 D0 F6		            bne _mul_loop
-   268 3567 60			            rts
-   269
-   270 				; reset PM0/1 to playfield settings
-   271 3568			dli_header
-   272 3568 48			            pha
-   273
-   274 3569 A9 08		            lda #8
-   275 356B 8D 17 D0		            sta COLPF1
-   276
-   277 356E A5 81		            lda shadow_HPOSP0
-   278 3570 8D 00 D0		            sta HPOSP0
-   279 3573 A5 82		            lda shadow_HPOSP1
-   280 3575 8D 01 D0		            sta HPOSP1
-   281
-   282 3578 A9 00		            lda #0
-   283 357A 8D 08 D0		            sta SIZEP0
-   284 357D 8D 09 D0		            sta SIZEP1
-   285
-   286 3580 A9 5A		            lda #BASE_COLOR_P1+10
-   287 3582 8D 12 D0		            sta COLPM0
-   288 3585 A9 BA		            lda #BASE_COLOR_P2+10
-   289 3587 8D 13 D0		            sta COLPM1
-   290
-   291 358A A9 96		            lda #<dli_menu
-   292 358C 8D 00 02		            sta VDSLST
-   293 358F A9 35		            lda #>dli_menu
-   294 3591 8D 01 02		            sta VDSLST+1
-   295
-   296 3594 68			            pla
-   297 3595 40			            rti
-   298
-   299 3596			dli_menu
-   300 3596 48			            pha
-   301 3597 8A			            txa
+   224 				; start vbi
+   225
+   226 3540 A9 C0		            lda #$c0
+   227 3542 8D 0E D4		            sta NMIEN
+   228
+   229 3545 A9 07		            lda #7          ; sets VVBLKI
+   230 3547 A0 BF		            ldy #<vbi
+   231 3549 A2 36		            ldx #>vbi
+   232 354B 20 5C E4		            jsr $e45c       ; SETVBV
+   233
+   234 				; we're just sitting here while VBI does all the work :)
+   235 354E 4C 4E 35		loop        jmp loop
+   236
+   237 				;------------------------
+   238 				; 8bit * 8bit = 16bit multiply
+   239 				; By White Flame
+   240 				; Multiplies _multiplicand by _multiplier and stores result in .A (low byte, also in .X) and .Y (high byte)
+   241 				; uses extra zp var _multiplicand+1
+   242
+   243 				; .X and .Y get clobbered.  Change the tax/txa and tay/tya to stack or zp storage if this is an issue.
+   244 				;  idea to store 16-bit accumulator in .X and .Y instead of zp from bogax
+   245
+   246 				; In this version, both inputs must be unsigned
+   247 				; Remove the noted line to turn this into a 16bit(either) * 8bit(unsigned) = 16bit multiply.
+   248
+   249 3551			_multi8
+   250 3551 A9 00		            lda #$00
+   251 3553 A8			            tay
+   252 				            ;sty _multiplicand+1          ; remove this line for 16*8=16bit multiply
+   253 3554 F0 0D		            beq _enter_loop
+   254 3556			_do_add
+   255 3556 18			            clc
+   256 3557 65 F6		            adc _multiplicand
+   257 3559 AA			            tax
+   258
+   259 355A 98			            tya
+   260 355B 65 F7		            adc _multiplicand+1
+   261 355D A8			            tay
+   262 355E 8A			            txa
+   263 355F			_mul_loop
+   264 355F 06 F6		            asl _multiplicand
+   265 3561 26 F7		            rol _multiplicand+1
+   266 3563			_enter_loop                     ; accumulating multiply entry point (enter with .A=lo, .Y=hi)
+   267 3563 46 F8		            lsr _multiplier
+   268 3565 B0 EF		            bcs _do_add
+   269 3567 D0 F6		            bne _mul_loop
+   270 3569 60			            rts
+   271
+   272 				; reset PM0/1 to playfield settings
+   273 356A			dli_header
+   274 356A 48			            pha
+   275
+   276 356B A9 08		            lda #8
+   277 356D 8D 17 D0		            sta COLPF1
+   278
+   279 3570 A5 81		            lda shadow_HPOSP0
+   280 3572 8D 00 D0		            sta HPOSP0
+   281 3575 A5 82		            lda shadow_HPOSP1
+   282 3577 8D 01 D0		            sta HPOSP1
+   283
+   284 357A A9 00		            lda #0
+   285 357C 8D 08 D0		            sta SIZEP0
+   286 357F 8D 09 D0		            sta SIZEP1
+   287
+   288 3582 A9 5A		            lda #BASE_COLOR_P1+10
+   289 3584 8D 12 D0		            sta COLPM0
+   290 3587 A9 BA		            lda #BASE_COLOR_P2+10
+   291 3589 8D 13 D0		            sta COLPM1
+   292
+   293 358C A9 98		            lda #<dli_menu
+   294 358E 8D 00 02		            sta VDSLST
+   295 3591 A9 35		            lda #>dli_menu
+   296 3593 8D 01 02		            sta VDSLST+1
+   297
+   298 3596 68			            pla
+   299 3597 40			            rti
+   300
+   301 3598			dli_menu
    302 3598 48			            pha
-   303
-   304 3599 A9 0E		            lda #$0e
-   305 359B 8D 0A D4		            sta WSYNC
-   306 359E 8D 1A D0		            sta COLBK
-   307 35A1 A9 0A		            lda #$0a
-   308 35A3 8D 0A D4		            sta WSYNC
-   309 35A6 8D 1A D0		            sta COLBK
-   310 35A9 A9 00		            lda #0
-   311 35AB 8D 0A D4		            sta WSYNC
-   312 35AE 8D 1A D0		            sta COLBK
-   313
-   314 35B1 A2 00		            ldx #0
-   315 35B3			color_it1
-   316 35B3 BD F5 35		            lda menu_colpf2,x
-   317 35B6 8D 0A D4		            sta WSYNC
-   318 35B9 8D 18 D0		            sta COLPF2
-   319 35BC E8			            inx
-   320 35BD E0 12		            cpx #18
-   321 35BF D0 F2		            bne color_it1
-   322
-   323 35C1 A2 00		            ldx #0
-   324 35C3			color_it2
-   325 35C3 BD 07 36		            lda menu_colpf0,x
-   326 35C6 8D 0A D4		            sta WSYNC
-   327 35C9 8D 16 D0		            sta COLPF0
-   328 35CC E8			            inx
-   329 35CD E0 26		            cpx #38
-   330 35CF D0 F2		            bne color_it2
-   331
-   332 35D1 A9 00		            lda #0
-   333 35D3 8D 0A D4		            sta WSYNC
-   334 35D6 8D 1A D0		            sta COLBK
-   335 35D9 A9 0A		            lda #$0a
-   336 35DB 8D 0A D4		            sta WSYNC
-   337 35DE 8D 1A D0		            sta COLBK
-   338 35E1 A9 0E		            lda #$0e
-   339 35E3 8D 0A D4		            sta WSYNC
-   340 35E6 8D 1A D0		            sta COLBK
-   341 35E9 A9 00		            lda #0
-   342 35EB 8D 0A D4		            sta WSYNC
-   343 35EE 8D 1A D0		            sta COLBK
-   344 				            
-   345 35F1 68			            pla
-   346 35F2 AA			            tax
+   303 3599 8A			            txa
+   304 359A 48			            pha
+   305
+   306 359B A9 0E		            lda #$0e
+   307 359D 8D 0A D4		            sta WSYNC
+   308 35A0 8D 1A D0		            sta COLBK
+   309 35A3 A9 0A		            lda #$0a
+   310 35A5 8D 0A D4		            sta WSYNC
+   311 35A8 8D 1A D0		            sta COLBK
+   312 35AB A9 00		            lda #0
+   313 35AD 8D 0A D4		            sta WSYNC
+   314 35B0 8D 1A D0		            sta COLBK
+   315
+   316 35B3 A2 00		            ldx #0
+   317 35B5			color_it1
+   318 35B5 BD F7 35		            lda menu_colpf2,x
+   319 35B8 8D 0A D4		            sta WSYNC
+   320 35BB 8D 18 D0		            sta COLPF2
+   321 35BE E8			            inx
+   322 35BF E0 12		            cpx #18
+   323 35C1 D0 F2		            bne color_it1
+   324
+   325 35C3 A2 00		            ldx #0
+   326 35C5			color_it2
+   327 35C5 BD 09 36		            lda menu_colpf0,x
+   328 35C8 8D 0A D4		            sta WSYNC
+   329 35CB 8D 16 D0		            sta COLPF0
+   330 35CE E8			            inx
+   331 35CF E0 26		            cpx #38
+   332 35D1 D0 F2		            bne color_it2
+   333
+   334 35D3 A9 00		            lda #0
+   335 35D5 8D 0A D4		            sta WSYNC
+   336 35D8 8D 1A D0		            sta COLBK
+   337 35DB A9 0A		            lda #$0a
+   338 35DD 8D 0A D4		            sta WSYNC
+   339 35E0 8D 1A D0		            sta COLBK
+   340 35E3 A9 0E		            lda #$0e
+   341 35E5 8D 0A D4		            sta WSYNC
+   342 35E8 8D 1A D0		            sta COLBK
+   343 35EB A9 00		            lda #0
+   344 35ED 8D 0A D4		            sta WSYNC
+   345 35F0 8D 1A D0		            sta COLBK
+   346 				            
    347 35F3 68			            pla
-   348 35F4 40			            rti
-   349
-   350 35F5			menu_colpf2
-   351 35F5 50			            dta BASE_COLOR_P1
-   352 35F6 50			            dta BASE_COLOR_P1
+   348 35F4 AA			            tax
+   349 35F5 68			            pla
+   350 35F6 40			            rti
+   351
+   352 35F7			menu_colpf2
    353 35F7 50			            dta BASE_COLOR_P1
    354 35F8 50			            dta BASE_COLOR_P1
    355 35F9 50			            dta BASE_COLOR_P1
    356 35FA 50			            dta BASE_COLOR_P1
    357 35FB 50			            dta BASE_COLOR_P1
    358 35FC 50			            dta BASE_COLOR_P1
-   359
-   360 35FD B0			            dta BASE_COLOR_P2
-   361 35FE B0			            dta BASE_COLOR_P2
+   359 35FD 50			            dta BASE_COLOR_P1
+   360 35FE 50			            dta BASE_COLOR_P1
+   361
    362 35FF B0			            dta BASE_COLOR_P2
    363 3600 B0			            dta BASE_COLOR_P2
    364 3601 B0			            dta BASE_COLOR_P2
    365 3602 B0			            dta BASE_COLOR_P2
    366 3603 B0			            dta BASE_COLOR_P2
    367 3604 B0			            dta BASE_COLOR_P2
-   368
-   369 3605 00 00		            dta 0,0
+   368 3605 B0			            dta BASE_COLOR_P2
+   369 3606 B0			            dta BASE_COLOR_P2
    370
-   371 3607			menu_colpf0
-   372 				;            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
-   373 				;            dta $7c,$7c,$7a,$7a,$78,$78,0,0
-   374 3607 00 00		            dta 0,0
-   375 3609 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
-   376 3611 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
-   377 3619 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
-   378 3621 00 00 00 00		            dta 0,0,0,0
-   379 3625 00 00 00 00 00 00 +             dta 0,0,0,0,0,0,0,0
-   380
-   381 				; make pointers from y-position to screen memory
-   382 				; screen memory is 3 blocks
-   383 				; screen_mem1 : 102 lines, 4080 bytes
-   384 				; screen_mem2 : 102 lines, 4080 bytes
-   385 				; screen_mem3 :  20 lines,  800 bytes
-   386
-   387 362D			make_screen_y_tab
-   388 362D A9 00		            lda #<screen_mem1
-   389 362F 85 86		            sta tmp_screen
-   390 3631 A9 60		            lda #>screen_mem1
-   391 3633 85 87		            sta tmp_screen+1
-   392
-   393 3635 A2 00		            ldx #0
-   394 3637			fill_y_tab1
-   395 3637 20 60 36		            jsr store_y_line
-   396 363A E8			            inx
-   397 363B E0 66		            cpx #102
-   398 363D D0 F8		            bne fill_y_tab1
-   399
-   400 				; x = 102
-   401 363F A9 00		            lda #<screen_mem2
-   402 3641 85 86		            sta tmp_screen
-   403 3643 A9 70		            lda #>screen_mem2
-   404 3645 85 87		            sta tmp_screen+1
-   405
-   406 3647			fill_y_tab2
-   407 3647 20 60 36		            jsr store_y_line
-   408 364A E8			            inx
-   409 364B E0 CC		            cpx #204
-   410 364D D0 F8		            bne fill_y_tab2
-   411
-   412 364F A9 00		            lda #<screen_mem3
-   413 3651 85 86		            sta tmp_screen
-   414 3653 A9 80		            lda #>screen_mem3
-   415 3655 85 87		            sta tmp_screen+1
-   416
-   417 				; x = 204
-   418 3657			fill_y_tab3
-   419 3657 20 60 36		            jsr store_y_line
-   420 365A E8			            inx
-   421 365B E0 E0		            cpx #224
-   422 365D D0 F8		            bne fill_y_tab3
-   423 365F 60			            rts
-   424
-   425 3660			store_y_line
-   426 3660 A5 86		            lda tmp_screen
-   427 3662 9D 00 12		            sta screen_y_lo,x
-   428 3665 A5 87		            lda tmp_screen+1
-   429 3667 9D 00 13		            sta screen_y_hi,x
-   430 				            
-   431 366A A5 86		            lda tmp_screen
-   432 366C 18			            clc
-   433 366D 69 28		            adc #SCREEN_WIDTH
-   434 366F 85 86		            sta tmp_screen
-   435 3671 A5 87		            lda tmp_screen+1
-   436 3673 69 00		            adc #0
-   437 3675 85 87		            sta tmp_screen+1
-   438 3677 60			            rts
-   439
-   440 				; @todo invert backdrop image
-   441 				; now we have to do it here :P
-   442 3678			invert_backdrop
-   443 3678 A9 00		            lda #<screen_mem1
-   444 367A 85 86		            sta tmp_screen
-   445 367C A9 60		            lda #>screen_mem1
-   446 367E 85 87		            sta tmp_screen+1
-   447 				            
-   448 3680 A2 10		            ldx #16     ; 16 pages = 4K
-   449 3682 20 A0 36		            jsr do_x_pages
-   450 				           
-   451 3685 A9 00		            lda #<screen_mem2
-   452 3687 85 86		            sta tmp_screen
-   453 3689 A9 70		            lda #>screen_mem2
-   454 368B 85 87		            sta tmp_screen+1
-   455 				            
-   456 368D A2 10		            ldx #16     ; 16 pages = 4K
-   457 368F 20 A0 36		            jsr do_x_pages
-   458
-   459 3692 A9 00		            lda #<screen_mem3
-   460 3694 85 86		            sta tmp_screen
-   461 3696 A9 80		            lda #>screen_mem3
-   462 3698 85 87		            sta tmp_screen+1
-   463 				            
-   464 369A A2 04		            ldx #4     ; 4 pages = 1K
-   465 369C 20 A0 36		            jsr do_x_pages
-   466 369F 60			            rts
-   467
-   468 				; invert x pages, starting from tmp_screen
+   371 3607 00 00		            dta 0,0
+   372
+   373 3609			menu_colpf0
+   374 				;            dta 0,0,$28,$28,$2a,$2a,$2c,$2c
+   375 				;            dta $7c,$7c,$7a,$7a,$78,$78,0,0
+   376 3609 00 00		            dta 0,0
+   377 360B 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
+   378 3613 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
+   379 361B 00 0E 0E 0C 0A 08 +             dta 0,14,14,12,10,8,6,0
+   380 3623 00 00 00 00		            dta 0,0,0,0
+   381 3627 00 00 00 00 00 00 +             dta 0,0,0,0,0,0,0,0
+   382
+   383 				; make pointers from y-position to screen memory
+   384 				; screen memory is 3 blocks
+   385 				; screen_mem1 : 102 lines, 4080 bytes
+   386 				; screen_mem2 : 102 lines, 4080 bytes
+   387 				; screen_mem3 :  20 lines,  800 bytes
+   388
+   389 362F			make_screen_y_tab
+   390 362F A9 00		            lda #<screen_mem1
+   391 3631 85 86		            sta tmp_screen
+   392 3633 A9 60		            lda #>screen_mem1
+   393 3635 85 87		            sta tmp_screen+1
+   394
+   395 3637 A2 00		            ldx #0
+   396 3639			fill_y_tab1
+   397 3639 20 62 36		            jsr store_y_line
+   398 363C E8			            inx
+   399 363D E0 66		            cpx #102
+   400 363F D0 F8		            bne fill_y_tab1
+   401
+   402 				; x = 102
+   403 3641 A9 00		            lda #<screen_mem2
+   404 3643 85 86		            sta tmp_screen
+   405 3645 A9 70		            lda #>screen_mem2
+   406 3647 85 87		            sta tmp_screen+1
+   407
+   408 3649			fill_y_tab2
+   409 3649 20 62 36		            jsr store_y_line
+   410 364C E8			            inx
+   411 364D E0 CC		            cpx #204
+   412 364F D0 F8		            bne fill_y_tab2
+   413
+   414 3651 A9 00		            lda #<screen_mem3
+   415 3653 85 86		            sta tmp_screen
+   416 3655 A9 80		            lda #>screen_mem3
+   417 3657 85 87		            sta tmp_screen+1
+   418
+   419 				; x = 204
+   420 3659			fill_y_tab3
+   421 3659 20 62 36		            jsr store_y_line
+   422 365C E8			            inx
+   423 365D E0 E0		            cpx #224
+   424 365F D0 F8		            bne fill_y_tab3
+   425 3661 60			            rts
+   426
+   427 3662			store_y_line
+   428 3662 A5 86		            lda tmp_screen
+   429 3664 9D 00 12		            sta screen_y_lo,x
+   430 3667 A5 87		            lda tmp_screen+1
+   431 3669 9D 00 13		            sta screen_y_hi,x
+   432 				            
+   433 366C A5 86		            lda tmp_screen
+   434 366E 18			            clc
+   435 366F 69 28		            adc #SCREEN_WIDTH
+   436 3671 85 86		            sta tmp_screen
+   437 3673 A5 87		            lda tmp_screen+1
+   438 3675 69 00		            adc #0
+   439 3677 85 87		            sta tmp_screen+1
+   440 3679 60			            rts
+   441
+   442 				; @todo invert backdrop image
+   443 				; now we have to do it here :P
+   444 367A			invert_backdrop
+   445 367A A9 00		            lda #<screen_mem1
+   446 367C 85 86		            sta tmp_screen
+   447 367E A9 60		            lda #>screen_mem1
+   448 3680 85 87		            sta tmp_screen+1
+   449 				            
+   450 3682 A2 10		            ldx #16     ; 16 pages = 4K
+   451 3684 20 A2 36		            jsr do_x_pages
+   452 				           
+   453 3687 A9 00		            lda #<screen_mem2
+   454 3689 85 86		            sta tmp_screen
+   455 368B A9 70		            lda #>screen_mem2
+   456 368D 85 87		            sta tmp_screen+1
+   457 				            
+   458 368F A2 10		            ldx #16     ; 16 pages = 4K
+   459 3691 20 A2 36		            jsr do_x_pages
+   460
+   461 3694 A9 00		            lda #<screen_mem3
+   462 3696 85 86		            sta tmp_screen
+   463 3698 A9 80		            lda #>screen_mem3
+   464 369A 85 87		            sta tmp_screen+1
+   465 				            
+   466 369C A2 04		            ldx #4     ; 4 pages = 1K
+   467 369E 20 A2 36		            jsr do_x_pages
+   468 36A1 60			            rts
    469
-   470 36A0			do_x_pages
-   471 36A0 A0 00		            ldy #0
-   472 36A2			do_page
-   473 36A2 B1 86		            lda (tmp_screen),y
-   474 36A4 49 FF		            eor #$ff
-   475 36A6 91 86		            sta (tmp_screen),y
-   476 36A8 C8			            iny
-   477 36A9 D0 F7		            bne do_page 
-   478
-   479 36AB E6 87		            inc tmp_screen+1
-   480 36AD CA			            dex
-   481 36AE D0 F2		            bne do_page
-   482 36B0 60			            rts
-   483
-   484 36B1			turn_color_ball
-   485 36B1 A6 B5		            ldx player_turn
-   486 36B3 BD BA 36		            lda color_turn,x
-   487 36B6 8D C7 02		            sta COLOR3
-   488 36B9 60			            rts
-   489 				            
-   490 36BA 00 56 B6		color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6                           
-   491
-   492 				; A, X, Y are already saved by the OS
-   493 36BD			vbi
-   494 36BD 20 DC 31		            jsr copy_shadow
-   495
-   496 36C0 A5 80		            lda music_toggle
-   497 36C2 F0 03		            beq skip_music
-   498 36C4 20 97 31		            jsr play_song
-   499 36C7			skip_music
-   500
-   501 				; toggle music on/off with spacebar
-   502 36C7 AD FC 02		            lda 764
-   503 36CA C9 21		            cmp #$21
-   504 36CC D0 10		            bne no_spacebar
-   505 36CE A5 80		            lda music_toggle
-   506 36D0 49 80		            eor #128
-   507 36D2 85 80		            sta music_toggle
-   508 36D4 D0 03		            bne music_turned_on
-   509 36D6 20 60 32		            jsr music_off
-   510
-   511 36D9			music_turned_on
-   512 36D9 A9 FF		            lda #255
-   513 36DB 8D FC 02		            sta 764
-   514
-   515 36DE			no_spacebar
-   516 36DE 20 4B 38		            jsr play_sound_bat
-   517 36E1 20 69 38		            jsr play_sound_edge
-   518
-   519 36E4 A9 68		            lda #<dli_header
-   520 36E6 8D 00 02		            sta VDSLST
-   521 36E9 A9 35		            lda #>dli_header
-   522 36EB 8D 01 02		            sta VDSLST+1
-   523
-   524 36EE A9 2E		            lda #%00101110  ; enable P/M DMA
-   525 36F0 8D 2F 02		            sta SDMCTL
-   526 36F3 A9 00		            lda #0
-   527 36F5 85 4D		            sta 77      ; attract off
-   528 36F7 A9 98		            lda #>rotor_font
-   529 36F9 8D F4 02		            sta 756
-   530
-   531 36FC A9 30		            lda #$30
-   532 36FE 8D 00 D0		            sta HPOSP0
-   533 3701 A9 B0		            lda #$b0
-   534 3703 8D 01 D0		            sta HPOSP1
-   535
-   536 				; menu switching thingy
+   470 				; invert x pages, starting from tmp_screen
+   471
+   472 36A2			do_x_pages
+   473 36A2 A0 00		            ldy #0
+   474 36A4			do_page
+   475 36A4 B1 86		            lda (tmp_screen),y
+   476 36A6 49 FF		            eor #$ff
+   477 36A8 91 86		            sta (tmp_screen),y
+   478 36AA C8			            iny
+   479 36AB D0 F7		            bne do_page 
+   480
+   481 36AD E6 87		            inc tmp_screen+1
+   482 36AF CA			            dex
+   483 36B0 D0 F2		            bne do_page
+   484 36B2 60			            rts
+   485
+   486 36B3			turn_color_ball
+   487 36B3 A6 B5		            ldx player_turn
+   488 36B5 BD BC 36		            lda color_turn,x
+   489 36B8 8D C7 02		            sta COLOR3
+   490 36BB 60			            rts
+   491 				            
+   492 36BC 00 56 B6		color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6                           
+   493
+   494 				; A, X, Y are already saved by the OS
+   495 36BF			vbi
+   496 36BF 20 DC 31		            jsr copy_shadow
+   497
+   498 36C2 A5 80		            lda music_toggle
+   499 36C4 F0 03		            beq skip_music
+   500 36C6 20 97 31		            jsr play_song
+   501 36C9			skip_music
+   502
+   503 				; toggle music on/off with spacebar
+   504 36C9 AD FC 02		            lda 764
+   505 36CC C9 21		            cmp #$21
+   506 36CE D0 10		            bne no_spacebar
+   507 36D0 A5 80		            lda music_toggle
+   508 36D2 49 80		            eor #128
+   509 36D4 85 80		            sta music_toggle
+   510 36D6 D0 03		            bne music_turned_on
+   511 36D8 20 60 32		            jsr music_off
+   512
+   513 36DB			music_turned_on
+   514 36DB A9 FF		            lda #255
+   515 36DD 8D FC 02		            sta 764
+   516
+   517 36E0			no_spacebar
+   518 36E0 20 52 38		            jsr play_sound_bat
+   519 36E3 20 70 38		            jsr play_sound_edge
+   520
+   521 36E6 A9 6A		            lda #<dli_header
+   522 36E8 8D 00 02		            sta VDSLST
+   523 36EB A9 35		            lda #>dli_header
+   524 36ED 8D 01 02		            sta VDSLST+1
+   525
+   526 36F0 A9 2E		            lda #%00101110  ; enable P/M DMA
+   527 36F2 8D 2F 02		            sta SDMCTL
+   528 36F5 A9 00		            lda #0
+   529 36F7 85 4D		            sta 77      ; attract off
+   530 36F9 A9 98		            lda #>rotor_font
+   531 36FB 8D F4 02		            sta 756
+   532
+   533 36FE A9 30		            lda #$30
+   534 3700 8D 00 D0		            sta HPOSP0
+   535 3703 A9 B0		            lda #$b0
+   536 3705 8D 01 D0		            sta HPOSP1
    537
-   538 3706 AD 1F D0		            lda CONSOL
-   539 3709 C9 03		            cmp #3
-   540 370B D0 0C		            bne no_option_pressed
-   541
-   542 370D			go_menu_mode            
-   543 370D 20 FA 31		            jsr music_normal_volume
-   544 				            
-   545 3710 20 AB 39		            jsr wipe_ball
+   538 				; menu switching thingy
+   539
+   540 3708 AD 1F D0		            lda CONSOL
+   541 370B C9 03		            cmp #3
+   542 370D D0 0C		            bne no_option_pressed
+   543
+   544 370F			go_menu_mode            
+   545 370F 20 FA 31		            jsr music_normal_volume
    546 				            
-   547 3713 A9 01		            lda #1
-   548 3715 85 8C		            sta mode_menu
-   549 3717 D0 12		            bne check_mode_menu
-   550
-   551 3719			no_option_pressed
-   552 3719 C9 06		            cmp #6
-   553 371B D0 0E		            bne check_mode_menu
-   554 				            
-   555 				; reset game
-   556
-   557 371D			reset_game
-   558 371D 20 05 32		            jsr music_low_volume
-   559
-   560 3720 20 AB 39		            jsr wipe_ball
-   561 				            
-   562 3723 A9 01		            lda #1
-   563 3725 85 B6		            sta game_restart
-   564
-   565 3727 A9 00		            lda #0
-   566 3729 85 8C		            sta mode_menu
-   567
-   568 372B			check_mode_menu
-   569 372B A5 8C		            lda mode_menu
-   570 372D F0 56		            beq main_game_vbi
-   571
-   572 				; within menu vbi
-   573 				            
-   574 372F AD 1F D0		            lda CONSOL
-   575 3732 C9 05		            cmp #5          ; select
-   576 3734 D0 18		            bne no_level_select
-   577 				            
-   578 3736 AD 18 3D		            lda previous_consol
-   579 3739 C9 05		            cmp #5
-   580 373B F0 14		            beq wait_depressed
-   581 				            
-   582 373D 20 2D 3D		            jsr increase_level
-   583 3740 AE 19 3D		            ldx current_level_index
-   584 3743 20 1E 3D		            jsr set_level_ball_speed            
-   585
-   586 3746 A9 05		            lda #5
-   587 3748 8D 18 3D		            sta previous_consol
-   588 374B 4C 51 37		            jmp wait_depressed
-   589
-   590 374E			no_level_select
-   591 374E 8D 18 3D		            sta previous_consol
-   592
-   593 3751			wait_depressed
-   594 3751 A9 01		            lda #1      ; dl jump
-   595 3753 8D 55 4C		            sta menu_dl_hook
-   596 3756 A9 EE		            lda #<menu_dl_part
-   597 3758 8D 56 4C		            sta menu_dl_hook+1
-   598 375B A9 4C		            lda #>menu_dl_part
-   599 375D 8D 57 4C		            sta menu_dl_hook+2
-   600
-   601 				; detect/show controller type (used for both players)
-   602 3760 20 6C 37		            jsr detect_show_driver
-   603
-   604 3763 20 B8 38		            jsr handle_player1
-   605 3766 20 D0 38		            jsr handle_player2
+   547 3712 20 B2 39		            jsr wipe_ball
+   548 				            
+   549 3715 A9 01		            lda #1
+   550 3717 85 8C		            sta mode_menu
+   551 3719 D0 17		            bne check_mode_menu
+   552
+   553 371B			no_option_pressed
+   554 371B C9 06		            cmp #6
+   555 				            ;bne check_mode_menu            
+   556 371D F0 05		            beq reset_game
+   557
+   558 371F 20 B1 34		            jsr is_both_buttons
+   559 3722 F0 0E		            beq check_mode_menu
+   560
+   561 				; reset game
+   562
+   563 3724			reset_game
+   564 3724 20 05 32		            jsr music_low_volume
+   565
+   566 3727 20 B2 39		            jsr wipe_ball
+   567 				            
+   568 372A A9 01		            lda #1
+   569 372C 85 B6		            sta game_restart
+   570
+   571 372E A9 00		            lda #0
+   572 3730 85 8C		            sta mode_menu
+   573
+   574 3732			check_mode_menu
+   575 3732 A5 8C		            lda mode_menu
+   576 3734 F0 56		            beq main_game_vbi
+   577
+   578 				; within menu vbi
+   579 				            
+   580 3736 AD 1F D0		            lda CONSOL
+   581 3739 C9 05		            cmp #5          ; select
+   582 373B D0 18		            bne no_level_select
+   583 				            
+   584 373D AD 1F 3D		            lda previous_consol
+   585 3740 C9 05		            cmp #5
+   586 3742 F0 14		            beq wait_depressed
+   587 				            
+   588 3744 20 34 3D		            jsr increase_level
+   589 3747 AE 20 3D		            ldx current_level_index
+   590 374A 20 25 3D		            jsr set_level_ball_speed            
+   591
+   592 374D A9 05		            lda #5
+   593 374F 8D 1F 3D		            sta previous_consol
+   594 3752 4C 58 37		            jmp wait_depressed
+   595
+   596 3755			no_level_select
+   597 3755 8D 1F 3D		            sta previous_consol
+   598
+   599 3758			wait_depressed
+   600 3758 A9 01		            lda #1      ; dl jump
+   601 375A 8D 55 4C		            sta menu_dl_hook
+   602 375D A9 EE		            lda #<menu_dl_part
+   603 375F 8D 56 4C		            sta menu_dl_hook+1
+   604 3762 A9 4C		            lda #>menu_dl_part
+   605 3764 8D 57 4C		            sta menu_dl_hook+2
    606
-   607 3769 4C 28 38		            jmp exit_vbi
-   608
-   609 				; X = port/driver to detect
-   610 376C			detect_show_driver
-   611 376C 20 3B 34		            jsr driver_detect
-   612 376F A8			            tay
-   613 3770 B9 D4 4E		            lda driver_text_lo,y
-   614 3773 85 86		            sta tmp_screen
-   615 3775 B9 D8 4E		            lda driver_text_hi,y
-   616 3778 85 87		            sta tmp_screen+1
-   617
-   618 377A A0 07		            ldy #7
-   619 377C			show_driv
-   620 377C B1 86		            lda (tmp_screen),y
-   621 377E 99 5A 4E		            sta driver_screen,y
-   622 3781 88			            dey
-   623 3782 10 F8		            bpl show_driv
-   624 3784 60			            rts
-   625
-   626 				; main game vbi
-   627 3785			main_game_vbi
-   628 3785 A5 B6		            lda game_restart
-   629 3787 F0 2C		            beq no_restart
-   630
-   631 				; restart game
-   632 				            
-   633 3789 A9 00		            lda #0
-   634 378B 85 B6		            sta game_restart
-   635 				            
-   636 378D 20 E2 3A		            jsr reset_score
-   637 3790 20 B0 3A		            jsr show_score_p1
-   638 3793 20 C9 3A		            jsr show_score_p2
-   639
-   640 3796 A6 9C		            ldx p1_angle
-   641 3798 86 AA		            stx ball_angle_start
-   642 379A 20 09 39		            jsr ball_to_start_position
-   643 379D 20 18 39		            jsr prepare_ball_end_position
-   644
-   645 37A0 A9 00		            lda #0
-   646 37A2 85 A0		            sta mp_collision
-   647 37A4 85 A1		            sta in_collision
-   648 37A6 85 A3		            sta edge_delay
-   649 37A8 8D 1E D0		            sta HITCLR
+   607 				; detect/show controller type (used for both players)
+   608 3767 20 73 37		            jsr detect_show_driver
+   609
+   610 376A 20 BF 38		            jsr handle_player1
+   611 376D 20 D7 38		            jsr handle_player2
+   612
+   613 3770 4C 2F 38		            jmp exit_vbi
+   614
+   615 				; X = port/driver to detect
+   616 3773			detect_show_driver
+   617 3773 20 3B 34		            jsr driver_detect
+   618 3776 A8			            tay
+   619 3777 B9 D4 4E		            lda driver_text_lo,y
+   620 377A 85 86		            sta tmp_screen
+   621 377C B9 D8 4E		            lda driver_text_hi,y
+   622 377F 85 87		            sta tmp_screen+1
+   623
+   624 3781 A0 07		            ldy #7
+   625 3783			show_driv
+   626 3783 B1 86		            lda (tmp_screen),y
+   627 3785 99 5A 4E		            sta driver_screen,y
+   628 3788 88			            dey
+   629 3789 10 F8		            bpl show_driv
+   630 378B 60			            rts
+   631
+   632 				; main game vbi
+   633 378C			main_game_vbi
+   634 378C A5 B6		            lda game_restart
+   635 378E F0 2C		            beq no_restart
+   636
+   637 				; restart game
+   638 				            
+   639 3790 A9 00		            lda #0
+   640 3792 85 B6		            sta game_restart
+   641 				            
+   642 3794 20 E9 3A		            jsr reset_score
+   643 3797 20 B7 3A		            jsr show_score_p1
+   644 379A 20 D0 3A		            jsr show_score_p2
+   645
+   646 379D A6 9C		            ldx p1_angle
+   647 379F 86 AA		            stx ball_angle_start
+   648 37A1 20 10 39		            jsr ball_to_start_position
+   649 37A4 20 1F 39		            jsr prepare_ball_end_position
    650
-   651 37AB A9 02		            lda #2
-   652 37AD 85 B5		            sta player_turn
-   653
-   654 37AF 20 B1 36		            jsr turn_color_ball
-   655 37B2 4C 28 38		            jmp exit_vbi            
+   651 37A7 A9 00		            lda #0
+   652 37A9 85 A0		            sta mp_collision
+   653 37AB 85 A1		            sta in_collision
+   654 37AD 85 A3		            sta edge_delay
+   655 37AF 8D 1E D0		            sta HITCLR
    656
-   657 37B5			no_restart
-   658 				; remove menu hook
-   659 37B5 A9 0F		            lda #$0f        ; dl gfx 8
-   660 37B7 8D 55 4C		            sta menu_dl_hook
-   661 37BA 8D 56 4C		            sta menu_dl_hook+1
-   662 37BD 8D 57 4C		            sta menu_dl_hook+2
-   663
-   664 37C0 AD 08 D0		            lda M0PL
-   665 37C3 85 A0		            sta mp_collision
-   666 37C5 AD 09 D0		            lda M1PL
-   667 37C8 05 A0		            ora mp_collision
-   668 37CA 85 A0		            sta mp_collision
-   669 				 
-   670 37CC 20 B8 38		            jsr handle_player1
-   671 37CF 20 D0 38		            jsr handle_player2
-   672
-   673 				; handle ball
-   674
-   675 37D2 20 AB 39		            jsr wipe_ball         
-   676
-   677 				; Check ball collision with bat
+   657 37B2 A9 02		            lda #2
+   658 37B4 85 B5		            sta player_turn
+   659
+   660 37B6 20 B3 36		            jsr turn_color_ball
+   661 37B9 4C 2F 38		            jmp exit_vbi            
+   662
+   663 37BC			no_restart
+   664 				; remove menu hook
+   665 37BC A9 0F		            lda #$0f        ; dl gfx 8
+   666 37BE 8D 55 4C		            sta menu_dl_hook
+   667 37C1 8D 56 4C		            sta menu_dl_hook+1
+   668 37C4 8D 57 4C		            sta menu_dl_hook+2
+   669
+   670 37C7 AD 08 D0		            lda M0PL
+   671 37CA 85 A0		            sta mp_collision
+   672 37CC AD 09 D0		            lda M1PL
+   673 37CF 05 A0		            ora mp_collision
+   674 37D1 85 A0		            sta mp_collision
+   675 				 
+   676 37D3 20 BF 38		            jsr handle_player1
+   677 37D6 20 D7 38		            jsr handle_player2
    678
-   679 37D5 A5 A4		            lda bat_collision_delay
-   680 37D7 F0 05		            beq check_allowed
-   681 37D9 C6 A4		            dec bat_collision_delay
-   682 37DB 4C F5 37		            jmp move_one
-   683
-   684 37DE			check_allowed
-   685 37DE A5 A0		            lda mp_collision
-   686 37E0 F0 0F		            beq reset_in_collision
-   687
-   688 37E2 A5 A1		            lda in_collision
-   689 37E4 D0 0F		            bne no_first_hit
-   690
-   691 37E6 E6 A1		            inc in_collision            
-   692 37E8 20 45 39		            jsr bounce_bat_ball 
-   693 				            
-   694 37EB 20 46 38		            jsr start_sound_bat          
-   695 				            
-   696 37EE 4C F5 37		            jmp move_one
-   697 				            
-   698 37F1			reset_in_collision
-   699 37F1 A9 00		            lda #0
-   700 37F3 85 A1		            sta in_collision        
-   701
-   702 37F5			move_one
-   703 37F5			no_first_hit
-   704 37F5 20 34 3C		            jsr move_current_xy
-   705 37F8 F0 1B		            beq still_moving
-   706
-   707 				; edge detected
-   708
-   709 37FA 20 64 38		            jsr start_sound_edge
-   710
-   711 37FD A5 AB		            lda ball_angle_end
-   712 37FF 85 AA		            sta ball_angle_start
-   713
-   714 3801 20 3C 39		            jsr ball_current_to_start_position
-   715 3804 20 18 39		            jsr prepare_ball_end_position
+   679 				; handle ball
+   680
+   681 37D9 20 B2 39		            jsr wipe_ball         
+   682
+   683 				; Check ball collision with bat
+   684
+   685 37DC A5 A4		            lda bat_collision_delay
+   686 37DE F0 05		            beq check_allowed
+   687 37E0 C6 A4		            dec bat_collision_delay
+   688 37E2 4C FC 37		            jmp move_one
+   689
+   690 37E5			check_allowed
+   691 37E5 A5 A0		            lda mp_collision
+   692 37E7 F0 0F		            beq reset_in_collision
+   693
+   694 37E9 A5 A1		            lda in_collision
+   695 37EB D0 0F		            bne no_first_hit
+   696
+   697 37ED E6 A1		            inc in_collision            
+   698 37EF 20 4C 39		            jsr bounce_bat_ball 
+   699 				            
+   700 37F2 20 4D 38		            jsr start_sound_bat          
+   701 				            
+   702 37F5 4C FC 37		            jmp move_one
+   703 				            
+   704 37F8			reset_in_collision
+   705 37F8 A9 00		            lda #0
+   706 37FA 85 A1		            sta in_collision        
+   707
+   708 37FC			move_one
+   709 37FC			no_first_hit
+   710 37FC 20 3B 3C		            jsr move_current_xy
+   711 37FF F0 1B		            beq still_moving
+   712
+   713 				; edge detected
+   714
+   715 3801 20 6B 38		            jsr start_sound_edge
    716
-   717 3807 20 84 38		            jsr update_score
-   718 380A D0 34		            bne game_ends
+   717 3804 A5 AB		            lda ball_angle_end
+   718 3806 85 AA		            sta ball_angle_start
    719
-   720 				; switch turns
-   721 380C A5 B5		            lda player_turn
-   722 380E 49 03		            eor #3              ; 1 => 2, 2 => 1
-   723 3810 85 B5		            sta player_turn
-   724 3812 20 B1 36		            jsr turn_color_ball
+   720 3808 20 43 39		            jsr ball_current_to_start_position
+   721 380B 20 1F 39		            jsr prepare_ball_end_position
+   722
+   723 380E 20 8B 38		            jsr update_score
+   724 3811 D0 34		            bne game_ends
    725
-   726 3815			still_moving
-   727 3815 A5 EB		            lda current_x+1
-   728 3817 85 A6		            sta ball_current_x
-   729 3819 A5 ED		            lda current_y+1
-   730 381B 85 A7		            sta ball_current_y
+   726 				; switch turns
+   727 3813 A5 B5		            lda player_turn
+   728 3815 49 03		            eor #3              ; 1 => 2, 2 => 1
+   729 3817 85 B5		            sta player_turn
+   730 3819 20 B3 36		            jsr turn_color_ball
    731
-   732 381D 20 C0 39		            jsr show_ball
-   733
-   734 3820 A9 00		            lda #0
-   735 3822 8D 18 D0		            sta $d018           
-   736
-   737 				; anything in A to clear collisions
-   738 3825 8D 1E D0		            sta HITCLR
+   732 381C			still_moving
+   733 381C A5 EB		            lda current_x+1
+   734 381E 85 A6		            sta ball_current_x
+   735 3820 A5 ED		            lda current_y+1
+   736 3822 85 A7		            sta ball_current_y
+   737
+   738 3824 20 C7 39		            jsr show_ball
    739
-   740 3828			exit_vbi
-   741
-   742 				; always set header stuff
-   743 3828 A9 03		            lda #3
-   744 382A 8D 08 D0		            sta SIZEP0
-   745 382D 8D 09 D0		            sta SIZEP1
-   746
-   747 				; background in PM0/1 for header
-   748 3830 A9 FF		            lda #255
-   749 3832 A2 07		            ldx #7
-   750 3834			fill_pm_header
-   751 3834 9D 00 0E		            sta p0_area,x
-   752 3837 9D 80 0E		            sta p1_area,x
-   753 383A CA			            dex
-   754 383B 10 F7		            bpl fill_pm_header
-   755
-   756 383D 4C 62 E4		            jmp $e462
-   757
-   758 3840			game_ends
-   759 3840 20 FA 31		            jsr music_normal_volume
-   760 3843 4C 62 E4		            jmp $e462            
+   740 3827 A9 00		            lda #0
+   741 3829 8D 18 D0		            sta $d018           
+   742
+   743 				; anything in A to clear collisions
+   744 382C 8D 1E D0		            sta HITCLR
+   745
+   746 382F			exit_vbi
+   747
+   748 				; always set header stuff
+   749 382F A9 03		            lda #3
+   750 3831 8D 08 D0		            sta SIZEP0
+   751 3834 8D 09 D0		            sta SIZEP1
+   752
+   753 				; background in PM0/1 for header
+   754 3837 A9 FF		            lda #255
+   755 3839 A2 07		            ldx #7
+   756 383B			fill_pm_header
+   757 383B 9D 00 0E		            sta p0_area,x
+   758 383E 9D 80 0E		            sta p1_area,x
+   759 3841 CA			            dex
+   760 3842 10 F7		            bpl fill_pm_header
    761
-   762 3846			start_sound_bat
-   763 3846 A9 0A		            lda #10
-   764 3848 85 8D		            sta volume_hit_bat
-   765 384A 60			            rts
-   766
-   767 384B			play_sound_bat
-   768 384B A5 8D		            lda volume_hit_bat
-   769 384D 30 14		            bmi silenced_bat
-   770
-   771 384F A5 B5		            lda player_turn
-   772 3851 0A			            asl
-   773 3852 0A			            asl
-   774 3853 69 30		            adc #$30
-   775 3855 E5 B3		            sbc angle_diff_bat
-   776 3857 8D 73 32		            sta SHADOW+4    ; $d204
-   777 385A A5 8D		            lda volume_hit_bat
-   778 385C 09 A0		            ora #$a0
-   779 385E 8D 74 32		            sta SHADOW+5    ; $d205
-   780 3861 C6 8D		            dec volume_hit_bat
-   781 3863			silenced_bat
-   782 3863 60			            rts
-   783
-   784 3864			start_sound_edge
-   785 3864 A9 04		            lda #4
-   786 3866 85 8E		            sta volume_hit_edge
-   787 3868 60			            rts
-   788
-   789 3869			play_sound_edge
-   790 3869 A5 8E		            lda volume_hit_edge
-   791 386B 30 16		            bmi silenced_edge
-   792 386D D0 06		            bne no_silenced_edge
-   793 386F 8D 74 32		            sta SHADOW+5    ; $d205
-   794 3872 C6 8E		            dec volume_hit_edge
-   795 3874 60			            rts            
-   796
-   797 3875			no_silenced_edge
-   798 3875 A9 08		            lda #$08
-   799 3877 8D 73 32		            sta SHADOW+4    ; $d204
-   800 387A A5 8E		            lda volume_hit_edge
-   801 387C 09 26		            ora #$26
-   802 387E 8D 74 32		            sta SHADOW+5    ; $d205
-   803 3881 C6 8E		            dec volume_hit_edge
-   804 3883			silenced_edge
-   805 3883 60			            rts
-   806
-   807 				; Update score
-   808 				; Score > max score, then exit A = 1, otherwise A = 0
-   809
-   810 3884			update_score
-   811 3884 A5 B5		            lda player_turn
-   812 3886 C9 01		            cmp #1
-   813 3888 D0 12		            bne was_player2_turn
-   814 				; was player 1 turn, so player 2 gets a point
-   815 388A 20 F7 3A		            jsr inc_score_p2
-   816 388D 20 C9 3A		            jsr show_score_p2
-   817
-   818 3890 AD 27 4D		            lda score_p2
-   819 3893 C9 11		            cmp #MAX_SCORE
-   820 3895 D0 17		            bne reset_edge_delay
-   821
-   822 3897 A9 01		            lda #1
-   823 3899 85 8C		            sta mode_menu
-   824 389B 60			            rts
-   825
-   826 389C			was_player2_turn
-   827 389C 20 EB 3A		            jsr inc_score_p1
-   828 389F 20 B0 3A		            jsr show_score_p1
-   829
-   830 38A2 AD 26 4D		            lda score_p1
-   831 38A5 C9 11		            cmp #MAX_SCORE
-   832 38A7 D0 05		            bne reset_edge_delay
-   833
-   834 38A9 A9 01		            lda #1
-   835 38AB 85 8C		            sta mode_menu
-   836 38AD 60			            rts
-   837
-   838 38AE			reset_edge_delay
-   839 38AE A9 0A		            lda #10
-   840 38B0 85 A3		            sta edge_delay
-   841
-   842 38B2			no_edge
+   762 3844 4C 62 E4		            jmp $e462
+   763
+   764 3847			game_ends
+   765 3847 20 FA 31		            jsr music_normal_volume
+   766 384A 4C 62 E4		            jmp $e462            
+   767
+   768 384D			start_sound_bat
+   769 384D A9 0A		            lda #10
+   770 384F 85 8D		            sta volume_hit_bat
+   771 3851 60			            rts
+   772
+   773 3852			play_sound_bat
+   774 3852 A5 8D		            lda volume_hit_bat
+   775 3854 30 14		            bmi silenced_bat
+   776
+   777 3856 A5 B5		            lda player_turn
+   778 3858 0A			            asl
+   779 3859 0A			            asl
+   780 385A 69 30		            adc #$30
+   781 385C E5 B3		            sbc angle_diff_bat
+   782 385E 8D 73 32		            sta SHADOW+4    ; $d204
+   783 3861 A5 8D		            lda volume_hit_bat
+   784 3863 09 A0		            ora #$a0
+   785 3865 8D 74 32		            sta SHADOW+5    ; $d205
+   786 3868 C6 8D		            dec volume_hit_bat
+   787 386A			silenced_bat
+   788 386A 60			            rts
+   789
+   790 386B			start_sound_edge
+   791 386B A9 04		            lda #4
+   792 386D 85 8E		            sta volume_hit_edge
+   793 386F 60			            rts
+   794
+   795 3870			play_sound_edge
+   796 3870 A5 8E		            lda volume_hit_edge
+   797 3872 30 16		            bmi silenced_edge
+   798 3874 D0 06		            bne no_silenced_edge
+   799 3876 8D 74 32		            sta SHADOW+5    ; $d205
+   800 3879 C6 8E		            dec volume_hit_edge
+   801 387B 60			            rts            
+   802
+   803 387C			no_silenced_edge
+   804 387C A9 08		            lda #$08
+   805 387E 8D 73 32		            sta SHADOW+4    ; $d204
+   806 3881 A5 8E		            lda volume_hit_edge
+   807 3883 09 26		            ora #$26
+   808 3885 8D 74 32		            sta SHADOW+5    ; $d205
+   809 3888 C6 8E		            dec volume_hit_edge
+   810 388A			silenced_edge
+   811 388A 60			            rts
+   812
+   813 				; Update score
+   814 				; Score > max score, then exit A = 1, otherwise A = 0
+   815
+   816 388B			update_score
+   817 388B A5 B5		            lda player_turn
+   818 388D C9 01		            cmp #1
+   819 388F D0 12		            bne was_player2_turn
+   820 				; was player 1 turn, so player 2 gets a point
+   821 3891 20 FE 3A		            jsr inc_score_p2
+   822 3894 20 D0 3A		            jsr show_score_p2
+   823
+   824 3897 AD 27 4D		            lda score_p2
+   825 389A C9 11		            cmp #MAX_SCORE
+   826 389C D0 17		            bne reset_edge_delay
+   827
+   828 389E A9 01		            lda #1
+   829 38A0 85 8C		            sta mode_menu
+   830 38A2 60			            rts
+   831
+   832 38A3			was_player2_turn
+   833 38A3 20 F2 3A		            jsr inc_score_p1
+   834 38A6 20 B7 3A		            jsr show_score_p1
+   835
+   836 38A9 AD 26 4D		            lda score_p1
+   837 38AC C9 11		            cmp #MAX_SCORE
+   838 38AE D0 05		            bne reset_edge_delay
+   839
+   840 38B0 A9 01		            lda #1
+   841 38B2 85 8C		            sta mode_menu
+   842 38B4 60			            rts
    843
-   844 38B2 A9 00		            lda #0      ; no end game
-   845 				; anything in A to clear collisions
-   846 38B4 8D 1E D0		            sta HITCLR
-   847 38B7 60			            rts
-   848
-   849 				; player 1
-   850 				; - wipe shape at previous y-position
-   851 				; - move player using controller
-   852 				; - set sprite positions
-   853
-   854 38B8			handle_player1
-   855 38B8 20 18 3A		            jsr wipe_p1         ; wipe previous shape player 1
-   856
-   857 38BB A2 00		            ldx #0              ; player 1
-   858 38BD 20 E8 38		            jsr move_player
-   859 				            
-   860 38C0 20 E4 39		            jsr show_p1
-   861
-   862 38C3 A5 94		            lda player1_x
-   863 38C5 18			            clc
-   864 38C6 69 20		            adc #left_margin
-   865 38C8 85 81		            sta shadow_HPOSP0
-   866 38CA 69 08		            adc #8
-   867 38CC 8D 02 D0		            sta HPOSP2
-   868 38CF 60			            rts
-   869
-   870 				; player 2
-   871 				; - wipe shape at previous y-position
-   872 				; - move player using controller
-   873 				; - set sprite positions
-   874
-   875 38D0			handle_player2
-   876 38D0 20 2D 3A		            jsr wipe_p2         ; wipe previous shape player 2
-   877
-   878 38D3 A2 01		            ldx #1              ; player 2
-   879 38D5 20 E8 38		            jsr move_player
-   880 				                        
-   881 38D8 20 FE 39		            jsr show_p2
-   882
-   883 38DB A5 95		            lda player2_x
-   884 38DD 18			            clc
-   885 38DE 69 20		            adc #left_margin
-   886 38E0 85 82		            sta shadow_HPOSP1
-   887 38E2 69 08		            adc #8
-   888 38E4 8D 03 D0		            sta HPOSP3
-   889 38E7 60			            rts
-   890
-   891 				; move player 1/2
-   892 				; right - clockwise, left = anti-clockwise
-   893
-   894 				; X = 0, player 1
-   895 				; X = 1, player 2
+   844 38B5			reset_edge_delay
+   845 38B5 A9 0A		            lda #10
+   846 38B7 85 A3		            sta edge_delay
+   847
+   848 38B9			no_edge
+   849
+   850 38B9 A9 00		            lda #0      ; no end game
+   851 				; anything in A to clear collisions
+   852 38BB 8D 1E D0		            sta HITCLR
+   853 38BE 60			            rts
+   854
+   855 				; player 1
+   856 				; - wipe shape at previous y-position
+   857 				; - move player using controller
+   858 				; - set sprite positions
+   859
+   860 38BF			handle_player1
+   861 38BF 20 1F 3A		            jsr wipe_p1         ; wipe previous shape player 1
+   862
+   863 38C2 A2 00		            ldx #0              ; player 1
+   864 38C4 20 EF 38		            jsr move_player
+   865 				            
+   866 38C7 20 EB 39		            jsr show_p1
+   867
+   868 38CA A5 94		            lda player1_x
+   869 38CC 18			            clc
+   870 38CD 69 20		            adc #left_margin
+   871 38CF 85 81		            sta shadow_HPOSP0
+   872 38D1 69 08		            adc #8
+   873 38D3 8D 02 D0		            sta HPOSP2
+   874 38D6 60			            rts
+   875
+   876 				; player 2
+   877 				; - wipe shape at previous y-position
+   878 				; - move player using controller
+   879 				; - set sprite positions
+   880
+   881 38D7			handle_player2
+   882 38D7 20 34 3A		            jsr wipe_p2         ; wipe previous shape player 2
+   883
+   884 38DA A2 01		            ldx #1              ; player 2
+   885 38DC 20 EF 38		            jsr move_player
+   886 				                        
+   887 38DF 20 05 3A		            jsr show_p2
+   888
+   889 38E2 A5 95		            lda player2_x
+   890 38E4 18			            clc
+   891 38E5 69 20		            adc #left_margin
+   892 38E7 85 82		            sta shadow_HPOSP1
+   893 38E9 69 08		            adc #8
+   894 38EB 8D 03 D0		            sta HPOSP3
+   895 38EE 60			            rts
    896
-   897 				; Y = driver mode:
-   898 				; 0 : stick
-   899 				; 1 : paddle
-   900 				; 2 : driving
-   901 				; 3 : computer
-   902 				            
-   903 38E8			move_player
-   904 38E8 20 6E 34		            jsr main_driver
-   905
-   906 38EB B5 9C		            lda p1_angle,x
-   907 38ED 29 7F		            and #127                    ; restrict angle to 0..179 degrees
-   908 38EF 49 40		            eor #64                     ; perpendicular to the circle angle
-   909 38F1 95 90		            sta p1_shape,x
-   910
-   911 38F3 B4 9C		            ldy p1_angle,x
-   912 38F5 B9 00 3E		            lda inner_x_tab,y
-   913 38F8 4A			            lsr
-   914 38F9 69 20		            adc #inner_x_margin/2
-   915 38FB 95 94		            sta player1_x,x
-   916 38FD B9 00 3F		            lda inner_y_tab,y
-   917 3900 4A			            lsr
-   918 3901 95 98		            sta player1_y,x
-   919
-   920 3903 B4 90		            ldy p1_shape,x
-   921 3905 20 67 3A		            jsr shape_to_ptr
-   922
-   923 3908 60			            rts
-   924
-   925 				; Set ball at start position
-   926 				; - start angle current player
-   927 				; - start position by inner table
-   928 				; - collision delay set?
-   929
-   930 				; Set ball current position to start position
-   931 				; input:
-   932 				; X = angle of start position
-   933 				; output:
-   934 				; ball position: (ball_current_x, ball_current_y)
-   935 				; (tmp_x1, tmp_y1) = (ball_current_x, ball_current_y)
-   936 3909			ball_to_start_position
-   937 3909 BD 00 3E		            lda inner_x_tab,x
-   938 390C 85 A6		            sta ball_current_x
-   939 390E 85 E6		            sta tmp_x1
-   940 3910 BD 00 3F		            lda inner_y_tab,x
-   941 3913 85 A7		            sta ball_current_y
-   942 3915 85 E7		            sta tmp_y1
-   943 3917 60			            rts
-   944
-   945 				; Prepare ball end position
-   946 				; - end angle current player
-   947 				; - end position by outer table
-   948 				; - calculate step size x,y
-   949
-   950 				; Input:
-   951 				; - ball_angle_start
-   952 				; - ball speed
-   953 				; Output:
-   954 				; - ball_andle_end
-   955 				; - ball start position (tmp_x1, tmp_y1)
-   956 				; - ball end position (tmp_x2, tmp_y2)
-   957 				; - step size (step_x, step_y) for ball movement
-   958 3918			prepare_ball_end_position
-   959 3918 A5 AA		            lda ball_angle_start
-   960 391A 49 80		            eor #128        ; other side
-   961 391C 85 AB		            sta ball_angle_end
-   962 391E AA			            tax
-   963 391F 20 A0 39		            jsr angle_to_end_position
-   964 				                        
-   965 3922 20 C7 3B		            jsr init_current_xy
-   966 				            
-   967 				; move current a little bit            
-   968 3925 20 34 3C		            jsr move_current_xy
-   969 				; ignore end indicator, since we only just started
-   970
-   971
-   972 3928 A9 0A		            lda #10         ; ball can touch bat at start position, so use this delay
-   973 392A 85 A4		            sta bat_collision_delay
-   974 392C 60			            rts
-   975
-   976 				; x = angle 0..255
-   977 392D			outer_angle_to_start_position
-   978 392D BD 00 10		            lda outer_x_256,x
-   979 3930 85 A6		            sta ball_current_x
-   980 3932 85 E6		            sta tmp_x1
-   981 3934 BD 00 11		            lda outer_y_256,x
-   982 3937 85 A7		            sta ball_current_y
-   983 3939 85 E7		            sta tmp_y1
-   984 393B 60			            rts
-   985
-   986 393C			ball_current_to_start_position
-   987 393C A5 A6		            lda ball_current_x
-   988 393E 85 E6		            sta tmp_x1
-   989 3940 A5 A7		            lda ball_current_y
-   990 3942 85 E7		            sta tmp_y1
-   991 3944 60			            rts
-   992
-   993 				; Ball collides with bat
-   994 				; - start ball angle = end ball angle
-   995 				; - calculate diff between bat and ball end angle
-   996 				; - calculate new end angle
-   997 				; - Set ball at start position
-   998 				; - Prepare ball end position
-   999
-  1000 3945			bounce_bat_ball
-  1001 				; set new start of ball
-  1002 				; @todo check ball angles
-  1003 				; set new ball start angle (= previous end angle)
-  1004 3945 A5 AB		            lda ball_angle_end
-  1005 3947 85 AA		            sta ball_angle_start
-  1006 				            
-  1007 				; alternative?
-  1008 				            ;ldx ball_angle_start
-  1009 				            ;jsr ball_to_start_position          
-  1010 3949 20 3C 39		            jsr ball_current_to_start_position
-  1011
-  1012 				; which player hit the ball?
-  1013 				; collision bits:
-  1014 				; xxxxx1x1 : 1 is player1 collision
-  1015 				; xxxx1010 : 2 is player2 collision
-  1016
-  1017 394C A5 A0		            lda mp_collision
-  1018 394E 4A			            lsr
-  1019 394F 4A			            lsr
-  1020 3950 05 A0		            ora mp_collision
-  1021 3952 29 03		            and #%00000011      ; 01 = player1, 10 = player2, 11 = both
+   897 				; move player 1/2
+   898 				; right - clockwise, left = anti-clockwise
+   899
+   900 				; X = 0, player 1
+   901 				; X = 1, player 2
+   902
+   903 				; Y = driver mode:
+   904 				; 0 : stick
+   905 				; 1 : paddle
+   906 				; 2 : driving
+   907 				; 3 : computer
+   908 				            
+   909 38EF			move_player
+   910 38EF 20 6E 34		            jsr main_driver
+   911
+   912 38F2 B5 9C		            lda p1_angle,x
+   913 38F4 29 7F		            and #127                    ; restrict angle to 0..179 degrees
+   914 38F6 49 40		            eor #64                     ; perpendicular to the circle angle
+   915 38F8 95 90		            sta p1_shape,x
+   916
+   917 38FA B4 9C		            ldy p1_angle,x
+   918 38FC B9 00 3E		            lda inner_x_tab,y
+   919 38FF 4A			            lsr
+   920 3900 69 20		            adc #inner_x_margin/2
+   921 3902 95 94		            sta player1_x,x
+   922 3904 B9 00 3F		            lda inner_y_tab,y
+   923 3907 4A			            lsr
+   924 3908 95 98		            sta player1_y,x
+   925
+   926 390A B4 90		            ldy p1_shape,x
+   927 390C 20 6E 3A		            jsr shape_to_ptr
+   928
+   929 390F 60			            rts
+   930
+   931 				; Set ball at start position
+   932 				; - start angle current player
+   933 				; - start position by inner table
+   934 				; - collision delay set?
+   935
+   936 				; Set ball current position to start position
+   937 				; input:
+   938 				; X = angle of start position
+   939 				; output:
+   940 				; ball position: (ball_current_x, ball_current_y)
+   941 				; (tmp_x1, tmp_y1) = (ball_current_x, ball_current_y)
+   942 3910			ball_to_start_position
+   943 3910 BD 00 3E		            lda inner_x_tab,x
+   944 3913 85 A6		            sta ball_current_x
+   945 3915 85 E6		            sta tmp_x1
+   946 3917 BD 00 3F		            lda inner_y_tab,x
+   947 391A 85 A7		            sta ball_current_y
+   948 391C 85 E7		            sta tmp_y1
+   949 391E 60			            rts
+   950
+   951 				; Prepare ball end position
+   952 				; - end angle current player
+   953 				; - end position by outer table
+   954 				; - calculate step size x,y
+   955
+   956 				; Input:
+   957 				; - ball_angle_start
+   958 				; - ball speed
+   959 				; Output:
+   960 				; - ball_andle_end
+   961 				; - ball start position (tmp_x1, tmp_y1)
+   962 				; - ball end position (tmp_x2, tmp_y2)
+   963 				; - step size (step_x, step_y) for ball movement
+   964 391F			prepare_ball_end_position
+   965 391F A5 AA		            lda ball_angle_start
+   966 3921 49 80		            eor #128        ; other side
+   967 3923 85 AB		            sta ball_angle_end
+   968 3925 AA			            tax
+   969 3926 20 A7 39		            jsr angle_to_end_position
+   970 				                        
+   971 3929 20 CE 3B		            jsr init_current_xy
+   972 				            
+   973 				; move current a little bit            
+   974 392C 20 3B 3C		            jsr move_current_xy
+   975 				; ignore end indicator, since we only just started
+   976
+   977
+   978 392F A9 0A		            lda #10         ; ball can touch bat at start position, so use this delay
+   979 3931 85 A4		            sta bat_collision_delay
+   980 3933 60			            rts
+   981
+   982 				; x = angle 0..255
+   983 3934			outer_angle_to_start_position
+   984 3934 BD 00 10		            lda outer_x_256,x
+   985 3937 85 A6		            sta ball_current_x
+   986 3939 85 E6		            sta tmp_x1
+   987 393B BD 00 11		            lda outer_y_256,x
+   988 393E 85 A7		            sta ball_current_y
+   989 3940 85 E7		            sta tmp_y1
+   990 3942 60			            rts
+   991
+   992 3943			ball_current_to_start_position
+   993 3943 A5 A6		            lda ball_current_x
+   994 3945 85 E6		            sta tmp_x1
+   995 3947 A5 A7		            lda ball_current_y
+   996 3949 85 E7		            sta tmp_y1
+   997 394B 60			            rts
+   998
+   999 				; Ball collides with bat
+  1000 				; - start ball angle = end ball angle
+  1001 				; - calculate diff between bat and ball end angle
+  1002 				; - calculate new end angle
+  1003 				; - Set ball at start position
+  1004 				; - Prepare ball end position
+  1005
+  1006 394C			bounce_bat_ball
+  1007 				; set new start of ball
+  1008 				; @todo check ball angles
+  1009 				; set new ball start angle (= previous end angle)
+  1010 394C A5 AB		            lda ball_angle_end
+  1011 394E 85 AA		            sta ball_angle_start
+  1012 				            
+  1013 				; alternative?
+  1014 				            ;ldx ball_angle_start
+  1015 				            ;jsr ball_to_start_position          
+  1016 3950 20 43 39		            jsr ball_current_to_start_position
+  1017
+  1018 				; which player hit the ball?
+  1019 				; collision bits:
+  1020 				; xxxxx1x1 : 1 is player1 collision
+  1021 				; xxxx1010 : 2 is player2 collision
   1022
-  1023 				; who's turn is it and who bounced the ball?
-  1024
-  1025 3954 25 B5		            and player_turn
-  1026 3956 F0 06		            beq no_switch_turn
-  1027
-  1028 3958 A5 B5		            lda player_turn
-  1029 395A 49 03		            eor #3              ; 1 => 2, 2 => 1
-  1030 395C 85 B5		            sta player_turn 
-  1031
-  1032 395E			no_switch_turn
-  1033 395E 20 B1 36		            jsr turn_color_ball
-  1034
-  1035 3961 A5 B5		            lda player_turn
-  1036 3963 49 03		            eor #3
-  1037 3965 AA			            tax
-  1038 3966 CA			            dex                 ; index 0,1 (player = 1,2)
-  1039 3967 B5 9C		            lda p1_angle,x
+  1023 3953 A5 A0		            lda mp_collision
+  1024 3955 4A			            lsr
+  1025 3956 4A			            lsr
+  1026 3957 05 A0		            ora mp_collision
+  1027 3959 29 03		            and #%00000011      ; 01 = player1, 10 = player2, 11 = both
+  1028
+  1029 				; who's turn is it and who bounced the ball?
+  1030
+  1031 395B 25 B5		            and player_turn
+  1032 395D F0 06		            beq no_switch_turn
+  1033
+  1034 395F A5 B5		            lda player_turn
+  1035 3961 49 03		            eor #3              ; 1 => 2, 2 => 1
+  1036 3963 85 B5		            sta player_turn 
+  1037
+  1038 3965			no_switch_turn
+  1039 3965 20 B3 36		            jsr turn_color_ball
   1040
-  1041 				; Calculate diff between bat angle position and new ball start position
-  1042 3969 85 B0		            sta tmp_angle1
-  1043
-  1044 396B A5 AA		            lda ball_angle_start
-  1045 396D 85 B1		            sta tmp_angle2
+  1041 3968 A5 B5		            lda player_turn
+  1042 396A 49 03		            eor #3
+  1043 396C AA			            tax
+  1044 396D CA			            dex                 ; index 0,1 (player = 1,2)
+  1045 396E B5 9C		            lda p1_angle,x
   1046
-  1047 396F 20 03 3B		            jsr calc_angle_diff
-  1048
-  1049 3972 0A			            asl
-  1050 3973 0A			            asl
-  1051 3974 0A			            asl
-  1052 3975 85 B3		            sta angle_diff_bat
-  1053
-  1054 3977 A5 B0		            lda tmp_angle1
-  1055 3979 18			            clc
-  1056 397A 65 B2		            adc add_to_angle
-  1057 397C 49 80		            eor #128            ; other side
-  1058 397E 85 B0		            sta tmp_angle1
-  1059 				            
-  1060 3980 A5 B4		            lda tmp_angle_direction
-  1061 3982 D0 0A		            bne diff_clockwise
-  1062 				; diff counter clockwise
-  1063 3984 A5 B0		            lda tmp_angle1
-  1064 3986 18			            clc
-  1065 3987 65 B3		            adc angle_diff_bat
-  1066 3989 85 B0		            sta tmp_angle1
-  1067 398B 4C 95 39		            jmp calc_done            
-  1068
-  1069 398E			diff_clockwise
-  1070 398E A5 B0		            lda tmp_angle1
-  1071 3990 38			            sec
-  1072 3991 E5 B3		            sbc angle_diff_bat
-  1073 3993 85 B0		            sta tmp_angle1
-  1074 				            
-  1075 				; calculation done            
-  1076 3995			calc_done
-  1077 3995 A5 B0		            lda tmp_angle1
-  1078 3997 85 AB		            sta ball_angle_end
-  1079 3999 AA			            tax
-  1080 399A 20 A0 39		            jsr angle_to_end_position
-  1081 				                        
-  1082 399D 4C C7 3B		            jmp init_current_xy
-  1083
-  1084 				; x = angle 0..255
-  1085 39A0			angle_to_end_position
-  1086 39A0 BD 00 10		            lda outer_x_256,x
-  1087 39A3 85 E8		            sta tmp_x2
-  1088 39A5 BD 00 11		            lda outer_y_256,x
-  1089 39A8 85 E9		            sta tmp_y2
-  1090 39AA 60			            rts
-  1091
-  1092 39AB			wipe_ball
-  1093 39AB A5 A7		            lda ball_current_y
-  1094 39AD 4A			            lsr
-  1095 39AE 69 06		            adc #ball_top_margin
-  1096 39B0 AA			            tax                 ; x = real y position on screen
-  1097 39B1 A9 00		            lda #0
-  1098 39B3 9D 80 0D		            sta msl_area,x
-  1099 39B6 9D 81 0D		            sta msl_area+1,x
-  1100 39B9 9D 82 0D		            sta msl_area+2,x
-  1101 39BC 9D 83 0D		            sta msl_area+3,x
-  1102 39BF 60			            rts
-  1103
-  1104 39C0			show_ball
-  1105 39C0 A5 A7		            lda ball_current_y
-  1106 39C2 4A			            lsr
-  1107 39C3 69 06		            adc #ball_top_margin
-  1108 39C5 AA			            tax                 ; x = real y position on screen
+  1047 				; Calculate diff between bat angle position and new ball start position
+  1048 3970 85 B0		            sta tmp_angle1
+  1049
+  1050 3972 A5 AA		            lda ball_angle_start
+  1051 3974 85 B1		            sta tmp_angle2
+  1052
+  1053 3976 20 0A 3B		            jsr calc_angle_diff
+  1054
+  1055 3979 0A			            asl
+  1056 397A 0A			            asl
+  1057 397B 0A			            asl
+  1058 397C 85 B3		            sta angle_diff_bat
+  1059
+  1060 397E A5 B0		            lda tmp_angle1
+  1061 3980 18			            clc
+  1062 3981 65 B2		            adc add_to_angle
+  1063 3983 49 80		            eor #128            ; other side
+  1064 3985 85 B0		            sta tmp_angle1
+  1065 				            
+  1066 3987 A5 B4		            lda tmp_angle_direction
+  1067 3989 D0 0A		            bne diff_clockwise
+  1068 				; diff counter clockwise
+  1069 398B A5 B0		            lda tmp_angle1
+  1070 398D 18			            clc
+  1071 398E 65 B3		            adc angle_diff_bat
+  1072 3990 85 B0		            sta tmp_angle1
+  1073 3992 4C 9C 39		            jmp calc_done            
+  1074
+  1075 3995			diff_clockwise
+  1076 3995 A5 B0		            lda tmp_angle1
+  1077 3997 38			            sec
+  1078 3998 E5 B3		            sbc angle_diff_bat
+  1079 399A 85 B0		            sta tmp_angle1
+  1080 				            
+  1081 				; calculation done            
+  1082 399C			calc_done
+  1083 399C A5 B0		            lda tmp_angle1
+  1084 399E 85 AB		            sta ball_angle_end
+  1085 39A0 AA			            tax
+  1086 39A1 20 A7 39		            jsr angle_to_end_position
+  1087 				                        
+  1088 39A4 4C CE 3B		            jmp init_current_xy
+  1089
+  1090 				; x = angle 0..255
+  1091 39A7			angle_to_end_position
+  1092 39A7 BD 00 10		            lda outer_x_256,x
+  1093 39AA 85 E8		            sta tmp_x2
+  1094 39AC BD 00 11		            lda outer_y_256,x
+  1095 39AF 85 E9		            sta tmp_y2
+  1096 39B1 60			            rts
+  1097
+  1098 39B2			wipe_ball
+  1099 39B2 A5 A7		            lda ball_current_y
+  1100 39B4 4A			            lsr
+  1101 39B5 69 06		            adc #ball_top_margin
+  1102 39B7 AA			            tax                 ; x = real y position on screen
+  1103 39B8 A9 00		            lda #0
+  1104 39BA 9D 80 0D		            sta msl_area,x
+  1105 39BD 9D 81 0D		            sta msl_area+1,x
+  1106 39C0 9D 82 0D		            sta msl_area+2,x
+  1107 39C3 9D 83 0D		            sta msl_area+3,x
+  1108 39C6 60			            rts
   1109
-  1110 39C6 A9 02		            lda #%00000010
-  1111 39C8 9D 80 0D		            sta msl_area,x
-  1112 39CB 9D 83 0D		            sta msl_area+3,x
-  1113 39CE A9 07		            lda #%00000111
-  1114 39D0 9D 81 0D		            sta msl_area+1,x
-  1115 39D3 9D 82 0D		            sta msl_area+2,x
-  1116 				            
-  1117 39D6 A5 A6		            lda ball_current_x
-  1118 39D8 4A			            lsr
-  1119 39D9 69 45		            adc #ball_left_margin
-  1120 39DB 8D 05 D0		            sta HPOSM1
-  1121 39DE 69 02		            adc #2
-  1122 39E0 8D 04 D0		            sta HPOSM0
-  1123 				                        
-  1124 39E3 60			            rts
-  1125 				            
-  1126 39E4			show_p1
-  1127 39E4 A5 98		            lda player1_y
-  1128 39E6 18			            clc
-  1129 39E7 69 01		            adc #upper_margin
-  1130 39E9 AA			            tax
-  1131
-  1132 39EA A0 00		            ldy #0
-  1133 39EC			show_shape1
-  1134 39EC B1 84		            lda (shape_ptr),y
-  1135 39EE 9D 00 0E		            sta p0_area,x 
-  1136 39F1 C8			            iny
-  1137 39F2 B1 84		            lda (shape_ptr),y
-  1138 39F4 9D 00 0F		            sta p2_area,x
-  1139 39F7 E8			            inx
-  1140 39F8 C8			            iny
-  1141 39F9 C0 20		            cpy #32
-  1142 39FB D0 EF		            bne show_shape1
-  1143 39FD 60			            rts
-  1144
-  1145 39FE			show_p2
-  1146 39FE A5 99		            lda player2_y
-  1147 3A00 18			            clc
-  1148 3A01 69 01		            adc #upper_margin
-  1149 3A03 AA			            tax
+  1110 39C7			show_ball
+  1111 39C7 A5 A7		            lda ball_current_y
+  1112 39C9 4A			            lsr
+  1113 39CA 69 06		            adc #ball_top_margin
+  1114 39CC AA			            tax                 ; x = real y position on screen
+  1115
+  1116 39CD A9 02		            lda #%00000010
+  1117 39CF 9D 80 0D		            sta msl_area,x
+  1118 39D2 9D 83 0D		            sta msl_area+3,x
+  1119 39D5 A9 07		            lda #%00000111
+  1120 39D7 9D 81 0D		            sta msl_area+1,x
+  1121 39DA 9D 82 0D		            sta msl_area+2,x
+  1122 				            
+  1123 39DD A5 A6		            lda ball_current_x
+  1124 39DF 4A			            lsr
+  1125 39E0 69 45		            adc #ball_left_margin
+  1126 39E2 8D 05 D0		            sta HPOSM1
+  1127 39E5 69 02		            adc #2
+  1128 39E7 8D 04 D0		            sta HPOSM0
+  1129 				                        
+  1130 39EA 60			            rts
+  1131 				            
+  1132 39EB			show_p1
+  1133 39EB A5 98		            lda player1_y
+  1134 39ED 18			            clc
+  1135 39EE 69 01		            adc #upper_margin
+  1136 39F0 AA			            tax
+  1137
+  1138 39F1 A0 00		            ldy #0
+  1139 39F3			show_shape1
+  1140 39F3 B1 84		            lda (shape_ptr),y
+  1141 39F5 9D 00 0E		            sta p0_area,x 
+  1142 39F8 C8			            iny
+  1143 39F9 B1 84		            lda (shape_ptr),y
+  1144 39FB 9D 00 0F		            sta p2_area,x
+  1145 39FE E8			            inx
+  1146 39FF C8			            iny
+  1147 3A00 C0 20		            cpy #32
+  1148 3A02 D0 EF		            bne show_shape1
+  1149 3A04 60			            rts
   1150
-  1151 3A04 A0 00		            ldy #0
-  1152 3A06			show_shape2
-  1153 3A06 B1 84		            lda (shape_ptr),y
-  1154 3A08 9D 80 0E		            sta p1_area,x
-  1155 3A0B C8			            iny
-  1156 3A0C B1 84		            lda (shape_ptr),y
-  1157 3A0E 9D 80 0F		            sta p3_area,x
-  1158 3A11 E8			            inx
-  1159 3A12 C8			            iny
-  1160 3A13 C0 20		            cpy #32
-  1161 3A15 D0 EF		            bne show_shape2
-  1162 3A17 60			            rts
-  1163
-  1164 3A18			wipe_p1
-  1165 3A18 A5 98		            lda player1_y
-  1166 3A1A 18			            clc
-  1167 3A1B 69 01		            adc #upper_margin
-  1168 3A1D AA			            tax
-  1169 				            
-  1170 3A1E A0 10		            ldy #16
-  1171 3A20 A9 00		            lda #0
-  1172 3A22			wipe_it1            
-  1173 3A22 9D 00 0E		            sta p0_area,x 
-  1174 3A25 9D 00 0F		            sta p2_area,x
-  1175 3A28 E8			            inx
-  1176 3A29 88			            dey
-  1177 3A2A D0 F6		            bne wipe_it1 
-  1178 3A2C 60			            rts
-  1179
-  1180 3A2D			wipe_p2
-  1181 3A2D A5 99		            lda player2_y
-  1182 3A2F 18			            clc
-  1183 3A30 69 01		            adc #upper_margin
-  1184 3A32 AA			            tax
-  1185 				            
-  1186 3A33 A0 10		            ldy #16
-  1187 3A35 A9 00		            lda #0
-  1188 3A37			wipe_it2            
-  1189 3A37 9D 80 0E		            sta p1_area,x
-  1190 3A3A 9D 80 0F		            sta p3_area,x
-  1191 3A3D E8			            inx
-  1192 3A3E 88			            dey
-  1193 3A3F D0 F6		            bne wipe_it2 
-  1194 3A41 60			            rts
-  1195
-  1196 3A42			make_shape_index
-  1197 3A42 A9 00		            lda #<pm_shapes
-  1198 3A44 85 84		            sta shape_ptr
-  1199 3A46 A9 50		            lda #>pm_shapes
-  1200 3A48 85 85		            sta shape_ptr+1
-  1201 				            
-  1202 3A4A A2 00		            ldx #0
-  1203 3A4C			fill_pm_tab
-  1204 3A4C A5 84		            lda shape_ptr
-  1205 3A4E 9D 00 14		            sta pm_shape_lo,x
-  1206 3A51 A5 85		            lda shape_ptr+1
-  1207 3A53 9D 80 14		            sta pm_shape_hi,x
-  1208 				            
-  1209 3A56 A5 84		            lda shape_ptr
-  1210 3A58 18			            clc
-  1211 3A59 69 20		            adc #32
-  1212 3A5B 85 84		            sta shape_ptr
-  1213 3A5D A5 85		            lda shape_ptr+1
-  1214 3A5F 69 00		            adc #0
-  1215 3A61 85 85		            sta shape_ptr+1
-  1216 				            
-  1217 3A63 E8			            inx
-  1218 3A64 10 E6		            bpl fill_pm_tab
-  1219 				            
-  1220 3A66 60			            rts
-  1221 				            
-  1222 				; there are 128 shapes, each 32 bytes
-  1223
-  1224 				; y = shape index
-  1225 3A67			shape_to_ptr
-  1226 3A67 B9 00 14		            lda pm_shape_lo,y
-  1227 3A6A 85 84		            sta shape_ptr
-  1228 3A6C B9 80 14		            lda pm_shape_hi,y
-  1229 3A6F 85 85		            sta shape_ptr+1
-  1230
-  1231 3A71 60			            rts
-  1232
-  1233 				; turn 1024 tables into 256 bytes for ball edge lookup
-  1234 3A72			make_outer_256
-  1235 3A72 A0 00		            ldy #0
-  1236 3A74 A2 00		            ldx #0
-  1237 3A76			conv_256
-  1238 3A76 BD 00 40		            lda outer_x_tab,x
-  1239 3A79 99 00 10		            sta outer_x_256,y
-  1240 3A7C BD 00 41		            lda outer_x_tab+$100,x
-  1241 3A7F 99 40 10		            sta outer_x_256+64,y
-  1242 3A82 BD 00 42		            lda outer_x_tab+$200,x
-  1243 3A85 99 80 10		            sta outer_x_256+128,y
-  1244 3A88 BD 00 43		            lda outer_x_tab+$300,x
-  1245 3A8B 99 C0 10		            sta outer_x_256+192,y
-  1246 				            
-  1247 3A8E BD 00 44		            lda outer_y_tab,x
-  1248 3A91 99 00 11		            sta outer_y_256,y
-  1249 3A94 BD 00 45		            lda outer_y_tab+$100,x
-  1250 3A97 99 40 11		            sta outer_y_256+64,y
-  1251 3A9A BD 00 46		            lda outer_y_tab+$200,x
-  1252 3A9D 99 80 11		            sta outer_y_256+128,y
-  1253 3AA0 BD 00 47		            lda outer_y_tab+$300,x
-  1254 3AA3 99 C0 11		            sta outer_y_256+192,y
-  1255
-  1256 3AA6 E8			            inx
-  1257 3AA7 E8			            inx
-  1258 3AA8 E8			            inx
-  1259 3AA9 E8			            inx
-  1260 3AAA C8			            iny
-  1261 3AAB C0 40		            cpy #64
-  1262 3AAD D0 C7		            bne conv_256            
-  1263 3AAF 60			            rts
-  1264
-  1265 3AB0			show_score_p1
-  1266 3AB0 AD 26 4D		            lda score_p1
-  1267 3AB3 4A			            lsr
-  1268 3AB4 4A			            lsr
-  1269 3AB5 4A			            lsr
-  1270 3AB6 4A			            lsr
-  1271 3AB7 F0 02		            beq do_space1
-  1272 3AB9 09 10		            ora #16
-  1273 3ABB			do_space1
-  1274 3ABB 8D 03 4D		            sta score_chars_p1
-  1275 3ABE AD 26 4D		            lda score_p1
-  1276 3AC1 29 0F		            and #15
-  1277 3AC3 09 10		            ora #16
-  1278 3AC5 8D 04 4D		            sta score_chars_p1+1
-  1279 3AC8 60			            rts
-  1280
-  1281 3AC9			show_score_p2
-  1282 3AC9 AD 27 4D		            lda score_p2
-  1283 3ACC 4A			            lsr
-  1284 3ACD 4A			            lsr
-  1285 3ACE 4A			            lsr
-  1286 3ACF 4A			            lsr
-  1287 3AD0 F0 02		            beq do_space2
-  1288 3AD2 09 10		            ora #16
-  1289 3AD4			do_space2
-  1290 3AD4 8D 23 4D		            sta score_chars_p2
-  1291 3AD7 AD 27 4D		            lda score_p2
-  1292 3ADA 29 0F		            and #15
-  1293 3ADC 09 10		            ora #16
-  1294 3ADE 8D 24 4D		            sta score_chars_p2+1
-  1295 3AE1 60			            rts
-  1296 				                        
-  1297 3AE2			reset_score
-  1298 3AE2 A9 00		            lda #0
-  1299 3AE4 8D 26 4D		            sta score_p1
-  1300 3AE7 8D 27 4D		            sta score_p2
-  1301 3AEA 60			            rts            
-  1302 				         
-  1303 3AEB			inc_score_p1
-  1304 3AEB F8			            sed
-  1305 3AEC AD 26 4D		            lda score_p1
-  1306 3AEF 18			            clc
-  1307 3AF0 69 01		            adc #1
-  1308 3AF2 8D 26 4D		            sta score_p1    
-  1309 3AF5 D8			            cld
-  1310 3AF6 60			            rts
-  1311
-  1312 3AF7			inc_score_p2
-  1313 3AF7 F8			            sed
-  1314 3AF8 AD 27 4D		            lda score_p2
-  1315 3AFB 18			            clc
-  1316 3AFC 69 01		            adc #1
-  1317 3AFE 8D 27 4D		            sta score_p2
-  1318 3B01 D8			            cld
-  1319 3B02 60			            rts
-  1320
-  1321 				; calculate the difference between angle1 and angle2
-  1322
-  1323 				; input:
-  1324 				; tmp_angle1 (0..255)
-  1325 				; tmp_angle2 (0..255)
+  1151 3A05			show_p2
+  1152 3A05 A5 99		            lda player2_y
+  1153 3A07 18			            clc
+  1154 3A08 69 01		            adc #upper_margin
+  1155 3A0A AA			            tax
+  1156
+  1157 3A0B A0 00		            ldy #0
+  1158 3A0D			show_shape2
+  1159 3A0D B1 84		            lda (shape_ptr),y
+  1160 3A0F 9D 80 0E		            sta p1_area,x
+  1161 3A12 C8			            iny
+  1162 3A13 B1 84		            lda (shape_ptr),y
+  1163 3A15 9D 80 0F		            sta p3_area,x
+  1164 3A18 E8			            inx
+  1165 3A19 C8			            iny
+  1166 3A1A C0 20		            cpy #32
+  1167 3A1C D0 EF		            bne show_shape2
+  1168 3A1E 60			            rts
+  1169
+  1170 3A1F			wipe_p1
+  1171 3A1F A5 98		            lda player1_y
+  1172 3A21 18			            clc
+  1173 3A22 69 01		            adc #upper_margin
+  1174 3A24 AA			            tax
+  1175 				            
+  1176 3A25 A0 10		            ldy #16
+  1177 3A27 A9 00		            lda #0
+  1178 3A29			wipe_it1            
+  1179 3A29 9D 00 0E		            sta p0_area,x 
+  1180 3A2C 9D 00 0F		            sta p2_area,x
+  1181 3A2F E8			            inx
+  1182 3A30 88			            dey
+  1183 3A31 D0 F6		            bne wipe_it1 
+  1184 3A33 60			            rts
+  1185
+  1186 3A34			wipe_p2
+  1187 3A34 A5 99		            lda player2_y
+  1188 3A36 18			            clc
+  1189 3A37 69 01		            adc #upper_margin
+  1190 3A39 AA			            tax
+  1191 				            
+  1192 3A3A A0 10		            ldy #16
+  1193 3A3C A9 00		            lda #0
+  1194 3A3E			wipe_it2            
+  1195 3A3E 9D 80 0E		            sta p1_area,x
+  1196 3A41 9D 80 0F		            sta p3_area,x
+  1197 3A44 E8			            inx
+  1198 3A45 88			            dey
+  1199 3A46 D0 F6		            bne wipe_it2 
+  1200 3A48 60			            rts
+  1201
+  1202 3A49			make_shape_index
+  1203 3A49 A9 00		            lda #<pm_shapes
+  1204 3A4B 85 84		            sta shape_ptr
+  1205 3A4D A9 50		            lda #>pm_shapes
+  1206 3A4F 85 85		            sta shape_ptr+1
+  1207 				            
+  1208 3A51 A2 00		            ldx #0
+  1209 3A53			fill_pm_tab
+  1210 3A53 A5 84		            lda shape_ptr
+  1211 3A55 9D 00 14		            sta pm_shape_lo,x
+  1212 3A58 A5 85		            lda shape_ptr+1
+  1213 3A5A 9D 80 14		            sta pm_shape_hi,x
+  1214 				            
+  1215 3A5D A5 84		            lda shape_ptr
+  1216 3A5F 18			            clc
+  1217 3A60 69 20		            adc #32
+  1218 3A62 85 84		            sta shape_ptr
+  1219 3A64 A5 85		            lda shape_ptr+1
+  1220 3A66 69 00		            adc #0
+  1221 3A68 85 85		            sta shape_ptr+1
+  1222 				            
+  1223 3A6A E8			            inx
+  1224 3A6B 10 E6		            bpl fill_pm_tab
+  1225 				            
+  1226 3A6D 60			            rts
+  1227 				            
+  1228 				; there are 128 shapes, each 32 bytes
+  1229
+  1230 				; y = shape index
+  1231 3A6E			shape_to_ptr
+  1232 3A6E B9 00 14		            lda pm_shape_lo,y
+  1233 3A71 85 84		            sta shape_ptr
+  1234 3A73 B9 80 14		            lda pm_shape_hi,y
+  1235 3A76 85 85		            sta shape_ptr+1
+  1236
+  1237 3A78 60			            rts
+  1238
+  1239 				; turn 1024 tables into 256 bytes for ball edge lookup
+  1240 3A79			make_outer_256
+  1241 3A79 A0 00		            ldy #0
+  1242 3A7B A2 00		            ldx #0
+  1243 3A7D			conv_256
+  1244 3A7D BD 00 40		            lda outer_x_tab,x
+  1245 3A80 99 00 10		            sta outer_x_256,y
+  1246 3A83 BD 00 41		            lda outer_x_tab+$100,x
+  1247 3A86 99 40 10		            sta outer_x_256+64,y
+  1248 3A89 BD 00 42		            lda outer_x_tab+$200,x
+  1249 3A8C 99 80 10		            sta outer_x_256+128,y
+  1250 3A8F BD 00 43		            lda outer_x_tab+$300,x
+  1251 3A92 99 C0 10		            sta outer_x_256+192,y
+  1252 				            
+  1253 3A95 BD 00 44		            lda outer_y_tab,x
+  1254 3A98 99 00 11		            sta outer_y_256,y
+  1255 3A9B BD 00 45		            lda outer_y_tab+$100,x
+  1256 3A9E 99 40 11		            sta outer_y_256+64,y
+  1257 3AA1 BD 00 46		            lda outer_y_tab+$200,x
+  1258 3AA4 99 80 11		            sta outer_y_256+128,y
+  1259 3AA7 BD 00 47		            lda outer_y_tab+$300,x
+  1260 3AAA 99 C0 11		            sta outer_y_256+192,y
+  1261
+  1262 3AAD E8			            inx
+  1263 3AAE E8			            inx
+  1264 3AAF E8			            inx
+  1265 3AB0 E8			            inx
+  1266 3AB1 C8			            iny
+  1267 3AB2 C0 40		            cpy #64
+  1268 3AB4 D0 C7		            bne conv_256            
+  1269 3AB6 60			            rts
+  1270
+  1271 3AB7			show_score_p1
+  1272 3AB7 AD 26 4D		            lda score_p1
+  1273 3ABA 4A			            lsr
+  1274 3ABB 4A			            lsr
+  1275 3ABC 4A			            lsr
+  1276 3ABD 4A			            lsr
+  1277 3ABE F0 02		            beq do_space1
+  1278 3AC0 09 10		            ora #16
+  1279 3AC2			do_space1
+  1280 3AC2 8D 03 4D		            sta score_chars_p1
+  1281 3AC5 AD 26 4D		            lda score_p1
+  1282 3AC8 29 0F		            and #15
+  1283 3ACA 09 10		            ora #16
+  1284 3ACC 8D 04 4D		            sta score_chars_p1+1
+  1285 3ACF 60			            rts
+  1286
+  1287 3AD0			show_score_p2
+  1288 3AD0 AD 27 4D		            lda score_p2
+  1289 3AD3 4A			            lsr
+  1290 3AD4 4A			            lsr
+  1291 3AD5 4A			            lsr
+  1292 3AD6 4A			            lsr
+  1293 3AD7 F0 02		            beq do_space2
+  1294 3AD9 09 10		            ora #16
+  1295 3ADB			do_space2
+  1296 3ADB 8D 23 4D		            sta score_chars_p2
+  1297 3ADE AD 27 4D		            lda score_p2
+  1298 3AE1 29 0F		            and #15
+  1299 3AE3 09 10		            ora #16
+  1300 3AE5 8D 24 4D		            sta score_chars_p2+1
+  1301 3AE8 60			            rts
+  1302 				                        
+  1303 3AE9			reset_score
+  1304 3AE9 A9 00		            lda #0
+  1305 3AEB 8D 26 4D		            sta score_p1
+  1306 3AEE 8D 27 4D		            sta score_p2
+  1307 3AF1 60			            rts            
+  1308 				         
+  1309 3AF2			inc_score_p1
+  1310 3AF2 F8			            sed
+  1311 3AF3 AD 26 4D		            lda score_p1
+  1312 3AF6 18			            clc
+  1313 3AF7 69 01		            adc #1
+  1314 3AF9 8D 26 4D		            sta score_p1    
+  1315 3AFC D8			            cld
+  1316 3AFD 60			            rts
+  1317
+  1318 3AFE			inc_score_p2
+  1319 3AFE F8			            sed
+  1320 3AFF AD 27 4D		            lda score_p2
+  1321 3B02 18			            clc
+  1322 3B03 69 01		            adc #1
+  1323 3B05 8D 27 4D		            sta score_p2
+  1324 3B08 D8			            cld
+  1325 3B09 60			            rts
   1326
-  1327 				; output:
-  1328 				; tmp_angle_diff, A: difference between angle1 and angle2
-  1329 				; tmp_angle_direction: 0 = anti-clockwise, 1 = clockwise
-  1330
-  1331 3B03			calc_angle_diff
-  1332 3B03 A9 00		            lda #0
-  1333 3B05 85 B2		            sta add_to_angle
-  1334 3B07 85 B4		            sta tmp_angle_direction
-  1335
-  1336 				; make sure we can compare angles, otherwise add $40 to angles
-  1337 3B09 A5 B0		            lda tmp_angle1
-  1338 3B0B C9 C0		            cmp #$c0
-  1339 3B0D B0 06		            bcs too_large
-  1340 3B0F A5 B1		            lda tmp_angle2
-  1341 3B11 C9 C0		            cmp #$c0
-  1342 3B13 90 12		            bcc not_too_large
-  1343 3B15			too_large
-  1344 3B15 A5 B0		            lda tmp_angle1
-  1345 3B17 38			            sec
-  1346 3B18 E9 40		            sbc #$40
-  1347 3B1A 85 B0		            sta tmp_angle1
-  1348 				            
-  1349 3B1C A5 B1		            lda tmp_angle2
-  1350 3B1E 38			            sec
-  1351 3B1F E9 40		            sbc #$40
-  1352 3B21 85 B1		            sta tmp_angle2
-  1353 				            
-  1354 3B23 A9 40		            lda #$40
-  1355 3B25 85 B2		            sta add_to_angle
-  1356
-  1357 3B27			not_too_large
-  1358 3B27 A5 B1		            lda tmp_angle2
-  1359 3B29 C5 B0		            cmp tmp_angle1
-  1360 3B2B 90 0A		            bcc angle2_smaller_angle1
-  1361 				; ball >= play
-  1362 3B2D 38			            sec
-  1363 3B2E E5 B0		            sbc tmp_angle1
-  1364 3B30 85 B7		            sta tmp_angle_diff
-  1365 				            
-  1366 3B32 E6 B4		            inc tmp_angle_direction
-  1367 3B34 4C 3E 3B		            jmp diff_calculated
-  1368 				                        
-  1369 3B37			angle2_smaller_angle1
-  1370 3B37 A5 B0		            lda tmp_angle1
-  1371 3B39 38			            sec
-  1372 3B3A E5 B1		            sbc tmp_angle2
-  1373 3B3C 85 B7		            sta tmp_angle_diff
-  1374
-  1375 3B3E			diff_calculated
-  1376 3B3E A5 B7		            lda tmp_angle_diff           
-  1377 3B40 60			            rts
-  1378
-  1379 				; X = angle
-  1380 				; lookup magnitude of angle 0 to angle X
-  1381 3B41			angle_to_magnitude
-  1382 3B41 BD 00 48		            lda magnitudes_lo,x
-  1383 3B44 85 B8		            sta magnitude
-  1384 3B46 BD 00 49		            lda magnitudes_hi,x
-  1385 3B49 85 B9		            sta magnitude+1
-  1386 3B4B 60			            rts
-  1387
-  1388 				; tmp_dx = abs(tmp_x2 - tmp_x1)
-  1389 3B4C			calc_abs_tmp_dx
-  1390 3B4C A5 E8		            lda tmp_x2
-  1391 3B4E 38			            sec
-  1392 3B4F E5 E6		            sbc tmp_x1
-  1393 3B51 B0 05		            bcs x2_le
-  1394 3B53 49 FF		            eor #255
-  1395 3B55 18			            clc
-  1396 3B56 69 01		            adc #1
-  1397 3B58 85 F2		x2_le       sta tmp_dx
-  1398
-  1399 				; tmp_dy = abs(tmp_y2 - tmp_y1)
-  1400 3B5A			calc_abs_tmp_dy
-  1401 3B5A A5 E9		            lda tmp_y2
-  1402 3B5C 38			            sec
-  1403 3B5D E5 E7		            sbc tmp_y1
-  1404 3B5F B0 05		            bcs y2_le
-  1405 3B61 49 FF		            eor #255
-  1406 3B63 18			            clc
-  1407 3B64 69 01		            adc #1
-  1408 3B66 85 F3		y2_le       sta tmp_dy
-  1409 3B68 60			            rts
-  1410 				            
-  1411 3B69			calc_dx_div_magnitude
-  1412 3B69 A9 00		            lda #0
-  1413 3B6B 85 E2		            sta _dividend
-  1414 3B6D A5 F2		            lda tmp_dx
-  1415 3B6F 85 E3		            sta _dividend+1
-  1416
-  1417 3B71 A5 B9		            lda magnitude+1
-  1418 3B73 85 E0		            sta _divisor
-  1419 3B75 A9 00		            lda #0
-  1420 3B77 85 E1		            sta _divisor+1
-  1421 				            
-  1422 3B79 20 A1 3B		            jsr _div16
-  1423
-  1424 				; todo multiply result with velocity            
-  1425 3B7C A5 E2		            lda _result
-  1426 3B7E 85 EE		            sta step_x
-  1427 3B80 A5 E3		            lda _result+1
-  1428 3B82 85 EF		            sta step_x+1
-  1429 				            
-  1430 3B84 60			            rts
-  1431 				            
-  1432 3B85			calc_dy_div_magnitude
-  1433 3B85 A9 00		            lda #0
-  1434 3B87 85 E2		            sta _dividend
-  1435 3B89 A5 F3		            lda tmp_dy
-  1436 3B8B 85 E3		            sta _dividend+1
+  1327 				; calculate the difference between angle1 and angle2
+  1328
+  1329 				; input:
+  1330 				; tmp_angle1 (0..255)
+  1331 				; tmp_angle2 (0..255)
+  1332
+  1333 				; output:
+  1334 				; tmp_angle_diff, A: difference between angle1 and angle2
+  1335 				; tmp_angle_direction: 0 = anti-clockwise, 1 = clockwise
+  1336
+  1337 3B0A			calc_angle_diff
+  1338 3B0A A9 00		            lda #0
+  1339 3B0C 85 B2		            sta add_to_angle
+  1340 3B0E 85 B4		            sta tmp_angle_direction
+  1341
+  1342 				; make sure we can compare angles, otherwise add $40 to angles
+  1343 3B10 A5 B0		            lda tmp_angle1
+  1344 3B12 C9 C0		            cmp #$c0
+  1345 3B14 B0 06		            bcs too_large
+  1346 3B16 A5 B1		            lda tmp_angle2
+  1347 3B18 C9 C0		            cmp #$c0
+  1348 3B1A 90 12		            bcc not_too_large
+  1349 3B1C			too_large
+  1350 3B1C A5 B0		            lda tmp_angle1
+  1351 3B1E 38			            sec
+  1352 3B1F E9 40		            sbc #$40
+  1353 3B21 85 B0		            sta tmp_angle1
+  1354 				            
+  1355 3B23 A5 B1		            lda tmp_angle2
+  1356 3B25 38			            sec
+  1357 3B26 E9 40		            sbc #$40
+  1358 3B28 85 B1		            sta tmp_angle2
+  1359 				            
+  1360 3B2A A9 40		            lda #$40
+  1361 3B2C 85 B2		            sta add_to_angle
+  1362
+  1363 3B2E			not_too_large
+  1364 3B2E A5 B1		            lda tmp_angle2
+  1365 3B30 C5 B0		            cmp tmp_angle1
+  1366 3B32 90 0A		            bcc angle2_smaller_angle1
+  1367 				; ball >= play
+  1368 3B34 38			            sec
+  1369 3B35 E5 B0		            sbc tmp_angle1
+  1370 3B37 85 B7		            sta tmp_angle_diff
+  1371 				            
+  1372 3B39 E6 B4		            inc tmp_angle_direction
+  1373 3B3B 4C 45 3B		            jmp diff_calculated
+  1374 				                        
+  1375 3B3E			angle2_smaller_angle1
+  1376 3B3E A5 B0		            lda tmp_angle1
+  1377 3B40 38			            sec
+  1378 3B41 E5 B1		            sbc tmp_angle2
+  1379 3B43 85 B7		            sta tmp_angle_diff
+  1380
+  1381 3B45			diff_calculated
+  1382 3B45 A5 B7		            lda tmp_angle_diff           
+  1383 3B47 60			            rts
+  1384
+  1385 				; X = angle
+  1386 				; lookup magnitude of angle 0 to angle X
+  1387 3B48			angle_to_magnitude
+  1388 3B48 BD 00 48		            lda magnitudes_lo,x
+  1389 3B4B 85 B8		            sta magnitude
+  1390 3B4D BD 00 49		            lda magnitudes_hi,x
+  1391 3B50 85 B9		            sta magnitude+1
+  1392 3B52 60			            rts
+  1393
+  1394 				; tmp_dx = abs(tmp_x2 - tmp_x1)
+  1395 3B53			calc_abs_tmp_dx
+  1396 3B53 A5 E8		            lda tmp_x2
+  1397 3B55 38			            sec
+  1398 3B56 E5 E6		            sbc tmp_x1
+  1399 3B58 B0 05		            bcs x2_le
+  1400 3B5A 49 FF		            eor #255
+  1401 3B5C 18			            clc
+  1402 3B5D 69 01		            adc #1
+  1403 3B5F 85 F2		x2_le       sta tmp_dx
+  1404
+  1405 				; tmp_dy = abs(tmp_y2 - tmp_y1)
+  1406 3B61			calc_abs_tmp_dy
+  1407 3B61 A5 E9		            lda tmp_y2
+  1408 3B63 38			            sec
+  1409 3B64 E5 E7		            sbc tmp_y1
+  1410 3B66 B0 05		            bcs y2_le
+  1411 3B68 49 FF		            eor #255
+  1412 3B6A 18			            clc
+  1413 3B6B 69 01		            adc #1
+  1414 3B6D 85 F3		y2_le       sta tmp_dy
+  1415 3B6F 60			            rts
+  1416 				            
+  1417 3B70			calc_dx_div_magnitude
+  1418 3B70 A9 00		            lda #0
+  1419 3B72 85 E2		            sta _dividend
+  1420 3B74 A5 F2		            lda tmp_dx
+  1421 3B76 85 E3		            sta _dividend+1
+  1422
+  1423 3B78 A5 B9		            lda magnitude+1
+  1424 3B7A 85 E0		            sta _divisor
+  1425 3B7C A9 00		            lda #0
+  1426 3B7E 85 E1		            sta _divisor+1
+  1427 				            
+  1428 3B80 20 A8 3B		            jsr _div16
+  1429
+  1430 				; todo multiply result with velocity            
+  1431 3B83 A5 E2		            lda _result
+  1432 3B85 85 EE		            sta step_x
+  1433 3B87 A5 E3		            lda _result+1
+  1434 3B89 85 EF		            sta step_x+1
+  1435 				            
+  1436 3B8B 60			            rts
   1437 				            
-  1438 3B8D A5 B9		            lda magnitude+1
-  1439 3B8F 85 E0		            sta _divisor
-  1440 3B91 A9 00		            lda #0
-  1441 3B93 85 E1		            sta _divisor+1
-  1442
-  1443 3B95 20 A1 3B		            jsr _div16
-  1444 				            
-  1445 				; todo multiply result with velocity
-  1446 3B98 A5 E2		            lda _result
-  1447 3B9A 85 F0		            sta step_y
-  1448 3B9C A5 E3		            lda _result+1
-  1449 3B9E 85 F1		            sta step_y+1
+  1438 3B8C			calc_dy_div_magnitude
+  1439 3B8C A9 00		            lda #0
+  1440 3B8E 85 E2		            sta _dividend
+  1441 3B90 A5 F3		            lda tmp_dy
+  1442 3B92 85 E3		            sta _dividend+1
+  1443 				            
+  1444 3B94 A5 B9		            lda magnitude+1
+  1445 3B96 85 E0		            sta _divisor
+  1446 3B98 A9 00		            lda #0
+  1447 3B9A 85 E1		            sta _divisor+1
+  1448
+  1449 3B9C 20 A8 3B		            jsr _div16
   1450 				            
-  1451 3BA0 60			            rts
-  1452
-  1453 				; divide 16bit
-  1454 				; https://codebase64.org/doku.php?id=base:16bit_division_16-bit_result
-  1455
-  1456 				; _result = _dividend / divisor
-  1457
-  1458 3BA1 A9 00		_div16      lda #0          ;preset remainder to 0
-  1459 3BA3 85 E4		            sta _remainder
-  1460 3BA5 85 E5		            sta _remainder+1
-  1461 3BA7 A2 10		            ldx #16         ;repeat for each bit: ...
-  1462
-  1463 3BA9 06 E2		_div_loop   asl _dividend    ;dividend lb & hb*2, msb -> Carry
-  1464 3BAB 26 E3		            rol _dividend+1  
-  1465 3BAD 26 E4		            rol _remainder   ;remainder lb & hb * 2 + msb from carry
-  1466 3BAF 26 E5		            rol _remainder+1
-  1467 3BB1 A5 E4		            lda _remainder
-  1468 3BB3 38			            sec
-  1469 3BB4 E5 E0		            sbc _divisor ;substract divisor to see if it fits in
-  1470 3BB6 A8			            tay         ;lb result -> Y, for we may need it later
-  1471 3BB7 A5 E5		            lda _remainder+1
-  1472 3BB9 E5 E1		            sbc _divisor+1
-  1473 3BBB 90 06		            bcc _div_skip    ;if carry=0 then divisor didn't fit in yet
-  1474
-  1475 3BBD 85 E5		            sta _remainder+1 ;else save substraction result as new remainder,
-  1476 3BBF 84 E4		            sty _remainder   
-  1477 3BC1 E6 E2		            inc _result  ;and INCrement result cause divisor fit in 1 times
-  1478
-  1479 3BC3 CA			_div_skip   dex
-  1480 3BC4 D0 E3		            bne _div_loop 
-  1481 3BC6 60			            rts
-  1482
-  1483 				; Calculations for step size
+  1451 				; todo multiply result with velocity
+  1452 3B9F A5 E2		            lda _result
+  1453 3BA1 85 F0		            sta step_y
+  1454 3BA3 A5 E3		            lda _result+1
+  1455 3BA5 85 F1		            sta step_y+1
+  1456 				            
+  1457 3BA7 60			            rts
+  1458
+  1459 				; divide 16bit
+  1460 				; https://codebase64.org/doku.php?id=base:16bit_division_16-bit_result
+  1461
+  1462 				; _result = _dividend / divisor
+  1463
+  1464 3BA8 A9 00		_div16      lda #0          ;preset remainder to 0
+  1465 3BAA 85 E4		            sta _remainder
+  1466 3BAC 85 E5		            sta _remainder+1
+  1467 3BAE A2 10		            ldx #16         ;repeat for each bit: ...
+  1468
+  1469 3BB0 06 E2		_div_loop   asl _dividend    ;dividend lb & hb*2, msb -> Carry
+  1470 3BB2 26 E3		            rol _dividend+1  
+  1471 3BB4 26 E4		            rol _remainder   ;remainder lb & hb * 2 + msb from carry
+  1472 3BB6 26 E5		            rol _remainder+1
+  1473 3BB8 A5 E4		            lda _remainder
+  1474 3BBA 38			            sec
+  1475 3BBB E5 E0		            sbc _divisor ;substract divisor to see if it fits in
+  1476 3BBD A8			            tay         ;lb result -> Y, for we may need it later
+  1477 3BBE A5 E5		            lda _remainder+1
+  1478 3BC0 E5 E1		            sbc _divisor+1
+  1479 3BC2 90 06		            bcc _div_skip    ;if carry=0 then divisor didn't fit in yet
+  1480
+  1481 3BC4 85 E5		            sta _remainder+1 ;else save substraction result as new remainder,
+  1482 3BC6 84 E4		            sty _remainder   
+  1483 3BC8 E6 E2		            inc _result  ;and INCrement result cause divisor fit in 1 times
   1484
-  1485 				; not optimised for speed or size
-  1486 				; step should be set according to the angle
-  1487
-  1488 				; move in straight line (x1,y1) to (x2,y2)
-  1489
-  1490 				; 1. set start/end of line
-  1491 				; set (tmp_x1, tmp_y1)
-  1492 				; set (tmp_x2, tmp_y2)
+  1485 3BCA CA			_div_skip   dex
+  1486 3BCB D0 E3		            bne _div_loop 
+  1487 3BCD 60			            rts
+  1488
+  1489 				; Calculations for step size
+  1490
+  1491 				; not optimised for speed or size
+  1492 				; step should be set according to the angle
   1493
-  1494 				; 2. init. current_x, current_y
-  1495 				; - set current x,y to start of line (tmp_x1, tmp_y2)
-  1496 				; - calculates step sizes for x,y
-  1497 				; - calculated directions for x,y
-  1498 				;            jsr init_current_xy
+  1494 				; move in straight line (x1,y1) to (x2,y2)
+  1495
+  1496 				; 1. set start/end of line
+  1497 				; set (tmp_x1, tmp_y1)
+  1498 				; set (tmp_x2, tmp_y2)
   1499
-  1500 				; 3. use current_x, current_y to plot or set a position
-  1501 				;            lda current_x+1
-  1502 				;            sta x_position
-  1503 				;            lda current_y+1
-  1504 				;            sta y_position
-  1505 				;            jsr plot_pixel
-  1506
-  1507 				; 4. move current_x, current_y to next position on line
-  1508 				; A=0 still moving
-  1509 				;           move_current_xy
-  1510
-  1511 3BC7			init_current_xy
-  1512 3BC7 A9 7F		            lda #$7f      ; was 128 for half pixel
-  1513 3BC9 85 EA		            sta current_x
-  1514 3BCB 85 EC		            sta current_y
-  1515
-  1516 3BCD A5 E6		            lda tmp_x1
-  1517 3BCF 85 EB		            sta current_x+1
-  1518 				            
-  1519 3BD1 A5 E7		            lda tmp_y1
-  1520 3BD3 85 ED		            sta current_y+1
+  1500 				; 2. init. current_x, current_y
+  1501 				; - set current x,y to start of line (tmp_x1, tmp_y2)
+  1502 				; - calculates step sizes for x,y
+  1503 				; - calculated directions for x,y
+  1504 				;            jsr init_current_xy
+  1505
+  1506 				; 3. use current_x, current_y to plot or set a position
+  1507 				;            lda current_x+1
+  1508 				;            sta x_position
+  1509 				;            lda current_y+1
+  1510 				;            sta y_position
+  1511 				;            jsr plot_pixel
+  1512
+  1513 				; 4. move current_x, current_y to next position on line
+  1514 				; A=0 still moving
+  1515 				;           move_current_xy
+  1516
+  1517 3BCE			init_current_xy
+  1518 3BCE A9 7F		            lda #$7f      ; was 128 for half pixel
+  1519 3BD0 85 EA		            sta current_x
+  1520 3BD2 85 EC		            sta current_y
   1521
-  1522 				; dx = abs(tmp_x1 - tmp_x2)
-  1523 3BD5 20 4C 3B		            jsr calc_abs_tmp_dx
-  1524
-  1525 				; dy = abs(tmp_y1 - tmp_y2)
-  1526 3BD8 20 5A 3B		            jsr calc_abs_tmp_dy
+  1522 3BD4 A5 E6		            lda tmp_x1
+  1523 3BD6 85 EB		            sta current_x+1
+  1524 				            
+  1525 3BD8 A5 E7		            lda tmp_y1
+  1526 3BDA 85 ED		            sta current_y+1
   1527
-  1528 				; set directions
-  1529 3BDB A5 E6		            lda tmp_x1
-  1530 3BDD C5 E8		            cmp tmp_x2
-  1531 3BDF 90 04		            bcc x1_smaller_x2
-  1532 				; x1 >= x2
-  1533 3BE1 A9 01		            lda #1
-  1534 3BE3 D0 02		            bne set_dir_x
-  1535 3BE5			x1_smaller_x2
-  1536 3BE5 A9 00		            lda #0
-  1537 3BE7			set_dir_x
-  1538 3BE7 85 FA		            sta dir_x
-  1539 				            
-  1540 3BE9 A5 E7		            lda tmp_y1
-  1541 3BEB C5 E9		            cmp tmp_y2
-  1542 3BED 90 04		            bcc y1_smaller_y2
-  1543 				; y1 >= y2
-  1544 3BEF A9 01		            lda #1
-  1545 3BF1 D0 02		            bne set_dir_y
-  1546 3BF3			y1_smaller_y2
-  1547 3BF3 A9 00		            lda #0
-  1548 3BF5			set_dir_y
-  1549 3BF5 85 FB		            sta dir_y
-  1550
-  1551 				; Calculate diff between start angle and end angle
-  1552
-  1553 3BF7 A5 AA		            lda ball_angle_start
-  1554 3BF9 85 B0		            sta tmp_angle1
-  1555 3BFB A5 AB		            lda ball_angle_end
-  1556 3BFD 85 B1		            sta tmp_angle2
-  1557 				            
-  1558 3BFF 20 03 3B		            jsr calc_angle_diff
-  1559
-  1560 				; lookup magnitude of vector (tmp_x1, tmp_y1), (tmp_x2, tmp_y2)
-  1561 3C02 A6 B7		            ldx tmp_angle_diff
-  1562 3C04 20 41 3B		            jsr angle_to_magnitude
+  1528 				; dx = abs(tmp_x1 - tmp_x2)
+  1529 3BDC 20 53 3B		            jsr calc_abs_tmp_dx
+  1530
+  1531 				; dy = abs(tmp_y1 - tmp_y2)
+  1532 3BDF 20 61 3B		            jsr calc_abs_tmp_dy
+  1533
+  1534 				; set directions
+  1535 3BE2 A5 E6		            lda tmp_x1
+  1536 3BE4 C5 E8		            cmp tmp_x2
+  1537 3BE6 90 04		            bcc x1_smaller_x2
+  1538 				; x1 >= x2
+  1539 3BE8 A9 01		            lda #1
+  1540 3BEA D0 02		            bne set_dir_x
+  1541 3BEC			x1_smaller_x2
+  1542 3BEC A9 00		            lda #0
+  1543 3BEE			set_dir_x
+  1544 3BEE 85 FA		            sta dir_x
+  1545 				            
+  1546 3BF0 A5 E7		            lda tmp_y1
+  1547 3BF2 C5 E9		            cmp tmp_y2
+  1548 3BF4 90 04		            bcc y1_smaller_y2
+  1549 				; y1 >= y2
+  1550 3BF6 A9 01		            lda #1
+  1551 3BF8 D0 02		            bne set_dir_y
+  1552 3BFA			y1_smaller_y2
+  1553 3BFA A9 00		            lda #0
+  1554 3BFC			set_dir_y
+  1555 3BFC 85 FB		            sta dir_y
+  1556
+  1557 				; Calculate diff between start angle and end angle
+  1558
+  1559 3BFE A5 AA		            lda ball_angle_start
+  1560 3C00 85 B0		            sta tmp_angle1
+  1561 3C02 A5 AB		            lda ball_angle_end
+  1562 3C04 85 B1		            sta tmp_angle2
   1563 				            
-  1564 3C07 20 69 3B		            jsr calc_dx_div_magnitude
-  1565 3C0A 20 85 3B		            jsr calc_dy_div_magnitude
-  1566 				            
-  1567 				; Calculate step size by ball speed
-  1568 				            
-  1569 				; step_x = step_x * speed
-  1570 				            
-  1571 3C0D A5 EE		            lda step_x
-  1572 3C0F 85 F6		            sta _multiplicand
-  1573 3C11 A5 EF		            lda step_x+1
-  1574 3C13 85 F7		            sta _multiplicand+1
-  1575 3C15 A5 AC		            lda ball_speed
-  1576 3C17 85 F8		            sta _multiplier
-  1577
-  1578 3C19 20 4F 35		            jsr _multi8
-  1579 				;result in .A (low byte, also in .X) and .Y (high byte)
-  1580 3C1C 85 EE		            sta step_x
-  1581 3C1E 84 EF		            sty step_x+1
-  1582 3C20			skip_step_x_hi
-  1583 				            
-  1584 				; step_y = step_y * speed
-  1585
-  1586 3C20 A5 F0		            lda step_y
-  1587 3C22 85 F6		            sta _multiplicand
-  1588 3C24 A5 F1		            lda step_y+1
-  1589 3C26 85 F7		            sta _multiplicand+1
-  1590 3C28 A5 AC		            lda ball_speed
-  1591 3C2A 85 F8		            sta _multiplier
-  1592
-  1593 3C2C 20 4F 35		            jsr _multi8
-  1594 				;result in .A (low byte, also in .X) and .Y (high byte)
-  1595 3C2F 85 F0		            sta step_y
-  1596 3C31 84 F1		            sty step_y+1
-  1597 3C33			skip_step_y_hi
+  1564 3C06 20 0A 3B		            jsr calc_angle_diff
+  1565
+  1566 				; lookup magnitude of vector (tmp_x1, tmp_y1), (tmp_x2, tmp_y2)
+  1567 3C09 A6 B7		            ldx tmp_angle_diff
+  1568 3C0B 20 48 3B		            jsr angle_to_magnitude
+  1569 				            
+  1570 3C0E 20 70 3B		            jsr calc_dx_div_magnitude
+  1571 3C11 20 8C 3B		            jsr calc_dy_div_magnitude
+  1572 				            
+  1573 				; Calculate step size by ball speed
+  1574 				            
+  1575 				; step_x = step_x * speed
+  1576 				            
+  1577 3C14 A5 EE		            lda step_x
+  1578 3C16 85 F6		            sta _multiplicand
+  1579 3C18 A5 EF		            lda step_x+1
+  1580 3C1A 85 F7		            sta _multiplicand+1
+  1581 3C1C A5 AC		            lda ball_speed
+  1582 3C1E 85 F8		            sta _multiplier
+  1583
+  1584 3C20 20 51 35		            jsr _multi8
+  1585 				;result in .A (low byte, also in .X) and .Y (high byte)
+  1586 3C23 85 EE		            sta step_x
+  1587 3C25 84 EF		            sty step_x+1
+  1588 3C27			skip_step_x_hi
+  1589 				            
+  1590 				; step_y = step_y * speed
+  1591
+  1592 3C27 A5 F0		            lda step_y
+  1593 3C29 85 F6		            sta _multiplicand
+  1594 3C2B A5 F1		            lda step_y+1
+  1595 3C2D 85 F7		            sta _multiplicand+1
+  1596 3C2F A5 AC		            lda ball_speed
+  1597 3C31 85 F8		            sta _multiplier
   1598
-  1599 3C33 60			            rts
-  1600
-  1601 				; Move ball position 
-  1602 				; Add one step, until end reached
-  1603 				; Input:
-  1604 				; - step size (step_x, step_y)
-  1605 				; - current ball position (current_x, current_y)
-  1606 				; - end position (tmp_x2, tmp_y2)
-  1607 				; Output:
-  1608 				; A (0 = still moving, 1 = end reached)
-  1609 3C34			move_current_xy
-  1610 3C34 A9 00		            lda #0
-  1611 3C36 85 FC		            sta line_end_x
-  1612 3C38 85 FD		            sta line_end_y
-  1613
-  1614 				; sets line end indicators here
-  1615 3C3A 20 57 3C		            jsr move_current_x
-  1616 3C3D 20 97 3C		            jsr move_current_y
-  1617
-  1618 3C40 A5 FC		            lda line_end_x
-  1619 3C42 25 FD		            and line_end_y
-  1620 3C44 F0 10		            beq no_end_reached
-  1621 				            
-  1622 				; set current to (x2,y2)
-  1623 3C46 A5 E8		            lda tmp_x2
-  1624 3C48 85 EB		            sta current_x+1
-  1625 3C4A A5 E9		            lda tmp_y2
-  1626 3C4C 85 ED		            sta current_y+1
+  1599 3C33 20 51 35		            jsr _multi8
+  1600 				;result in .A (low byte, also in .X) and .Y (high byte)
+  1601 3C36 85 F0		            sta step_y
+  1602 3C38 84 F1		            sty step_y+1
+  1603 3C3A			skip_step_y_hi
+  1604
+  1605 3C3A 60			            rts
+  1606
+  1607 				; Move ball position 
+  1608 				; Add one step, until end reached
+  1609 				; Input:
+  1610 				; - step size (step_x, step_y)
+  1611 				; - current ball position (current_x, current_y)
+  1612 				; - end position (tmp_x2, tmp_y2)
+  1613 				; Output:
+  1614 				; A (0 = still moving, 1 = end reached)
+  1615 3C3B			move_current_xy
+  1616 3C3B A9 00		            lda #0
+  1617 3C3D 85 FC		            sta line_end_x
+  1618 3C3F 85 FD		            sta line_end_y
+  1619
+  1620 				; sets line end indicators here
+  1621 3C41 20 5E 3C		            jsr move_current_x
+  1622 3C44 20 9E 3C		            jsr move_current_y
+  1623
+  1624 3C47 A5 FC		            lda line_end_x
+  1625 3C49 25 FD		            and line_end_y
+  1626 3C4B F0 10		            beq no_end_reached
   1627 				            
-  1628 3C4E A9 00		            lda #0
-  1629 3C50 85 EA		            sta current_x
-  1630 3C52 85 EC		            sta current_y
-  1631 				            
-  1632 3C54 A9 01		            lda #1 ; end reached
+  1628 				; set current to (x2,y2)
+  1629 3C4D A5 E8		            lda tmp_x2
+  1630 3C4F 85 EB		            sta current_x+1
+  1631 3C51 A5 E9		            lda tmp_y2
+  1632 3C53 85 ED		            sta current_y+1
   1633 				            
-  1634 3C56			no_end_reached  ; A = 0
-  1635 3C56 60			            rts
-  1636
-  1637 3C57			move_current_x
-  1638 3C57 A5 FA		            lda dir_x
-  1639 3C59 D0 18		            bne move_current_left
-  1640
-  1641 				; move right, add
-  1642 3C5B A5 EA		            lda current_x
-  1643 3C5D 18			            clc
-  1644 3C5E 65 EE		            adc step_x
-  1645 3C60 85 EA		            sta current_x
-  1646 3C62 A5 EB		            lda current_x+1
-  1647 3C64 65 EF		            adc step_x+1
-  1648 3C66 85 EB		            sta current_x+1
-  1649
-  1650 3C68 A5 EB		            lda current_x+1
-  1651 3C6A C5 E8		            cmp tmp_x2
-  1652 3C6C 90 04		            bcc no_line_end
-  1653 3C6E			exact_end_x
-  1654 3C6E A9 01		            lda #1
-  1655 3C70 85 FC		            sta line_end_x 
-  1656 3C72			no_line_end
-  1657 3C72 60			            rts
-  1658 				            
-  1659 3C73			move_current_left
-  1660 3C73 A5 EA		            lda current_x
-  1661 3C75 38			            sec
-  1662 3C76 E5 EE		            sbc step_x
-  1663 3C78 90 01		            bcc clear_skip
-  1664 3C7A EA			            nop
-  1665 3C7B			clear_skip
-  1666 3C7B 85 EA		            sta current_x
-  1667 3C7D A5 EB		            lda current_x+1
-  1668 3C7F E5 EF		            sbc step_x+1
-  1669 3C81 85 EB		            sta current_x+1
-  1670 3C83 90 0B		            bcc below_zero
-  1671 				                        
-  1672 3C85 A5 E8		            lda tmp_x2
-  1673 3C87 C5 EB		            cmp current_x+1
-  1674 3C89 90 E7		            bcc no_line_end
-  1675 3C8B A9 01		            lda #1
-  1676 3C8D 85 FC		            sta line_end_x            
-  1677 3C8F 60			            rts
-  1678 3C90			below_zero            
-  1679 3C90 A9 01		            lda #1
-  1680 3C92 85 FC		            sta line_end_x
-  1681 3C94 85 FD		            sta line_end_y
-  1682 3C96 60			            rts
-  1683 3C97			move_current_y
-  1684 3C97 A5 FB		            lda dir_y
-  1685 3C99 D0 18		            bne move_current_up
-  1686
-  1687 				; move down, add
-  1688 3C9B A5 EC		            lda current_y
-  1689 3C9D 18			            clc
-  1690 3C9E 65 F0		            adc step_y
-  1691 3CA0 85 EC		            sta current_y
-  1692 3CA2 A5 ED		            lda current_y+1
-  1693 3CA4 65 F1		            adc step_y+1
-  1694 3CA6 85 ED		            sta current_y+1
-  1695 				            
-  1696 3CA8 A5 ED		            lda current_y+1
-  1697 3CAA C5 E9		            cmp tmp_y2
-  1698 3CAC 90 C4		            bcc no_line_end
-  1699 3CAE			exact_end_y
-  1700 3CAE A9 01		            lda #1
-  1701 3CB0 85 FD		            sta line_end_y
-  1702 3CB2 60			            rts
-  1703
-  1704 3CB3			move_current_up
-  1705 3CB3 A5 EC		            lda current_y
-  1706 3CB5 38			            sec
-  1707 3CB6 E5 F0		            sbc step_y
-  1708 3CB8 85 EC		            sta current_y
-  1709 3CBA A5 ED		            lda current_y+1
-  1710 3CBC E5 F1		            sbc step_y+1
-  1711 3CBE 90 D0		            bcc below_zero
-  1712 3CC0 85 ED		            sta current_y+1
-  1713 				            
-  1714 3CC2 A5 E9		            lda tmp_y2
-  1715 3CC4 C5 ED		            cmp current_y+1
-  1716 3CC6 90 AA		            bcc no_line_end
-  1717 3CC8 A9 01		            lda #1
-  1718 3CCA 85 FD		            sta line_end_y
-  1719 3CCC 60			            rts                            
-  1720 				            
-  1721 3CCD			init_sprites
-  1722 3CCD A2 00		            ldx #0
-  1723 3CCF 8A			            txa
-  1724 3CD0			set_p
-  1725 3CD0 9D 00 0E		            sta p0_area,x
-  1726 3CD3 9D 80 0E		            sta p1_area,x
-  1727 3CD6 9D 00 0F		            sta p2_area,x
-  1728 3CD9 9D 80 0F		            sta p3_area,x
-  1729 3CDC E8			            inx
-  1730 3CDD 10 F1		            bpl set_p
-  1731
-  1732 3CDF A9 31		            lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
-  1733 3CE1 8D 6F 02		            sta GPRIOR
-  1734
-  1735 3CE4 A9 0C		            lda #>pm_area
-  1736 3CE6 8D 07 D4		            sta PMBASE
+  1634 3C55 A9 00		            lda #0
+  1635 3C57 85 EA		            sta current_x
+  1636 3C59 85 EC		            sta current_y
+  1637 				            
+  1638 3C5B A9 01		            lda #1 ; end reached
+  1639 				            
+  1640 3C5D			no_end_reached  ; A = 0
+  1641 3C5D 60			            rts
+  1642
+  1643 3C5E			move_current_x
+  1644 3C5E A5 FA		            lda dir_x
+  1645 3C60 D0 18		            bne move_current_left
+  1646
+  1647 				; move right, add
+  1648 3C62 A5 EA		            lda current_x
+  1649 3C64 18			            clc
+  1650 3C65 65 EE		            adc step_x
+  1651 3C67 85 EA		            sta current_x
+  1652 3C69 A5 EB		            lda current_x+1
+  1653 3C6B 65 EF		            adc step_x+1
+  1654 3C6D 85 EB		            sta current_x+1
+  1655
+  1656 3C6F A5 EB		            lda current_x+1
+  1657 3C71 C5 E8		            cmp tmp_x2
+  1658 3C73 90 04		            bcc no_line_end
+  1659 3C75			exact_end_x
+  1660 3C75 A9 01		            lda #1
+  1661 3C77 85 FC		            sta line_end_x 
+  1662 3C79			no_line_end
+  1663 3C79 60			            rts
+  1664 				            
+  1665 3C7A			move_current_left
+  1666 3C7A A5 EA		            lda current_x
+  1667 3C7C 38			            sec
+  1668 3C7D E5 EE		            sbc step_x
+  1669 3C7F 90 01		            bcc clear_skip
+  1670 3C81 EA			            nop
+  1671 3C82			clear_skip
+  1672 3C82 85 EA		            sta current_x
+  1673 3C84 A5 EB		            lda current_x+1
+  1674 3C86 E5 EF		            sbc step_x+1
+  1675 3C88 85 EB		            sta current_x+1
+  1676 3C8A 90 0B		            bcc below_zero
+  1677 				                        
+  1678 3C8C A5 E8		            lda tmp_x2
+  1679 3C8E C5 EB		            cmp current_x+1
+  1680 3C90 90 E7		            bcc no_line_end
+  1681 3C92 A9 01		            lda #1
+  1682 3C94 85 FC		            sta line_end_x            
+  1683 3C96 60			            rts
+  1684 3C97			below_zero            
+  1685 3C97 A9 01		            lda #1
+  1686 3C99 85 FC		            sta line_end_x
+  1687 3C9B 85 FD		            sta line_end_y
+  1688 3C9D 60			            rts
+  1689 3C9E			move_current_y
+  1690 3C9E A5 FB		            lda dir_y
+  1691 3CA0 D0 18		            bne move_current_up
+  1692
+  1693 				; move down, add
+  1694 3CA2 A5 EC		            lda current_y
+  1695 3CA4 18			            clc
+  1696 3CA5 65 F0		            adc step_y
+  1697 3CA7 85 EC		            sta current_y
+  1698 3CA9 A5 ED		            lda current_y+1
+  1699 3CAB 65 F1		            adc step_y+1
+  1700 3CAD 85 ED		            sta current_y+1
+  1701 				            
+  1702 3CAF A5 ED		            lda current_y+1
+  1703 3CB1 C5 E9		            cmp tmp_y2
+  1704 3CB3 90 C4		            bcc no_line_end
+  1705 3CB5			exact_end_y
+  1706 3CB5 A9 01		            lda #1
+  1707 3CB7 85 FD		            sta line_end_y
+  1708 3CB9 60			            rts
+  1709
+  1710 3CBA			move_current_up
+  1711 3CBA A5 EC		            lda current_y
+  1712 3CBC 38			            sec
+  1713 3CBD E5 F0		            sbc step_y
+  1714 3CBF 85 EC		            sta current_y
+  1715 3CC1 A5 ED		            lda current_y+1
+  1716 3CC3 E5 F1		            sbc step_y+1
+  1717 3CC5 90 D0		            bcc below_zero
+  1718 3CC7 85 ED		            sta current_y+1
+  1719 				            
+  1720 3CC9 A5 E9		            lda tmp_y2
+  1721 3CCB C5 ED		            cmp current_y+1
+  1722 3CCD 90 AA		            bcc no_line_end
+  1723 3CCF A9 01		            lda #1
+  1724 3CD1 85 FD		            sta line_end_y
+  1725 3CD3 60			            rts                            
+  1726 				            
+  1727 3CD4			init_sprites
+  1728 3CD4 A2 00		            ldx #0
+  1729 3CD6 8A			            txa
+  1730 3CD7			set_p
+  1731 3CD7 9D 00 0E		            sta p0_area,x
+  1732 3CDA 9D 80 0E		            sta p1_area,x
+  1733 3CDD 9D 00 0F		            sta p2_area,x
+  1734 3CE0 9D 80 0F		            sta p3_area,x
+  1735 3CE3 E8			            inx
+  1736 3CE4 10 F1		            bpl set_p
   1737
-  1738 3CE9 A9 03		            lda #3          ; P/M both on
-  1739 3CEB 8D 1D D0		            sta GRACTL
+  1738 3CE6 A9 31		            lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
+  1739 3CE8 8D 6F 02		            sta GPRIOR
   1740
-  1741 3CEE A9 90		            lda #$90
-  1742 3CF0 8D 02 D0		            sta HPOSP2
-  1743 3CF3 A9 A0		            lda #$A0
-  1744 3CF5 8D 03 D0		            sta HPOSP3  
-  1745 3CF8 60			            rts
+  1741 3CEB A9 0C		            lda #>pm_area
+  1742 3CED 8D 07 D4		            sta PMBASE
+  1743
+  1744 3CF0 A9 03		            lda #3          ; P/M both on
+  1745 3CF2 8D 1D D0		            sta GRACTL
   1746
-  1747 3CF9			init_colors
-  1748 3CF9 A9 5A		            lda #BASE_COLOR_P1+10
-  1749 3CFB 8D C2 02		            sta PCOLR2
-  1750 3CFE A9 BA		            lda #BASE_COLOR_P2+10
-  1751 3D00 8D C3 02		            sta PCOLR3
-  1752 				            
-  1753 3D03 A9 00		            lda #0
-  1754 3D05 8D C6 02		            sta COLOR2
-  1755
-  1756 3D08 A9 0E		            lda #HEADER_FG_COLOR
-  1757 3D0A 8D C5 02		            sta COLOR1
-  1758
-  1759 3D0D A9 50		            lda #HEADER_P1_COLOR
-  1760 3D0F 8D C0 02		            sta PCOLR0
-  1761 3D12 A9 B0		            lda #HEADER_P2_COLOR
-  1762 3D14 8D C1 02		            sta PCOLR1
-  1763
-  1764 3D17 60			            rts
-  1765
-  1766 3D18			previous_consol
-  1767 3D18 00			            dta 0
-  1768
-  1769 3D19			current_level_index
-  1770 3D19 00			            dta 0
-  1771 = 0004			NR_OF_LEVELS = 4
-  1772 = 0000			INIT_LEVEL_INDEX = 0
-  1773 3D1A			level_speeds
-  1774 3D1A 02 04 06 08		            dta 2,4,6,8
-  1775 				            
-  1776 				; X = level (0..NR_OF_LEVELS)
-  1777 3D1E			set_level_ball_speed
-  1778 3D1E BD 1A 3D		            lda level_speeds,x
-  1779 3D21 85 AC		            sta ball_speed
-  1780 3D23 8A			            txa
-  1781 3D24 18			            clc
-  1782 3D25 69 01		            adc #1
-  1783 3D27 09 10		            ora #16
-  1784 3D29 8D 84 4E		            sta level_char
-  1785 3D2C 60			            rts
-  1786 				            
-  1787 3D2D			increase_level
-  1788 3D2D EE 19 3D		            inc current_level_index
-  1789 3D30 AD 19 3D		            lda current_level_index
-  1790 3D33 C9 04		            cmp #NR_OF_LEVELS
-  1791 3D35 D0 05		            bne ok_level
-  1792 3D37 A9 00		            lda #INIT_LEVEL_INDEX
-  1793 3D39 8D 19 3D		            sta current_level_index
-  1794 3D3C			ok_level           
-  1795 3D3C 60			            rts
-  1796 				            
-  1797 3D3D			            .align $100
-  1798 3E00			inner_x_tab
-  1799 = 3F00			inner_y_tab = *+$100
-  1800 3E00-49FF> 70 72 75 77 +             ins 'data\in210.dat'
-  1801 				      
-  1802 4000			            .align $400            
-  1803 				; outer circle 1024 plot points on 360 degrees
-  1804 4000			outer_x_tab
-  1805 = 4400			outer_y_tab = *+1024
-  1806 4000 70 70 71 72 72 73 +             ins 'data\out224.dat'
-  1807 				           
-  1808 4800			            .align $400
-  1809 				; table of magnitudes (length) between angle 0 and 0..255
-  1810 				; fixed point 8.8 : hi.lo
-  1811 4800			magnitudes_lo
-  1812 = 4900			magnitudes_hi = *+256
-  1813 4800 00 BC 79 35 F1 AC +             ins 'data\magnitud.dat'
-  1814
-  1815 4A00			            .align $400
-  1816 4C00			display_list
-  1817 4C00-4D27> C2		            dta $42+128         ; dli_header
-  1818 4C01 FE 4C		            dta a(score_line)
-  1819
-  1820 				; 102 x 40 = 4080 bytes            
-  1821 4C03 4F			            dta $4f
-  1822 4C04 00 60		            dta a(screen_mem1)
-  1823 4C06 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1824 4C0D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1825 4C15 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1826 4C1D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1827
-  1828 4C25 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1829 4C2D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1830 4C35 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1831 4C3D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1832
-  1833 4C45 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1834 4C4D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1835 4C55			menu_dl_hook
-  1836 4C55 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1837 4C5D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1747 3CF5 A9 90		            lda #$90
+  1748 3CF7 8D 02 D0		            sta HPOSP2
+  1749 3CFA A9 A0		            lda #$A0
+  1750 3CFC 8D 03 D0		            sta HPOSP3  
+  1751 3CFF 60			            rts
+  1752
+  1753 3D00			init_colors
+  1754 3D00 A9 5A		            lda #BASE_COLOR_P1+10
+  1755 3D02 8D C2 02		            sta PCOLR2
+  1756 3D05 A9 BA		            lda #BASE_COLOR_P2+10
+  1757 3D07 8D C3 02		            sta PCOLR3
+  1758 				            
+  1759 3D0A A9 00		            lda #0
+  1760 3D0C 8D C6 02		            sta COLOR2
+  1761
+  1762 3D0F A9 0E		            lda #HEADER_FG_COLOR
+  1763 3D11 8D C5 02		            sta COLOR1
+  1764
+  1765 3D14 A9 50		            lda #HEADER_P1_COLOR
+  1766 3D16 8D C0 02		            sta PCOLR0
+  1767 3D19 A9 B0		            lda #HEADER_P2_COLOR
+  1768 3D1B 8D C1 02		            sta PCOLR1
+  1769
+  1770 3D1E 60			            rts
+  1771
+  1772 3D1F			previous_consol
+  1773 3D1F 00			            dta 0
+  1774
+  1775 3D20			current_level_index
+  1776 3D20 00			            dta 0
+  1777 = 0004			NR_OF_LEVELS = 4
+  1778 = 0000			INIT_LEVEL_INDEX = 0
+  1779 3D21			level_speeds
+  1780 3D21 02 04 06 08		            dta 2,4,6,8
+  1781 				            
+  1782 				; X = level (0..NR_OF_LEVELS)
+  1783 3D25			set_level_ball_speed
+  1784 3D25 BD 21 3D		            lda level_speeds,x
+  1785 3D28 85 AC		            sta ball_speed
+  1786 3D2A 8A			            txa
+  1787 3D2B 18			            clc
+  1788 3D2C 69 01		            adc #1
+  1789 3D2E 09 10		            ora #16
+  1790 3D30 8D 84 4E		            sta level_char
+  1791 3D33 60			            rts
+  1792 				            
+  1793 3D34			increase_level
+  1794 3D34 EE 20 3D		            inc current_level_index
+  1795 3D37 AD 20 3D		            lda current_level_index
+  1796 3D3A C9 04		            cmp #NR_OF_LEVELS
+  1797 3D3C D0 05		            bne ok_level
+  1798 3D3E A9 00		            lda #INIT_LEVEL_INDEX
+  1799 3D40 8D 20 3D		            sta current_level_index
+  1800 3D43			ok_level           
+  1801 3D43 60			            rts
+  1802 				            
+  1803 3D44			            .align $100
+  1804 3E00			inner_x_tab
+  1805 = 3F00			inner_y_tab = *+$100
+  1806 3E00-49FF> 70 72 75 77 +             ins 'data\in210.dat'
+  1807 				      
+  1808 4000			            .align $400            
+  1809 				; outer circle 1024 plot points on 360 degrees
+  1810 4000			outer_x_tab
+  1811 = 4400			outer_y_tab = *+1024
+  1812 4000 70 70 71 72 72 73 +             ins 'data\out224.dat'
+  1813 				           
+  1814 4800			            .align $400
+  1815 				; table of magnitudes (length) between angle 0 and 0..255
+  1816 				; fixed point 8.8 : hi.lo
+  1817 4800			magnitudes_lo
+  1818 = 4900			magnitudes_hi = *+256
+  1819 4800 00 BC 79 35 F1 AC +             ins 'data\magnitud.dat'
+  1820
+  1821 4A00			            .align $400
+  1822 4C00			display_list
+  1823 4C00-4D27> C2		            dta $42+128         ; dli_header
+  1824 4C01 FE 4C		            dta a(score_line)
+  1825
+  1826 				; 102 x 40 = 4080 bytes            
+  1827 4C03 4F			            dta $4f
+  1828 4C04 00 60		            dta a(screen_mem1)
+  1829 4C06 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1830 4C0D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1831 4C15 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1832 4C1D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1833
+  1834 4C25 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1835 4C2D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1836 4C35 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1837 4C3D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
   1838
-  1839 4C65 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
-  1840
-  1841 				; 42 + 60 = 102, 4080 bytes
-  1842 4C6B 4F			            dta $4f
-  1843 4C6C 00 70		            dta a(screen_mem2)
-  1844 4C6E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1845
-  1846 4C75 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1847 4C7D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1848 4C85 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1849 4C8D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1850
-  1851 4C95 0F 0F		            dta $0f,$0f
-  1852
-  1853 				; 60 lines
-  1854 4C97			menu_dl_end
-  1855 4C97 4F			            dta $4f
-  1856 4C98 90 76		            dta a(screen_mem2+(42*SCREEN_WIDTH))
-  1857 4C9A 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1858 4CA1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1859 4CA9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1860 4CB1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1861
-  1862 4CB9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1863 4CC1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1864 4CC9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1865 4CD1 0F 0F 0F 0F		            dta $0f,$0f,$0f,$0f
-  1866
-  1867 				; 20 x 40 = 800
-  1868 4CD5 4F			            dta $4f
-  1869 4CD6 00 80		            dta a(screen_mem3)       
-  1870 4CD8 0F 0F 0F		            dta $0f,$0f,$0f
-  1871 4CDB 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1872 4CE3 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  1873 				            
-  1874 4CEB 41			            dta $41
-  1875 4CEC 00 4C		            dta a(display_list)
-  1876
-  1877 4CEE			menu_dl_part
-  1878 4CEE 80			            dta 128 ; dli_menu
-  1879 4CEF 20			            dta $20
-  1880 4CF0 42			            dta $42
-  1881 4CF1 00 4E		            dta a(menu_screen)
-  1882 4CF3 02			            dta 2
-  1883 4CF4 30 06 06 06 30 02 +             dta $30,6,6,6,$30,2,$10
-  1884 4CFB 01			            dta $01 ; jump
-  1885 4CFC 97 4C		            dta a(menu_dl_end)
-  1886
-  1887 4CFE			score_line  
-  1888 4CFE 00 2F 2E 25 00	            dta d' ONE '
-  1889 4D03			score_chars_p1
-  1890 4D03 0D 0D 00		            dta d'-- '
-  1891
-  1892 4D06 00 00 00 00 00 00 +             dta d'          '
-  1893 4D10 00 00 00 00 00 00 +             dta d'          '
-  1894
-  1895 4D1A 00 00 00 00 00 34 +             dta d'     TWO '
-  1896 4D23			score_chars_p2
-  1897 4D23 0D 0D 00		            dta d'-- '
-  1898
-  1899 4D26 00			score_p1    dta 0
-  1900 4D27 00			score_p2    dta 0
-  1901
-  1902 4D28			            .align $100
-  1903 4E00			menu_screen
-  1904 4E00-4EDB> 00 00 00 00 +             dta d'              '
-  1905 4E0E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
-  1906 4E1A 00 00 00 00 00 00 +             dta d'              '
-  1907 4E28 00 00 00 00 00 00 +             dta d'              '
-  1908 4E36 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
-  1909 4E42 00 00 00 00 00 00 +             dta d'              '
-  1910
-  1911 4E50 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
-  1912 4E5A			driver_screen
-  1913 4E5A 00 00 00 00 00 00 +             dta d'            '
-  1914 4E66 00 12 00 30 2C 21 +             dta d' 2 PLAYER GAME    '
-  1915 4E78 00 00 00 00 00 00 +             dta d'      LEVEL '
-  1916 4E84			level_char            
-  1917 4E84 11 00 00 00 00 00 +             dta d'1       '
-  1918 4E8C 80 80 80 80 80 B3 +             dta d'     START to play | OPTION for menu    '*
-  1919 4EB4			stick_text
-  1920 4EB4 33 34 29 23 2B 00 +             dta d'STICK   '
-  1921 4EBC			paddle_text
-  1922 4EBC 30 21 24 24 2C 25 +             dta d'PADDLE  '
-  1923 4EC4			driving_text
-  1924 4EC4 24 32 29 36 29 2E +             dta d'DRIVING '
-  1925 4ECC			computer_text
-  1926 4ECC 23 2F 2D 30 35 34 +             dta d'COMPUTER'
-  1927
-  1928 4ED4			driver_text_lo
-  1929 4ED4 B4			            dta <stick_text
-  1930 4ED5 BC			            dta <paddle_text
-  1931 4ED6 C4			            dta <driving_text
-  1932 4ED7 CC			            dta <computer_text
-  1933 				            
-  1934 4ED8			driver_text_hi
-  1935 4ED8 4E			            dta >stick_text
-  1936 4ED9 4E			            dta >paddle_text
-  1937 4EDA 4E			            dta >driving_text
-  1938 4EDB 4E			            dta >computer_text
-  1939
-  1940 				; 4 KB
-  1941 				; 128 x 32 bytes shapes
-  1942 4EDC			            .align $1000
-  1943 5000			pm_shapes
-  1944 5000-6FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
+  1839 4C45 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1840 4C4D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1841 4C55			menu_dl_hook
+  1842 4C55 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1843 4C5D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1844
+  1845 4C65 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
+  1846
+  1847 				; 42 + 60 = 102, 4080 bytes
+  1848 4C6B 4F			            dta $4f
+  1849 4C6C 00 70		            dta a(screen_mem2)
+  1850 4C6E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1851
+  1852 4C75 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1853 4C7D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1854 4C85 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1855 4C8D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1856
+  1857 4C95 0F 0F		            dta $0f,$0f
+  1858
+  1859 				; 60 lines
+  1860 4C97			menu_dl_end
+  1861 4C97 4F			            dta $4f
+  1862 4C98 90 76		            dta a(screen_mem2+(42*SCREEN_WIDTH))
+  1863 4C9A 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1864 4CA1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1865 4CA9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1866 4CB1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1867
+  1868 4CB9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1869 4CC1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1870 4CC9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1871 4CD1 0F 0F 0F 0F		            dta $0f,$0f,$0f,$0f
+  1872
+  1873 				; 20 x 40 = 800
+  1874 4CD5 4F			            dta $4f
+  1875 4CD6 00 80		            dta a(screen_mem3)       
+  1876 4CD8 0F 0F 0F		            dta $0f,$0f,$0f
+  1877 4CDB 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1878 4CE3 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  1879 				            
+  1880 4CEB 41			            dta $41
+  1881 4CEC 00 4C		            dta a(display_list)
+  1882
+  1883 4CEE			menu_dl_part
+  1884 4CEE 80			            dta 128 ; dli_menu
+  1885 4CEF 20			            dta $20
+  1886 4CF0 42			            dta $42
+  1887 4CF1 00 4E		            dta a(menu_screen)
+  1888 4CF3 02			            dta 2
+  1889 4CF4 30 06 06 06 30 02 +             dta $30,6,6,6,$30,2,$10
+  1890 4CFB 01			            dta $01 ; jump
+  1891 4CFC 97 4C		            dta a(menu_dl_end)
+  1892
+  1893 4CFE			score_line  
+  1894 4CFE 00 2F 2E 25 00	            dta d' ONE '
+  1895 4D03			score_chars_p1
+  1896 4D03 0D 0D 00		            dta d'-- '
+  1897
+  1898 4D06 00 00 00 00 00 00 +             dta d'          '
+  1899 4D10 00 00 00 00 00 00 +             dta d'          '
+  1900
+  1901 4D1A 00 00 00 00 00 34 +             dta d'     TWO '
+  1902 4D23			score_chars_p2
+  1903 4D23 0D 0D 00		            dta d'-- '
+  1904
+  1905 4D26 00			score_p1    dta 0
+  1906 4D27 00			score_p2    dta 0
+  1907
+  1908 4D28			            .align $100
+  1909 4E00			menu_screen
+  1910 4E00-4EDB> 00 00 00 00 +             dta d'              '
+  1911 4E0E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
+  1912 4E1A 00 00 00 00 00 00 +             dta d'              '
+  1913 4E28 00 00 00 00 00 00 +             dta d'              '
+  1914 4E36 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
+  1915 4E42 00 00 00 00 00 00 +             dta d'              '
+  1916
+  1917 4E50 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
+  1918 4E5A			driver_screen
+  1919 4E5A 00 00 00 00 00 00 +             dta d'            '
+  1920 4E66 00 12 00 30 2C 21 +             dta d' 2 PLAYER GAME    '
+  1921 4E78 00 00 00 00 00 00 +             dta d'      LEVEL '
+  1922 4E84			level_char            
+  1923 4E84 11 00 00 00 00 00 +             dta d'1       '
+  1924 4E8C 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
+  1925 4EB4			stick_text
+  1926 4EB4 33 34 29 23 2B 00 +             dta d'STICK   '
+  1927 4EBC			paddle_text
+  1928 4EBC 30 21 24 24 2C 25 +             dta d'PADDLE  '
+  1929 4EC4			driving_text
+  1930 4EC4 24 32 29 36 29 2E +             dta d'DRIVING '
+  1931 4ECC			computer_text
+  1932 4ECC 23 2F 2D 30 35 34 +             dta d'COMPUTER'
+  1933
+  1934 4ED4			driver_text_lo
+  1935 4ED4 B4			            dta <stick_text
+  1936 4ED5 BC			            dta <paddle_text
+  1937 4ED6 C4			            dta <driving_text
+  1938 4ED7 CC			            dta <computer_text
+  1939 				            
+  1940 4ED8			driver_text_hi
+  1941 4ED8 4E			            dta >stick_text
+  1942 4ED9 4E			            dta >paddle_text
+  1943 4EDA 4E			            dta >driving_text
+  1944 4EDB 4E			            dta >computer_text
   1945
-  1946 				; 9 KB for backdrop image
-  1947 6000			            .align $1000
-  1948 = 6000			screen_mem1 = * ; 4K
-  1949 				;            org screen_mem1
-  1950 6000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
+  1946 				; 4 KB
+  1947 				; 128 x 32 bytes shapes
+  1948 4EDC			            .align $1000
+  1949 5000			pm_shapes
+  1950 5000-6FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
   1951
-  1952 6FF0			            .align $1000
-  1953 = 7000			screen_mem2 = * ; 4K
-  1954 				;            org screen_mem2
-  1955 7000-7FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
-  1956
-  1957 7FF0			            .align $1000
-  1958 = 8000			screen_mem3 = * ; 1K
-  1959 				;            org screen_mem3
-  1960 8000-831F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
-  1961
-  1962 02E0-02E1> DC 34		            run main
+  1952 				; 9 KB for backdrop image
+  1953 6000			            .align $1000
+  1954 = 6000			screen_mem1 = * ; 4K
+  1955 				;            org screen_mem1
+  1956 6000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
+  1957
+  1958 6FF0			            .align $1000
+  1959 = 7000			screen_mem2 = * ; 4K
+  1960 				;            org screen_mem2
+  1961 7000-7FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
+  1962
+  1963 7FF0			            .align $1000
+  1964 = 8000			screen_mem3 = * ; 1K
+  1965 				;            org screen_mem3
+  1966 8000-831F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
+  1967
+  1968 02E0-02E1> DE 34		            run main
