@@ -350,7 +350,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     90 				            
     91 9D16			            org $a010
     92 A010			intro_image
-    93 A010-BE0F> 42 08 11 29 +             ins 'gfx\intro\intro_v4_gr8_inverted.gr8'
+    93 A010-BE0F> 00 00 00 00 +             ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
     94
     95 02E2-02E3> 00 9C		            ini intro_main
    152
