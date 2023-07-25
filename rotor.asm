@@ -1,7 +1,7 @@
 ; R O T O R
 
-; F#READY, 2023-07-20
-; Version 1.1.14
+; F#READY, 2023-07-25
+; Version 1.1.15
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -69,10 +69,11 @@ music_toggle    = $80
 shadow_HPOSP0   = $81
 shadow_HPOSP1   = $82
 
-fire_buttons    = $83
-
 shape_ptr       = $84
 tmp_screen      = $86
+
+stick_slow_speed = $88
+stick_fast_speed = $89
 
 mode_menu       = $8c
 
@@ -192,9 +193,9 @@ any_key_pressed
             jsr driver_init
 
             jsr make_shape_index
- 
+
             jsr make_outer_256
-            
+
             jsr make_screen_y_tab
 
             jsr invert_backdrop
@@ -202,7 +203,7 @@ any_key_pressed
             jsr reset_score
             jsr show_score_p1
             jsr show_score_p2
-                       
+
             jsr init_sprites
             jsr init_colors
 
@@ -1777,9 +1778,18 @@ NR_OF_LEVELS = 4
 INIT_LEVEL_INDEX = 0
 level_speeds
             dta 2,4,6,8
+stick_slow_speed_tab
+            dta 1,2,2,3
+stick_fast_speed_tab
+            dta 2,3,3,4
             
 ; X = level (0..NR_OF_LEVELS)
 set_level_ball_speed
+            lda stick_slow_speed_tab,x
+            sta stick_slow_speed
+            lda stick_fast_speed_tab,x
+            sta stick_fast_speed
+
             lda level_speeds,x
             sta ball_speed
             txa
