@@ -17,12 +17,14 @@ You will become the rotor champion when you have scored 11 points. To score a po
 Remember that Rotor is about having fun and, of course, showing off your quick reactions, skill and superior tactics to your friends. 
 
 GAME CONTROLS
-Rotor is a two player game and can be played with joysticks or paddles. The game will detect automatically which controllers are connected. Please note that paddles must be connected to port 1 of the Atari computer and different types of controllers cannot be mixed.
+Rotor is a two player game and can be played with joysticks or paddles. The game will detect automatically which controllers are connected. When using joysticks you can move faster by pressing the fire button. Please note that paddles must be connected to port 1 of the Atari computer and different types of controllers cannot be mixed.
 
 FUNCTION KEYS
 START: start the game
 OPTION: abort the current game
 SELECT: starting speed of the game (1: slowest, 4: fastest)
 SPACEBAR: turn background music on/off
+
+The game can also be started by pressing both fire buttons at the same time.
 
 Enjoy this game and become the National Rotor Champion!
