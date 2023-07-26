@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-25
-; Version 1.1.15
+; Version 1.1.16
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -158,6 +158,10 @@ line_end_y  = $fd  ; byte
             icl 'music\rotor_music\rotor_music.asm'
 
             icl 'lib/drivers.inc'       
+
+reset_pressed
+            jsr intro_main
+
 main
             lda #255
             sta 764
@@ -187,8 +191,16 @@ any_key_pressed
             sta volume_hit_edge
             sta music_toggle        ; 128 = on, 0 = off
 
-            lda #1
+            lda #0
             sta 580 ; coldstart
+
+            lda #1
+            sta 9   ; boot
+
+            lda #<reset_pressed
+            sta $0a
+            lda #>reset_pressed
+            sta $0b
 
             jsr driver_init
 
@@ -199,6 +211,8 @@ any_key_pressed
             jsr make_screen_y_tab
 
             jsr invert_backdrop
+            lda #$60
+            sta invert_backdrop ; dirty hack to fix warm reset :P
 
             jsr reset_score
             jsr show_score_p1
