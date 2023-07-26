@@ -25,6 +25,4 @@ OPTION: abort the current game
 SELECT: starting speed of the game (1: slowest, 4: fastest)
 SPACEBAR: turn background music on/off
 
-The game can also be started by pressing both fire buttons at the same time.
-
 Enjoy this game and become the National Rotor Champion!
