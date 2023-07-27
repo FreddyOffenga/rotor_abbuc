@@ -1,7 +1,7 @@
 ; R O T O R
 
-; F#READY, 2023-07-25
-; Version 1.1.16
+; F#READY, 2023-07-27
+; Version 1.1.17
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -75,10 +75,16 @@ tmp_screen      = $86
 stick_slow_speed = $88
 stick_fast_speed = $89
 
-mode_menu       = $8c
+game_state       = $8c
+
+STATE_IN_GAME   = 0
+STATE_IN_MENU   = 1
+STATE_IN_END    = 2
 
 volume_hit_bat  = $8d
 volume_hit_edge = $8e
+
+end_screen_delay = $8f
 
 ; player vars must be in sequence for zp,x indexing
 
@@ -185,6 +191,7 @@ any_key_pressed
             lda #0
             sta SDMCTL
             sta game_restart
+            sta end_screen_delay
 
             lda #128
             sta volume_hit_bat
@@ -226,10 +233,12 @@ any_key_pressed
             stx current_level_index
             jsr set_level_ball_speed
 
-            lda #1
-            sta mode_menu           ; start with menu
+            lda #STATE_IN_MENU
+            sta game_state           ; start with menu
 
             jsr music_init
+
+            jsr show_menu_options
 
             lda #<display_list
             sta SDLSTL
@@ -506,6 +515,48 @@ turn_color_ball
             
 color_turn  dta 0,BASE_COLOR_P1+6,BASE_COLOR_P2+6                           
 
+show_menu_options
+            lda #<controller_text
+            sta menu_line1_ptr
+            lda #>controller_text
+            sta menu_line1_ptr+1
+
+            lda #<two_player_text
+            sta menu_line2_ptr
+            lda #>two_player_text
+            sta menu_line2_ptr+1
+
+            lda #<level_text
+            sta menu_line3_ptr
+            lda #>level_text
+            sta menu_line3_ptr+1
+            rts
+
+show_end_screen
+            lda #<empty_text
+            sta menu_line1_ptr
+            sta menu_line3_ptr
+            lda #>empty_text
+            sta menu_line1_ptr+1
+            sta menu_line3_ptr+1
+
+            lda score_p1
+            cmp score_p2
+            bcc player_2_wins
+
+            lda #<winner_one_text
+            sta menu_line2_ptr
+            lda #>winner_one_text
+            sta menu_line2_ptr+1
+            rts
+
+player_2_wins
+            lda #<winner_two_text
+            sta menu_line2_ptr
+            lda #>winner_two_text
+            sta menu_line2_ptr+1
+            rts
+
 ; A, X, Y are already saved by the OS
 vbi
             jsr copy_shadow
@@ -553,24 +604,23 @@ no_spacebar
 ; menu switching thingy
 
             lda CONSOL
-            cmp #3
+            cmp #3  ; option button
             bne no_option_pressed
 
-go_menu_mode            
-            jsr music_normal_volume
-            
+go_menu_mode
             jsr wipe_ball
-            
-            lda #1
-            sta mode_menu
-            bne check_mode_menu
+
+            jsr music_normal_volume
+
+            jsr show_menu_options
+
+            lda #STATE_IN_MENU
+            sta game_state
+            jmp check_game_state
 
 no_option_pressed
-            cmp #6            
-            beq reset_game
-
-            jsr is_both_buttons
-            beq check_mode_menu
+            cmp #6  ; start pressed
+            bne check_game_state
 
 ; reset game
 
@@ -582,15 +632,37 @@ reset_game
             lda #1
             sta game_restart
 
-            lda #0
-            sta mode_menu
+            lda #STATE_IN_GAME
+            sta game_state
 
-check_mode_menu
-            lda mode_menu
+check_game_state
+            lda game_state
             beq main_game_vbi
 
+            cmp #STATE_IN_END
+            bne menu_vbi
+
+; end screen vbi
+            lda end_screen_delay
+            bne stay_in_end_screen
+
+; here we show the menu again
+            jsr show_menu_options
+
+            lda #STATE_IN_MENU
+            sta game_state
+            jmp menu_vbi
+
+stay_in_end_screen
+            dec end_screen_delay
+            jmp wait_depressed
+
 ; within menu vbi
-            
+
+menu_vbi
+            jsr is_both_buttons
+            bne reset_game
+
             lda CONSOL
             cmp #5          ; select
             bne no_level_select
@@ -672,7 +744,7 @@ main_game_vbi
             sta player_turn
 
             jsr turn_color_ball
-            jmp exit_vbi            
+            jmp exit_vbi
 
 no_restart
 ; remove menu hook
@@ -777,7 +849,16 @@ fill_pm_header
 
 game_ends
             jsr music_normal_volume
-            jmp $e462            
+
+            lda #255
+            sta end_screen_delay
+
+            jsr show_end_screen
+
+            lda #STATE_IN_END
+            sta game_state
+
+            jmp exit_vbi
 
 start_sound_bat
             lda #10
@@ -839,8 +920,8 @@ update_score
             cmp #MAX_SCORE
             bne reset_edge_delay
 
-            lda #1
-            sta mode_menu
+            lda #STATE_IN_MENU
+            sta game_state
             rts
 
 was_player2_turn
@@ -851,8 +932,8 @@ was_player2_turn
             cmp #MAX_SCORE
             bne reset_edge_delay
 
-            lda #1
-            sta mode_menu
+            lda #STATE_IN_MENU
+            sta game_state
             rts
 
 reset_edge_delay
@@ -1907,9 +1988,22 @@ menu_dl_part
             dta 128 ; dli_menu
             dta $20
             dta $42
-            dta a(menu_screen)
+            dta a(rotor_logo_text)
             dta 2
-            dta $30,6,6,6,$30,2,$10
+            dta $30
+            dta $46
+menu_line1_ptr
+            dta a(controller_text)
+            dta $46
+menu_line2_ptr
+            dta a(two_player_text)
+            dta $46
+menu_line3_ptr
+            dta a(level_text)
+            dta $30
+            dta $42
+            dta a(start_text)
+            dta $10
             dta $01 ; jump
             dta a(menu_dl_end)
 
@@ -1929,7 +2023,7 @@ score_p1    dta 0
 score_p2    dta 0
 
             .align $100
-menu_screen
+rotor_logo_text
             dta d'              '
             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
             dta d'              '
@@ -1937,13 +2031,20 @@ menu_screen
             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
             dta d'              '
 
+controller_text
             dta d'  CONTROL:'
 driver_screen
-            dta d'            '
-            dta d' 2 PLAYER GAME    '
+            dta d'          '
+
+two_player_text
+            dta d'   2 PLAYER GAME    '
+
+level_text
             dta d'      LEVEL '
 level_char            
             dta d'1       '
+
+start_text
             dta d'     START or FIRE buttons to play!     '*
 stick_text
             dta d'STICK   '
@@ -1953,6 +2054,13 @@ driving_text
             dta d'DRIVING '
 computer_text
             dta d'COMPUTER'
+
+empty_text
+            dta d'                    '
+winner_one_text
+            dta d'  PLAYER ONE WINS!  '
+winner_two_text
+            dta d'  PLAYER TWO WINS!  '
 
 driver_text_lo
             dta <stick_text
