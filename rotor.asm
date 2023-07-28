@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-27
-; Version 1.1.19
+; Version 1.1.20
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -200,16 +200,16 @@ any_key_pressed
             sta volume_hit_edge
             sta music_toggle        ; 128 = on, 0 = off
 
-            lda #0
+            lda #1
             sta 580 ; coldstart
 
-            lda #1
-            sta 9   ; boot
+;            lda #1
+;            sta 9   ; boot
 
-            lda #<reset_pressed
-            sta $0a
-            lda #>reset_pressed
-            sta $0b
+;            lda #<reset_pressed
+;            sta $0a
+;            lda #>reset_pressed
+;            sta $0b
 
             jsr driver_init
 
