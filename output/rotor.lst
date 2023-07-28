@@ -273,96 +273,104 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
      3 				            org $0600
      4
      5 				first_screen_off
-     6 FFFF> 0600-060B> A9 00	            lda #0
+     6 FFFF> 0600-0618> A9 00	            lda #0
      7 0602 8D 2F 02		            sta 559
      8 0605 A5 14		            lda 20
      9 0607			wait_black
     10 0607 C5 14		            cmp 20
     11 0609 F0 FC		            beq wait_black
-    12 060B 60			            rts
-    13
-    14 02E2-02E3> 00 06		            ini first_screen_off
-    15
-    16 060C			            org $9800
-    17 9800			rotor_font
-    18 9800-9D15> 00 00 00 00 +             ins 'font\rotor.fnt'
-    19
-    20 9C00			intro_main
-    21 9C00 A9 48		            lda #<dl_intro
-    22 9C02 8D 30 02		            sta $230
-    23 9C05 A9 9C		            lda #>dl_intro
-    24 9C07 8D 31 02		            sta $231
-    25
-    26 9C0A A9 98		            lda #>rotor_font
-    27 9C0C 8D F4 02		            sta 756
-    28
-    29 9C0F A9 00		            lda #0
-    30 9C11 8D C6 02		            sta 710
-    31
-    32 9C14 A9 22		            lda #34
-    33 9C16 8D 2F 02		            sta 559
-    34
-    35 				; reset clock
-    36 9C19 A9 00		            lda #0
-    37 9C1B 85 14		            sta 20
-    38 9C1D 85 13		            sta 19
-    39 				            
-    40 9C1F 60			            rts
-    41
-    42 9C20			footer_intro
-    43 9C20 2B 6F 64 1A 26 03 +             dta d'Kod:F#READY  Music:IvoP  Gfx:IvoP,Fred_M'
-    44
-    45 9C48			dl_intro
-    46 9C48 70 70 70		            dta $70,$70,$70
-    47
-    48 9C4B 4F			            dta $4f
-    49 9C4C 10 A0		            dta a(intro_image)
-    50 9C4E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-    51 9C55 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    52 9C5D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    53 9C65 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    54
-    55 9C6D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    56 9C75 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    57 9C7D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    58 9C85 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    59
-    60 9C8D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    61 9C95 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    62 9C9D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    63 9CA5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    64
-    65 9CAD 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
-    66
-    67 9CB3 4F			            dta $4f
-    68 9CB4 00 B0		            dta a(intro_image+$ff0)
-    69 9CB6 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-    70 9CBD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    71 9CC5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    72 9CCD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    73
-    74 9CD5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    75 9CDD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    76 9CE5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    77 9CED 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    78
-    79 9CF5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    80 9CFD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
-    81 9D05 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-    82 9D0D 0F 0F		            dta $0f,$0f
-    83 				            
-    84 9D0F 20			            dta $20
-    85 9D10 42			            dta $42
-    86 9D11 20 9C		            dta a(footer_intro)
-    87
-    88 9D13 41			            dta $41
-    89 9D14 48 9C		            dta a(dl_intro)
-    90 				            
-    91 9D16			            org $a010
-    92 A010			intro_image
-    93 A010-BE0F> 00 00 00 00 +             ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
-    94
-    95 02E2-02E3> 00 9C		            ini intro_main
+    12
+    13 				; BASIC off
+    14 060B AD 01 D3		            lda $d301
+    15 060E 09 02		            ora #2
+    16 0610 8D 01 D3		            sta $d301
+    17
+    18 0613 A9 01		            lda #1
+    19 0615 8D 44 02		            sta 580
+    20 0618 60			            rts
+    21
+    22 02E2-02E3> 00 06		            ini first_screen_off
+    23
+    24 0619			            org $9800
+    25 9800			rotor_font
+    26 9800-9D15> 00 00 00 00 +             ins 'font\rotor.fnt'
+    27
+    28 9C00			intro_main
+    29 9C00 A9 48		            lda #<dl_intro
+    30 9C02 8D 30 02		            sta $230
+    31 9C05 A9 9C		            lda #>dl_intro
+    32 9C07 8D 31 02		            sta $231
+    33
+    34 9C0A A9 98		            lda #>rotor_font
+    35 9C0C 8D F4 02		            sta 756
+    36
+    37 9C0F A9 00		            lda #0
+    38 9C11 8D C6 02		            sta 710
+    39
+    40 9C14 A9 22		            lda #34
+    41 9C16 8D 2F 02		            sta 559
+    42
+    43 				; reset clock
+    44 9C19 A9 00		            lda #0
+    45 9C1B 85 14		            sta 20
+    46 9C1D 85 13		            sta 19
+    47 				            
+    48 9C1F 60			            rts
+    49
+    50 9C20			footer_intro
+    51 9C20 2B 6F 64 1A 26 03 +             dta d'Kod:F#READY  Music:IvoP  Gfx:IvoP,Fred_M'
+    52
+    53 9C48			dl_intro
+    54 9C48 70 70 70		            dta $70,$70,$70
+    55
+    56 9C4B 4F			            dta $4f
+    57 9C4C 10 A0		            dta a(intro_image)
+    58 9C4E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+    59 9C55 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    60 9C5D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    61 9C65 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    62
+    63 9C6D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    64 9C75 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    65 9C7D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    66 9C85 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    67
+    68 9C8D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    69 9C95 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    70 9C9D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    71 9CA5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    72
+    73 9CAD 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
+    74
+    75 9CB3 4F			            dta $4f
+    76 9CB4 00 B0		            dta a(intro_image+$ff0)
+    77 9CB6 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+    78 9CBD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    79 9CC5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    80 9CCD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    81
+    82 9CD5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    83 9CDD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    84 9CE5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    85 9CED 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    86
+    87 9CF5 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    88 9CFD 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f            
+    89 9D05 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+    90 9D0D 0F 0F		            dta $0f,$0f
+    91 				            
+    92 9D0F 20			            dta $20
+    93 9D10 42			            dta $42
+    94 9D11 20 9C		            dta a(footer_intro)
+    95
+    96 9D13 41			            dta $41
+    97 9D14 48 9C		            dta a(dl_intro)
+    98 				            
+    99 9D16			            org $a010
+   100 A010			intro_image
+   101 A010-BE0F> 00 00 00 00 +             ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
+   102
+   103 02E2-02E3> 00 9C		            ini intro_main
    162
    163 				; real data is loaded at $2000 ($1700+$900)
    164 BE10			            org $1700

@@ -9,6 +9,14 @@ first_screen_off
 wait_black
             cmp 20
             beq wait_black
+
+; BASIC off
+            lda $d301
+            ora #2
+            sta $d301
+
+            lda #1
+            sta 580
             rts
 
             ini first_screen_off

@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-27
-; Version 1.1.20
+; Version 1.1.21
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
