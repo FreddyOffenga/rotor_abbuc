@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-27
-; Version 1.1.17
+; Version 1.1.18
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -69,14 +69,15 @@ music_toggle    = $80
 shadow_HPOSP0   = $81
 shadow_HPOSP1   = $82
 
+winner_color    = $83
+
 shape_ptr       = $84
 tmp_screen      = $86
 
 stick_slow_speed = $88
 stick_fast_speed = $89
 
-game_state       = $8c
-
+game_state      = $8c
 STATE_IN_GAME   = 0
 STATE_IN_MENU   = 1
 STATE_IN_END    = 2
@@ -192,6 +193,7 @@ any_key_pressed
             sta SDMCTL
             sta game_restart
             sta end_screen_delay
+            sta winner_color
 
             lda #128
             sta volume_hit_bat
@@ -349,6 +351,7 @@ color_it1
             ldx #0
 color_it2
             lda menu_colpf0,x
+            ora winner_color
             sta WSYNC
             sta COLPF0
             inx
@@ -530,6 +533,9 @@ show_menu_options
             sta menu_line3_ptr
             lda #>level_text
             sta menu_line3_ptr+1
+
+            lda #0
+            sta winner_color
             rts
 
 show_end_screen
@@ -548,6 +554,9 @@ show_end_screen
             sta menu_line2_ptr
             lda #>winner_one_text
             sta menu_line2_ptr+1
+
+            lda #BASE_COLOR_P1
+            sta winner_color
             rts
 
 player_2_wins
@@ -555,6 +564,10 @@ player_2_wins
             sta menu_line2_ptr
             lda #>winner_two_text
             sta menu_line2_ptr+1
+
+            lda #BASE_COLOR_P2
+            sta winner_color
+
             rts
 
 ; A, X, Y are already saved by the OS
