@@ -1,7 +1,7 @@
 ; R O T O R
 
 ; F#READY, 2023-07-27
-; Version 1.1.18
+; Version 1.1.19
 ; For ABBUC Software Competition 2023
 
 ; Casual game for two players
@@ -659,6 +659,9 @@ check_game_state
             lda end_screen_delay
             bne stay_in_end_screen
 
+            jsr restart_music
+            jsr music_normal_volume
+
 ; here we show the menu again
             jsr show_menu_options
 
@@ -667,6 +670,7 @@ check_game_state
             jmp menu_vbi
 
 stay_in_end_screen
+            jsr play_sound_end_game
             dec end_screen_delay
             jmp wait_depressed
 
@@ -734,7 +738,9 @@ main_game_vbi
             beq no_restart
 
 ; restart game
-            
+
+            jsr silence_end
+
             lda #0
             sta game_restart
             
@@ -861,8 +867,6 @@ fill_pm_header
             jmp $e462
 
 game_ends
-            jsr music_normal_volume
-
             lda #255
             sta end_screen_delay
 
@@ -876,6 +880,26 @@ game_ends
 start_sound_bat
             lda #10
             sta volume_hit_bat
+            rts
+
+play_sound_end_game
+            jsr music_off
+
+            lda end_screen_delay
+            cmp #192
+            bcc silence_end
+            lsr
+            and end_screen_delay
+            lsr
+            ora #$20
+            sta SHADOW+4
+            ;lda end_screen_delay
+            lda #$aa
+            sta SHADOW+5
+            rts
+silence_end
+            lda #0
+            sta SHADOW+5
             rts
 
 play_sound_bat
