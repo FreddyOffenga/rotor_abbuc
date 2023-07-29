@@ -5,7 +5,12 @@ All files may be used for ABBUC Magazine
 Contents of this folder:
 
 - rotor.xex
-Executable game, runs on Atari XL/XE 64K/PAL
+Executable game, not compressed, 32K
+runs on Atari XL/XE 64K/PAL
+
+- rotorexo.xex
+Executable game, compressed with Superpacker/Exomizer, 20K
+runs on Atari XL/XE 64K/PAL
 
 - rights_declaration.txt
 Statement about the rights and author information
