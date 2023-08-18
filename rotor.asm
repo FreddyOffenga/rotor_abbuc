@@ -1,8 +1,8 @@
 ; R O T O R
 
-; F#READY, 2023-07-27
-; Version 1.1.21
-; For ABBUC Software Competition 2023
+; F#READY, 2023-08-18
+; Version 2.0.0
+; After-Compo release
 
 ; Casual game for two players
 ; (computer player not yet implemented)
@@ -76,6 +76,13 @@ tmp_screen      = $86
 
 stick_slow_speed = $88
 stick_fast_speed = $89
+
+player_mode     = $8a
+MODE_2_PLAYER   = 0
+MODE_1_PLAYER   = 1
+MODE_DEMO       = 2
+NR_OF_PLAYER_MODES = 3
+INIT_PLAYER_MODE = MODE_2_PLAYER
 
 game_state      = $8c
 STATE_IN_GAME   = 0
@@ -234,6 +241,10 @@ any_key_pressed
             ldx #INIT_LEVEL_INDEX
             stx current_level_index
             jsr set_level_ball_speed
+
+            lda #INIT_PLAYER_MODE
+            sta player_mode
+            jsr show_player_mode
 
             lda #STATE_IN_MENU
             sta game_state           ; start with menu
@@ -524,10 +535,7 @@ show_menu_options
             lda #>controller_text
             sta menu_line1_ptr+1
 
-            lda #<two_player_text
-            sta menu_line2_ptr
-            lda #>two_player_text
-            sta menu_line2_ptr+1
+            jsr show_player_mode
 
             lda #<level_text
             sta menu_line3_ptr
@@ -619,6 +627,13 @@ no_spacebar
             lda CONSOL
             cmp #3  ; option button
             bne no_option_pressed
+            lda game_state
+            cmp #STATE_IN_MENU
+            beq check_game_state
+
+; prevent menu option directly after leaving in-game state
+            lda #3
+            sta previous_consol
 
 go_menu_mode
             jsr wipe_ball
@@ -650,8 +665,10 @@ reset_game
 
 check_game_state
             lda game_state
-            beq main_game_vbi
+            bne no_main_game_state
+            jmp main_game_vbi
 
+no_main_game_state
             cmp #STATE_IN_END
             bne menu_vbi
 
@@ -677,9 +694,18 @@ stay_in_end_screen
 ; within menu vbi
 
 menu_vbi
+            lda player_mode
+            beq check_human_buttons
+
+            jsr is_player1_button_pressed
+            bne reset_game
+            beq check_consol_buttons
+
+check_human_buttons
             jsr is_both_buttons
             bne reset_game
 
+check_consol_buttons
             lda CONSOL
             cmp #5          ; select
             bne no_level_select
@@ -687,16 +713,28 @@ menu_vbi
             lda previous_consol
             cmp #5
             beq wait_depressed
-            
+
             jsr increase_level
             ldx current_level_index
-            jsr set_level_ball_speed            
+            jsr set_level_ball_speed
 
             lda #5
             sta previous_consol
             jmp wait_depressed
 
 no_level_select
+            cmp #3          ; option
+            bne no_player_mode_select
+
+            lda previous_consol
+            cmp #3
+            beq wait_depressed
+
+            jsr increase_player_mode
+            jsr show_player_mode
+
+            lda #3
+no_player_mode_select
             sta previous_consol
 
 wait_depressed
@@ -992,17 +1030,24 @@ no_edge
 handle_player1
             jsr wipe_p1         ; wipe previous shape player 1
 
+            lda player_mode
+            cmp #2
+            beq do_p1_is_computer
+
             ldx #0              ; player 1
+            jsr main_driver
             jsr move_player
             
             jsr show_p1
+            rts
 
-            lda player1_x
-            clc
-            adc #left_margin
-            sta shadow_HPOSP0
-            adc #8
-            sta HPOSP2
+; p1 now controlled by computer
+do_p1_is_computer
+            ldx #0              ; player 1
+            inc p1_angle
+            jsr move_player
+
+            jsr show_p1
             rts
 
 ; player 2
@@ -1013,17 +1058,23 @@ handle_player1
 handle_player2
             jsr wipe_p2         ; wipe previous shape player 2
 
+            lda player_mode
+            bne do_p2_is_computer
+
             ldx #1              ; player 2
+            jsr main_driver
             jsr move_player
                         
             jsr show_p2
+            rts
 
-            lda player2_x
-            clc
-            adc #left_margin
-            sta shadow_HPOSP1
-            adc #8
-            sta HPOSP3
+; p2 now controlled by computer
+do_p2_is_computer
+            ldx #1              ; player 2
+            dec p2_angle
+            jsr move_player
+
+            jsr show_p2
             rts
 
 ; move player 1/2
@@ -1039,8 +1090,6 @@ handle_player2
 ; 3 : computer
             
 move_player
-            jsr main_driver
-
             lda p1_angle,x
             and #127                    ; restrict angle to 0..179 degrees
             eor #64                     ; perpendicular to the circle angle
@@ -1262,6 +1311,7 @@ show_ball
             rts
             
 show_p1
+; y position
             lda player1_y
             clc
             adc #upper_margin
@@ -1278,9 +1328,18 @@ show_shape1
             iny
             cpy #32
             bne show_shape1
+
+; x position
+            lda player1_x
+            clc
+            adc #left_margin
+            sta shadow_HPOSP0
+            adc #8
+            sta HPOSP2
             rts
 
 show_p2
+; y position
             lda player2_y
             clc
             adc #upper_margin
@@ -1297,6 +1356,14 @@ show_shape2
             iny
             cpy #32
             bne show_shape2
+
+; x position
+            lda player2_x
+            clc
+            adc #left_margin
+            sta shadow_HPOSP1
+            adc #8
+            sta HPOSP3
             rts
 
 wipe_p1
@@ -1940,7 +2007,25 @@ increase_level
             sta current_level_index
 ok_level           
             rts
-            
+
+increase_player_mode
+            inc player_mode
+            lda player_mode
+            cmp #NR_OF_PLAYER_MODES
+            bne ok_player_mode
+            lda #INIT_PLAYER_MODE
+            sta player_mode
+ok_player_mode
+            rts
+
+show_player_mode
+            ldx player_mode
+            lda player_mode_lo,x
+            sta menu_line2_ptr
+            lda player_mode_hi,x
+            sta menu_line2_ptr+1
+            rts
+
             .align $100
 inner_x_tab
 inner_y_tab = *+$100
@@ -2074,7 +2159,13 @@ driver_screen
             dta d'          '
 
 two_player_text
-            dta d'   2 PLAYER GAME    '
+            dta d'   HUMAN VS HUMAN   '
+
+one_player_text
+            dta d'    HUMAN VS CPU    '
+
+demo_player_text
+            dta d'     CPU VS CPU     '
 
 level_text
             dta d'      LEVEL '
@@ -2110,6 +2201,16 @@ driver_text_hi
             dta >paddle_text
             dta >driving_text
             dta >computer_text
+
+player_mode_lo
+            dta <two_player_text
+            dta <one_player_text
+            dta <demo_player_text
+
+player_mode_hi
+            dta >two_player_text
+            dta >one_player_text
+            dta >demo_player_text
 
 ; 4 KB
 ; 128 x 32 bytes shapes

@@ -171,6 +171,24 @@ no_fast_right
 move_done
             rts
 
+; check if player1 button is pressed
+; A=0 not pressed, 1=pressed
+
+is_player1_button_pressed
+            lda driver_mode
+            cmp #1
+            beq check_player1_paddle_fire
+
+            lda STRIG0
+            beq fire_pressed
+            bne fire_not_pressed
+
+check_player1_paddle_fire
+            lda STICK0
+            cmp #11
+            beq fire_pressed
+            bne fire_not_pressed
+
 ; X=port number to check (paddle uses only port 1)
 ; check fire button (paddle uses left/right stick as fire button)
 ; A=0 not pressed, 1=pressed
@@ -181,20 +199,20 @@ is_both_buttons
             beq check_paddle_fire
 
             lda STRIG0
-            bne not_both_stick
+            bne fire_not_pressed
             lda STRIG1
-            bne not_both_stick
+            bne fire_not_pressed
 
-both_fire
+fire_pressed
             lda #1
             rts
 
 check_paddle_fire
             lda STICK0
             cmp #3
-            beq both_fire
+            beq fire_pressed
 
-not_both_stick
+fire_not_pressed
             lda #0
             rts
 
