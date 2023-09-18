@@ -1,19 +1,22 @@
 ; R O T O R
 
-; F#READY, 2023-08-18
+; F#READY, 2023-09-18
 ; Version 2.0.0
 ; After-Compo release
 
 ; Casual game for two players
-; (computer player not yet implemented)
 
 ; Main idea:
 ; - two players ONE and TWO move in a circle
 ; - the ball gets color of player to indicate who should catch it
 ; - when the ball hits the circle, the other player gets a point
 
+; TODO
+; - cpu player should not play perfect, this is no fun!
+; - smaller steps for ball speed; 1.25, 1.5, 1.75 ?
+; - new score system; ball hit = point?
+
 ; Optional for a later version:
-; - add computer player(s)
 ; - add support for driving controllers
 
             icl 'lib/labels.inc'
@@ -1043,10 +1046,19 @@ handle_player1
 
 ; p1 now controlled by computer
 do_p1_is_computer
-            ldx #0              ; player 1
-            inc p1_angle
-            jsr move_player
+            lda game_state
+            bne not_in_game
 
+            ldx #0              ; player 1
+
+            lda player_turn
+            cmp #1
+            bne not_p1_turn
+
+            jsr cpu_controller
+not_p1_turn
+
+            jsr move_player
             jsr show_p1
             rts
 
@@ -1070,11 +1082,52 @@ handle_player2
 
 ; p2 now controlled by computer
 do_p2_is_computer
-            ldx #1              ; player 2
-            dec p2_angle
-            jsr move_player
+            lda game_state
+            bne not_in_game
 
+            ldx #1              ; player 2
+
+            lda player_turn
+            cmp #2
+            bne not_p2_turn
+
+            jsr cpu_controller
+
+not_p2_turn
+            jsr move_player
             jsr show_p2
+
+not_in_game
+            rts
+
+; x = 0 (cpu 1), x = 1 (cpu 2)
+
+cpu_controller
+            lda ball_angle_end  ; current ball end
+            sta tmp_angle1
+            lda p1_angle,x
+            sta tmp_angle2
+
+            jsr calc_angle_diff
+
+            lda tmp_angle_diff
+            beq comp_in_catch_position
+            lda tmp_angle_direction
+            bne move_comp_clockwise
+
+            lda RANDOM
+            and #3
+            beq comp_in_catch_position
+            inc p1_angle,x
+            rts
+move_comp_clockwise
+
+            lda RANDOM
+            and #3
+            beq comp_in_catch_position
+
+            dec p1_angle,x
+comp_in_catch_position
             rts
 
 ; move player 1/2
