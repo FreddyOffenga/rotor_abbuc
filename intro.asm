@@ -98,6 +98,7 @@ dl_intro
             
             org $a010
 intro_image
-            ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
+            ;ins 'gfx\intro\intro_v6_gr8_inverted.gr8'
+            ins 'gfx\intro\intro_rotor2_v2.gr8'
 
             ini intro_main
