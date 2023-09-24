@@ -3035,90 +3035,91 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2209 5200			rotor_logo_text
   2210 5200-5345> 00 00 00 00 +             dta d'              '
   2211 520E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
-  2212 521A 00 00 00 00 00 00 +             dta d'              '
-  2213 5228 00 00 00 00 00 00 +             dta d'              '
-  2214 5236 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
-  2215 5242 00 00 00 00 00 00 +             dta d'              '
-  2216
-  2217 5250			controller_text
-  2218 5250 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
-  2219 525A			driver_screen
-  2220 525A 00 00 00 00 00 00 +             dta d'          '
-  2221
-  2222 5264			two_player_text
-  2223 5264 00 00 00 28 35 2D +             dta d'   HUMAN VS HUMAN   '
-  2224
-  2225 5278			one_player_text
-  2226 5278 00 00 00 00 28 35 +             dta d'    HUMAN VS CPU    '
-  2227
-  2228 528C			demo_player_text
-  2229 528C 00 00 00 00 00 23 +             dta d'     CPU VS CPU     '
-  2230
-  2231 52A0			level_text
-  2232 52A0 00 00 00 00 00 00 +             dta d'      LEVEL '
-  2233 52AC			level_char            
-  2234 52AC 11 00 00 00 00 00 +             dta d'1       '
-  2235
-  2236 52B4			start_text
-  2237 52B4 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
-  2238 52DC			stick_text
-  2239 52DC 33 34 29 23 2B 00 +             dta d'STICK   '
-  2240 52E4			paddle_text
-  2241 52E4 30 21 24 24 2C 25 +             dta d'PADDLE  '
-  2242 52EC			driving_text
-  2243 52EC 24 32 29 36 29 2E +             dta d'DRIVING '
-  2244 52F4			computer_text
-  2245 52F4 23 2F 2D 30 35 34 +             dta d'COMPUTER'
-  2246
-  2247 52FC			empty_text
-  2248 52FC 00 00 00 00 00 00 +             dta d'                    '
-  2249 5310			winner_one_text
-  2250 5310 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
-  2251 5324			winner_two_text
-  2252 5324 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
-  2253
-  2254 5338			driver_text_lo
-  2255 5338 DC			            dta <stick_text
-  2256 5339 E4			            dta <paddle_text
-  2257 533A EC			            dta <driving_text
-  2258 533B F4			            dta <computer_text
-  2259 				            
-  2260 533C			driver_text_hi
-  2261 533C 52			            dta >stick_text
-  2262 533D 52			            dta >paddle_text
-  2263 533E 52			            dta >driving_text
-  2264 533F 52			            dta >computer_text
-  2265
-  2266 5340			player_mode_lo
-  2267 5340 64			            dta <two_player_text
-  2268 5341 78			            dta <one_player_text
-  2269 5342 8C			            dta <demo_player_text
-  2270
-  2271 5343			player_mode_hi
-  2272 5343 52			            dta >two_player_text
-  2273 5344 52			            dta >one_player_text
-  2274 5345 52			            dta >demo_player_text
-  2275
-  2276 				; 4 KB
-  2277 				; 128 x 32 bytes shapes
-  2278 5346			            .align $1000
-  2279 6000			pm_shapes
-  2280 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
-  2281
-  2282 				; 9 KB for backdrop image
-  2283 7000			            .align $1000
-  2284 = 7000			screen_mem1 = * ; 4K
-  2285 				;            org screen_mem1
-  2286 7000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
-  2287
-  2288 7FF0			            .align $1000
-  2289 = 8000			screen_mem2 = * ; 4K
-  2290 				;            org screen_mem2
-  2291 8000-8FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
-  2292
-  2293 8FF0			            .align $1000
-  2294 = 9000			screen_mem3 = * ; 1K
-  2295 				;            org screen_mem3
-  2296 9000-931F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
-  2297
-  2298 02E0-02E1> 08 35		            run main
+  2212 521A 40			            dta $40
+  2213 521B 00 00 00 00 00 00 +             dta d'             '
+  2214 5228 00 00 00 00 00 00 +             dta d'              '
+  2215 5236 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
+  2216 5242 00 00 00 00 00 00 +             dta d'              '
+  2217
+  2218 5250			controller_text
+  2219 5250 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
+  2220 525A			driver_screen
+  2221 525A 00 00 00 00 00 00 +             dta d'          '
+  2222
+  2223 5264			two_player_text
+  2224 5264 00 00 00 28 35 2D +             dta d'   HUMAN VS HUMAN   '
+  2225
+  2226 5278			one_player_text
+  2227 5278 00 00 00 00 28 35 +             dta d'    HUMAN VS CPU    '
+  2228
+  2229 528C			demo_player_text
+  2230 528C 00 00 00 00 00 23 +             dta d'     CPU VS CPU     '
+  2231
+  2232 52A0			level_text
+  2233 52A0 00 00 00 00 00 00 +             dta d'      LEVEL '
+  2234 52AC			level_char            
+  2235 52AC 11 00 00 00 00 00 +             dta d'1       '
+  2236
+  2237 52B4			start_text
+  2238 52B4 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
+  2239 52DC			stick_text
+  2240 52DC 33 34 29 23 2B 00 +             dta d'STICK   '
+  2241 52E4			paddle_text
+  2242 52E4 30 21 24 24 2C 25 +             dta d'PADDLE  '
+  2243 52EC			driving_text
+  2244 52EC 24 32 29 36 29 2E +             dta d'DRIVING '
+  2245 52F4			computer_text
+  2246 52F4 23 2F 2D 30 35 34 +             dta d'COMPUTER'
+  2247
+  2248 52FC			empty_text
+  2249 52FC 00 00 00 00 00 00 +             dta d'                    '
+  2250 5310			winner_one_text
+  2251 5310 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
+  2252 5324			winner_two_text
+  2253 5324 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
+  2254
+  2255 5338			driver_text_lo
+  2256 5338 DC			            dta <stick_text
+  2257 5339 E4			            dta <paddle_text
+  2258 533A EC			            dta <driving_text
+  2259 533B F4			            dta <computer_text
+  2260 				            
+  2261 533C			driver_text_hi
+  2262 533C 52			            dta >stick_text
+  2263 533D 52			            dta >paddle_text
+  2264 533E 52			            dta >driving_text
+  2265 533F 52			            dta >computer_text
+  2266
+  2267 5340			player_mode_lo
+  2268 5340 64			            dta <two_player_text
+  2269 5341 78			            dta <one_player_text
+  2270 5342 8C			            dta <demo_player_text
+  2271
+  2272 5343			player_mode_hi
+  2273 5343 52			            dta >two_player_text
+  2274 5344 52			            dta >one_player_text
+  2275 5345 52			            dta >demo_player_text
+  2276
+  2277 				; 4 KB
+  2278 				; 128 x 32 bytes shapes
+  2279 5346			            .align $1000
+  2280 6000			pm_shapes
+  2281 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
+  2282
+  2283 				; 9 KB for backdrop image
+  2284 7000			            .align $1000
+  2285 = 7000			screen_mem1 = * ; 4K
+  2286 				;            org screen_mem1
+  2287 7000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
+  2288
+  2289 7FF0			            .align $1000
+  2290 = 8000			screen_mem2 = * ; 4K
+  2291 				;            org screen_mem2
+  2292 8000-8FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
+  2293
+  2294 8FF0			            .align $1000
+  2295 = 9000			screen_mem3 = * ; 1K
+  2296 				;            org screen_mem3
+  2297 9000-931F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
+  2298
+  2299 02E0-02E1> 08 35		            run main
