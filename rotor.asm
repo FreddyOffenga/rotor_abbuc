@@ -1,8 +1,8 @@
-; R O T O R
+; R O T O R (II)
 
-; F#READY, 2023-09-18
-; Version 2.0.0
-; After-Compo release
+; F#READY, 2023-09-24
+; Version 2.1.0
+; For cartridge release
 
 ; Casual game for two players
 
@@ -12,8 +12,6 @@
 ; - when the ball hits the circle, the other player gets a point
 
 ; TODO
-; - cpu player should not play perfect, this is no fun!
-; - smaller steps for ball speed; 1.25, 1.5, 1.75 ?
 ; - new score system; ball hit = point?
 
 ; Optional for a later version:
@@ -2209,7 +2207,8 @@ score_p2    dta 0
 rotor_logo_text
             dta d'              '
             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
-            dta d'              '
+            dta $40
+            dta d'             '
             dta d'              '
             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
             dta d'              '
