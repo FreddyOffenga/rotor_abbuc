@@ -1117,16 +1117,20 @@ cpu_controller
 
             lda RANDOM
             and #3
-            beq comp_in_catch_position
-            inc p1_angle,x
+            bne comp_in_catch_position
+            lda p1_angle,x
+            adc stick_slow_speed
+            sta p1_angle,x
             rts
 move_comp_clockwise
 
             lda RANDOM
             and #3
-            beq comp_in_catch_position
+            bne comp_in_catch_position
 
-            dec p1_angle,x
+            lda p1_angle,x
+            sbc stick_slow_speed
+            sta p1_angle,x
 comp_in_catch_position
             rts
 
@@ -1828,7 +1832,8 @@ set_dir_y
             
             lda step_x
             sta _multiplicand
-            lda step_x+1
+            ;lda step_x+1
+            lda #0
             sta _multiplicand+1
             lda ball_speed
             sta _multiplier
@@ -1843,7 +1848,8 @@ skip_step_x_hi
 
             lda step_y
             sta _multiplicand
-            lda step_y+1
+            ;lda step_y+1
+            lda #0
             sta _multiplicand+1
             lda ball_speed
             sta _multiplier
@@ -2026,15 +2032,17 @@ previous_consol
 
 current_level_index
             dta 0
-NR_OF_LEVELS = 4
+NR_OF_LEVELS = 7
 INIT_LEVEL_INDEX = 0
 level_speeds
-            dta 2,4,6,8
+            dta 2,3,4,5,6,7,8
+;level_speeds_lo
+;            dta 128
 stick_slow_speed_tab
-            dta 1,2,2,3
+            dta 1,2,2,2,3,3,3
 stick_fast_speed_tab
-            dta 2,3,3,4
-            
+            dta 2,2,3,3,4,4,4
+
 ; X = level (0..NR_OF_LEVELS)
 set_level_ball_speed
             lda stick_slow_speed_tab,x
