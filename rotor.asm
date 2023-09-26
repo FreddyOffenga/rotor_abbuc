@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
-; F#READY, 2023-09-24
-; Version 2.1.0
+; F#READY, 2023-09-26
+; Version 2.2.0
 ; For cartridge release
 
 ; Casual game for two players
@@ -131,6 +131,10 @@ player_turn         = $b5       ; who's turn to hit ball? 1=player1, 2=player2
 game_restart        = $b6
 tmp_angle_diff      = $b7
 magnitude           = $b8       ; word
+
+cpu_angle_end       = $ba       ; 2 bytes
+cpu1_angle_end      = cpu_angle_end
+cpu2_angle_end      = cpu_angle_end+1
 
 ; $c0 - $df free for music
 
@@ -657,7 +661,12 @@ reset_game
             jsr music_low_volume
 
             jsr wipe_ball
-            
+
+            lda #0
+            sta cpu1_angle_end
+            lda #128
+            sta cpu2_angle_end
+
             lda #1
             sta game_restart
 
@@ -872,6 +881,7 @@ no_first_hit
             eor #3              ; 1 => 2, 2 => 1
             sta player_turn
             jsr turn_color_ball
+            jsr set_cpu_angle_end
 
 still_moving
             lda current_x+1
@@ -1098,10 +1108,23 @@ not_p2_turn
 not_in_game
             rts
 
+set_cpu_angle_end
+            ldx player_turn
+            dex
+            lda RANDOM
+            and #7
+            clc
+            adc ball_angle_end
+            sec
+            sbc #3
+            sta cpu_angle_end,x
+            rts
+
 ; x = 0 (cpu 1), x = 1 (cpu 2)
 
 cpu_controller
-            lda ball_angle_end  ; current ball end
+;            lda ball_angle_end  ; current ball end
+            lda cpu_angle_end,x
             sta tmp_angle1
             lda p1_angle,x
             sta tmp_angle2
@@ -1269,7 +1292,7 @@ bounce_bat_ball
 
             lda player_turn
             eor #3              ; 1 => 2, 2 => 1
-            sta player_turn 
+            sta player_turn
 
 no_switch_turn
             jsr turn_color_ball
@@ -1320,7 +1343,9 @@ calc_done
             sta ball_angle_end
             tax
             jsr angle_to_end_position
-                        
+
+            jsr set_cpu_angle_end
+
             jmp init_current_xy
 
 ; x = angle 0..255
