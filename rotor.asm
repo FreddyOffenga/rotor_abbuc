@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
-; F#READY, 2023-09-26
-; Version 2.2.0
+; F#READY, 2023-09-30
+; Version 2.2.1
 ; For cartridge release
 
 ; Casual game for two players
@@ -121,6 +121,9 @@ ball_current_y      = $a7
 ball_angle_start    = $aa
 ball_angle_end      = $ab
 ball_speed          = $ac
+
+edge_collision      = $ad
+edge_hit_count      = $ae
 
 tmp_angle1          = $b0
 tmp_angle2          = $b1
@@ -805,6 +808,8 @@ main_game_vbi
             sta mp_collision
             sta in_collision
             sta edge_delay
+            sta edge_collision
+            sta edge_hit_count
             sta HITCLR
 
             lda #2
@@ -825,7 +830,27 @@ no_restart
             lda M1PL
             ora mp_collision
             sta mp_collision
- 
+
+            lda M0PF
+            sta edge_collision
+            lda M1PF
+            ora edge_collision
+            sta edge_collision
+;           beq no_edge_collision
+
+;            inc edge_hit_count
+;            lda edge_hit_count
+;            cmp #2
+;            bcc edge_hit_counting
+
+;            sei
+;lalala      jmp lalala
+
+;no_edge_collision
+;            lda #0
+;            sta edge_hit_count
+
+edge_hit_counting
             jsr handle_player1
             jsr handle_player2
 
@@ -1855,8 +1880,7 @@ set_dir_y
             
             lda step_x
             sta _multiplicand
-            ;lda step_x+1
-            lda #0
+            lda step_x+1
             sta _multiplicand+1
             lda ball_speed
             sta _multiplier
@@ -1871,8 +1895,7 @@ skip_step_x_hi
 
             lda step_y
             sta _multiplicand
-            ;lda step_y+1
-            lda #0
+            lda step_y+1
             sta _multiplicand+1
             lda ball_speed
             sta _multiplier
