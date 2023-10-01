@@ -1,4 +1,4 @@
-; drivers for game
+
 ; F#READY
 
 driver_tmp      .ds 2
@@ -15,9 +15,16 @@ paddle_to_256
 prev_paddle_value
             .ds 1
 
+; previous driving controller value (player 1,2)
+prev_driving_value
+            .ds 2
+
 driver_init
             lda #0  ; stick
             sta driver_mode
+
+            sta prev_driving_value
+            sta prev_driving_value+1
 
             lda PADDL0
             sta prev_paddle_value
@@ -106,7 +113,7 @@ no_stick_detect
 ; 2 : driving
 ; 3 : computer
 
-main_driver            
+main_driver
             ldy driver_mode
             lda driver_lo,y
             sta driver_ptr
@@ -119,13 +126,13 @@ driver_ptr = *+1
 driver_lo
             dta <driver_stick
             dta <driver_paddle
-            dta <driver_stick
+            dta <driver_driving
             dta <driver_stick
 
 driver_hi
             dta >driver_stick
             dta >driver_paddle
-            dta >driver_stick
+            dta >driver_driving
             dta >driver_stick
 
 ; joystick driver
@@ -225,6 +232,67 @@ driver_paddle
             eor paddle_offsets,x
             sta p1_angle,x
             rts
+
+; driving controller driver
+
+driver_driving
+            rts
+;            lda STICK0,x
+;            eor #15
+;            jmp driver_driving_main
+
+driver_driving_fast_p1
+            lda PORTA
+            ldx #0
+            jmp driver_driving_main
+
+driver_driving_fast_p2
+            lda PORTA
+            lsr
+            lsr
+            lsr
+            lsr
+            ldx #1
+; have to call this many times per frame for each player
+driver_driving_main
+            and #%00000011
+            pha
+            ora prev_driving_value,x
+            tay
+            pla
+            asl
+            asl
+            sta prev_driving_value,x  ; store previous bits at 0000AA00 position for next time
+
+            lda driving_transitions,y
+            adc p1_angle,x
+            sta p1_angle,x
+            rts
+
+; nibble coded transitions for driving controller
+; 15,13,12,14 = anti-clockwise
+; 15,14,12,13 = clockwise
+; only lowest 2 bits change, so we need 16 values for all transitions
+
+; index is the combined value of nibble AABB
+; where AA is previous bits and BB current bits
+driving_transitions
+            dta 0   ; 00 -> 00 (12 -> 12)
+            dta 3   ; 00 -> 01 (12 -> 13)
+            dta 253 ; 00 -> 10 (12 -> 14)
+            dta 0   ; 00 -> 11 (12 -> 15)
+            dta 251 ; 01 -> 00 (13 -> 12)
+            dta 0   ; 01 -> 01 (13 -> 13)
+            dta 0   ; 01 -> 10 (13 -> 14)
+            dta 5   ; 01 -> 11 (13 -> 15)
+            dta 5   ; 10 -> 00 (14 -> 12)
+            dta 0   ; 10 -> 01 (14 -> 13)
+            dta 0   ; 10 -> 10 (14 -> 14)
+            dta 251 ; 10 -> 11 (14 -> 15)
+            dta 0   ; 11 -> 00 (15 -> 12)
+            dta 253 ; 11 -> 01 (15 -> 13)
+            dta 3   ; 11 -> 10 (15 -> 14)
+            dta 0   ; 11 -> 11 (15 -> 15)
 
 paddle_offsets
             dta 0,0

@@ -100,6 +100,8 @@ AUDCTL      = $d208
 
 RANDOM      = $d20a
 
+PORTA       = $d300
+
 PMBASE      = $d407
 WSYNC       = $d40a
 NMIEN       = $d40e

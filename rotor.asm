@@ -1,10 +1,13 @@
 ; R O T O R (II)
 
-; F#READY, 2023-09-30
-; Version 2.2.1
+; F#READY, 2023-10-01
+; Version 2.3.1
 ; For cartridge release
 
-; Casual game for two players
+; - added more gradual levels (level 1 - 7)
+; - added single player support (against CPU)
+; - added CPU vs CPU (demo mode)
+; - added support for driving controllers
 
 ; Main idea:
 ; - two players ONE and TWO move in a circle
@@ -13,9 +16,6 @@
 
 ; TODO
 ; - new score system; ball hit = point?
-
-; Optional for a later version:
-; - add support for driving controllers
 
             icl 'lib/labels.inc'
 
@@ -276,8 +276,16 @@ any_key_pressed
             ldx #>vbi
             jsr $e45c       ; SETVBV
 
-; we're just sitting here while VBI does all the work :)
-loop        jmp loop
+wait_driving_controller
+
+            lda driver_mode
+            cmp #2
+            bne wait_driving_controller
+
+            jsr driver_driving_fast_p1
+            jsr driver_driving_fast_p2
+
+            jmp wait_driving_controller
 
 ;------------------------
 ; 8bit * 8bit = 16bit multiply
