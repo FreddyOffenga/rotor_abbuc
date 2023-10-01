@@ -1,12 +1,12 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-01
-; Version 2.3.1
+; Version 2.3.2
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
-; - added single player support (against CPU)
-; - added CPU vs CPU (demo mode)
+; - added single player support (against robot)
+; - added demo mode
 ; - added support for driving controllers
 
 ; Main idea:
@@ -2278,10 +2278,10 @@ two_player_text
             dta d'   HUMAN VS HUMAN   '
 
 one_player_text
-            dta d'    HUMAN VS CPU    '
+            dta d'   HUMAN VS ROBOT  '
 
 demo_player_text
-            dta d'     CPU VS CPU     '
+            dta d'        DEMO        '
 
 level_text
             dta d'      LEVEL '

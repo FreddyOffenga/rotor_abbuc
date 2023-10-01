@@ -1449,7 +1449,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    553
    554 3754 20 59 3F		            jsr show_player_mode
    555
-   556 3757 A9 A0		            lda #<level_text
+   556 3757 A9 9F		            lda #<level_text
    557 3759 8D FC 50		            sta menu_line3_ptr
    558 375C A9 52		            lda #>level_text
    559 375E 8D FD 50		            sta menu_line3_ptr+1
@@ -1459,7 +1459,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    563 3765 60			            rts
    564
    565 3766			show_end_screen
-   566 3766 A9 FC		            lda #<empty_text
+   566 3766 A9 FB		            lda #<empty_text
    567 3768 8D F6 50		            sta menu_line1_ptr
    568 376B 8D FC 50		            sta menu_line3_ptr
    569 376E A9 52		            lda #>empty_text
@@ -1470,7 +1470,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    574 3779 CD 2F 51		            cmp score_p2
    575 377C 90 0F		            bcc player_2_wins
    576
-   577 377E A9 10		            lda #<winner_one_text
+   577 377E A9 0F		            lda #<winner_one_text
    578 3780 8D F9 50		            sta menu_line2_ptr
    579 3783 A9 53		            lda #>winner_one_text
    580 3785 8D FA 50		            sta menu_line2_ptr+1
@@ -1480,7 +1480,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    584 378C 60			            rts
    585
    586 378D			player_2_wins
-   587 378D A9 24		            lda #<winner_two_text
+   587 378D A9 23		            lda #<winner_two_text
    588 378F 8D F9 50		            sta menu_line2_ptr
    589 3792 A9 53		            lda #>winner_two_text
    590 3794 8D FA 50		            sta menu_line2_ptr+1
@@ -1674,9 +1674,9 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    778 38A8			detect_show_driver
    779 38A8 20 43 34		            jsr driver_detect
    780 38AB A8			            tay
-   781 38AC B9 38 53		            lda driver_text_lo,y
+   781 38AC B9 37 53		            lda driver_text_lo,y
    782 38AF 85 86		            sta tmp_screen
-   783 38B1 B9 3C 53		            lda driver_text_hi,y
+   783 38B1 B9 3B 53		            lda driver_text_hi,y
    784 38B4 85 87		            sta tmp_screen+1
    785
    786 38B6 A0 07		            ldy #7
@@ -3006,7 +3006,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2110 3F33 18			            clc
   2111 3F34 69 01		            adc #1
   2112 3F36 09 10		            ora #16
-  2113 3F38 8D AC 52		            sta level_char
+  2113 3F38 8D AB 52		            sta level_char
   2114 3F3B 60			            rts
   2115 				            
   2116 3F3C			increase_level
@@ -3031,9 +3031,9 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2135
   2136 3F59			show_player_mode
   2137 3F59 A6 8A		            ldx player_mode
-  2138 3F5B BD 40 53		            lda player_mode_lo,x
+  2138 3F5B BD 3F 53		            lda player_mode_lo,x
   2139 3F5E 8D F9 50		            sta menu_line2_ptr
-  2140 3F61 BD 43 53		            lda player_mode_hi,x
+  2140 3F61 BD 42 53		            lda player_mode_hi,x
   2141 3F64 8D FA 50		            sta menu_line2_ptr+1
   2142 3F67 60			            rts
   2143
@@ -3132,10 +3132,10 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2236 50F9 64 52		            dta a(two_player_text)
   2237 50FB 46			            dta $46
   2238 50FC			menu_line3_ptr
-  2239 50FC A0 52		            dta a(level_text)
+  2239 50FC 9F 52		            dta a(level_text)
   2240 50FE 30			            dta $30
   2241 50FF 42			            dta $42
-  2242 5100 B4 52		            dta a(start_text)
+  2242 5100 B3 52		            dta a(start_text)
   2243 5102 10			            dta $10
   2244 5103 01			            dta $01 ; jump
   2245 5104 97 50		            dta a(menu_dl_end)
@@ -3157,7 +3157,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2261
   2262 5130			            .align $100
   2263 5200			rotor_logo_text
-  2264 5200-5345> 00 00 00 00 +             dta d'              '
+  2264 5200-5344> 00 00 00 00 +             dta d'              '
   2265 520E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
   2266 521A 40			            dta $40
   2267 521B 00 00 00 00 00 00 +             dta d'             '
@@ -3174,59 +3174,59 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2278 5264 00 00 00 28 35 2D +             dta d'   HUMAN VS HUMAN   '
   2279
   2280 5278			one_player_text
-  2281 5278 00 00 00 00 28 35 +             dta d'    HUMAN VS CPU    '
+  2281 5278 00 00 00 28 35 2D +             dta d'   HUMAN VS ROBOT  '
   2282
-  2283 528C			demo_player_text
-  2284 528C 00 00 00 00 00 23 +             dta d'     CPU VS CPU     '
+  2283 528B			demo_player_text
+  2284 528B 00 00 00 00 00 00 +             dta d'        DEMO        '
   2285
-  2286 52A0			level_text
-  2287 52A0 00 00 00 00 00 00 +             dta d'      LEVEL '
-  2288 52AC			level_char            
-  2289 52AC 11 00 00 00 00 00 +             dta d'1       '
+  2286 529F			level_text
+  2287 529F 00 00 00 00 00 00 +             dta d'      LEVEL '
+  2288 52AB			level_char            
+  2289 52AB 11 00 00 00 00 00 +             dta d'1       '
   2290
-  2291 52B4			start_text
-  2292 52B4 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
-  2293 52DC			stick_text
-  2294 52DC 33 34 29 23 2B 00 +             dta d'STICK   '
-  2295 52E4			paddle_text
-  2296 52E4 30 21 24 24 2C 25 +             dta d'PADDLE  '
-  2297 52EC			driving_text
-  2298 52EC 24 32 29 36 29 2E +             dta d'DRIVING '
-  2299 52F4			computer_text
-  2300 52F4 23 2F 2D 30 35 34 +             dta d'COMPUTER'
+  2291 52B3			start_text
+  2292 52B3 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
+  2293 52DB			stick_text
+  2294 52DB 33 34 29 23 2B 00 +             dta d'STICK   '
+  2295 52E3			paddle_text
+  2296 52E3 30 21 24 24 2C 25 +             dta d'PADDLE  '
+  2297 52EB			driving_text
+  2298 52EB 24 32 29 36 29 2E +             dta d'DRIVING '
+  2299 52F3			computer_text
+  2300 52F3 23 2F 2D 30 35 34 +             dta d'COMPUTER'
   2301
-  2302 52FC			empty_text
-  2303 52FC 00 00 00 00 00 00 +             dta d'                    '
-  2304 5310			winner_one_text
-  2305 5310 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
-  2306 5324			winner_two_text
-  2307 5324 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
+  2302 52FB			empty_text
+  2303 52FB 00 00 00 00 00 00 +             dta d'                    '
+  2304 530F			winner_one_text
+  2305 530F 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
+  2306 5323			winner_two_text
+  2307 5323 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
   2308
-  2309 5338			driver_text_lo
-  2310 5338 DC			            dta <stick_text
-  2311 5339 E4			            dta <paddle_text
-  2312 533A EC			            dta <driving_text
-  2313 533B F4			            dta <computer_text
+  2309 5337			driver_text_lo
+  2310 5337 DB			            dta <stick_text
+  2311 5338 E3			            dta <paddle_text
+  2312 5339 EB			            dta <driving_text
+  2313 533A F3			            dta <computer_text
   2314 				            
-  2315 533C			driver_text_hi
-  2316 533C 52			            dta >stick_text
-  2317 533D 52			            dta >paddle_text
-  2318 533E 52			            dta >driving_text
-  2319 533F 52			            dta >computer_text
+  2315 533B			driver_text_hi
+  2316 533B 52			            dta >stick_text
+  2317 533C 52			            dta >paddle_text
+  2318 533D 52			            dta >driving_text
+  2319 533E 52			            dta >computer_text
   2320
-  2321 5340			player_mode_lo
-  2322 5340 64			            dta <two_player_text
-  2323 5341 78			            dta <one_player_text
-  2324 5342 8C			            dta <demo_player_text
+  2321 533F			player_mode_lo
+  2322 533F 64			            dta <two_player_text
+  2323 5340 78			            dta <one_player_text
+  2324 5341 8B			            dta <demo_player_text
   2325
-  2326 5343			player_mode_hi
-  2327 5343 52			            dta >two_player_text
-  2328 5344 52			            dta >one_player_text
-  2329 5345 52			            dta >demo_player_text
+  2326 5342			player_mode_hi
+  2327 5342 52			            dta >two_player_text
+  2328 5343 52			            dta >one_player_text
+  2329 5344 52			            dta >demo_player_text
   2330
   2331 				; 4 KB
   2332 				; 128 x 32 bytes shapes
-  2333 5346			            .align $1000
+  2333 5345			            .align $1000
   2334 6000			pm_shapes
   2335 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
   2336
