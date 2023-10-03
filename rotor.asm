@@ -1,13 +1,14 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-01
-; Version 2.3.2
+; F#READY, 2023-10-03
+; Version 2.4.2
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
 ; - added single player support (against robot)
 ; - added demo mode
 ; - added support for driving controllers
+; - added autostart demo after about 2 minutes
 
 ; Main idea:
 ; - two players ONE and TWO move in a circle
@@ -260,6 +261,8 @@ any_key_pressed
             jsr music_init
 
             jsr show_menu_options
+
+            jsr reset_autostart_demo
 
             lda #<display_list
             sta SDLSTL
@@ -664,7 +667,12 @@ go_menu_mode
 
 no_option_pressed
             cmp #6  ; start pressed
-            bne check_game_state
+            beq reset_game
+
+; check autostart state
+
+            lda autostart_demo
+            beq check_game_state
 
 ; reset game
 
@@ -680,6 +688,8 @@ reset_game
 
             lda #1
             sta game_restart
+
+            jsr reset_autostart_demo
 
             lda #STATE_IN_GAME
             sta game_state
@@ -712,9 +722,43 @@ stay_in_end_screen
             dec end_screen_delay
             jmp wait_depressed
 
+; demo autostart
+
+autostart_demo  dta 0
+autostart_timer dta 0,0
+
+reset_autostart_demo
+            lda #0
+            sta autostart_demo      ; do not start again
+            sta autostart_timer
+            lda #30                 ; N * 5 seconds (roughly)
+            sta autostart_timer+1
+            rts
+
+handle_autostart_timer
+            lda autostart_timer
+            ora autostart_timer+1
+            beq idle_timer
+            dec autostart_timer
+            bne running_timer
+            dec autostart_timer+1
+            bne running_timer
+
+; timer reached zero
+            lda #1
+            sta autostart_demo
+            lda #2
+            sta player_mode
+
+running_timer
+idle_timer
+            rts
+
 ; within menu vbi
 
 menu_vbi
+            jsr handle_autostart_timer
+
             lda player_mode
             beq check_human_buttons
 
