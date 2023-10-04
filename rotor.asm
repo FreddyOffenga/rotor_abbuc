@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-03
-; Version 2.4.2
+; F#READY, 2023-10-04
+; Version 2.4.3
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
