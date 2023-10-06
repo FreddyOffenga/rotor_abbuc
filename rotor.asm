@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-06
-; Version 2.4.4
+; Version 2.4.5
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -279,20 +279,19 @@ any_key_pressed
             ldx #>vbi
             jsr $e45c       ; SETVBV
 
-wait_driving_controller
-
+wait_mouse
             lda driver_mode
             cmp #2
-            bne wait_driving_controller
+            bne wait_mouse
 
             lda player_mode
             cmp #MODE_1_PLAYER
             beq single_driver
-            jsr driver_driving_fast_p2
+            jsr driver_mouse_fast_p2
 single_driver
-            jsr driver_driving_fast_p1
+            jsr driver_mouse_fast_p1
 
-            jmp wait_driving_controller
+            jmp wait_mouse
 
 ;------------------------
 ; 8bit * 8bit = 16bit multiply
@@ -665,6 +664,8 @@ go_menu_mode
 
             jsr show_menu_options
 
+            jsr reset_driver_mode
+
             lda #STATE_IN_MENU
             sta game_state
             jmp check_game_state
@@ -685,10 +686,7 @@ reset_game
 
             jsr wipe_ball
 
-            lda #0
-            sta cpu1_angle_end
-            lda #128
-            sta cpu2_angle_end
+            jsr reset_cpu_angle_end
 
             lda #1
             sta game_restart
@@ -716,6 +714,8 @@ no_main_game_state
 
 ; here we show the menu again
             jsr show_menu_options
+
+            jsr reset_driver_mode
 
             lda #STATE_IN_MENU
             sta game_state
@@ -1189,6 +1189,13 @@ not_p2_turn
 not_in_game
             rts
 
+reset_cpu_angle_end
+            lda #0
+            sta cpu1_angle_end
+            lda #128
+            sta cpu2_angle_end
+            rts
+
 set_cpu_angle_end
             ldx player_turn
             dex
@@ -1245,7 +1252,7 @@ comp_in_catch_position
 ; Y = driver mode:
 ; 0 : stick
 ; 1 : paddle
-; 2 : driving
+; 2 : mouse
 ; 3 : computer
             
 move_player
@@ -2342,8 +2349,8 @@ stick_text
             dta d'STICK   '
 paddle_text
             dta d'PADDLE  '
-driving_text
-            dta d'DRIVING '
+mouse_text
+            dta d'MOUSE   '
 computer_text
             dta d'COMPUTER'
 
@@ -2357,13 +2364,13 @@ winner_two_text
 driver_text_lo
             dta <stick_text
             dta <paddle_text
-            dta <driving_text
+            dta <mouse_text
             dta <computer_text
             
 driver_text_hi
             dta >stick_text
             dta >paddle_text
-            dta >driving_text
+            dta >mouse_text
             dta >computer_text
 
 player_mode_lo
