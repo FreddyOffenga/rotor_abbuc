@@ -138,9 +138,9 @@ game_restart        = $b6
 tmp_angle_diff      = $b7
 magnitude           = $b8       ; word
 
-cpu_angle_end       = $ba       ; 2 bytes
-cpu1_angle_end      = cpu_angle_end
-cpu2_angle_end      = cpu_angle_end+1
+robot_angle_end     = $ba       ; 2 bytes
+robot1_angle_end    = robot_angle_end
+robot2_angle_end    = robot_angle_end+1
 
 ; $c0 - $df free for music
 
@@ -685,7 +685,7 @@ reset_game
 
             jsr wipe_ball
 
-            jsr reset_cpu_angle_end
+            jsr reset_robot_angle_end
 
             lda #1
             sta game_restart
@@ -971,7 +971,7 @@ no_first_hit
             eor #3              ; 1 => 2, 2 => 1
             sta player_turn
             jsr turn_color_ball
-            jsr set_cpu_angle_end
+            jsr set_robot_angle_end
 
 still_moving
             lda current_x+1
@@ -1153,7 +1153,7 @@ do_p1_is_computer
             cmp #1
             bne not_p1_turn
 
-            jsr cpu_controller
+            jsr robot_to_ball
 not_p1_turn
 
             jsr move_player
@@ -1189,7 +1189,7 @@ do_p2_is_computer
             cmp #2
             bne not_p2_turn
 
-            jsr cpu_controller
+            jsr robot_to_ball
 
 not_p2_turn
             jsr move_player
@@ -1198,14 +1198,14 @@ not_p2_turn
 not_in_game
             rts
 
-reset_cpu_angle_end
+reset_robot_angle_end
             lda #0
-            sta cpu1_angle_end
+            sta robot1_angle_end
             lda #128
-            sta cpu2_angle_end
+            sta robot2_angle_end
             rts
 
-set_cpu_angle_end
+set_robot_angle_end
             ldx player_turn
             dex
             lda RANDOM
@@ -1214,14 +1214,14 @@ set_cpu_angle_end
             adc ball_angle_end
             sec
             sbc #3
-            sta cpu_angle_end,x
+            sta robot_angle_end,x
             rts
 
-; x = 0 (cpu 1), x = 1 (cpu 2)
+; x = 0 (robot 1), x = 1 (robot 2)
 
-cpu_controller
+robot_to_ball
 ;            lda ball_angle_end  ; current ball end
-            lda cpu_angle_end,x
+            lda robot_angle_end,x
             sta tmp_angle1
             lda p1_angle,x
             sta tmp_angle2
@@ -1441,7 +1441,7 @@ calc_done
             tax
             jsr angle_to_end_position
 
-            jsr set_cpu_angle_end
+            jsr set_robot_angle_end
 
             jmp init_current_xy
 
