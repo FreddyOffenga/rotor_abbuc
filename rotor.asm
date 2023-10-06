@@ -1,13 +1,13 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-04
-; Version 2.4.3
+; F#READY, 2023-10-06
+; Version 2.4.4
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
 ; - added single player support (against robot)
 ; - added demo mode
-; - added support for driving controllers
+; - added support for Atari mouse
 ; - added autostart demo after about 2 minutes
 
 ; Main idea:
@@ -285,8 +285,12 @@ wait_driving_controller
             cmp #2
             bne wait_driving_controller
 
-            jsr driver_driving_fast_p1
+            lda player_mode
+            cmp #MODE_1_PLAYER
+            beq single_driver
             jsr driver_driving_fast_p2
+single_driver
+            jsr driver_driving_fast_p1
 
             jmp wait_driving_controller
 
