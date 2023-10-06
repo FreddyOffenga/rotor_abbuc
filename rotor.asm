@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-06
-; Version 2.4.5
+; Version 2.4.6
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -85,6 +85,8 @@ MODE_1_PLAYER   = 1
 MODE_DEMO       = 2
 NR_OF_PLAYER_MODES = 3
 INIT_PLAYER_MODE = MODE_2_PLAYER
+
+player_mode_saved = $8b
 
 game_state      = $8c
 STATE_IN_GAME   = 0
@@ -253,6 +255,7 @@ any_key_pressed
 
             lda #INIT_PLAYER_MODE
             sta player_mode
+            sta player_mode_saved
             jsr show_player_mode
 
             lda #STATE_IN_MENU
@@ -662,12 +665,8 @@ go_menu_mode
 
             jsr music_normal_volume
 
-            jsr show_menu_options
+            jsr switch_to_menu
 
-            jsr reset_driver_mode
-
-            lda #STATE_IN_MENU
-            sta game_state
             jmp check_game_state
 
 no_option_pressed
@@ -712,19 +711,26 @@ no_main_game_state
             jsr restart_music
             jsr music_normal_volume
 
-; here we show the menu again
-            jsr show_menu_options
+            jsr switch_to_menu
 
-            jsr reset_driver_mode
-
-            lda #STATE_IN_MENU
-            sta game_state
             jmp menu_vbi
 
 stay_in_end_screen
             jsr play_sound_end_game
             dec end_screen_delay
             jmp wait_depressed
+
+switch_to_menu
+            lda player_mode_saved
+            sta player_mode
+
+            jsr show_menu_options
+
+            jsr reset_driver_mode
+
+            lda #STATE_IN_MENU
+            sta game_state
+            rts
 
 ; demo autostart
 
@@ -751,6 +757,8 @@ handle_autostart_timer
 ; timer reached zero
             lda #1
             sta autostart_demo
+            lda player_mode
+            sta player_mode_saved
             lda #2
             sta player_mode
 
@@ -767,12 +775,13 @@ menu_vbi
             beq check_human_buttons
 
             jsr is_player1_button_pressed
-            bne reset_game
             beq check_consol_buttons
+            jmp reset_game
 
 check_human_buttons
             jsr is_both_buttons
-            bne reset_game
+            beq check_consol_buttons
+            jmp reset_game
 
 check_consol_buttons
             lda CONSOL
@@ -2186,6 +2195,7 @@ increase_player_mode
             lda #INIT_PLAYER_MODE
             sta player_mode
 ok_player_mode
+            sta player_mode_saved
             rts
 
 show_player_mode
