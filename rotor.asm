@@ -1149,11 +1149,11 @@ do_p1_is_computer
 
             ldx #0              ; player 1
 
-            lda player_turn
-            cmp #1
-            bne not_p1_turn
+;            lda player_turn
+;            cmp #1
+;            bne not_p1_turn
 
-            jsr robot_to_ball
+            jsr robot_controller
 not_p1_turn
 
             jsr move_player
@@ -1185,11 +1185,11 @@ do_p2_is_computer
 
             ldx #1              ; player 2
 
-            lda player_turn
-            cmp #2
-            bne not_p2_turn
+;            lda player_turn
+;            cmp #2
+;            bne not_p2_turn
 
-            jsr robot_to_ball
+            jsr robot_controller
 
 not_p2_turn
             jsr move_player
@@ -1215,11 +1215,27 @@ set_robot_angle_end
             sec
             sbc #3
             sta robot_angle_end,x
+
+; other robot (not your turn)
+            lda player_turn
+            eor #3
+            tax
+            dex
+
+            lda RANDOM
+            and #15
+            clc
+            adc ball_angle_end
+            sec
+            sbc #7
+            eor #128            ; other side
+            sta robot_angle_end,x
+
             rts
 
 ; x = 0 (robot 1), x = 1 (robot 2)
 
-robot_to_ball
+robot_controller
 ;            lda ball_angle_end  ; current ball end
             lda robot_angle_end,x
             sta tmp_angle1
