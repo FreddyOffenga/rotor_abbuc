@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-08
-; Version 2.4.9
+; Version 2.5.0
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -354,6 +354,22 @@ dli_header
             lda #>dli_menu
             sta VDSLST+1
 
+            txa
+            pha
+            tya
+            pha
+
+            jsr copy_shadow
+            lda music_toggle
+            beq skip_music
+            jsr play_song
+skip_music
+
+            pla
+            tay
+            pla
+            tax
+
             pla
             rti
 
@@ -602,12 +618,8 @@ player_2_wins
 
 ; A, X, Y are already saved by the OS
 vbi
-            jsr copy_shadow
-
-            lda music_toggle
-            beq skip_music
-            jsr play_song
-skip_music
+;            lda #$28
+;            sta $d01a
 
 ; toggle music on/off with spacebar
             lda 764
@@ -1024,6 +1036,8 @@ fill_pm_header
             dex
             bpl fill_pm_header
 
+;            lda #$04
+;            sta $d01a
             jmp $e462
 
 game_ends
@@ -1171,6 +1185,7 @@ do_p1_is_computer
             jsr robot_controller
 
             jsr move_player
+
             jsr show_p1
             rts
 
@@ -1187,8 +1202,8 @@ handle_player2
 
             ldx #1              ; player 2
             jsr main_driver
+
             jsr move_player
-                        
             jsr show_p2
             rts
 
@@ -1499,16 +1514,16 @@ show_ball
             lda #%00000111
             sta msl_area+1,x
             sta msl_area+2,x
-            
+
             lda ball_current_x
             lsr
             adc #ball_left_margin
             sta HPOSM1
             adc #2
             sta HPOSM0
-                        
+
             rts
-            
+
 show_p1
 ; y position
             lda player1_y
@@ -1570,7 +1585,7 @@ wipe_p1
             clc
             adc #upper_margin
             tax
-            
+
             ldy #16
             lda #0
 wipe_it1            
