@@ -242,6 +242,38 @@ driver_paddle
             sta p1_angle,x
             rts
 
+; keyboard driver (always player1)
+; not used here, but might come in handy sometime
+
+driver_keyboard
+            ldx #0          ; player 1
+
+            lda SKSTAT
+            and #4
+            bne key_done
+
+still_pressed
+            lda KBCODE
+            cmp #$16        ; $56 including SHIFT
+            bne no_z_key
+
+            lda p1_angle,x
+            clc
+            adc stick_slow_speed
+            sta p1_angle,x
+
+            jmp key_done
+
+no_z_key    cmp #$17        ; $57 including SHIFT
+            bne key_done
+
+            lda p1_angle,x
+            sec
+            sbc stick_slow_speed
+            sta p1_angle,x
+key_done
+            rts
+
 ; mouse driver (Atari ST compatible)
 
 driver_mouse

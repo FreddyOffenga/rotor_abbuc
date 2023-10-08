@@ -98,7 +98,11 @@ AUDF4       = $d206
 AUDC4       = $d207
 AUDCTL      = $d208
 
+KBCODE      = $d209
+
 RANDOM      = $d20a
+
+SKSTAT      = $d20f
 
 PORTA       = $d300
 
