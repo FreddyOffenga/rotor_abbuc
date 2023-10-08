@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-07
-; Version 2.4.7
+; F#READY, 2023-10-08
+; Version 2.4.8
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -14,9 +14,6 @@
 ; - two players ONE and TWO move in a circle
 ; - the ball gets color of player to indicate who should catch it
 ; - when the ball hits the circle, the other player gets a point
-
-; TODO
-; - new score system; ball hit = point?
 
             icl 'lib/labels.inc'
 
@@ -951,10 +948,13 @@ reset_in_collision
 move_one
 no_first_hit
             jsr move_current_xy
+
+            lda edge_collision
             beq still_moving
 
 ; edge detected
 
+edge_detected
             jsr start_sound_edge
 
             lda ball_angle_end
@@ -1345,7 +1345,6 @@ prepare_ball_end_position
 ; move current a little bit            
             jsr move_current_xy
 ; ignore end indicator, since we only just started
-
 
             lda #10         ; ball can touch bat at start position, so use this delay
             sta bat_collision_delay
@@ -2016,7 +2015,8 @@ move_current_xy
             lda line_end_x
             and line_end_y
             beq no_end_reached
-            
+
+end_reached
 ; set current to (x2,y2)
             lda tmp_x2
             sta current_x+1
@@ -2049,8 +2049,8 @@ move_current_x
             cmp tmp_x2
             bcc no_line_end
 exact_end_x
-            lda #1
-            sta line_end_x 
+;            lda #1
+;            sta line_end_x
 no_line_end
             rts
             
@@ -2070,13 +2070,13 @@ clear_skip
             lda tmp_x2
             cmp current_x+1
             bcc no_line_end
-            lda #1
-            sta line_end_x            
+;            lda #1
+;            sta line_end_x
             rts
 below_zero            
-            lda #1
-            sta line_end_x
-            sta line_end_y
+;            lda #1
+;            sta line_end_x
+;            sta line_end_y
             rts
 move_current_y
             lda dir_y
@@ -2095,8 +2095,8 @@ move_current_y
             cmp tmp_y2
             bcc no_line_end
 exact_end_y
-            lda #1
-            sta line_end_y
+;            lda #1
+;            sta line_end_y
             rts
 
 move_current_up
@@ -2112,8 +2112,8 @@ move_current_up
             lda tmp_y2
             cmp current_y+1
             bcc no_line_end
-            lda #1
-            sta line_end_y
+;            lda #1
+;            sta line_end_y
             rts                            
             
 init_sprites
