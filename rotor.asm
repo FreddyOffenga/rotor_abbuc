@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-08
-; Version 2.4.8
+; Version 2.4.9
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -823,6 +823,27 @@ wait_depressed
 ; detect/show controller type (used for both players)
             jsr detect_show_driver
 
+            lda player_mode
+            cmp #MODE_2_PLAYER
+            beq no_robot_in_menu
+
+            cmp #MODE_1_PLAYER
+            beq one_robot_in_menu
+; demo mode, both robots in menu
+            lda p1_angle
+            cmp robot1_angle_end
+            bne robot1_moves_to_goal
+
+            lda RANDOM
+            sta robot1_angle_end
+
+robot1_moves_to_goal
+one_robot_in_menu
+            lda p1_angle
+            eor #128
+            sta robot2_angle_end
+
+no_robot_in_menu
             jsr handle_player1
             jsr handle_player2
 
@@ -1145,16 +1166,9 @@ handle_player1
 ; p1 now controlled by computer
 do_p1_is_computer
             lda game_state
-            bne not_in_game
 
             ldx #0              ; player 1
-
-;            lda player_turn
-;            cmp #1
-;            bne not_p1_turn
-
             jsr robot_controller
-not_p1_turn
 
             jsr move_player
             jsr show_p1
@@ -1181,17 +1195,10 @@ handle_player2
 ; p2 now controlled by computer
 do_p2_is_computer
             lda game_state
-            bne not_in_game
 
             ldx #1              ; player 2
-
-;            lda player_turn
-;            cmp #2
-;            bne not_p2_turn
-
             jsr robot_controller
 
-not_p2_turn
             jsr move_player
             jsr show_p2
 
