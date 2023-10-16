@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-08
-; Version 2.5.0
+; F#READY, 2023-10-16
+; Version 2.5.1
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -680,8 +680,12 @@ go_menu_mode
 
 no_option_pressed
             cmp #6  ; start pressed
-            beq reset_game
+            bne check_autostart
+            jsr is_driver_unknown
+            beq check_autostart
+            bne reset_game
 
+check_autostart
 ; check autostart state
 
             lda autostart_demo
@@ -775,6 +779,11 @@ running_timer
 idle_timer
             rts
 
+is_driver_unknown
+            lda driver_mode
+            cmp #3
+            rts
+
 ; within menu vbi
 
 menu_vbi
@@ -785,10 +794,14 @@ menu_vbi
 
             jsr is_player1_button_pressed
             beq check_consol_buttons
+            jsr is_driver_unknown
+            beq check_consol_buttons
             jmp reset_game
 
 check_human_buttons
             jsr is_both_buttons
+            beq check_consol_buttons
+            jsr is_driver_unknown
             beq check_consol_buttons
             jmp reset_game
 
@@ -2399,8 +2412,8 @@ paddle_text
             dta d'PADDLE  '
 mouse_text
             dta d'MOUSE   '
-computer_text
-            dta d'COMPUTER'
+unknown_text
+            dta d'UNKNOWN '
 
 empty_text
             dta d'                    '
@@ -2413,13 +2426,13 @@ driver_text_lo
             dta <stick_text
             dta <paddle_text
             dta <mouse_text
-            dta <computer_text
+            dta <unknown_text
             
 driver_text_hi
             dta >stick_text
             dta >paddle_text
             dta >mouse_text
-            dta >computer_text
+            dta >unknown_text
 
 player_mode_lo
             dta <two_player_text

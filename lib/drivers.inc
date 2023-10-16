@@ -20,7 +20,7 @@ prev_mouse_value
             .ds 2
 
 driver_init
-            lda #0  ; stick
+            lda #3  ; unknown
             sta driver_mode
 
             sta prev_mouse_value
@@ -58,7 +58,7 @@ store_pv
             rts
 
 reset_driver_mode
-            lda #0
+            lda #3  ; unknown
             sta driver_mode     ; reset driver mode
             rts
 
@@ -86,28 +86,31 @@ paddle_detect
 no_paddle_detect
             lda driver_mode
             cmp #2
-            beq keep_mouse
+            beq mouse_detected
+
+; not connected: mouse or stick?
+
+detect_mouse_or_stick
             lda STICK0
-            cmp #12
-            bne no_mouse_detect
+            cmp #15
+            bne mouse_or_stick
+
+            lda driver_mode
+            rts
+
+mouse_or_stick
+            tax
+            lda stick_detect_table,x
+            bne stick_detected
+
+mouse_detected
             lda #2
             sta driver_mode
-keep_mouse
             rts
 
-no_mouse_detect
-            cmp #7      ; paddle button also gives this
-            beq stick_detect    
-            cmp #11     ; paddle button also gives this
-            bne no_stick_detect
-stick_detect
+stick_detected
             lda #0
             sta driver_mode
-            rts
-
-no_stick_detect
-; default is the last value
-            lda driver_mode
             rts
 
 ; move player 1/2
@@ -120,7 +123,7 @@ no_stick_detect
 ; 0 : stick
 ; 1 : paddle
 ; 2 : mouse
-; 3 : computer
+; 3 : unknown
 
 main_driver
             ldy driver_mode
@@ -136,13 +139,13 @@ driver_lo
             dta <driver_stick
             dta <driver_paddle
             dta <driver_mouse
-            dta <driver_stick
+            dta <driver_unknown
 
 driver_hi
             dta >driver_stick
             dta >driver_paddle
             dta >driver_mouse
-            dta >driver_stick
+            dta >driver_unknown
 
 ; joystick driver
 
@@ -308,7 +311,27 @@ driver_mouse_main
             lda mouse_transitions,y
             adc p1_angle,x
             sta p1_angle,x
+
+driver_unknown
             rts
+
+stick_detect_table
+            dta 0       ; 0  -
+            dta 0       ; 1  -
+            dta 0       ; 2  -
+            dta 0       ; 3  -
+            dta 0       ; 4  -
+            dta 1       ; 5  RIGHT/DOWN
+            dta 1       ; 6  RIGHT/UP
+            dta 1       ; 7  RIGHT
+            dta 0       ; 8  -
+            dta 1       ; 9  LEFT/DOWN
+            dta 1       ; 10 LEFT/UP
+            dta 1       ; 11 LEFT
+            dta 0       ; 12 -
+            dta 1       ; 13 DOWN
+            dta 1       ; 14 UP
+            dta 1       ; 15 (not connected = default stick)
 
 ; nibble coded transitions for mouse
 ; 15,13,12,14 = anti-clockwise
