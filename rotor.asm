@@ -1,7 +1,7 @@
 ; R O T O R (II)
 
 ; F#READY, 2023-10-18
-; Version 2.5.2
+; Version 2.5.3
 ; For cartridge release
 
 ; - added more gradual levels (level 1 - 7)
@@ -623,6 +623,12 @@ vbi
 
 ; toggle music on/off with spacebar
             lda 764
+            cmp #$3a    ; D key (detection)
+            bne no_reset_detection
+            jsr reset_driver_mode
+            jmp clear_key
+
+no_reset_detection
             cmp #$21
             bne no_spacebar
             lda music_toggle
@@ -631,6 +637,7 @@ vbi
             bne music_turned_on
             jsr music_off
 
+clear_key
 music_turned_on
             lda #255
             sta 764
