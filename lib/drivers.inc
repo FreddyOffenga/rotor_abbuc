@@ -13,7 +13,7 @@ paddle_to_256
 
 ; paddle initial value
 prev_paddle_value
-            .ds 1
+            .ds 2
 
 ; previous mouse value (player 1,2)
 prev_mouse_value
@@ -28,6 +28,8 @@ driver_init
 
             lda PADDL0
             sta prev_paddle_value
+            lda PADDL1
+            sta prev_paddle_value+1
 
             lda #0
             sta p1_angle
@@ -72,18 +74,20 @@ reset_driver_mode
 ; 2 = mouse detected
 
 driver_detect
-            lda PADDL0
-            cmp #228
-            bne paddle_detect
-            lda PADDL1
-            cmp #228
-            beq no_paddle_detect
-paddle_detect
+            ldx #0
+            jsr detect_paddle
+            bne paddle_detected
+            ldx #1
+            jsr detect_paddle
+            beq no_paddle_detected
+
+paddle_detected
             lda #1
             sta driver_mode
             rts
 
-no_paddle_detect
+no_paddle_detected
+
             lda driver_mode
             cmp #2
             beq mouse_detected
@@ -111,6 +115,43 @@ mouse_detected
 stick_detected
             lda #0
             sta driver_mode
+            rts
+
+PADDLE_JITTER = 8
+
+detect_paddle
+            lda PADDL0,x
+            cmp #228-PADDLE_JITTER
+            bcs paddle_not_detected
+            cmp #PADDLE_JITTER
+            bcc paddle_not_detected
+
+; paddle in range 0+jitter .. 228-jitter
+
+            lda #228    ; prev_paddle_value,x
+            sec
+            sbc #PADDLE_JITTER
+            cmp #228    ;PADDL0,x
+            bcs paddle_is_detected
+
+            lda prev_paddle_value,x
+            clc
+            adc #8
+            cmp PADDL0,x
+            bcs paddle_value_within_bounds
+
+paddle_is_detected
+            lda PADDL0,x
+            sta prev_paddle_value,x
+            lda #1
+            rts
+
+paddle_value_within_bounds
+            lda PADDL0,x
+            sta prev_paddle_value,x
+
+paddle_not_detected
+            lda #0
             rts
 
 ; move player 1/2
@@ -239,6 +280,7 @@ fire_not_pressed
             
 driver_paddle            
             lda PADDL0,x
+            sta prev_paddle_value,x
             tay
             lda paddle_to_256,y
             eor paddle_offsets,x
