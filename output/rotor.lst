@@ -3,7 +3,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
      1 				; R O T O R (II)
      2
      3 				; F#READY, 2023-10-18
-     4 				; Version 2.5.2
+     4 				; Version 2.5.3
      5 				; For cartridge release
      6
      7 				; - added more gradual levels (level 1 - 7)
@@ -804,7 +804,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
     20 = 3402			            .ds 2
     21
     22 3404			driver_init
-    23 3404-4070> A9 03		            lda #3  ; unknown
+    23 3404-4073> A9 03		            lda #3  ; unknown
     24 3406 8D BE 32		            sta driver_mode
     25
     26 3409 8D 02 34		            sta prev_mouse_value
@@ -1249,17 +1249,17 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    243 360C 20 DA 3D		            jsr show_score_p2
    244
    245 360F 20 C8 3F		            jsr init_sprites
-   246 3612 20 F4 3F		            jsr init_colors
+   246 3612 20 F7 3F		            jsr init_colors
    247
    248 				; init. game vars
    249 3615 A2 00		            ldx #INIT_LEVEL_INDEX
-   250 3617 8E 14 40		            stx current_level_index
-   251 361A 20 2A 40		            jsr set_level_ball_speed
+   250 3617 8E 17 40		            stx current_level_index
+   251 361A 20 2D 40		            jsr set_level_ball_speed
    252
    253 361D A9 00		            lda #INIT_PLAYER_MODE
    254 361F 85 8A		            sta player_mode
    255 3621 85 8B		            sta player_mode_saved
-   256 3623 20 62 40		            jsr show_player_mode
+   256 3623 20 65 40		            jsr show_player_mode
    257
    258 3626 A9 01		            lda #STATE_IN_MENU
    259 3628 85 8C		            sta game_state           ; start with menu
@@ -1579,7 +1579,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    573 37E8 A9 52		            lda #>controller_text
    574 37EA 8D F7 50		            sta menu_line1_ptr+1
    575
-   576 37ED 20 62 40		            jsr show_player_mode
+   576 37ED 20 65 40		            jsr show_player_mode
    577
    578 37F0 A9 9F		            lda #<level_text
    579 37F2 8D FC 50		            sta menu_line3_ptr
@@ -1629,7 +1629,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    623
    624 				; toggle music on/off with spacebar
    625 3835 AD FC 02		            lda 764
-   626 3838 C9 3A		            cmp #$3a
+   626 3838 C9 3A		            cmp #$3a    ; D key (detection)
    627 383A D0 06		            bne no_reset_detection
    628 383C 20 4A 34		            jsr reset_driver_mode
    629 383F 4C 51 38		            jmp clear_key
@@ -1680,7 +1680,7 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    674
    675 				; prevent menu option directly after leaving in-game state
    676 388B A9 03		            lda #3
-   677 388D 8D 13 40		            sta previous_consol
+   677 388D 8D 16 40		            sta previous_consol
    678
    679 3890			go_menu_mode
    680 3890 20 A4 3C		            jsr wipe_ball
@@ -1823,32 +1823,32 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
    817 394D C9 05		            cmp #5          ; select
    818 394F D0 18		            bne no_level_select
    819 				            
-   820 3951 AD 13 40		            lda previous_consol
+   820 3951 AD 16 40		            lda previous_consol
    821 3954 C9 05		            cmp #5
    822 3956 F0 27		            beq wait_depressed
    823
-   824 3958 20 43 40		            jsr increase_level
-   825 395B AE 14 40		            ldx current_level_index
-   826 395E 20 2A 40		            jsr set_level_ball_speed
+   824 3958 20 46 40		            jsr increase_level
+   825 395B AE 17 40		            ldx current_level_index
+   826 395E 20 2D 40		            jsr set_level_ball_speed
    827
    828 3961 A9 05		            lda #5
-   829 3963 8D 13 40		            sta previous_consol
+   829 3963 8D 16 40		            sta previous_consol
    830 3966 4C 7F 39		            jmp wait_depressed
    831
    832 3969			no_level_select
    833 3969 C9 03		            cmp #3          ; option
    834 396B D0 0F		            bne no_player_mode_select
    835
-   836 396D AD 13 40		            lda previous_consol
+   836 396D AD 16 40		            lda previous_consol
    837 3970 C9 03		            cmp #3
    838 3972 F0 0B		            beq wait_depressed
    839
-   840 3974 20 53 40		            jsr increase_player_mode
-   841 3977 20 62 40		            jsr show_player_mode
+   840 3974 20 56 40		            jsr increase_player_mode
+   841 3977 20 65 40		            jsr show_player_mode
    842
    843 397A A9 03		            lda #3
    844 397C			no_player_mode_select
-   845 397C 8D 13 40		            sta previous_consol
+   845 397C 8D 16 40		            sta previous_consol
    846
    847 397F			wait_depressed
    848 397F A9 01		            lda #1      ; dl jump
@@ -3168,315 +3168,316 @@ Source: C:\Users\Freddy\Documents\Projects\wudsn\Freddy\2023\2023 ROTOR\rotor_ab
   2162 3FC8 A2 00		            ldx #0
   2163 3FCA 8A			            txa
   2164 3FCB			set_p
-  2165 3FCB 9D 00 0E		            sta p0_area,x
-  2166 3FCE 9D 80 0E		            sta p1_area,x
-  2167 3FD1 9D 00 0F		            sta p2_area,x
-  2168 3FD4 9D 80 0F		            sta p3_area,x
-  2169 3FD7 E8			            inx
-  2170 3FD8 10 F1		            bpl set_p
-  2171
-  2172 3FDA A9 31		            lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
-  2173 3FDC 8D 6F 02		            sta GPRIOR
-  2174
-  2175 3FDF A9 0C		            lda #>pm_area
-  2176 3FE1 8D 07 D4		            sta PMBASE
-  2177
-  2178 3FE4 A9 03		            lda #3          ; P/M both on
-  2179 3FE6 8D 1D D0		            sta GRACTL
-  2180
-  2181 3FE9 A9 90		            lda #$90
-  2182 3FEB 8D 02 D0		            sta HPOSP2
-  2183 3FEE A9 A0		            lda #$A0
-  2184 3FF0 8D 03 D0		            sta HPOSP3  
-  2185 3FF3 60			            rts
-  2186
-  2187 3FF4			init_colors
-  2188 3FF4 A9 5A		            lda #BASE_COLOR_P1+10
-  2189 3FF6 8D C2 02		            sta PCOLR2
-  2190 3FF9 A9 BA		            lda #BASE_COLOR_P2+10
-  2191 3FFB 8D C3 02		            sta PCOLR3
-  2192 				            
-  2193 3FFE A9 00		            lda #0
-  2194 4000 8D C6 02		            sta COLOR2
-  2195
-  2196 4003 A9 0E		            lda #HEADER_FG_COLOR
-  2197 4005 8D C5 02		            sta COLOR1
-  2198
-  2199 4008 A9 50		            lda #HEADER_P1_COLOR
-  2200 400A 8D C0 02		            sta PCOLR0
-  2201 400D A9 B0		            lda #HEADER_P2_COLOR
-  2202 400F 8D C1 02		            sta PCOLR1
-  2203
-  2204 4012 60			            rts
-  2205
-  2206 4013			previous_consol
-  2207 4013 00			            dta 0
-  2208
-  2209 4014			current_level_index
-  2210 4014 00			            dta 0
-  2211 = 0007			NR_OF_LEVELS = 7
-  2212 = 0000			INIT_LEVEL_INDEX = 0
-  2213 4015			level_speeds
-  2214 4015 02 03 04 05 06 07 +             dta 2,3,4,5,6,7,8
-  2215 				;level_speeds_lo
-  2216 				;            dta 128
-  2217 401C			stick_slow_speed_tab
-  2218 401C 01 02 02 02 03 03 +             dta 1,2,2,2,3,3,3
-  2219 4023			stick_fast_speed_tab
-  2220 4023 02 02 03 03 04 04 +             dta 2,2,3,3,4,4,4
-  2221
-  2222 				; X = level (0..NR_OF_LEVELS)
-  2223 402A			set_level_ball_speed
-  2224 402A BD 1C 40		            lda stick_slow_speed_tab,x
-  2225 402D 85 88		            sta stick_slow_speed
-  2226 402F BD 23 40		            lda stick_fast_speed_tab,x
-  2227 4032 85 89		            sta stick_fast_speed
-  2228
-  2229 4034 BD 15 40		            lda level_speeds,x
-  2230 4037 85 AC		            sta ball_speed
-  2231 4039 8A			            txa
-  2232 403A 18			            clc
-  2233 403B 69 01		            adc #1
-  2234 403D 09 10		            ora #16
-  2235 403F 8D AB 52		            sta level_char
-  2236 4042 60			            rts
-  2237 				            
-  2238 4043			increase_level
-  2239 4043 EE 14 40		            inc current_level_index
-  2240 4046 AD 14 40		            lda current_level_index
-  2241 4049 C9 07		            cmp #NR_OF_LEVELS
-  2242 404B D0 05		            bne ok_level
-  2243 404D A9 00		            lda #INIT_LEVEL_INDEX
-  2244 404F 8D 14 40		            sta current_level_index
-  2245 4052			ok_level           
-  2246 4052 60			            rts
-  2247
-  2248 4053			increase_player_mode
-  2249 4053 E6 8A		            inc player_mode
-  2250 4055 A5 8A		            lda player_mode
-  2251 4057 C9 03		            cmp #NR_OF_PLAYER_MODES
-  2252 4059 D0 04		            bne ok_player_mode
-  2253 405B A9 00		            lda #INIT_PLAYER_MODE
-  2254 405D 85 8A		            sta player_mode
-  2255 405F			ok_player_mode
-  2256 405F 85 8B		            sta player_mode_saved
-  2257 4061 60			            rts
-  2258
-  2259 4062			show_player_mode
-  2260 4062 A6 8A		            ldx player_mode
-  2261 4064 BD 3F 53		            lda player_mode_lo,x
-  2262 4067 8D F9 50		            sta menu_line2_ptr
-  2263 406A BD 42 53		            lda player_mode_hi,x
-  2264 406D 8D FA 50		            sta menu_line2_ptr+1
-  2265 4070 60			            rts
-  2266
-  2267 4071			            .align $100
-  2268 4100			inner_x_tab
-  2269 = 4200			inner_y_tab = *+$100
-  2270 4100-42FF> 70 72 75 77 +             ins 'data\in210.dat'
-  2271 				      
-  2272 4300			            .align $400            
-  2273 				; outer circle 1024 plot points on 360 degrees
-  2274 4400			outer_x_tab
-  2275 = 4800			outer_y_tab = *+1024
-  2276 4400-4DFF> 70 70 71 72 +             ins 'data\out224.dat'
-  2277 				           
-  2278 4C00			            .align $400
-  2279 				; table of magnitudes (length) between angle 0 and 0..255
-  2280 				; fixed point 8.8 : hi.lo
-  2281 4C00			magnitudes_lo
-  2282 = 4D00			magnitudes_hi = *+256
-  2283 4C00 00 BC 79 35 F1 AC +             ins 'data\magnitud.dat'
-  2284
-  2285 4E00			            .align $400
-  2286 5000			display_list
-  2287 5000-512F> C2		            dta $42+128         ; dli_header
-  2288 5001 06 51		            dta a(score_line)
-  2289
-  2290 				; 102 x 40 = 4080 bytes            
-  2291 5003 4F			            dta $4f
-  2292 5004 00 70		            dta a(screen_mem1)
-  2293 5006 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2294 500D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2295 5015 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2296 501D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2297
-  2298 5025 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2299 502D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2300 5035 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2301 503D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2302
-  2303 5045 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2304 504D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2305 5055			menu_dl_hook
-  2306 5055 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2307 505D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2308
-  2309 5065 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
-  2310
-  2311 				; 42 + 60 = 102, 4080 bytes
-  2312 506B 4F			            dta $4f
-  2313 506C 00 80		            dta a(screen_mem2)
-  2314 506E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2315
-  2316 5075 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2317 507D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2318 5085 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2319 508D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2320
-  2321 5095 0F 0F		            dta $0f,$0f
-  2322
-  2323 				; 60 lines
-  2324 5097			menu_dl_end
-  2325 5097 4F			            dta $4f
-  2326 5098 90 86		            dta a(screen_mem2+(42*SCREEN_WIDTH))
-  2327 509A 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2328 50A1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2329 50A9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2330 50B1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2331
-  2332 50B9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2333 50C1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2334 50C9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2335 50D1 0F 0F 0F 0F		            dta $0f,$0f,$0f,$0f
-  2336
-  2337 				; 20 x 40 = 800
-  2338 50D5 4F			            dta $4f
-  2339 50D6 00 90		            dta a(screen_mem3)       
-  2340 50D8 0F 0F 0F		            dta $0f,$0f,$0f
-  2341 50DB 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2342 50E3 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-  2343 				            
-  2344 50EB 41			            dta $41
-  2345 50EC 00 50		            dta a(display_list)
-  2346
-  2347 50EE			menu_dl_part
-  2348 50EE 80			            dta 128 ; dli_menu
-  2349 50EF 20			            dta $20
-  2350 50F0 42			            dta $42
-  2351 50F1 00 52		            dta a(rotor_logo_text)
-  2352 50F3 02			            dta 2
-  2353 50F4 30			            dta $30
-  2354 50F5 46			            dta $46
-  2355 50F6			menu_line1_ptr
-  2356 50F6 50 52		            dta a(controller_text)
-  2357 50F8 46			            dta $46
-  2358 50F9			menu_line2_ptr
-  2359 50F9 64 52		            dta a(two_player_text)
-  2360 50FB 46			            dta $46
-  2361 50FC			menu_line3_ptr
-  2362 50FC 9F 52		            dta a(level_text)
-  2363 50FE 30			            dta $30
-  2364 50FF 42			            dta $42
-  2365 5100 B3 52		            dta a(start_text)
-  2366 5102 10			            dta $10
-  2367 5103 01			            dta $01 ; jump
-  2368 5104 97 50		            dta a(menu_dl_end)
-  2369
-  2370 5106			score_line  
-  2371 5106 00 2F 2E 25 00	            dta d' ONE '
-  2372 510B			score_chars_p1
-  2373 510B 0D 0D 00		            dta d'-- '
-  2374
-  2375 510E 00 00 00 00 00 00 +             dta d'          '
-  2376 5118 00 00 00 00 00 00 +             dta d'          '
-  2377
-  2378 5122 00 00 00 00 00 34 +             dta d'     TWO '
-  2379 512B			score_chars_p2
-  2380 512B 0D 0D 00		            dta d'-- '
-  2381
-  2382 512E 00			score_p1    dta 0
-  2383 512F 00			score_p2    dta 0
-  2384
-  2385 5130			            .align $100
-  2386 5200			rotor_logo_text
-  2387 5200-5344> 00 00 00 00 +             dta d'              '
-  2388 520E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
-  2389 521A 40			            dta $40
-  2390 521B 00 00 00 00 00 00 +             dta d'             '
-  2391 5228 00 00 00 00 00 00 +             dta d'              '
-  2392 5236 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
-  2393 5242 00 00 00 00 00 00 +             dta d'              '
-  2394
-  2395 5250			controller_text
-  2396 5250 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
-  2397 525A			driver_screen
-  2398 525A 00 00 00 00 00 00 +             dta d'          '
-  2399
-  2400 5264			two_player_text
-  2401 5264 00 00 00 28 35 2D +             dta d'   HUMAN VS HUMAN   '
-  2402
-  2403 5278			one_player_text
-  2404 5278 00 00 00 28 35 2D +             dta d'   HUMAN VS ROBOT  '
-  2405
-  2406 528B			demo_player_text
-  2407 528B 00 00 00 00 00 00 +             dta d'        DEMO        '
-  2408
-  2409 529F			level_text
-  2410 529F 00 00 00 00 00 00 +             dta d'      LEVEL '
-  2411 52AB			level_char            
-  2412 52AB 11 00 00 00 00 00 +             dta d'1       '
-  2413
-  2414 52B3			start_text
-  2415 52B3 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
-  2416 52DB			stick_text
-  2417 52DB 33 34 29 23 2B 00 +             dta d'STICK   '
-  2418 52E3			paddle_text
-  2419 52E3 30 21 24 24 2C 25 +             dta d'PADDLE  '
-  2420 52EB			mouse_text
-  2421 52EB 2D 2F 35 33 25 00 +             dta d'MOUSE   '
-  2422 52F3			unknown_text
-  2423 52F3 35 2E 2B 2E 2F 37 +             dta d'UNKNOWN '
-  2424
-  2425 52FB			empty_text
-  2426 52FB 00 00 00 00 00 00 +             dta d'                    '
-  2427 530F			winner_one_text
-  2428 530F 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
-  2429 5323			winner_two_text
-  2430 5323 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
-  2431
-  2432 5337			driver_text_lo
-  2433 5337 DB			            dta <stick_text
-  2434 5338 E3			            dta <paddle_text
-  2435 5339 EB			            dta <mouse_text
-  2436 533A F3			            dta <unknown_text
-  2437 				            
-  2438 533B			driver_text_hi
-  2439 533B 52			            dta >stick_text
-  2440 533C 52			            dta >paddle_text
-  2441 533D 52			            dta >mouse_text
-  2442 533E 52			            dta >unknown_text
-  2443
-  2444 533F			player_mode_lo
-  2445 533F 64			            dta <two_player_text
-  2446 5340 78			            dta <one_player_text
-  2447 5341 8B			            dta <demo_player_text
-  2448
-  2449 5342			player_mode_hi
-  2450 5342 52			            dta >two_player_text
-  2451 5343 52			            dta >one_player_text
-  2452 5344 52			            dta >demo_player_text
-  2453
-  2454 				; 4 KB
-  2455 				; 128 x 32 bytes shapes
-  2456 5345			            .align $1000
-  2457 6000			pm_shapes
-  2458 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
-  2459
-  2460 				; 9 KB for backdrop image
-  2461 7000			            .align $1000
-  2462 = 7000			screen_mem1 = * ; 4K
-  2463 				;            org screen_mem1
-  2464 7000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
-  2465
-  2466 7FF0			            .align $1000
-  2467 = 8000			screen_mem2 = * ; 4K
-  2468 				;            org screen_mem2
-  2469 8000-8FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
-  2470
-  2471 8FF0			            .align $1000
-  2472 = 9000			screen_mem3 = * ; 1K
-  2473 				;            org screen_mem3
-  2474 9000-931F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
-  2475
-  2476 02E0-02E1> C3 35		            run main
+  2165 3FCB 9D 80 0D		            sta msl_area,x
+  2166 3FCE 9D 00 0E		            sta p0_area,x
+  2167 3FD1 9D 80 0E		            sta p1_area,x
+  2168 3FD4 9D 00 0F		            sta p2_area,x
+  2169 3FD7 9D 80 0F		            sta p3_area,x
+  2170 3FDA E8			            inx
+  2171 3FDB 10 EE		            bpl set_p
+  2172
+  2173 3FDD A9 31		            lda #%0110001  ; overlap OR colors, missile = 5th player, prio player 0..3
+  2174 3FDF 8D 6F 02		            sta GPRIOR
+  2175
+  2176 3FE2 A9 0C		            lda #>pm_area
+  2177 3FE4 8D 07 D4		            sta PMBASE
+  2178
+  2179 3FE7 A9 03		            lda #3          ; P/M both on
+  2180 3FE9 8D 1D D0		            sta GRACTL
+  2181
+  2182 3FEC A9 90		            lda #$90
+  2183 3FEE 8D 02 D0		            sta HPOSP2
+  2184 3FF1 A9 A0		            lda #$A0
+  2185 3FF3 8D 03 D0		            sta HPOSP3  
+  2186 3FF6 60			            rts
+  2187
+  2188 3FF7			init_colors
+  2189 3FF7 A9 5A		            lda #BASE_COLOR_P1+10
+  2190 3FF9 8D C2 02		            sta PCOLR2
+  2191 3FFC A9 BA		            lda #BASE_COLOR_P2+10
+  2192 3FFE 8D C3 02		            sta PCOLR3
+  2193 				            
+  2194 4001 A9 00		            lda #0
+  2195 4003 8D C6 02		            sta COLOR2
+  2196
+  2197 4006 A9 0E		            lda #HEADER_FG_COLOR
+  2198 4008 8D C5 02		            sta COLOR1
+  2199
+  2200 400B A9 50		            lda #HEADER_P1_COLOR
+  2201 400D 8D C0 02		            sta PCOLR0
+  2202 4010 A9 B0		            lda #HEADER_P2_COLOR
+  2203 4012 8D C1 02		            sta PCOLR1
+  2204
+  2205 4015 60			            rts
+  2206
+  2207 4016			previous_consol
+  2208 4016 00			            dta 0
+  2209
+  2210 4017			current_level_index
+  2211 4017 00			            dta 0
+  2212 = 0007			NR_OF_LEVELS = 7
+  2213 = 0000			INIT_LEVEL_INDEX = 0
+  2214 4018			level_speeds
+  2215 4018 02 03 04 05 06 07 +             dta 2,3,4,5,6,7,8
+  2216 				;level_speeds_lo
+  2217 				;            dta 128
+  2218 401F			stick_slow_speed_tab
+  2219 401F 01 02 02 02 03 03 +             dta 1,2,2,2,3,3,3
+  2220 4026			stick_fast_speed_tab
+  2221 4026 02 02 03 03 04 04 +             dta 2,2,3,3,4,4,4
+  2222
+  2223 				; X = level (0..NR_OF_LEVELS)
+  2224 402D			set_level_ball_speed
+  2225 402D BD 1F 40		            lda stick_slow_speed_tab,x
+  2226 4030 85 88		            sta stick_slow_speed
+  2227 4032 BD 26 40		            lda stick_fast_speed_tab,x
+  2228 4035 85 89		            sta stick_fast_speed
+  2229
+  2230 4037 BD 18 40		            lda level_speeds,x
+  2231 403A 85 AC		            sta ball_speed
+  2232 403C 8A			            txa
+  2233 403D 18			            clc
+  2234 403E 69 01		            adc #1
+  2235 4040 09 10		            ora #16
+  2236 4042 8D AB 52		            sta level_char
+  2237 4045 60			            rts
+  2238 				            
+  2239 4046			increase_level
+  2240 4046 EE 17 40		            inc current_level_index
+  2241 4049 AD 17 40		            lda current_level_index
+  2242 404C C9 07		            cmp #NR_OF_LEVELS
+  2243 404E D0 05		            bne ok_level
+  2244 4050 A9 00		            lda #INIT_LEVEL_INDEX
+  2245 4052 8D 17 40		            sta current_level_index
+  2246 4055			ok_level           
+  2247 4055 60			            rts
+  2248
+  2249 4056			increase_player_mode
+  2250 4056 E6 8A		            inc player_mode
+  2251 4058 A5 8A		            lda player_mode
+  2252 405A C9 03		            cmp #NR_OF_PLAYER_MODES
+  2253 405C D0 04		            bne ok_player_mode
+  2254 405E A9 00		            lda #INIT_PLAYER_MODE
+  2255 4060 85 8A		            sta player_mode
+  2256 4062			ok_player_mode
+  2257 4062 85 8B		            sta player_mode_saved
+  2258 4064 60			            rts
+  2259
+  2260 4065			show_player_mode
+  2261 4065 A6 8A		            ldx player_mode
+  2262 4067 BD 3F 53		            lda player_mode_lo,x
+  2263 406A 8D F9 50		            sta menu_line2_ptr
+  2264 406D BD 42 53		            lda player_mode_hi,x
+  2265 4070 8D FA 50		            sta menu_line2_ptr+1
+  2266 4073 60			            rts
+  2267
+  2268 4074			            .align $100
+  2269 4100			inner_x_tab
+  2270 = 4200			inner_y_tab = *+$100
+  2271 4100-42FF> 70 72 75 77 +             ins 'data\in210.dat'
+  2272 				      
+  2273 4300			            .align $400            
+  2274 				; outer circle 1024 plot points on 360 degrees
+  2275 4400			outer_x_tab
+  2276 = 4800			outer_y_tab = *+1024
+  2277 4400-4DFF> 70 70 71 72 +             ins 'data\out224.dat'
+  2278 				           
+  2279 4C00			            .align $400
+  2280 				; table of magnitudes (length) between angle 0 and 0..255
+  2281 				; fixed point 8.8 : hi.lo
+  2282 4C00			magnitudes_lo
+  2283 = 4D00			magnitudes_hi = *+256
+  2284 4C00 00 BC 79 35 F1 AC +             ins 'data\magnitud.dat'
+  2285
+  2286 4E00			            .align $400
+  2287 5000			display_list
+  2288 5000-512F> C2		            dta $42+128         ; dli_header
+  2289 5001 06 51		            dta a(score_line)
+  2290
+  2291 				; 102 x 40 = 4080 bytes            
+  2292 5003 4F			            dta $4f
+  2293 5004 00 70		            dta a(screen_mem1)
+  2294 5006 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2295 500D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2296 5015 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2297 501D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2298
+  2299 5025 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2300 502D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2301 5035 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2302 503D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2303
+  2304 5045 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2305 504D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2306 5055			menu_dl_hook
+  2307 5055 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2308 505D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2309
+  2310 5065 0F 0F 0F 0F 0F 0F	            dta $0f,$0f,$0f,$0f,$0f,$0f
+  2311
+  2312 				; 42 + 60 = 102, 4080 bytes
+  2313 506B 4F			            dta $4f
+  2314 506C 00 80		            dta a(screen_mem2)
+  2315 506E 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2316
+  2317 5075 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2318 507D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2319 5085 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2320 508D 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2321
+  2322 5095 0F 0F		            dta $0f,$0f
+  2323
+  2324 				; 60 lines
+  2325 5097			menu_dl_end
+  2326 5097 4F			            dta $4f
+  2327 5098 90 86		            dta a(screen_mem2+(42*SCREEN_WIDTH))
+  2328 509A 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2329 50A1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2330 50A9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2331 50B1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2332
+  2333 50B9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2334 50C1 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2335 50C9 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2336 50D1 0F 0F 0F 0F		            dta $0f,$0f,$0f,$0f
+  2337
+  2338 				; 20 x 40 = 800
+  2339 50D5 4F			            dta $4f
+  2340 50D6 00 90		            dta a(screen_mem3)       
+  2341 50D8 0F 0F 0F		            dta $0f,$0f,$0f
+  2342 50DB 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2343 50E3 0F 0F 0F 0F 0F 0F +             dta $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
+  2344 				            
+  2345 50EB 41			            dta $41
+  2346 50EC 00 50		            dta a(display_list)
+  2347
+  2348 50EE			menu_dl_part
+  2349 50EE 80			            dta 128 ; dli_menu
+  2350 50EF 20			            dta $20
+  2351 50F0 42			            dta $42
+  2352 50F1 00 52		            dta a(rotor_logo_text)
+  2353 50F3 02			            dta 2
+  2354 50F4 30			            dta $30
+  2355 50F5 46			            dta $46
+  2356 50F6			menu_line1_ptr
+  2357 50F6 50 52		            dta a(controller_text)
+  2358 50F8 46			            dta $46
+  2359 50F9			menu_line2_ptr
+  2360 50F9 64 52		            dta a(two_player_text)
+  2361 50FB 46			            dta $46
+  2362 50FC			menu_line3_ptr
+  2363 50FC 9F 52		            dta a(level_text)
+  2364 50FE 30			            dta $30
+  2365 50FF 42			            dta $42
+  2366 5100 B3 52		            dta a(start_text)
+  2367 5102 10			            dta $10
+  2368 5103 01			            dta $01 ; jump
+  2369 5104 97 50		            dta a(menu_dl_end)
+  2370
+  2371 5106			score_line  
+  2372 5106 00 2F 2E 25 00	            dta d' ONE '
+  2373 510B			score_chars_p1
+  2374 510B 0D 0D 00		            dta d'-- '
+  2375
+  2376 510E 00 00 00 00 00 00 +             dta d'          '
+  2377 5118 00 00 00 00 00 00 +             dta d'          '
+  2378
+  2379 5122 00 00 00 00 00 34 +             dta d'     TWO '
+  2380 512B			score_chars_p2
+  2381 512B 0D 0D 00		            dta d'-- '
+  2382
+  2383 512E 00			score_p1    dta 0
+  2384 512F 00			score_p2    dta 0
+  2385
+  2386 5130			            .align $100
+  2387 5200			rotor_logo_text
+  2388 5200-5344> 00 00 00 00 +             dta d'              '
+  2389 520E 45 46 47 48 49 4A +             dta $45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f,$50
+  2390 521A 40			            dta $40
+  2391 521B 00 00 00 00 00 00 +             dta d'             '
+  2392 5228 00 00 00 00 00 00 +             dta d'              '
+  2393 5236 51 52 53 54 55 56 +             dta $51,$52,$53,$54,$55,$56,$57,$58,$59,$5a,$5b,$5c
+  2394 5242 00 00 00 00 00 00 +             dta d'              '
+  2395
+  2396 5250			controller_text
+  2397 5250 00 00 23 2F 2E 34 +             dta d'  CONTROL:'
+  2398 525A			driver_screen
+  2399 525A 00 00 00 00 00 00 +             dta d'          '
+  2400
+  2401 5264			two_player_text
+  2402 5264 00 00 00 28 35 2D +             dta d'   HUMAN VS HUMAN   '
+  2403
+  2404 5278			one_player_text
+  2405 5278 00 00 00 28 35 2D +             dta d'   HUMAN VS ROBOT  '
+  2406
+  2407 528B			demo_player_text
+  2408 528B 00 00 00 00 00 00 +             dta d'        DEMO        '
+  2409
+  2410 529F			level_text
+  2411 529F 00 00 00 00 00 00 +             dta d'      LEVEL '
+  2412 52AB			level_char            
+  2413 52AB 11 00 00 00 00 00 +             dta d'1       '
+  2414
+  2415 52B3			start_text
+  2416 52B3 80 80 80 80 80 B3 +             dta d'     START or FIRE buttons to play!     '*
+  2417 52DB			stick_text
+  2418 52DB 33 34 29 23 2B 00 +             dta d'STICK   '
+  2419 52E3			paddle_text
+  2420 52E3 30 21 24 24 2C 25 +             dta d'PADDLE  '
+  2421 52EB			mouse_text
+  2422 52EB 2D 2F 35 33 25 00 +             dta d'MOUSE   '
+  2423 52F3			unknown_text
+  2424 52F3 35 2E 2B 2E 2F 37 +             dta d'UNKNOWN '
+  2425
+  2426 52FB			empty_text
+  2427 52FB 00 00 00 00 00 00 +             dta d'                    '
+  2428 530F			winner_one_text
+  2429 530F 00 00 30 2C 21 39 +             dta d'  PLAYER ONE WINS!  '
+  2430 5323			winner_two_text
+  2431 5323 00 00 30 2C 21 39 +             dta d'  PLAYER TWO WINS!  '
+  2432
+  2433 5337			driver_text_lo
+  2434 5337 DB			            dta <stick_text
+  2435 5338 E3			            dta <paddle_text
+  2436 5339 EB			            dta <mouse_text
+  2437 533A F3			            dta <unknown_text
+  2438 				            
+  2439 533B			driver_text_hi
+  2440 533B 52			            dta >stick_text
+  2441 533C 52			            dta >paddle_text
+  2442 533D 52			            dta >mouse_text
+  2443 533E 52			            dta >unknown_text
+  2444
+  2445 533F			player_mode_lo
+  2446 533F 64			            dta <two_player_text
+  2447 5340 78			            dta <one_player_text
+  2448 5341 8B			            dta <demo_player_text
+  2449
+  2450 5342			player_mode_hi
+  2451 5342 52			            dta >two_player_text
+  2452 5343 52			            dta >one_player_text
+  2453 5344 52			            dta >demo_player_text
+  2454
+  2455 				; 4 KB
+  2456 				; 128 x 32 bytes shapes
+  2457 5345			            .align $1000
+  2458 6000			pm_shapes
+  2459 6000-7FEF> 01 00 01 00 +             ins 'data\pm_128_x_32.dat'
+  2460
+  2461 				; 9 KB for backdrop image
+  2462 7000			            .align $1000
+  2463 = 7000			screen_mem1 = * ; 4K
+  2464 				;            org screen_mem1
+  2465 7000 FF FF F1 07 D0 00 +             ins 'gfx\backdrop2.gr8',0,102*SCREEN_WIDTH
+  2466
+  2467 7FF0			            .align $1000
+  2468 = 8000			screen_mem2 = * ; 4K
+  2469 				;            org screen_mem2
+  2470 8000-8FEF> A1 55 7F E0 +             ins 'gfx\backdrop2.gr8',102*SCREEN_WIDTH,102*SCREEN_WIDTH
+  2471
+  2472 8FF0			            .align $1000
+  2473 = 9000			screen_mem3 = * ; 1K
+  2474 				;            org screen_mem3
+  2475 9000-931F> EE 2A AB 52 +             ins 'gfx\backdrop2.gr8',204*SCREEN_WIDTH,20*SCREEN_WIDTH
+  2476
+  2477 02E0-02E1> C3 35		            run main

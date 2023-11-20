@@ -1,8 +1,8 @@
 ; R O T O R (II)
 
-; F#READY, 2023-10-18
-; Version 2.5.3
-; For cartridge release
+; F#READY, 2023-11-20
+; Version 2.5.4
+; ABBUC Magazine release
 
 ; - added more gradual levels (level 1 - 7)
 ; - added single player support (against robot)
@@ -2162,6 +2162,7 @@ init_sprites
             ldx #0
             txa
 set_p
+            sta msl_area,x
             sta p0_area,x
             sta p1_area,x
             sta p2_area,x
